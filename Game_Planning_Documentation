@@ -1,0 +1,148 @@
+Project Planning takes place on Trello and on Google Drive.
+Trello Link: https://trello.com/b/3KLeSRbA/cse-3902-group-project
+Google Drive Link: https://drive.google.com/drive/u/0/folders/12tBD0OoxzEWtA66OV9-D1PQgMvBOxmtd
+
+Planning was uploaded here on Thursday 2/3/22 after we emailed our planning on Tuesday 2/1/22.
+
+Game Idea:
+
+You play inside a forest that has been infested with a darkness or parasite that drains the inhabitants of happiness. You take it upon yourself to bring life back to the forest by finding the sacred musicians that are spread throughout the woods. 
+
+I’m picturing a few levels/areas each with a group of musicians. Each group of musicians all play the same song, but when you find one, the song changes, adding the instrument that the found musician was playing to the track. (So the song builds as you find each musician and is complete when you finish the level).
+
+Each level/area will have different music and art aesthetics to convey a specific tone incorporated into it. 
+
+By finding the musicians, you are bringing happiness to the forest villagers and healing them with music. When all the musicians are found in an area, it is restored, and the player acquires an instrument as a weapon/item.
+
+There will be enemies incorporated by means of the darkness/parasite. The weapons the player uses can be instruments that are found in the levels (as stated previously). The projectiles can look like music notes and they can perform melee attacks with the actual body of the instrument. 
+
+The actual design of the world is very much “Zelda Lost Woods” but with twists like some of the structures can be upside down, or there can be towns with groups of people, and there are growths of the darkness/parasites everywhere. 
+
+We can explore making all of the characters into forest sprites, anthropomorphic animals, etc. or we can do humans. 
+
+This idea is very much inspired by the dream sequences in “Night in the Woods” if anyone has played that game. You can also look up those parts of the game on YouTube to get an idea for the vision I’m describing here (in particular how the music builds when you find each musician).
+
+Notes:
+Change darkness/parasites to a different opposing force?
+The game will be a side-scroller with different levels/environments
+Playable characters, other characters, and musicians are spirits?
+Idea for darkness cause/origin:
+There is a queen spirit that gives life to the forest when she is flourishing.
+The queen spirit of the forest loved to sing, bringing life to the woods and gifting all spirits with energy. When her partner is vanquished by the evil force, she stops singing and performing music, leaving darkness--an embodiment of her grief--to take over the forest. 
+Because the queen is grieving, the darkness begins to take over.
+Another idea: Another group of spirits that vanquishes the queen’s partner.
+The leader of another group of spirits is taking over the woods in search of a home for her people, when she and her people were banished from their previous residence for ambiguous wrong-doings. The player would find this out much later. 
+You have to find some musicians before you can find others. 
+Two designs for musicians for when they aren’t accessible. If the musicians are unsaturated, then you can’t “save” them yet. 
+Musicians would be at a stand-still and then become animated playing their instrument
+The player is working for the queen, and noticing her plight, they go to each level to bring music back and encourage her to sing.
+You start out in the center of the environment with the queen. After saving all the instruments, you return to the center of the level to heal that section of the forest. 
+The queen sings at the very end once you have rallied the citizens to make music
+
+Ideas for each level: 3-4 Musicians/lvl: Acquire all instruments 
+
+Level One: The Deep Woods
+Deep within the forest, lots of trees and vines
+Levers that activate pathways
+Climbing trees?
+Level Two: The Grotto
+A grotto within the woods
+Song could be slow and more serene
+Platforming surrounding jumping across the water
+Maybe add water mechanics
+Levers and switches in a boat
+Level Three: The Cliff
+A cliffside, with lots of vertical movement going up and down the cliff
+Platforming going upwards
+Rock paths inside the cliff
+Grappling hook
+
+Instruments: :3 = needs ammo
+Wooden Sword - Guitar
+Sword beam - Whatever instrument is being used is more powerful and produces a sound wave
+Arrows - Harp :3
+Boomerang - Accordion
+Bombs - Percussion/Drum :3
+Blue Candle - Flute 
+Blue Potion - Triangle (really cute animation of the character hitting the triangle) :3
+Blue ring - Speaker/Amplifier
+The following is a list of features in the first dungeon from the Legend of Zelda (plus a few extras from the overworld and second dungeon), which is the expected workload for a team of 6. Teams of larger or smaller sizes should add or remove 2-3 features per person above or below 6. You may also substitute other features from the game for ones on this list with approval from your grader.
+
+
+Environment – interactive
+Statues /trees/plants/rocks
+Square, sometimes movable block /rocks
+Walls walls of rocks/trees/forest
+Locked door: Caves  
+Shut door
+Open door
+Bombed opening
+Gap tile
+Stairs
+Ladder tile
+Brick tile
+Fire
+Items
+Compass
+Map
+Key
+Heart container
+Triforce piece
+Wooden boomerang
+Bow: Harp
+Heart
+Rupee
+Arrow - 
+Bomb - Percussion/Drum
+Fairy - Forest Sprites
+Clock
+Systems
+Sound effects
+Music
+Collision handling: Lots of collisions!!
+Game state logic (pause, Item selection) 
+
+
+Player
+Link - MAIN CHARACTER
+Wooden Sword - Guitar
+Sword beam - Whatever instrument is being used is more powerful and produces a sound wave
+Arrows - Harp with music notes flinging out
+Boomerang - Accordion
+Bombs - Percussion/Drum
+Blue Candle - Flute 
+Blue Potion - Triangle (really cute animation of the character hitting the triangle :3)
+Blue ring - Speaker/Amplifier
+Enemies and NPCS: Concept art in progress, but they should be the same but different looks.
+Bat (keese) 
+Skeleton (stalfos)
+Dog-like monster (goriya)
+Jelly (gel-small and zol-big)
+Hand (wall master)
+Spike cross (trap)
+Snake (rope)
+Boss/Dragon (aquamentus)
+Boss/Dragon fireballs
+Boss/Dinosaur (Dodongo)
+Old man
+Merchant
+Flame
+Environment – non-interactive
+Floor tile
+Room border
+Map HUD elements
+Enemy cloud appearance
+Enemy death explosion
+
+
+
+
+
+
+
+
+HUD
+Map – room layout
+Rupee and item counts,
+a/b selected items
+life heart
