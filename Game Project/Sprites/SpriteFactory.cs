@@ -29,5 +29,17 @@ namespace Game_Project.Sprites
             return new GenericSprite(Texture2DStorage.GetTexture(frames[animationName].Item1), frames[animationName].Item2, 
                 frames[animationName].Item3);
         }
+        
+        public void LoadDictionary()
+        {
+            frames.Add("gelGeneric", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(1, 1, 8, 16), new Rectangle(10, 1, 8, 16) }, 2));
+            frames.Add("keeseGeneric", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(53, 1, 16, 16), new Rectangle(70, 1, 16, 16) }, 2));
+            frames.Add("zohGeneric", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(19, 1, 16, 16), new Rectangle(36, 1, 16, 16) }, 2));
+            frames.Add("stalfosGeneric", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(69, 18, 16, 16), new Rectangle(69, 35, 16, 16) }, 2));
+            frames.Add("goriyaDown", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(1, 18, 16, 16), new Rectangle(18, 18, 16, 16) }, 2));
+            frames.Add("goriyaUp", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(35, 18, 16, 16), new Rectangle(52, 18, 16, 16) }, 2));
+            frames.Add("goriyaRight", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(1, 35, 16, 16), new Rectangle(18, 35, 16, 16) }, 2));
+            frames.Add("goriyaLeft", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(35, 35, 16, 16), new Rectangle(52, 35, 16, 16) }, 2));
+        }
     }
 }
