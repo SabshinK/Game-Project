@@ -4,57 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game_Project
+namespace Game_Project.Sprites
 {
     class PlayerAttack : ISprite
     {
-      public Texture2D Texture {get; set;}
       public Vector2 Vector {get; set;}
+      public string animationSelected;
+      private Keys[] Key;
       
-      private int currentFrame;
-      private int totalNumberOfFrames;
-      private SpriteBatch spriteBatch;
-      
-      public int Columns {get; set}
-      public int Rows {get; set;}
-      
-      public PlayerAttack(Vector2 vector, Texture2D texture, int columns, int rows, SpriteBatch spritebatch)
+      public PlayerAttack(Vector2 vector)
       {
         Vector = vector;
-        Texture = texture;
-        Columns = columns;
-        Rows = rows;
-        spriteBatch = spritebatch;
+      }
+      
+      public void SelectAttack()
+      {
+        Key = Keyboard.GetState().GetPressedKeys();
         
-        totalNumberOfFrames = columns * rows;
-        currentFrame = wherever it is;
-      }
-      
-      public void Update()
-      {
-        currentFrame++;
-        if (currentFrame == totalNumberOfFrames)
-        {
-          currentFrame = wherever it is;
+        //Calling for a specific attack animation depending on what key is pressed. Only one example below.
+        if(Key == Keys.t){
+            animationSelected = Guitar;
+            
+            // Should the CreateSprite function take in a location?
+            SpriteFactory.CreateSprite(Guitar, (int)Vector.X, (int)Vector.Y);
         }
-      }
-      
-      public void Draw(SpriteBatch spriteBatch, Vector2 Vector)
-      {
-        //Getting the width and height
-        int width = texture.Width / Columns;
-        int height = texture.Height / Rows;
-        int row = currentFrame / Columns;
-        int column = currentFrame % Columns;
-
-        //Using the rows and columns to draw the 
-        Rectangle sourceRectangle = new Rectangle(column*width, row*height, width, height);
-        Rectangle destinationRectangle = new Rectangle((int)Vector.X, (int)Vector.Y, 4*width, 4*height);
-
-        spriteBatch.Begin();
-        spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-        spriteBatch.End();
-      }
-      
+      }      
     }
 }
