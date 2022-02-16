@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class NonAnimatedMoving : ISprite
+    class NonAnimatedMoving
     {
         // Necessary for implementing ISprite
         public Texture2D Texture { get; set; }
