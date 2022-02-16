@@ -11,7 +11,6 @@ namespace Game_Project.Sprites
       public IPlayer state;
       
       private int Health;
-      private int Damage;
       public string animationToCreate;
       
       public PlayerManager()
@@ -21,7 +20,6 @@ namespace Game_Project.Sprites
         SpriteFactory.instance.CreateSprite(animationToCreate);
         
         Health = 3;
-        Damage = 0;
       }
       
       public void AttackComplete()
@@ -33,6 +31,7 @@ namespace Game_Project.Sprites
       
       public void DamageTaken()
       {
+        Health--;
         state.TakeDamage();
         animationToCreate = "TakeDamage";
         SpriteFactory.instance.CreateSprite(animationToCreate);
