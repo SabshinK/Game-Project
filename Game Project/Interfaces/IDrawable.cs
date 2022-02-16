@@ -6,6 +6,6 @@ namespace Game_Project.Interfaces
 {
     internal Interface IDrawable
     {
-        public void Draw(); // Update any appropriate states for when the player collides with another object.
+        public void Draw(); // Draw function for creating any animations.
     }
 }
