@@ -6,6 +6,6 @@ namespace Game_Project.Interfaces
 {
     internal Interface IObjectInteractable
     {
-        public void Interact(); // Update any appropriate states for when the player collides with another object.
+        public void Interact(); // Changing states and updating the game for when an interactable object is influenced by the player.
     }
 }
