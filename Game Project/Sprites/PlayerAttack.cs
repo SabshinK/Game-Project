@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project.Sprites
 {
-    class PlayerAttack : SpriteFactory
+    class PlayerAttack
     {
       public Vector2 Vector {get; set;}
       public string animationSelected;
@@ -26,7 +26,7 @@ namespace Game_Project.Sprites
             animationSelected = Guitar;
             
             // Should the CreateSprite function take in a location?
-            SpriteFactory.CreateSprite(Guitar, (int)Vector.X, (int)Vector.Y);
+            SpriteFactory.instance.CreateSprite(Guitar, (int)Vector.X, (int)Vector.Y);
         }
       }      
     }
