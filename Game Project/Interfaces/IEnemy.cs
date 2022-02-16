@@ -6,6 +6,12 @@ namespace Game_Project.Interfaces
 {
     interface IEnemy
     {
-        public void Update();
+        public void ChangeDirection();
+
+        public void Attack();
+
+        public void TakeDamage();
+
+        public void Draw();
     }
 }
