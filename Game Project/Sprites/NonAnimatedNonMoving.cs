@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class NonAnimatedNonMoving : ISprite
+    class NonAnimatedNonMoving
     {
         public Texture2D Texture { get; set; }
         // Vector needed to determine location of sprite to render, this is a bandaid solution for the problem of getting a
