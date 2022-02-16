@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project.Sprites
 {
-    class PlayerAttack : ISprite
+    class PlayerAttack : SpriteFactory
     {
       public Vector2 Vector {get; set;}
       public string animationSelected;
