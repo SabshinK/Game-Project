@@ -13,6 +13,8 @@ namespace Game_Project.Sprites
         public Vector2 location;
         // Necessary for movement to tell when the player has moved off screen, this is a bandaid solution
         private int moveFactor;
+        private PlayerManager manager;
+
        
 
         public PlayerMoveRight(Vector2 location)
@@ -26,7 +28,14 @@ namespace Game_Project.Sprites
         // Must include both frame counting and movement
         public void Update()
         {
-            location.X += moveFactor;
+            if (location.X < 800)
+            {
+                location.X += moveFactor;
+            }
+            else
+            {
+                manager.instance.CompleteRight();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
