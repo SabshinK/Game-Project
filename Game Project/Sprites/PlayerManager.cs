@@ -9,26 +9,28 @@ namespace Game_Project.Sprites
     class PlayerManager
     {
       public IPlayer state;
-      public ISprite stateProjectile;
       
       private int Health;
       public string animationToCreate;
+      public boolean faceRight;
       
       // Constructor
       public PlayerManager()
       {
         state = new RightIdle(this);
         animationToCreate = "RightIdle";
+        faceRight = true;
         SpriteFactory.instance.CreateSprite(animationToCreate);
         
         Health = 3;
       }
         
-      // CompleteRight and CompleteLeft will be called after a move or attack animation, depending on which direction the sprite was facing.
+      // CompleteRight and CompleteLeft will be called after a move, attack, or damage animation, depending on which direction the sprite was facing.
       public void CompleteRight()
       {
         state.RightIdle();
         animationToCreate = "RightIdle";
+        faceRight = true;
         SpriteFactory.instance.CreateSprite(animationToCreate);
       }
         
@@ -36,6 +38,7 @@ namespace Game_Project.Sprites
       {
         state.LeftIdle();
         animationToCreate = "LeftIdle";
+        faceRight = false;
         SpriteFactory.instance.CreateSprite(animationToCreate);
       }
         
