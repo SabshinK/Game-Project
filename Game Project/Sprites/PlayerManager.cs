@@ -9,10 +9,12 @@ namespace Game_Project.Sprites
     class PlayerManager
     {
       public IPlayer state;
+      public ISprite stateProjectile;
       
       private int Health;
       public string animationToCreate;
       
+      // Constructor
       public PlayerManager()
       {
         state = new RightIdle(this);
@@ -22,21 +24,22 @@ namespace Game_Project.Sprites
         Health = 3;
       }
         
-      // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
-      public void AttackCompleteRight()
+      // CompleteRight and CompleteLeft will be called after a move or attack animation, depending on which direction the sprite was facing.
+      public void CompleteRight()
       {
         state.RightIdle();
         animationToCreate = "RightIdle";
         SpriteFactory.instance.CreateSprite(animationToCreate);
       }
         
-      public void AttackCompleteLeft()
+      public void CompleteLeft()
       {
         state.LeftIdle();
         animationToCreate = "LeftIdle";
         SpriteFactory.instance.CreateSprite(animationToCreate);
       }
-      
+        
+      // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
       public void DamageTaken()
       {
         Health--;
