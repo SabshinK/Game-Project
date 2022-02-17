@@ -21,11 +21,19 @@ namespace Game_Project.Sprites
         
         Health = 3;
       }
-      
-      public void AttackComplete()
+        
+      // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
+      public void AttackCompleteRight()
       {
         state.RightIdle();
         animationToCreate = "RightIdle";
+        SpriteFactory.instance.CreateSprite(animationToCreate);
+      }
+        
+      public void AttackCompleteLeft()
+      {
+        state.LeftIdle();
+        animationToCreate = "LeftIdle";
         SpriteFactory.instance.CreateSprite(animationToCreate);
       }
       
