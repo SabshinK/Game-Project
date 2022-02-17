@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
@@ -9,6 +9,7 @@ namespace Game_Project
 	{
 		// Will change name and replace the Keyboard Controller file after finishing PlayerManager.cs file!
 		private Dictionary<Keys, ICommand> controllerMappings;
+		private TileManager manager;
 
 		public KeyboardControllerDraft()
 		{
@@ -42,6 +43,8 @@ namespace Game_Project
 			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(game));
 			RegisterCommand(Keys.S, new NonAnimatedMovingCommand(game)); // I don't know what this will do.
 			RegisterCommand(Keys.D, new PlayerMoveRightCommand(game)); // I'm not sure if this is working right??
+			RegisterCommand(Keys.T, new manager.instance.previousTile()); // This will go to the previous tile in the block.
+			RegisterCommand(Keys.Y, new manager.instance.nextTile()); // This will go to the next tile in the block
 		}
 	}
 }
