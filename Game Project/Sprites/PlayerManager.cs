@@ -11,7 +11,7 @@ namespace Game_Project.Sprites
       public IPlayer state;
       
       private int Health;
-      public string animationToCreate;
+      private string animationToCreate;
       public boolean faceRight;
       
       // Constructor
