@@ -33,7 +33,7 @@ namespace Game_Project.Sprites
         {
             // Calculate size of individual sprites in spritesheet and which sprite is being animated
 
-            string animationToCreate = "MoveRight";
+            string animationToCreate = "MoveLeft";
             SpriteFactory.instance.CreateSprite(animationToCreate);
 
         }
