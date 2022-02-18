@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project.Sprites
 {
-    class PlayerMoveRight : ISprite
+    class PlayerMoveRight
     {
         // Necessary for implementing ISprite
         
