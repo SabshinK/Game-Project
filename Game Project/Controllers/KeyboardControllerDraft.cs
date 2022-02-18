@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
+using Game_Project.Sprites;
+using Game_Project.Interfaces;
 
 namespace Game_Project
 {
