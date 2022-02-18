@@ -56,5 +56,10 @@ namespace Game_Project.Sprites
                 sprite.Draw(spriteBatch, location);
             }
         }
+        
+        public void setSprite(ISprite sprite)
+        {
+            this.sprite = sprite;
+        }
     }
 }
