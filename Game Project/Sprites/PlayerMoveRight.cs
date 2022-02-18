@@ -10,10 +10,8 @@ namespace Game_Project.Sprites
     {
         
         public Vector2 location;
-        // Necessary for movement to tell when the player has moved off screen, this is a bandaid solution
         private int moveFactor;
         private PlayerManager Player;
-
        
 
         public PlayerMoveRight(Vector2 location, PlayerManager player)
@@ -34,13 +32,6 @@ namespace Game_Project.Sprites
             {
                 Player.instance.BackToIdleRight();
             }
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            string animationToCreate = "MoveRight";
-            SpriteFactory.instance.CreateSprite(animationToCreate);
-            
         }
     }
 }
