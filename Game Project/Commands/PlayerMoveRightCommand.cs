@@ -6,18 +6,20 @@ namespace Game_Project
 {
     class PlayerMoveRightCommand : ICommand
     {
-        private Game1 myGame;
+        private PlayerManager player;
 
-        public PlayerMoveRightCommand(Game1 game)
+        public PlayerMoveRightCommand(PlayerManager manager)
         {
-            myGame = game;
+            player = manager;
         }
 
         public void Execute()
         {
 
             // Three dots is nasty here, this all should be refactored
-            myGame.setSprite(new PlayerMoveRight(myGame.Location));
+            player.setState(new PlayerMoveRight(player.Location));
+            
+            player.sprite = SpriteFactory.Instance.CreateSprite("MoveRight");
         }
     }
 }
