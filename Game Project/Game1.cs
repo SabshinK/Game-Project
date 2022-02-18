@@ -62,7 +62,6 @@ namespace Game_Project
             PlayerTexture = Content.Load<Texture2D>("HyperLightWalkingRight");
             font = Content.Load<SpriteFont>("Text");
             // Set default sprite state
-            sprite = new NonAnimatedNonMoving(PlayerTexture, Location, GraphicsDevice.Viewport.Bounds, rows, columns);
         }
 
         /// <summary>
@@ -96,7 +95,7 @@ namespace Game_Project
             _spriteBatch.End();
 
             // Draw the sprite
-            sprite.Draw(_spriteBatch);
+            sprite.Draw(_spriteBatch, new Vector2(5f));
 
             base.Draw(gameTime);
         }
