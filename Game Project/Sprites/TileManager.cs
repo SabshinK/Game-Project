@@ -8,15 +8,18 @@ namespace Game_Project.Sprites
 {
     class TileManager
     {
+        private ISprite sprite;
+        
         private int tileNumber;
         private string[] tileArray;
         private int lengthOfArray = 3;
+        private Vector2 location;
       
         public TileManager
         {
             tileNumber = 0;
             tileArray = new string[lengthOfArray] {"TileZero", "TileOne", "TileTwo"};
-            SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
+            sprite = SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
         }
       
         public void NextTile
@@ -26,7 +29,7 @@ namespace Game_Project.Sprites
             } else {
                 tileNumber++;
             }        
-            SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
+            sprite = SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
         }
       
         public void PreviousTile
@@ -36,7 +39,12 @@ namespace Game_Project.Sprites
             } else {
                 tileNumber--;
             }
-            SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
+            sprite = SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
+        }
+        
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            sprite.Draw(spriteBatch, location);
         }
       
     }
