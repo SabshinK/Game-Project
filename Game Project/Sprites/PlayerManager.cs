@@ -25,8 +25,8 @@ namespace Game_Project.Sprites
             Health = 3;
         }
         
-        // CompleteRight and CompleteLeft will be called after a move, attack, or damage animation, depending on which direction the sprite was facing.
-        public void CompleteRight()
+        // BackToIdleRight and BackToIdleLeft will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
+        public void BackToIdleRight()
         {
             state.RightIdle();
             animationToCreate = "RightIdle";
@@ -34,7 +34,7 @@ namespace Game_Project.Sprites
             SpriteFactory.instance.CreateSprite(animationToCreate);
         }
         
-        public void CompleteLeft()
+        public void BackToIdleLeft()
         {
             state.LeftIdle();
             animationToCreate = "LeftIdle";
