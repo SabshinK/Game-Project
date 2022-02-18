@@ -41,7 +41,7 @@ namespace Game_Project.Sprites
                 frames[currentFrame].Height);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(spriteSheet, frames[currentFrame], destinationRectangle, Color.White);
+            spriteBatch.Draw(spriteSheet, destinationRectangle, frames[currentFrame], Color.White);
             spriteBatch.End();
         }
     }
