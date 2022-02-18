@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Interfaces;
 
 namespace Game_Project.Sprites
 {
@@ -14,7 +15,7 @@ namespace Game_Project.Sprites
         private int health;
         private string animationToCreate;
         private Vector2 location;
-        public boolean faceRight;
+        public bool faceRight;
       
         // Constructor
         public PlayerManager()
@@ -26,19 +27,16 @@ namespace Game_Project.Sprites
         
             health = 3;
         }
-        
+
         // BackToIdleRight and BackToIdleLeft will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
         public void BackToIdleRight()
         {
-            state.RightIdle();
-            animationToCreate = "RightIdle";
+            state.BackToIdleRight();
             faceRight = true;
         }
-        
         public void BackToIdleLeft()
         {
-            state.LeftIdle();
-            animationToCreate = "LeftIdle";
+            state.BackToIdleLeft();
             faceRight = false;
         }
         

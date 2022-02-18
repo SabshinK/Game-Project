@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Interfaces;
 
 namespace Game_Project.Sprites
 {
@@ -12,34 +13,34 @@ namespace Game_Project.Sprites
         
         private int tileNumber;
         private string[] tileArray;
-        private int lengthOfArray = 3;
+        private const int lengthOfArray = 3;
         private Vector2 location;
       
-        public TileManager
+        public TileManager()
         {
             tileNumber = 0;
             tileArray = new string[lengthOfArray] {"TileZero", "TileOne", "TileTwo"};
-            sprite = SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
+            sprite = SpriteFactory.Instance.CreateSprite(tileArray[tileNumber]);
         }
       
-        public void NextTile
+        public void NextTile()
         {
             if (tileNumber == (lengthOfArray - 1)) {
                 tileNumber = 0;
             } else {
                 tileNumber++;
             }        
-            sprite = SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
+            sprite = SpriteFactory.Instance.CreateSprite(tileArray[tileNumber]);
         }
       
-        public void PreviousTile
+        public void PreviousTile()
         {
             if (tileNumber == 0) {
                 tileNumber = (lengthOfArray - 1);
             } else {
                 tileNumber--;
             }
-            sprite = SpriteFactory.instance.CreateSprite(tileArray[tileNumber]);
+            sprite = SpriteFactory.Instance.CreateSprite(tileArray[tileNumber]);
         }
         
         public void Draw(SpriteBatch spriteBatch)

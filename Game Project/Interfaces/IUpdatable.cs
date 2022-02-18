@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game_Project.Interfaces
 {
-    internal Interface IUpdatable
+    internal interface IUpdatable
     {
         public void Update(); // Update any appropriate states for the game.
     }
