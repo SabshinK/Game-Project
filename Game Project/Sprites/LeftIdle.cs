@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Interfaces;
 
 namespace Game_Project.Sprites
 {
-    class LeftIdle
+    class LeftIdle : IPlayer
     {
         private PlayerManager player;
         public LeftIdle(PlayerManager manager)
@@ -20,6 +21,11 @@ namespace Game_Project.Sprites
         public void BackToRightIdle()
         {
             player.state = new RightIdle(player);
+        }
+
+        public void Update()
+        {
+            //Nothing to see here! Have a good day!
         }
     }
 }

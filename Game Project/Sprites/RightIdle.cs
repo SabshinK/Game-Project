@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Interfaces;
 
 namespace Game_Project.Sprites
 {
@@ -26,6 +27,9 @@ namespace Game_Project.Sprites
             player.state = new LeftIdle(player);
         }
 
-
+        public void Update()
+        {
+            //Nothing to see here! Have a good day!
+        }
     }
 }
