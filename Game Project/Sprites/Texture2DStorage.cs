@@ -22,6 +22,9 @@ namespace Game_Project.Sprites
 
         // Actual Zelda spritesheet
         private static Texture2D enemiesSpriteSheet;
+        private static Texture2D blocksSpriteSheet;
+        private static Texture2D projectilesSpriteSheet;
+        private static Texture2D playerSpriteSheet;
 
         // Dictionary used for getting Texture2D's
         private static Dictionary<string, Texture2D> spritesByNames;
@@ -57,6 +60,9 @@ namespace Game_Project.Sprites
             //playerSpriteSheet = content.Load<Texture2D>("playerSpriteSheet");
             //musicianSpriteSheet = content.Load<Texture2D>("musicianSpriteSheet");
             enemiesSpriteSheet = content.Load<Texture2D>("TempDungeonEnemies");
+            blocksSpriteSheet = content.Load<Texture2D>("TileSet");
+            projectilesSpriteSheet = content.Load<Texture2D>("TempProjectiles");
+            playerSpriteSheet = content.Load<Texture2D>("ClarySage");
 
             LoadDictionary();
         }
@@ -74,6 +80,9 @@ namespace Game_Project.Sprites
             //spritesByNames.Add("playerSpriteSheet", playerSpriteSheet);
             //spritesByNames.Add("musicianSpriteSheet", musicianSpriteSheet);
             spritesByNames.Add("TempDungeonEnemies", enemiesSpriteSheet);
+            spritesByNames.Add("TileSet", blocksSpriteSheet);
+            spritesByNames.Add("TempProjectiles", projectilesSpriteSheet);
+            spritesByNames.Add("ClarySage", playerSpriteSheet);
         }
     }
 }

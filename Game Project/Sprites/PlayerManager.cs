@@ -14,14 +14,14 @@ namespace Game_Project.Sprites
       
         private int health;
         private string animationToCreate;
-        private Vector2 location;
+        public Vector2 location;
         public bool faceRight;
       
         // Constructor
         public PlayerManager()
         {
             state = new RightIdle(this);
-            animationToCreate = "RightIdle";
+            animationToCreate = "idleRight";
             faceRight = true;
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
         
@@ -55,9 +55,9 @@ namespace Game_Project.Sprites
             }
         }
         
-        public void setSprite(ISprite sprite)
+        public void setState(IPlayer state)
         {
-            this.sprite = sprite;
+            this.state = state;
         }
     }
 }

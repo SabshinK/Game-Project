@@ -31,6 +31,8 @@ namespace Game_Project.Sprites
                 frames[animationName].Item3);
         }
         
+        // Loading the Dictionary, all this will be changed when data starts being loaded from XML files, just a temporary
+        // way of loading things in
         public void LoadDictionary()
         {
             frames.Add("gelGeneric", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(1, 1, 8, 16), new Rectangle(10, 1, 8, 16) }, 2));
@@ -41,6 +43,42 @@ namespace Game_Project.Sprites
             frames.Add("goriyaUp", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(35, 18, 16, 16), new Rectangle(52, 18, 16, 16) }, 2));
             frames.Add("goriyaRight", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(1, 35, 16, 16), new Rectangle(18, 35, 16, 16) }, 2));
             frames.Add("goriyaLeft", new Tuple<string, Rectangle[], int>("TempDungeonEnemies", new Rectangle[] { new Rectangle(35, 35, 16, 16), new Rectangle(52, 35, 16, 16) }, 2));
+
+            frames.Add("lightGrottoGround", new Tuple<string, Rectangle[], int>("TileSet", new Rectangle[] { new Rectangle(0, 0, 64, 64) }, 1));
+            frames.Add("darkGrottoGround", new Tuple<string, Rectangle[], int>("TileSet", new Rectangle[] { new Rectangle(64, 0, 64, 64) }, 1));
+            frames.Add("grottoPlatform", new Tuple<string, Rectangle[], int>("TileSet", new Rectangle[] { new Rectangle(128, 0, 64, 64) }, 1));
+
+            frames.Add("boomerangGeneric", new Tuple<string, Rectangle[], int>("TempProjectiles", 
+                new Rectangle[] 
+                { 
+                    new Rectangle(1, 1, 16, 16), new Rectangle(18, 1, 16, 16), new Rectangle(35, 1, 16, 16), new Rectangle(52, 1, 16, 16),
+                    new Rectangle(69, 1, 16, 16), new Rectangle(86, 1, 16, 16), new Rectangle(103, 1, 16, 16), new Rectangle(120, 1, 16, 16)
+                }, 2));
+            frames.Add("leftArrow", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(1, 18, 16, 16) }, 2));
+            frames.Add("rightArrow", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(18, 18, 16, 16) }, 2));
+            frames.Add("despawnGeneric", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(35, 18, 16, 16) }, 2));
+            frames.Add("candleGeneric", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(52, 18, 16, 16), new Rectangle(69, 18, 16, 16) }, 2));
+            frames.Add("bombWaiting", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(1, 35, 16, 16) }, 2));
+            frames.Add("bombExplosion", new Tuple<string, Rectangle[], int>("TempProjectiles", 
+                new Rectangle[] { new Rectangle(18, 35, 16, 16), new Rectangle(35, 35, 16, 16), new Rectangle(52, 35, 16, 16) }, 2));
+
+            frames.Add("idleRight", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(0, 0, 128, 128) }, 1));
+            frames.Add("idleLeft", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(129, 0, 128, 128) }, 1));
+            frames.Add("movingRight", new Tuple<string, Rectangle[], int>("ClarySage", 
+                new Rectangle[] 
+                { 
+                    new Rectangle(0, 128, 128, 128), new Rectangle(128, 128, 128, 128), new Rectangle(256, 128, 128, 128), new Rectangle(384, 128, 128, 128),
+                    new Rectangle(512, 128, 128, 128), new Rectangle(640, 128, 128, 128), new Rectangle(768, 128, 128, 128), new Rectangle(896, 128, 128, 128),
+                    new Rectangle(1024, 128, 128, 128), new Rectangle(1152, 128, 128, 128), new Rectangle(1280, 128, 128, 128), new Rectangle(1408, 128, 128, 128)
+                }, 1));
+            frames.Add("movingLeft", new Tuple<string, Rectangle[], int>("ClarySage", 
+                new Rectangle[] 
+                {
+                    new Rectangle(0, 256, 128, 128), new Rectangle(128, 256, 128, 128), new Rectangle(256, 256, 128, 128), new Rectangle(384, 256, 128, 128),
+                    new Rectangle(512, 256, 128, 128), new Rectangle(640, 256, 128, 128), new Rectangle(768, 256, 128, 128), new Rectangle(896, 256, 128, 128),
+                    new Rectangle(1024, 256, 128, 128), new Rectangle(1152, 256, 128, 128), new Rectangle(1280, 256, 128, 128), new Rectangle(1408, 256, 128, 128)
+                }, 1));
+
         }
     }
 }
