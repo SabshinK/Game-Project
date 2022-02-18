@@ -15,8 +15,6 @@ namespace Game_Project
 
         public void Execute()
         {
-
-            // Three dots is nasty here, this all should be refactored
             player.setState(new PlayerMoveRight(player.Location));
             
             player.sprite = SpriteFactory.Instance.CreateSprite("MoveRight");
