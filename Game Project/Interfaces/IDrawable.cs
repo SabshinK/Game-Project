@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game_Project.Interfaces
 {
-    internal Interface IDrawable
+    internal interface IDrawable
     {
         public void Draw(); // Draw function for creating any animations.
     }
