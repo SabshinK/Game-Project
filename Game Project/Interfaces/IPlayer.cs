@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game_Project.Interfaces
 {
-    internal interface IPlayer
+    public interface IPlayer
     {
         public void BackToIdleRight();
         public void BackToIdleLeft();

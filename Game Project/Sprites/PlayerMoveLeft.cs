@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Interfaces;
 
 namespace Game_Project.Sprites
 {
@@ -29,9 +30,19 @@ namespace Game_Project.Sprites
             }
              else
             {
-                manager.Instance.BackToIdleLeft();
+                manager.BackToIdleLeft();
             }              
 
+        }
+
+        public void BackToIdleRight()
+        {
+            manager.state = new RightIdle(manager);
+
+        }
+        public void BackToIdleLeft()
+        {
+            manager.state = new LeftIdle(manager);
         }
     }
 }
