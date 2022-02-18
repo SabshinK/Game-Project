@@ -36,13 +36,13 @@ namespace Game_Project
 		}
 
 		// This wouldn't necessarily be done in this way
-		public void LoadContent(Game1 game)
+		public void LoadContent(Game1 game, PlayerManager player)
 		{
 			RegisterCommand(Keys.Q, new QuitCommand(game)); // this should work as normal, just the key is different
-			RegisterCommand(Keys.W, new NonAnimatedNonMovingCommand(game));
-			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(game));
-			RegisterCommand(Keys.S, new NonAnimatedMovingCommand(game)); // I don't know what this will do.
-			RegisterCommand(Keys.D, new PlayerMoveRightCommand(game)); // I'm not sure if this is working right??
+			RegisterCommand(Keys.W, new NonAnimatedNonMovingCommand(player));
+			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
+			RegisterCommand(Keys.S, new NonAnimatedMovingCommand(player)); // I don't know what this will do.
+			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player)); // I'm not sure if this is working right??
 			RegisterCommand(Keys.T, new manager.instance.previousTile()); // This will go to the previous tile in the block.
 			RegisterCommand(Keys.Y, new manager.instance.nextTile()); // This will go to the next tile in the block
 		}
