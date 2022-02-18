@@ -8,10 +8,8 @@ namespace Game_Project.Sprites
 {
     class PlayerMoveLeft : IPlayer
     {
-        // Necessary for implementing ISprite
-
+    
         public Vector2 location;
-        // Necessary for movement to tell when the player has moved off screen, this is a bandaid solution
         private int moveFactor;
         private PlayerManager manager;
 
@@ -19,12 +17,10 @@ namespace Game_Project.Sprites
         {
             this.location = location;
 
-            moveFactor = 2;
-            
+            moveFactor = 2;           
 
         }
 
-        // Must include both frame counting and movement
         public void Update()
         {
              if (location.X > 0)
@@ -33,18 +29,8 @@ namespace Game_Project.Sprites
             }
              else
             {
-                manager.instance.CompleteLeft();
-            }
-                
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            // Calculate size of individual sprites in spritesheet and which sprite is being animated
-
-            string animationToCreate = "MoveLeft";
-            SpriteFactory.instance.CreateSprite(animationToCreate);
+                manager.instance.BackToIdleLeft();
+            }              
 
         }
     }
