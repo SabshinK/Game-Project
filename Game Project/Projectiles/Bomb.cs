@@ -24,11 +24,11 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            sprite = SpriteFactory.Instance.GetSprite("bomb");
+            sprite = Game_Project.Sprites.SpriteFactory.Instance.GetSprite("bombWaiting");
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (timer >= lifeSpan)
             {
-                sprite = SpriteFactory.Instance.GetSprite("bomb explosion");
+                sprite = SpriteFactory.Instance.GetSprite("bombExplosion");
                 timer = 0f;
             }
 

@@ -15,18 +15,20 @@ namespace Game_Project
         private SpriteBatch spriteBatch;
         private ISprite sprite;
         private bool inPlay = true;
-        public Arrow(Vector2 position, SpriteBatch spriteBatch)
+        private bool userDirection;
+        public Arrow(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
         {
             this.position = position;
             timer = 0f;
             lifeSpan = 300f;
             moveFactor = 8;
             this.spriteBatch = spriteBatch;
+            this.userDirection = userDirection;
         }
 
         public void Update(GameTime gameTime)
         {
-            sprite = SpriteFactory.Instance.GetSprite("arrow");
+            
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if(timer >= lifeSpan)
             {
@@ -34,12 +36,14 @@ namespace Game_Project
                 timer = 0f;
             }
 
-            if ()//player facing right
+            if (userDirection)
             {
+                sprite = Game_Project.Sprites.SpriteFactory.Instance.GetSprite("rightArrow");
                 position.X += moveFactor;
             }
             else
             {
+                sprite = Game_Project.Sprites.SpriteFactory.Instance.GetSprite("leftArrow");
                 position.X -= moveFactor;
             }
 

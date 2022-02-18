@@ -16,19 +16,21 @@ namespace Game_Project
         private bool inPlay = true;
         private ISprite sprite;
         private SpriteBatch spriteBatch;
-        public Boomerang(Vector2 position, SpriteBatch spriteBatch)
+        private bool userDirection;
+        public Boomerang(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
         {
             this.position = position;
             this.initialPosition = position;
             boomerangLimit = 100;
             moveFactor = 8;
             this.spriteBatch = spriteBatch;
+            this.userDirection = userDirection;
         }
 
         public void Update(GameTime gameTime)
         {
-            sprite = SpriteFactory.Instance.GetSprite("boomerang");
-            if ()//player facing right
+            sprite = Game_Project.Sprites.SpriteFactory.Instance.GetSprite("boomerangGeneric");
+            if (userDirection)//player facing right
             {
                 if (!changeDirection)
                     position.X += moveFactor;
