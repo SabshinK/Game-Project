@@ -16,7 +16,7 @@ namespace Game_Project.Sprites
 
         // A Dictionary that contains a string key and a tuple containing the name of the texture, an array of the frame rectangles,
         // and the animation speed
-        private Dictionary<string, Tuple<string, Rectangle[], int>> frames;
+        private Dictionary<string, Tuple<string, Rectangle[], int>> frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
 
         /// <summary>
         /// Method for other classes to call when they need an ISprite implementation. Given the name of the spritesheet needed,

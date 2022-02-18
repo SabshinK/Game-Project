@@ -8,26 +8,21 @@ namespace Game_Project.Enemies
 
 //MAKE THIS INTO A STATE MACHINE BASED ON THE GOOMBA STATE MACHINE ON KIRBY'S SITE
 {
-    class BatStateMachine : Game_Project.Interfaces.IEnemyStateMachine
+    class GoriyaStateMachine : Game_Project.Interfaces.IEnemyStateMachine
     {
-        private int health = 5;
+        private int health = 25;
 
-        direction batDirection = direction.right;
-        actions batAction = actions.moving;
+        direction goriyaDirection = direction.right;
+        actions goriyaAction = actions.moving;
 
         private Tuple<actions, direction> stateTuple;
 
         private Random random = new Random();
+        direction[] directionsArr = { direction.right, direction.up, direction.down, direction.left };
 
         public void ChangeDirection()
         {
-            if (batDirection.Equals(direction.right)){
-                batDirection = direction.left;
-            }
-            else
-            {
-                batDirection = direction.right;
-            }
+            goriyaDirection = directionsArr[random.Next(4)];
         }
 
         public void TakeDamage()
@@ -40,13 +35,13 @@ namespace Game_Project.Enemies
 
         public void Attack()
         {
-            batAction = actions.attacking;
+            goriyaAction = actions.attacking;
         }
 
         public Tuple<actions, direction> getState()
         {
 
-            stateTuple = new Tuple<actions, direction>(batAction, batDirection);
+            stateTuple = new Tuple<actions, direction>(goriyaAction, goriyaDirection);
             return stateTuple;
         }
 

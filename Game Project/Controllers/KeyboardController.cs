@@ -36,11 +36,7 @@ namespace Game_Project
 		// This wouldn't necessarily be done in this way
 		public void LoadContent(Game1 game)
         {
-			RegisterCommand(Keys.Escape, new QuitCommand(game));
-			RegisterCommand(Keys.W, new NonAnimatedNonMovingCommand(game));
-			RegisterCommand(Keys.A, new AnimatedNonMovingCommand(game));
-			RegisterCommand(Keys.S, new NonAnimatedMovingCommand(game));
-			RegisterCommand(Keys.D, new AnimatedMovingCommand(game));
+
 		}
     }
 }

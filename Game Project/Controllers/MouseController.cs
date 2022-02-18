@@ -42,17 +42,6 @@ namespace Game_Project
         {
             // Quick and dirty way of getting the size of the window
             windowSize = game.GraphicsDevice.Viewport.Bounds;
-
-            RegisterCommand(new MouseState(0, 0, 0, ButtonState.Released, ButtonState.Pressed, ButtonState.Released,
-                ButtonState.Released, ButtonState.Released), new QuitCommand(game));
-            RegisterCommand(new MouseState(0, 0, 0, ButtonState.Pressed, ButtonState.Released, ButtonState.Released,
-                ButtonState.Released, ButtonState.Released), new NonAnimatedNonMovingCommand(game));
-            RegisterCommand(new MouseState(1, 0, 0, ButtonState.Pressed, ButtonState.Released, ButtonState.Released,
-                ButtonState.Released, ButtonState.Released), new AnimatedNonMovingCommand(game));
-            RegisterCommand(new MouseState(0, 1, 0, ButtonState.Pressed, ButtonState.Released, ButtonState.Released,
-                ButtonState.Released, ButtonState.Released), new NonAnimatedMovingCommand(game));
-            RegisterCommand(new MouseState(1, 1, 0, ButtonState.Pressed, ButtonState.Released, ButtonState.Released,
-                ButtonState.Released, ButtonState.Released), new AnimatedMovingCommand(game));
         }
 
         /// <summary>
