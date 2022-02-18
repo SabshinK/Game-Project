@@ -1,23 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Sprites;
 
 namespace Game_Project
 {
-    class PlayerMoveRightCommand : ICommand
+    class PlayerMoveLeftCommand : ICommand
     {
         private PlayerManager player;
 
-        public PlayerMoveRightCommand(PlayerManager manager)
+        public PlayerMoveLeftCommand(PlayerManager manager)
         {
             player = manager;
         }
 
         public void Execute()
         {
-            player.setState(new PlayerMoveLeft(player.Location));
+            player.setState(new PlayerMoveLeft(player.location, player));
             
-            player.sprite = SpriteFactory.Instance.CreateSprite("MoveLeft");
+            player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Sprites;
 
 namespace Game_Project
 {
@@ -15,9 +16,9 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.setState(new PlayerMoveRight(player.Location));
+            player.setState(new PlayerMoveRight(player.location, player));
             
-            player.sprite = SpriteFactory.Instance.CreateSprite("MoveRight");
+            player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
         }
     }
 }
