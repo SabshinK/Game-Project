@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project.Sprites
 {
-    class PlayerMoveLeft
+    class PlayerMoveLeft : IPlayer
     {
         // Necessary for implementing ISprite
 
