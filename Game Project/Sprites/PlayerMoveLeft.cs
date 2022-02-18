@@ -29,7 +29,7 @@ namespace Game_Project.Sprites
             }
              else
             {
-                manager.instance.BackToIdleLeft();
+                manager.Instance.BackToIdleLeft();
             }              
 
         }
