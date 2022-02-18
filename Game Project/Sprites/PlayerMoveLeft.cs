@@ -14,10 +14,10 @@ namespace Game_Project.Sprites
         private int moveFactor;
         private PlayerManager manager;
 
-        public PlayerMoveLeft(Vector2 location)
+        public PlayerMoveLeft(Vector2 location, PlayerManager player)
         {
             this.location = location;
-
+            manager = player;
             moveFactor = 2;           
 
         }

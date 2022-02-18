@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:HyperLightWalkingRight.png
 
+#begin TempBosses.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TempBosses.png
+
 #begin TempDungeonEnemies.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,6 +60,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TempDungeonEnemies.png
+
+#begin TempItemsAndCollectables.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TempItemsAndCollectables.png
+
+#begin TempProjectiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TempProjectiles.png
 
 #begin Text.spritefont
 /importer:FontDescriptionImporter
