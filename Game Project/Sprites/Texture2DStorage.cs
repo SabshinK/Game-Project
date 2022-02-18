@@ -25,6 +25,8 @@ namespace Game_Project.Sprites
         private static Texture2D blocksSpriteSheet;
         private static Texture2D projectilesSpriteSheet;
         private static Texture2D playerSpriteSheet;
+        private static Texture2D bossesSpriteSheet;
+        private static Texture2D itemsSpriteSheet;
 
         // Dictionary used for getting Texture2D's
         private static Dictionary<string, Texture2D> spritesByNames;
@@ -63,6 +65,8 @@ namespace Game_Project.Sprites
             blocksSpriteSheet = content.Load<Texture2D>("TileSet");
             projectilesSpriteSheet = content.Load<Texture2D>("TempProjectiles");
             playerSpriteSheet = content.Load<Texture2D>("ClarySage");
+            bossesSpriteSheet = content.Load<Texture2D>("TempBosses");
+            itemsSpriteSheet = content.Load<Texture2D>("TempItemsAndCollectables");
 
             LoadDictionary();
         }
@@ -83,6 +87,8 @@ namespace Game_Project.Sprites
             spritesByNames.Add("TileSet", blocksSpriteSheet);
             spritesByNames.Add("TempProjectiles", projectilesSpriteSheet);
             spritesByNames.Add("ClarySage", playerSpriteSheet);
+            spritesByNames.Add("TempBosses", bossesSpriteSheet);
+            spritesByNames.Add("TempItemsAndCollectables", itemsSpriteSheet);
         }
     }
 }
