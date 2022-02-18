@@ -30,7 +30,7 @@ namespace Game_Project.Sprites
             }
             else
             {
-                Player.instance.BackToIdleRight();
+                Player.Instance.BackToIdleRight();
             }
         }
     }
