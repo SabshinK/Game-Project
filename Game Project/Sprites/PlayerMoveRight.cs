@@ -6,26 +6,24 @@ using System.Text;
 
 namespace Game_Project.Sprites
 {
-    class PlayerMoveRight
+    class PlayerMoveRight : IPlayer
     {
-        // Necessary for implementing ISprite
         
         public Vector2 location;
         // Necessary for movement to tell when the player has moved off screen, this is a bandaid solution
         private int moveFactor;
-        private PlayerManager manager;
+        private PlayerManager Player;
 
        
 
-        public PlayerMoveRight(Vector2 location)
+        public PlayerMoveRight(Vector2 location, PlayerManager player)
         {
             this.location = location;
-
+            Player = player;
             moveFactor = 2;
 
         }
 
-        // Must include both frame counting and movement
         public void Update()
         {
             if (location.X < 800)
@@ -34,14 +32,12 @@ namespace Game_Project.Sprites
             }
             else
             {
-                manager.instance.CompleteRight();
+                Player.instance.BackToIdleRight();
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Calculate size of individual sprites in spritesheet and which sprite is being animated
-            
             string animationToCreate = "MoveRight";
             SpriteFactory.instance.CreateSprite(animationToCreate);
             
