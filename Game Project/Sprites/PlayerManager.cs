@@ -9,9 +9,11 @@ namespace Game_Project.Sprites
     class PlayerManager
     {
         public IPlayer state;
+        public ISprite sprite;
       
         private int Health;
         private string animationToCreate;
+        private Vector2 location;
         public boolean faceRight;
       
         // Constructor
@@ -20,7 +22,7 @@ namespace Game_Project.Sprites
             state = new RightIdle(this);
             animationToCreate = "RightIdle";
             faceRight = true;
-            SpriteFactory.instance.CreateSprite(animationToCreate);
+            sprite = SpriteFactory.instance.CreateSprite(animationToCreate);
         
             Health = 3;
         }
@@ -31,7 +33,6 @@ namespace Game_Project.Sprites
             state.RightIdle();
             animationToCreate = "RightIdle";
             faceRight = true;
-            SpriteFactory.instance.CreateSprite(animationToCreate);
         }
         
         public void BackToIdleLeft()
@@ -39,7 +40,6 @@ namespace Game_Project.Sprites
             state.LeftIdle();
             animationToCreate = "LeftIdle";
             faceRight = false;
-            SpriteFactory.instance.CreateSprite(animationToCreate);
         }
         
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
@@ -48,7 +48,13 @@ namespace Game_Project.Sprites
             Health--;
             state.TakeDamage();
             animationToCreate = "TakeDamage";
-            SpriteFactory.instance.CreateSprite(animationToCreate);
         } 
+        
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if (sprite != null) {
+                sprite.Draw(spriteBatch, location);
+            }
+        }
     }
 }
