@@ -24,6 +24,7 @@ namespace Game_Project
             itemList = new List<ISprite>(numItems);
             FeedItemList(); //Creating the Item List
             sprite = itemList[itemId];
+            location = new Vector2(100, 300);
             
             
         }
@@ -57,6 +58,10 @@ namespace Game_Project
             {
                 itemId = itemList.IndexOf(sprite) + 1;
             }
+            if(itemId >= numItems)
+            {
+                itemId = 0;
+            }
             sprite = itemList[itemId];
         }
 
@@ -64,11 +69,15 @@ namespace Game_Project
         {
             if (itemList.IndexOf(sprite) == (0))
             {
-                itemId = numItems;
+                itemId = numItems-1;
             }
             else
             {
                 itemId = itemList.IndexOf(sprite) - 1;
+                if(itemId < 0)
+                {
+                    itemId = numItems-1;
+                }
             }
             sprite = itemList[itemId];
         }

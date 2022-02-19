@@ -74,15 +74,15 @@ namespace Game_Project
             switch(code)
             {
                 case 0:
-                    return new Arrow(location, spriteBatch, state.FaceRight);
+                    return new Arrow(location, state.FaceRight);
                 case 1:
-                    return new Bomb(location, spriteBatch);
+                    return new Bomb(location);
                 case 2:
-                    return new Boomerang(location, spriteBatch, state.FaceRight);
+                    return new Boomerang(location, state.FaceRight);
                 case 3:
-                    return new Candle(location, spriteBatch, state.FaceRight);
+                    return new Candle(location, state.FaceRight);
                 case 4:
-                    return new SwordBeam(location, spriteBatch, state.FaceRight);
+                    return new SwordBeam(location, state.FaceRight);
                 default:
                     return null;
             }

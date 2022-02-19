@@ -23,6 +23,7 @@ namespace Game_Project
             locationVector = location;
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
+            currentGoriyaSprite = goriyaSpriteRight;
         }
         //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
         //{
@@ -49,7 +50,12 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            stateTuple = goriya.getState();
             currentGoriyaSprite.Draw(spriteBatch, locationVector);
+            if (stateTuple.Item1.Equals(actions.attacking))
+            {
+                weapon.Draw(spriteBatch);
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -86,7 +92,6 @@ namespace Game_Project
                     currentGoriyaSprite = goriyaSpriteLeft;
                     weapon = new Boomerang(locationVector, false);
                 }
-                weapon.Draw();
                 for(int i = 0; i < 25; i++)
                 {
                     weapon.Update(gameTime);

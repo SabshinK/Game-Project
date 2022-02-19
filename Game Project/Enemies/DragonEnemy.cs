@@ -53,7 +53,13 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            stateTuple = dragon.getState();
             dragonSprite.Draw(spriteBatch, locationVector);
+            if (stateTuple.Item1.Equals(actions.attacking))
+            {
+                weapon.Draw(spriteBatch);
+            }
+
         }
 
         public void Update(GameTime gameTime)
@@ -84,7 +90,6 @@ namespace Game_Project
             {
                 dragonSprite = attackSprite;
                 weapon = new Candle(locationVector, false);
-                weapon.Draw();
                 for(int i = 0; i < 10; i++)
                 {
                     weapon.Update(gameTime);

@@ -83,7 +83,7 @@ namespace Game_Project
 
             player.Draw(spriteBatch);
             tiles.Draw(spriteBatch);
-            enemies.Draw();
+            enemies.Draw(spriteBatch);
             items.Draw(spriteBatch);
 
             base.Draw(gameTime);
