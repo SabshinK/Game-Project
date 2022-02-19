@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
@@ -46,7 +47,7 @@ namespace Game_Project
             dragonSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > 25)
@@ -75,9 +76,9 @@ namespace Game_Project
                 dragonSprite = attackSprite;
                 weapon = new Candle(locationVector, spriteBatch, false);
                 weapon.Draw();
-                for(int i = 0, i < 10, i++)
+                for(int i = 0; i < 10; i++)
                 {
-                    weapon.Update();
+                    weapon.Update(gameTime);
                 }
             }
 

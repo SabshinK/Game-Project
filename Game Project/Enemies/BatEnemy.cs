@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
@@ -43,7 +44,7 @@ namespace Game_Project
             batSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > new Random().Next(50))

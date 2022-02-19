@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
@@ -45,7 +46,7 @@ namespace Game_Project
             currentGoriyaSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > new Random().Next(100))
@@ -59,17 +60,17 @@ namespace Game_Project
 
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
             if(stateTuple.Item1.Equals(actions.moving)){
-                if (stateTuple.Item2.Equals(directions.right)){
+                if (stateTuple.Item2.Equals(direction.right)){
                     currentGoriyaSprite = goriyaSpriteRight;
-                    locationVector++;
+                    locationVector.X++;
                 }
                 else{
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    locationVector--;
+                    locationVector.X--;
                 }
             }
             else if (stateTuple.Item1.Equals(actions.attacking)){
-                if (stateTuple.Item1.Equals(directions.right))
+                if (stateTuple.Item1.Equals(direction.right))
                 {
                     currentGoriyaSprite = goriyaSpriteRight;
                     weapon = new Boomerang(locationVector, spriteBatch, true);
@@ -80,9 +81,9 @@ namespace Game_Project
                     weapon = new Boomerang(locationVector, spriteBatch, false);
                 }
                 weapon.Draw();
-                for(int i = 0; i < 25, i++)
+                for(int i = 0; i < 25; i++)
                 {
-                    weapon.Update();
+                    weapon.Update(gameTime);
                 }
             }
             currentGoriyaSprite.Update();
