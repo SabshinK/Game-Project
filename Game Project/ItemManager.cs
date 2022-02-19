@@ -23,7 +23,7 @@ namespace Game_Project.Sprites
             itemId = 0;
             sprite = itemList[itemId];
             itemList = new List<ISprite>(numItems);
-            FeedItemList();
+            FeedItemList(); //Creating the Item List
         }
 
         public void FeedItemList()
