@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Game_Project.Sprites;
+using Game_Project.Enemies;
+using Game_Project.Interfaces;
 
 namespace Game_Project
 {
@@ -9,6 +12,7 @@ namespace Game_Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont font;
+        private GoriyaEnemy mrGoriya;
 
         // Interfaces to use
         public IController keyboard;
@@ -55,13 +59,17 @@ namespace Game_Project
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Texture2DStorage.LoadContent(Content);
 
             keyboard.LoadContent(this);
             mouse.LoadContent(this);
-
-            PlayerTexture = Content.Load<Texture2D>("HyperLightWalkingRight");
+            SpriteFactory.Instance.LoadDictionary();
+            
             font = Content.Load<SpriteFont>("Text");
             // Set default sprite state
+
+            mrGoriya = new GoriyaEnemy();
+            mrGoriya.Create(_spriteBatch, new Vector2(300, 300));
         }
 
         /// <summary>
@@ -74,9 +82,10 @@ namespace Game_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            sprite.Update();
             keyboard.Update();
             mouse.Update();
+
+            mrGoriya.Update();
 
             base.Update(gameTime);
         }
@@ -95,7 +104,8 @@ namespace Game_Project
             _spriteBatch.End();
 
             // Draw the sprite
-            sprite.Draw(_spriteBatch, new Vector2(5f));
+            mrGoriya.Draw();
+
 
             base.Draw(gameTime);
         }

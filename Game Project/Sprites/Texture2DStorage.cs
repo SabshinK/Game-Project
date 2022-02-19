@@ -30,7 +30,7 @@ namespace Game_Project
         private static Texture2D tempPlayerSpriteSheet;
 
         // Dictionary used for getting Texture2D's
-        private static Dictionary<string, Texture2D> spritesByNames;
+        private static Dictionary<string, Texture2D> spritesByNames = new Dictionary<string, Texture2D>();
 
         /// <summary>
         /// Given the name of a spritesheet, this function gets the corresponding Texture2D
