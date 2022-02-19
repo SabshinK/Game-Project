@@ -11,7 +11,7 @@ namespace Game_Project.Sprites
     class ItemManager
     {
         private int numItems = 15;
-        List<ISprite> itemList = new List<ISprite>(numItems);
+        private List<ISprite> itemList;
 
         private int itemId;
         private ISprite sprite;
@@ -22,6 +22,8 @@ namespace Game_Project.Sprites
         {
             itemId = 0;
             sprite = itemList[itemId];
+            itemList = new List<ISprite>(numItems);
+            FeedItemList();
         }
 
         public void FeedItemList()
