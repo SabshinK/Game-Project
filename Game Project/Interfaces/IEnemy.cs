@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace Game_Project.Interfaces
+namespace Game_Project
 {
-    interface IEnemy
+    public interface IEnemy
     {
 
         public void Create(SpriteBatch spriteBatch, Vector2 vector);

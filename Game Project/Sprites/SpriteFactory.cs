@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Interfaces;
 
-namespace Game_Project.Sprites
+namespace Game_Project
 {
     // most of the functionality of this class may be changed based on how sprites are loaded
     public class SpriteFactory
@@ -18,6 +17,11 @@ namespace Game_Project.Sprites
         // A Dictionary that contains a string key and a tuple containing the name of the texture, an array of the frame rectangles,
         // and the animation speed
         private Dictionary<string, Tuple<string, Rectangle[], int>> frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
+
+        public SpriteFactory()
+        {
+            frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
+        }
 
         /// <summary>
         /// Method for other classes to call when they need an ISprite implementation. Given the name of the animation needed,
@@ -65,6 +69,8 @@ namespace Game_Project.Sprites
             frames.Add("bombWaiting", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(1, 35, 16, 16) }, 2));
             frames.Add("bombExplosion", new Tuple<string, Rectangle[], int>("TempProjectiles", 
                 new Rectangle[] { new Rectangle(18, 35, 16, 16), new Rectangle(35, 35, 16, 16), new Rectangle(52, 35, 16, 16) }, 2));
+            frames.Add("swordBeamRight", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(69, 35, 16, 16), new Rectangle(86, 35, 16, 16) }, 2));
+            frames.Add("swordBeamLeft", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(103, 35, 16, 16), new Rectangle(120, 35, 16, 16) }, 2));
 
             // Player animations
             frames.Add("idleRight", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(0, 0, 128, 128) }, 1));
@@ -83,6 +89,30 @@ namespace Game_Project.Sprites
                     new Rectangle(512, 256, 128, 128), new Rectangle(640, 256, 128, 128), new Rectangle(768, 256, 128, 128), new Rectangle(896, 256, 128, 128),
                     new Rectangle(1024, 256, 128, 128), new Rectangle(1152, 256, 128, 128), new Rectangle(1280, 256, 128, 128), new Rectangle(1408, 256, 128, 128)
                 }, 1));
+            frames.Add("useItemRight", new Tuple<string, Rectangle[], int>("TempPlayer", new Rectangle[] { new Rectangle(1, 1, 16, 16) }, 2));
+            frames.Add("useItemLeft", new Tuple<string, Rectangle[], int>("TempPlayer", new Rectangle[] { new Rectangle(18, 1, 16, 16) }, 2));
+            frames.Add("attackRight", new Tuple<string, Rectangle[], int>("TempPlayer", 
+                new Rectangle[] 
+                { 
+                    new Rectangle(1, 18, 16, 16), new Rectangle(18, 18, 27, 16), new Rectangle(46, 18, 23, 16), new Rectangle(70, 18, 19, 16)
+                }, 2));
+            frames.Add("attackLeft", new Tuple<string, Rectangle[], int>("TempPlayer",
+                new Rectangle[]
+                {
+                    new Rectangle(73, 35, 16, 16), new Rectangle(45, 35, 27, 16), new Rectangle(21, 35, 23, 16), new Rectangle(1, 35, 19, 16)
+                }, 2));
+            frames.Add("damagedRight", new Tuple<string, Rectangle[], int>("TempPlayer",
+                new Rectangle[]
+                {
+                    new Rectangle(1, 52, 16, 16), new Rectangle(18, 52, 16, 16), new Rectangle(35, 52, 16, 16), new Rectangle(52, 52, 16, 16),
+                    new Rectangle(69, 52, 16, 16), new Rectangle(86, 52, 16, 16)
+                }, 2));
+            frames.Add("damagedLeft", new Tuple<string, Rectangle[], int>("TempPlayer",
+                new Rectangle[]
+                {
+                    new Rectangle(1, 69, 16, 16), new Rectangle(18, 69, 16, 16), new Rectangle(35, 69, 16, 16), new Rectangle(52, 69, 16, 16),
+                    new Rectangle(69, 69, 16, 16), new Rectangle(86, 69, 16, 16)
+                }, 2));
 
             // Item and Collectable animations
             frames.Add("fullHeart", new Tuple<string, Rectangle[], int>("TempItemsAndCollectables", new Rectangle[] { new Rectangle(0, 0, 8, 8) }, 2));
