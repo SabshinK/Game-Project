@@ -4,20 +4,20 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerMoveRightCommand : ICommand
+    class PlayerMoveLeftCommand : ICommand
     {
-        private PlayerManager player;
+        private Player player;
 
-        public PlayerMoveRightCommand(PlayerManager manager)
+        public PlayerMoveLeftCommand(Player manager)
         {
             player = manager;
         }
 
         public void Execute()
         {
-            player.setState(new PlayerMoveLeft(player.Location));
+            player.setState(new PlayerMoveState(player.location, player, false));
             
-            player.sprite = SpriteFactory.Instance.CreateSprite("MoveLeft");
+            player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
         }
     }
 }
