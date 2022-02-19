@@ -8,9 +8,9 @@ namespace Game_Project
     {
         private ISprite sprite;
         private IPlayer state;
-        private PlayerManager player;
+        private Player player;
 
-        public RightIdle(PlayerManager manager)
+        public RightIdle(Player manager)
         {
             player = manager;
         }

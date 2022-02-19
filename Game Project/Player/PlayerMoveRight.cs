@@ -10,10 +10,10 @@ namespace Game_Project
         
         public Vector2 location;
         private int moveFactor;
-        private PlayerManager manager;
+        private Player manager;
        
 
-        public PlayerMoveRight(Vector2 location, PlayerManager player)
+        public PlayerMoveRight(Vector2 location, Player player)
         {
             this.location = location;
             manager = player;
