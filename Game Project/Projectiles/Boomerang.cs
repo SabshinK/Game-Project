@@ -12,9 +12,12 @@ namespace Game_Project
         public Vector2 initialPosition;
         private int boomerangLimit;
         private int moveFactor;
-        public ISprite sprite;
+        public ISprite sprite, movingSprite, despawnSprite;
         private SpriteBatch spriteBatch;
         private bool userDirection;
+        movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
+        despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+        
 
         //constructor
         public Boomerang(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
@@ -31,7 +34,7 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //get sprite for boomerang
-            sprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
+            sprite = movingSprite;
             //player is looking right
             if (userDirection)
             {
@@ -54,7 +57,7 @@ namespace Game_Project
             //remove boomerang when it returns to original player
             if(Math.Abs(position.X-initialPosition.X) == 0)
             {
-                sprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+                sprite = despawnSprite;
             }
 
         }
