@@ -12,6 +12,7 @@ namespace Game_Project
         
         private int tileNumber;
         private List<ISprite> tileList;
+        private const int lengthOfList = 3;
         private Vector2 location;
       
         public TileManager()
@@ -24,7 +25,7 @@ namespace Game_Project
       
         public void NextTile()
         {
-            if (tileNumber == (lengthOfArray - 1)) {
+            if (tileNumber == (lengthOfList - 1)) {
                 tileNumber = 0;
             } else {
                 tileNumber++;
@@ -35,7 +36,7 @@ namespace Game_Project
         public void PreviousTile()
         {
             if (tileNumber == 0) {
-                tileNumber = (lengthOfArray - 1);
+                tileNumber = (lengthOfList - 1);
             } else {
                 tileNumber--;
             }
