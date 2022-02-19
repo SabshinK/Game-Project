@@ -16,14 +16,17 @@ namespace Game_Project
         Vector2 locationVector = new Vector2(200, 200);
         int lengthOfAction = 0;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public BatEnemy()
         {
-            bat = new BatStateMachine();
-            locationVector = vector;
-            spriteBatch = gameSpriteBatch;
-            batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
+
         }
+        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+          //  bat = new BatStateMachine();
+           // locationVector = vector;
+            //spriteBatch = gameSpriteBatch;
+            //batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
+        //}
         public void ChangeDirection()
         {
             bat.ChangeDirection();

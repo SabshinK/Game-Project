@@ -15,8 +15,6 @@ namespace Game_Project
         public ISprite sprite, movingSprite, despawnSprite;
         private SpriteBatch spriteBatch;
         private bool userDirection;
-        movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
-        despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
         
 
         //constructor
@@ -28,6 +26,9 @@ namespace Game_Project
             moveFactor = 8;
             this.spriteBatch = spriteBatch;
             this.userDirection = userDirection;
+            movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
+            despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+
         }
 
 

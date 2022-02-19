@@ -18,8 +18,6 @@ namespace Game_Project
         private Vector2 finalPositionRight;
         private Vector2 finalPositionLeft;
         private bool stopFire;
-        fireSprite = SpriteFactory.Instance.CreateSprite("candleFileGeneric");
-        despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
         
         
         //constructor
@@ -36,6 +34,9 @@ namespace Game_Project
             lifeSpan = 50f;
             this.userDirection = userDirection;
             stopFire = false;
+            fireSprite = SpriteFactory.Instance.CreateSprite("candleFireGeneric");
+            despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+
 
         }
 

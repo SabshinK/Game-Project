@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -49,6 +50,10 @@ namespace Game_Project
         {
             enemies.Add(new BatEnemy());
         }
+
+        public void Draw()
+        {
+            enemy.Draw();
+        }
     }
-}
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class ItemManager
+    public class ItemManagerV2
     {
         private ISprite sprite;
 
@@ -15,7 +15,7 @@ namespace Game_Project
         private const int lengthOfList = 3;
         private Vector2 location;
 
-        public ItemManager()
+        public ItemManagerV2()
         {
             itemNumber = 0;
             itemList = new List<ISprite>();

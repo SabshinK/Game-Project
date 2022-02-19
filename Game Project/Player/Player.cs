@@ -26,7 +26,7 @@ namespace Game_Project
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
 
-            location = new Vector2(GraphicsDevice.Viewport.Width / 2 - 48, GraphicsDevice.Viewport.Height / 2 - 64);
+            location = new Vector2(800 / 2 - 48, 400 / 2 - 64);
         
             health = 3;
         }
