@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+// Sprint 2 - cycling thru items
 
 namespace Game_Project.Sprites
 {
