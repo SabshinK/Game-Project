@@ -8,26 +8,37 @@ namespace Game_Project
     class IdleState : IPlayerState
     {
         private Player player;
-        private bool faceRight;
+        public bool FaceRight { get; set; }
+
         public IdleState(Player manager, bool faceright)
         {
             player = manager;
-            faceRight = faceright;
+            FaceRight = faceright;
         }
 
         public void BackToIdle()
         {
-            //yay
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            //Nothing to see here! Have a good day!
+            // Already in the idle state
         }
 
         public void TakeDamage()
         {
-            //hi there!
+            player.setState(new DamageState(player, FaceRight));
+        }
+
+        public void Attack()
+        {
+            player.setState(new PlayerAttackState(player, FaceRight));
+        }
+
+        public void UseItem(IProjectile projectile)
+        {
+            player.setState(new PlayerItemState(player, FaceRight, projectile));
+        }
+        
+        public void Update(GameTime gameTime)
+        {
+            //Nothing to see here! Have a good day!
         }
     }
 }
