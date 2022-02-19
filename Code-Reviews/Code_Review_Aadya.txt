@@ -1,1 +1,22 @@
+READABILTY REVIEW:
+
+Author of the code review: Aadya Jain
+Date of the code review: 02/19
+Sprint number: 2
+Name of the .cs file being reviewed: Arrow.cs
+Author of the .cs file being reviewed: Anooj Deshpande
+Number of minutes taken to complete the review: 25
+
+The code in the Arrow.cs file had consistent variable naming convention using camel case with lifeSpan, userDirection, moveFactor. moveFactor is also a variable that has been used throughout all of the projectiles to describe the factor of the speed that the projectiles are moving. Each if block is spaced apart and there are easy to follow comments to explain the code. I would also group the initial variable names based on the type and interfaces. Currently, it's in the order of Vector, float, int, spritebatch, ISprite, boolean. I would probably group primitive types together first, then the vector, and finally the spritebatch and ISprite later. Same thing with the constructor where setting position to this.position is disconnected and far away from setting spritebatch and userDirection. Overall, this is a very readable code.
+
+MAINTAINABILITY:
+
+Author of the code review: Aadya Jain
+Date of the code review: 02/19
+Sprint number: 2
+Name of the .cs file being reviewed: SwordBeam.cs
+Author of the .cs file being reviewed: Anooj Deshpande
+Specific comments on code quality
+One change I would make: 
+The first thing that I noticed about the code was the fact that Interfaces.ISprite sprite line which was used instead of ISprite sprite and then referencing in the top with 'using Game_Project.Interfaces.' The userDirection is public, but I'm not sure that if it should since other classes shouldn't be able to change Sword Beam's direction. It would also be important to note that moveFactor is currently using a magic number which we would need to remove for later sprints. Another suggestion would be using a private string animationToCreate which would be set to 'swordBeamRight' or 'swordBeamLeft' in the if block. Then, at the end of the if-else block, the createSprite method can be used with animationToCreate sprite = Sprites.SpriteFactory.Instance.CreateSprite(animationToCreate) to help reduce similar code.. 
 
