@@ -9,11 +9,11 @@ using static Game_Project.Interfaces.IEnemyStateMachine;
 
 namespace Game_Project.Enemies
 {
-    class BatEnemy : Game_Project.Interfaces.IEnemy
+    class DragonEnemy : Game_Project.Interfaces.IEnemy
     {
         Tuple<actions, direction> stateTuple;
-        BatStateMachine bat;
-        ISprite batSprite;
+        BatStateMachine dragon;
+        ISprite dragonSprite, waitingSprite, attackSprite;
         SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(200, 200);
         int lengthOfAction = 0;
@@ -21,29 +21,31 @@ namespace Game_Project.Enemies
 
         public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
         {
-            bat = new BatStateMachine();
+            dragon = new BatStateMachine();
             locationVector = vector;
             spriteBatch = gameSpriteBatch;
-            batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
+            waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
+            attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
+            dragonSprite = waitingSprite;
         }
         public void ChangeDirection()
         {
-            bat.ChangeDirection();
+            dragon.ChangeDirection();
         }
 
         public void Attack()
         {
-            bat.Attack();
+            dragon.Attack();
         }
 
         public void TakeDamage()
         {
-            bat.TakeDamage();
+            dragon.TakeDamage();
         }
 
         public void Draw()
         {
-            batSprite.Draw(spriteBatch, locationVector);
+            dragonSprite.Draw(spriteBatch, locationVector);
         }
 
         public void Update()
@@ -55,7 +57,7 @@ namespace Game_Project.Enemies
                 lengthOfAction = 0;
             }
 
-            stateTuple = bat.getState();
+            stateTuple = dragon.getState();
 
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
             if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
@@ -64,7 +66,7 @@ namespace Game_Project.Enemies
                 locationVector.X++;
             }
 
-            batSprite.Update();
+            dragonSprite.Update();
             lengthOfAction++;
         }
 
