@@ -6,8 +6,8 @@ namespace Game_Project
 {
     class LeftIdle : IPlayer
     {
-        private PlayerManager player;
-        public LeftIdle(PlayerManager manager)
+        private Player player;
+        public LeftIdle(Player manager)
         {
             player = manager;
         }

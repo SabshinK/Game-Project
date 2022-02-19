@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerManager
+    class Player
     {
         public IPlayer state;
         public ISprite sprite;
@@ -17,7 +17,7 @@ namespace Game_Project
         public bool faceRight;
       
         // Constructor
-        public PlayerManager()
+        public Player()
         {
             state = new RightIdle(this);
             animationToCreate = "idleRight";

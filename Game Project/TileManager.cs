@@ -11,15 +11,15 @@ namespace Game_Project
         private ISprite sprite;
         
         private int tileNumber;
-        private string[] tileArray;
-        private const int lengthOfArray = 3;
+        private List<ISprite> tileList;
         private Vector2 location;
       
         public TileManager()
         {
             tileNumber = 0;
-            tileArray = new string[lengthOfArray] {"TileZero", "TileOne", "TileTwo"};
-            sprite = SpriteFactory.Instance.CreateSprite(tileArray[tileNumber]);
+            tileList = new List<ISprite>();
+            LoadTileList();
+            sprite = tileList[tileNumber];
         }
       
         public void NextTile()
@@ -28,8 +28,8 @@ namespace Game_Project
                 tileNumber = 0;
             } else {
                 tileNumber++;
-            }        
-            sprite = SpriteFactory.Instance.CreateSprite(tileArray[tileNumber]);
+            }
+            sprite = tileList[tileNumber];
         }
       
         public void PreviousTile()
@@ -39,12 +39,19 @@ namespace Game_Project
             } else {
                 tileNumber--;
             }
-            sprite = SpriteFactory.Instance.CreateSprite(tileArray[tileNumber]);
+            sprite = tileList[tileNumber];
         }
         
         public void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, location);
+        }
+
+        public void LoadTileList()
+        {
+            tileList.Add(SpriteFactory.Instance.CreateSprite("lightGrottoGround"));
+            tileList.Add(SpriteFactory.Instance.CreateSprite("darkGrottoGround"));
+            tileList.Add(SpriteFactory.Instance.CreateSprite("grottoPlatform"));
         }
       
     }
