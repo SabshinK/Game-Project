@@ -1,1 +1,35 @@
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    2/19/2022
+Sprint Number:    2
+Name of File:     BatStateMachine.cs
+Author of File:    AJ Waizmann
+
+Code Quality Comments:
+The variables above the class constructor are well sorted and easy to read through.
+Perhaps, to limit confusion, the variable names could have the word “Enemy” in them so that they aren’t accidentally compared to the Player’s states and variables. 
+It looks like the variable names have good syntax, which really helped with my ability to understand the code.
+The example for “GoombaStateMachine” on our class website talks about utilizing an if/else structure as well as looking at the enemy’s health to determine movement. That might be an option to look at.
+
+Hypothetical Change(s) to to the Game that Are/Are Not Supported by This Code:
+	This StateMachine uses random numbers to determine the pathing of the enemies. Given that some enemies will be on platforms, some will be in secluded areas, and some won’t stray a certain distance away from where they started, we may want to conduct this moment differently. Random movement doesn’t allow for much control over where enemies are going, so we may want to try another method so that we ensure enemies stay in certain areas (eg. more difficult enemies should stay near the end of the level, flaying enemies should stay above ground, enemies on a platform should stay on that platform, etc.). 
+	We could potentially do this by defining a range for each enemy type, and then placing those distinct types in similar locations (eg. on/off a platform, in the air, on the ground level, etc.). The enemies could either move randomly in this range, or they could move in a set pattern. We could also implement a radius, where they chase the player when they get close, and otherwise maintain a constant movement pattern. As stated earlier, the example on our class website called “GoombaStateMachine” suggests using an if/else structure and the “health” variable.
+	I think the “stateArray” is a cool way to keep track of an enemy’s behavior, but I worry that the array is getting changed too often, and the player won’t be able to discern a pattern with which to defeat the enemy. I think, as I stated before, we want the enemies to follow some king of pattern to give the player visual cues.
+	Awesome work!
+  
+
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    2/19/2022
+Sprint Number:    2
+Name of File:     ItemManager.cs
+Author of File:    Maria Stein
+Minutes It Took To Complete Review:  20  
+
+Comments On Readability:
+Some portions of variable names are abbreviated like “numItems”, which is an int indicating the total number of items in the game. It may be clearer to simply write “numberOfItems'' as the variable name. 
+The author needs to be sure to classify “public”, “private”, etc. for every variable to avoid confusion and error. 
+To improve readability, it may be a good idea for the author to group variable declarations above the constructor class by functionality, type, or available. (Eg. all the private variables are grouped, all the int’s are grouped, all of the variables contributing to the item List are grouped, etc.).
+The code could use some comments explaining what is happening for each method, or for the author’s general thought process. 
+Because the method “FeedItemList()” is called only once, it may be better to rename it to something like “CreateItemList()”. I think the word “feed” implies something like “add”, where it could occur more than once in the code. 
+NextItem() and PreviousItem() were very clear to me in terms of their logic and readability. The names of the variables and methods were descriptive, and the code was spaced so that it was easy to read. 
+Overall, I would say this code reads pretty well. I think variable name changes could make variable and method functionalities clearer, and there could be more thought put into where certain code is written. Arranging lines with purpose could make the variable declarations, in particular, much clearer. Great work!
 
