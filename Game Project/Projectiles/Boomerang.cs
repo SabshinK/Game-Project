@@ -12,11 +12,11 @@ namespace Game_Project
         public Vector2 initialPosition;
         private int boomerangLimit;
         private int moveFactor;
-        private bool changeDirection = false;
-        private bool inPlay = true;
-        private ISprite sprite;
+        public Interfaces.ISprite sprite;
         private SpriteBatch spriteBatch;
         private bool userDirection;
+
+        //constructor
         public Boomerang(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
         {
             this.position = position;
@@ -27,39 +27,42 @@ namespace Game_Project
             this.userDirection = userDirection;
         }
 
+
         public void Update(GameTime gameTime)
         {
-            sprite = Game_Project.Sprites.SpriteFactory.Instance.GetSprite("boomerangGeneric");
-            if (userDirection)//player facing right
+            //get sprite for boomerang
+            sprite = Sprites.SpriteFactory.Instance.CreateSprite("boomerangGeneric");
+            //player is looking right
+            if (userDirection)
             {
-                if (!changeDirection)
-                    position.X += moveFactor;
-                else
-                    position.X -= moveFactor;
+                //change position
+                position.X += moveFactor;
             }
+            //player looking left
             else
             {
-                if (!changeDirection)
-                    position.X -= moveFactor;
-                else
-                    position.X += moveFactor;
+                //change position
+                position.X -= moveFactor;
             }
 
+            //set change direction if boomerang exceeds its limits
             if(Math.Abs(position.X-initialPosition.X) >= boomerangLimit)
             {
-                changeDirection = true;
+                moveFactor = -moveFactor;
             }
 
+            //remove boomerang when it returns to original player
             if(Math.Abs(position.X-initialPosition.X) == 0)
             {
-                inPlay = false;
+                sprite = Sprites.SpriteFactory.Instance.CreateSprite("despawnGeneric");
             }
 
         }
 
         public void Draw()
         {
-            if(sprite != null && inPlay)
+            //draw boomerang if it still needs to be drawn
+            if(sprite != null)
                 sprite.Draw(spriteBatch, position);
         }
     }

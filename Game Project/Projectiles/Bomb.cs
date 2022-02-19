@@ -9,10 +9,12 @@ namespace Game_Project
     class Bomb : IProjectile
     {
         private Vector2 position;
-        private ISprite sprite;
+        private Interfaces.ISprite sprite;
         private SpriteBatch spriteBatch;
         private float timer;
         private float lifeSpan;
+       
+        //constructor
         public Bomb(Vector2 position, SpriteBatch spriteBatch)
         {
             this.position = position;
@@ -24,11 +26,13 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            sprite = Game_Project.Sprites.SpriteFactory.Instance.GetSprite("bombWaiting");
+            //get sprite for bomb that has not yet exploded and update timer
+            sprite = Sprites.SpriteFactory.Instance.CreateSprite("bombWaiting");
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //if bomb timer exceeds its life span, update sprite, reset timer
             if (timer >= lifeSpan)
             {
-                sprite = SpriteFactory.Instance.GetSprite("bombExplosion");
+                sprite = Sprites.SpriteFactory.Instance.CreateSprite("bombExplosion");
                 timer = 0f;
             }
 
@@ -37,6 +41,7 @@ namespace Game_Project
 
         public void Draw()
         {
+            //draw bomb
             if (sprite != null)
                 sprite.Draw(spriteBatch, position);
         }

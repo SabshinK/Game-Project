@@ -10,25 +10,36 @@ namespace Game_Project
     {
         private Vector2 position;
         private SpriteBatch spriteBatch;
-        private ISprite sprite;
+        private Interfaces.ISprite sprite;
         private int moveFactor;
-        public SwordBeam(Vector2 position, SpriteBatch spriteBatch)
+        public bool userDirection;
+
+        //constructor
+        public SwordBeam(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
         {
             this.position = position;
             this.spriteBatch = spriteBatch;
             moveFactor = 16;
+            this.userDirection = userDirection;
 
         }
 
         public void Update(GameTime gameTime)
         {
-            sprite = SpriteFactory.Instance.GetSprite("sword beam");
-            if ()//player facing right
+            
+           //if player is facing right
+            if (userDirection)
             {
+                //get the sprite for sword beam
+                sprite = Sprites.SpriteFactory.Instance.CreateSprite("swordBeamRight");
                 position.X += moveFactor;
+
             }
+            //if player is facing left
             else
             {
+                //get the sprite for sword beam
+                sprite = Sprites.SpriteFactory.Instance.CreateSprite("swordBeamLeft");
                 position.X -= moveFactor;
             }
 
@@ -36,6 +47,7 @@ namespace Game_Project
 
         public void Draw()
         {
+            //draw sprite
             if (sprite != null)
                 sprite.Draw(spriteBatch, position);
         }
