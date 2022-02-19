@@ -2,31 +2,31 @@
 using System.Collections.Generic;
 using System.Text;
 using Game_Project.Interfaces;
+using static Game_Project.Interfaces.IEnemyStateMachine;
 
 namespace Game_Project.Enemies
 
-    //MAKE THIS INTO A STATE MACHINE BASED ON THE GOOMBA STATE MACHINE ON KIRBY'S SITE
+//MAKE THIS INTO A STATE MACHINE BASED ON THE GOOMBA STATE MACHINE ON KIRBY'S SITE
 {
     class BatStateMachine : Game_Project.Interfaces.IEnemyStateMachine
     {
-        private Boolean attacking = false;
-        private Boolean facingLeft = true;
-        private Boolean moving = false;
-        private Boolean jumping = false;
         private int health = 5;
-        private Boolean[] stateArray = new Boolean[4];
+
+        direction batDirection = direction.right;
+        actions batAction = actions.moving;
+
+        private Tuple<actions, direction> stateTuple;
 
         private Random random = new Random();
 
         public void ChangeDirection()
         {
-            if (facingLeft)
-            {
-                facingLeft = false;
+            if (batDirection.Equals(direction.right)){
+                batDirection = direction.left;
             }
             else
             {
-                facingLeft = true;
+                batDirection = direction.right;
             }
         }
 
@@ -40,27 +40,14 @@ namespace Game_Project.Enemies
 
         public void Attack()
         {
-            attacking = true;
+            batAction = actions.attacking;
         }
 
-        public Boolean[4] Update()
+        public Tuple<actions, direction> getState()
         {
-            
-            //Randomly selects if the enemy will start moving randomly, and randomly decides the direction it will face.
-            moving = (random.Next(0, 1) == 1);
-            facingLeft = (random.Next(0, 1) == 1);
 
-            //this will be deleted with collision detection added, to attack the player
-            attacking = (random.Next(0, 1) == 1);
-
-            /* if(health <= 0){
-             *  //draw death animation TODO: THIS CHUNK WILL BE UNCOMMENTED WITH THE ADDITION OF COLLISION DETECTION
-            */ 
-
-            stateArray = {moving, facingLeft, jumping, attacking}; //this array will be changed to contain a "Dead" state
-
-            return stateArray;
-
+            stateTuple = new Tuple<actions, direction>(batAction, batDirection);
+            return stateTuple;
         }
 
     }

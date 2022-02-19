@@ -1,17 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Sprites;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Game_Project.Interfaces;
+using static Game_Project.Interfaces.IEnemyStateMachine;
 
 namespace Game_Project.Enemies
 {
     class BatEnemy : Game_Project.Interfaces.IEnemy
     {
+        Tuple<actions, direction> stateTuple;
         BatStateMachine bat;
-        Boolean[] batState = new Boolean[4];
+        ISprite batSprite;
+        SpriteBatch spriteBatch;
+        Vector2 locationVector = new Vector2(200, 200);
+        int lengthOfAction = 0;
+        
 
-        public void CreateBat()
+        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
         {
             bat = new BatStateMachine();
+            locationVector = vector;
+            spriteBatch = gameSpriteBatch;
+            batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
         }
         public void ChangeDirection()
         {
@@ -28,11 +41,31 @@ namespace Game_Project.Enemies
             bat.TakeDamage();
         }
 
-        //I'll be honest, I don't know if this should be here. I believe the state machine will actually handle all the drawing
         public void Draw()
         {
-            batState = bat.Update();
-            //TODO: give sprite class the state to deal with
+            batSprite.Draw(spriteBatch, locationVector);
+        }
+
+        public void Update()
+        {
+
+            if (lengthOfAction > new Random().Next(50))
+            {
+                ChangeDirection();
+                lengthOfAction = 0;
+            }
+
+            stateTuple = bat.getState();
+
+            //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
+            if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
+                locationVector.X--;
+            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
+                locationVector.X++;
+            }
+
+            batSprite.Update();
+            lengthOfAction++;
         }
 
 

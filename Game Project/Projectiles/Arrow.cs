@@ -13,7 +13,7 @@ namespace Game_Project
         private float lifeSpan;
         private int moveFactor;
         private SpriteBatch spriteBatch;
-        private Interfaces.ISprite sprite;
+        private ISprite sprite;
         private bool userDirection;
         //constructor
         public Arrow(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
@@ -33,20 +33,20 @@ namespace Game_Project
             //if timer exceeds life span, remove arrow, reset timer
             if(timer >= lifeSpan)
             {
-                sprite = Sprites.SpriteFactory.Instance.CreateSprite("despawnGeneric");
+                sprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
                 timer = 0f;
             }
 
             //if player looking right
             if (userDirection)
             {
-                sprite = Sprites.SpriteFactory.Instance.CreateSprite("rightArrow");
+                sprite = SpriteFactory.Instance.CreateSprite("rightArrow");
                 position.X += moveFactor;
             }
             //if player looking left
             else
             {
-                sprite = Sprites.SpriteFactory.Instance.CreateSprite("leftArrow");
+                sprite = SpriteFactory.Instance.CreateSprite("leftArrow");
                 position.X -= moveFactor;
             }
 
