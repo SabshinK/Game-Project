@@ -9,7 +9,6 @@ namespace Game_Project
     class Candle : IProjectile
     {
         public Vector2 position;
-        public SpriteBatch spriteBatch;
         private ISprite sprite, fireSprite, despawnSprite;
         private int moveFactor;
         private bool userDirection;
@@ -21,10 +20,9 @@ namespace Game_Project
         
         
         //constructor
-        public Candle(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
+        public Candle(Vector2 position, bool userDirection)
         {
             this.position = position;
-            this.spriteBatch = spriteBatch;
             moveFactor = 8;
             finalPositionRight = position;
             finalPositionRight.X += 80;
@@ -89,7 +87,7 @@ namespace Game_Project
             }
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             //draw the sprite
             if (sprite != null)

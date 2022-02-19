@@ -12,17 +12,15 @@ namespace Game_Project
         private float timer;
         private float lifeSpan;
         private int moveFactor;
-        private SpriteBatch spriteBatch;
         private ISprite sprite;
         private bool userDirection;
         //constructor
-        public Arrow(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
+        public Arrow(Vector2 position, bool userDirection)
         {
             this.position = position;
             timer = 0f;
             lifeSpan = 300f;
             moveFactor = 8;
-            this.spriteBatch = spriteBatch;
             this.userDirection = userDirection;
         }
 
@@ -52,7 +50,7 @@ namespace Game_Project
 
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             //draw sprite if arrow's life span is not over
             if(sprite != null)

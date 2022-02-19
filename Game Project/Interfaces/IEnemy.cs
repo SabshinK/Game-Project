@@ -13,6 +13,6 @@ namespace Game_Project
 
         public void TakeDamage();
 
-        public void Draw();
+        public void Draw(SpriteBatch spriteBatch);
     }
 }

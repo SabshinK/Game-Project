@@ -12,18 +12,25 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         GelStateMachine gel;
         ISprite gelSprite;
-        SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(500, 300);
+        Vector2 locationVector;
         int lengthOfAction = 0;
         
 
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public GelEnemy(Vector2 vector)
         {
+            locationVector = vector;
+            lengthOfAction = 0;
             gel = new GelStateMachine();
-            spriteBatch = gameSpriteBatch;
-            locationVector = vector; //game will state where it wants the enemy when it is created
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
         }
+
+      //  public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+          //  gel = new GelStateMachine();
+            //spriteBatch = gameSpriteBatch;
+            //locationVector = vector; //game will state where it wants the enemy when it is created
+           // gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
+        //}
         public void ChangeDirection()
         {
             gel.ChangeDirection();
@@ -39,7 +46,7 @@ namespace Game_Project
             gel.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             gelSprite.Draw(spriteBatch, locationVector);
         }

@@ -12,13 +12,16 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         BatStateMachine bat;
         ISprite batSprite;
-        SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(200, 200);
-        int lengthOfAction = 0;
+       // SpriteBatch spriteBatch;
+        Vector2 locationVector;
+        int lengthOfAction;
         
-        public BatEnemy()
+        public BatEnemy(Vector2 vector)
         {
-
+            locationVector = vector;
+            lengthOfAction = 0;
+            bat = new BatStateMachine();
+            batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
         }
         //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
         //{
@@ -42,7 +45,7 @@ namespace Game_Project
             bat.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             batSprite.Draw(spriteBatch, locationVector);
         }

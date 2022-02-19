@@ -10,23 +10,32 @@ namespace Game_Project
     class DragonEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
-        BatStateMachine dragon;
+        DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
-        SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(200, 200);
-        int lengthOfAction = 0;
+       // SpriteBatch spriteBatch;
+        Vector2 locationVector;
+        int lengthOfAction;
         Candle weapon;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public DragonEnemy(Vector2 vector)
         {
-            dragon = new BatStateMachine();
+            dragon = new DragonStateMachine();
             locationVector = vector;
-            spriteBatch = gameSpriteBatch;
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;
+
         }
+
+       // public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+        //    dragon = new BatStateMachine();
+        //    locationVector = vector;
+        //    spriteBatch = gameSpriteBatch;
+        //    waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
+        //    attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
+        //    dragonSprite = waitingSprite;
+        //}
         public void ChangeDirection()
         {
             dragon.ChangeDirection();
@@ -42,7 +51,7 @@ namespace Game_Project
             dragon.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             dragonSprite.Draw(spriteBatch, locationVector);
         }
@@ -74,7 +83,7 @@ namespace Game_Project
             else if (stateTuple.Item1.Equals(actions.attacking))
             {
                 dragonSprite = attackSprite;
-                weapon = new Candle(locationVector, spriteBatch, false);
+                weapon = new Candle(locationVector, false);
                 weapon.Draw();
                 for(int i = 0; i < 10; i++)
                 {
