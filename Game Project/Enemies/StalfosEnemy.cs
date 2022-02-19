@@ -12,18 +12,23 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         StalfosStateMachine stalfos;
         ISprite stalfosSprite;
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public StalfosEnemy(Vector2 location)
         {
             stalfos = new StalfosStateMachine();
-            spriteBatch = gameSpriteBatch;
-            locationVector = vector; //game will state where it wants the enemy when it is created
+            locationVector = location; //game will state where it wants the enemy when it is created
             stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
         }
+        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+        //    stalfos = new StalfosStateMachine();
+        //    spriteBatch = gameSpriteBatch;
+        //    locationVector = vector; //game will state where it wants the enemy when it is created
+        //    stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
+        //}
         public void ChangeDirection()
         {
             stalfos.ChangeDirection();
@@ -39,7 +44,7 @@ namespace Game_Project
             stalfos.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             stalfosSprite.Draw(spriteBatch, locationVector);
         }

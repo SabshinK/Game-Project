@@ -12,20 +12,26 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         Boomerang weapon;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public GoriyaEnemy(Vector2 location)
         {
             goriya = new GoriyaStateMachine();
-            spriteBatch = gameSpriteBatch;
-            locationVector = vector; //game will state where it wants the enemy when it is created
+            locationVector = location;
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
         }
+        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+        //    goriya = new GoriyaStateMachine();
+        //    spriteBatch = gameSpriteBatch;
+        //    locationVector = vector; //game will state where it wants the enemy when it is created
+        //    goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
+        //    goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
+        //}
         public void ChangeDirection()
         {
             goriya.ChangeDirection();
@@ -41,7 +47,7 @@ namespace Game_Project
             goriya.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             currentGoriyaSprite.Draw(spriteBatch, locationVector);
         }
@@ -73,12 +79,12 @@ namespace Game_Project
                 if (stateTuple.Item1.Equals(direction.right))
                 {
                     currentGoriyaSprite = goriyaSpriteRight;
-                    weapon = new Boomerang(locationVector, spriteBatch, true);
+                    weapon = new Boomerang(locationVector, true);
                 }
                 else
                 {
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    weapon = new Boomerang(locationVector, spriteBatch, false);
+                    weapon = new Boomerang(locationVector, false);
                 }
                 weapon.Draw();
                 for(int i = 0; i < 25; i++)

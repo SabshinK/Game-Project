@@ -12,18 +12,23 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         ZohStateMachine zoh;
         ISprite zohSprite;
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public ZohEnemy(Vector2 location)
         {
             zoh = new ZohStateMachine();
-            spriteBatch = gameSpriteBatch;
-            locationVector = vector; //game will state where it wants the enemy when it is created
+            locationVector = location; //game will state where it wants the enemy when it is created
             zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
         }
+        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+        //    zoh = new ZohStateMachine();
+        //    spriteBatch = gameSpriteBatch;
+        //    locationVector = vector; //game will state where it wants the enemy when it is created
+        //    zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
+        //}
         public void ChangeDirection()
         {
             zoh.ChangeDirection();
@@ -39,7 +44,7 @@ namespace Game_Project
             zoh.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             zohSprite.Draw(spriteBatch, locationVector);
         }
