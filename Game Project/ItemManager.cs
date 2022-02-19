@@ -56,6 +56,11 @@ namespace Game_Project
 
         public void LoaditemList()
         {
+            itemList.Add(SpriteFactory.Instance.CreateSprite("fullHeart"));
+            itemList.Add(SpriteFactory.Instance.CreateSprite("halfHeart"));
+            itemList.Add(SpriteFactory.Instance.CreateSprite("emptyHeart"));
+            itemList.Add(SpriteFactory.Instance.CreateSprite("heartCollectable"));
+            itemList.Add(SpriteFactory.Instance.CreateSprite("heartContainer"));
             itemList.Add(SpriteFactory.Instance.CreateSprite("fairyGeneric"));
             itemList.Add(SpriteFactory.Instance.CreateSprite("stopwatch"));
             itemList.Add(SpriteFactory.Instance.CreateSprite("rupee"));
