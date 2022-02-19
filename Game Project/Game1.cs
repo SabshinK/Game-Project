@@ -7,6 +7,7 @@ using Game_Project.Interfaces;
 
 namespace Game_Project
 {
+    // Names: Sebastian King, Rachel Watters, AJ Waizmann, Maria Stein, Aadya Jain, and Anooj Deshpande
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
