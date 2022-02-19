@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 
