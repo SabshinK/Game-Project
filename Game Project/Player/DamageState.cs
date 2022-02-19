@@ -8,12 +8,23 @@ namespace Game_Project
     class DamageState : IPlayerState
     {
         private Player player;
+        private float timeElapsed;
         public bool FaceRight { get; set; }
 
         public DamageState(Player manager, bool faceRight)
         {
             player = manager;
             FaceRight = faceRight;
+            timeElapsed = 0;
+
+            if (FaceRight)
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("damagedRight");
+            }
+            else
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("damagedLeft");
+            }
         }
 
         public void TakeDamage()
@@ -38,7 +49,13 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            
+            if (timeElapsed < 2)
+            {
+                timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            } else
+            {
+                player.setState(new IdleState(player, FaceRight));
+            }
         }
         
     }

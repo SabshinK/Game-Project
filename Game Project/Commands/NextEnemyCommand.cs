@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class NextEnemyCommand
+    class NextEnemyCommand : ICommand
     {
         private EnemyManager manager;
 
