@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 {
-    class StalfosEnemy : Game_Project.Interfaces.IEnemy
+    class StalfosEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         StalfosStateMachine stalfos;
