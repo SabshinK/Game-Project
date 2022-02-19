@@ -1,9 +1,7 @@
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Xna.Framework.Input;
-using Game_Project.Sprites;
-using Game_Project.Interfaces;
 
 namespace Game_Project
 {
@@ -11,7 +9,6 @@ namespace Game_Project
 	{
 		// Will change name and replace the Keyboard Controller file after finishing PlayerManager.cs file!
 		private Dictionary<Keys, ICommand> controllerMappings;
-		private TileManager manager;
 
 		public KeyboardControllerDraft()
 		{
@@ -35,18 +32,34 @@ namespace Game_Project
 					controllerMappings[key].Execute();
 				}
 			}
+
+			if(!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+				controllerMappings[Keys.None].Execute();
+            }
+
 		}
 
-		// This wouldn't necessarily be done in this way
-		public void LoadContent(Game1 game, PlayerManager player)
+		public void LoadContent(Game1 game, Player player, TileManager tiles, EnemyManager enemies, ItemManager items)
 		{
-			RegisterCommand(Keys.Q, new QuitCommand(game)); // this should work as normal, just the key is different
-			RegisterCommand(Keys.W, new NonAnimatedNonMovingCommand(player));
+			RegisterCommand(Keys.None, new IdleCommand(player));
+			RegisterCommand(Keys.Q, new QuitCommand(game));
 			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
-			RegisterCommand(Keys.S, new NonAnimatedMovingCommand(player)); // I don't know what this will do.
-			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player)); // I'm not sure if this is working right??
-			RegisterCommand(Keys.T, new manager.instance.previousTile()); // This will go to the previous tile in the block.
-			RegisterCommand(Keys.Y, new manager.instance.nextTile()); // This will go to the next tile in the block
+			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player)); 
+			RegisterCommand(Keys.Z, new AttackCommand(player));
+			RegisterCommand(Keys.N, new AttackCommand(player));
+			RegisterCommand(Keys.T, new PreviousTileCommand(tiles)); // This will go to the previous tile in the block.
+			RegisterCommand(Keys.Y, new NextTileCommand(tiles)); // This will go to the next tile in the block
+			RegisterCommand(Keys.O, new PreviousEnemyCommand(enemies));
+			RegisterCommand(Keys.P, new NextEnemyCommand(enemies));
+			RegisterCommand(Keys.U, new PreviousItemCommand(items));
+			RegisterCommand(Keys.I, new NextItemCommand(items));
+			RegisterCommand(Keys.D1, new UseItemCommand(player, player.CreateProjectile(1)));
+			RegisterCommand(Keys.D2, new UseItemCommand(player, player.CreateProjectile(2)));
+			RegisterCommand(Keys.D3, new UseItemCommand(player, player.CreateProjectile(3)));
+			RegisterCommand(Keys.D4, new UseItemCommand(player, player.CreateProjectile(4)));
+			RegisterCommand(Keys.D5, new UseItemCommand(player, player.CreateProjectile(5)));
+			RegisterCommand(Keys.E, new TakeDamageCommand(player));
 		}
 	}
 }
