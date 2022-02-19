@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Game_Project.Interfaces;
 using static Game_Project.Interfaces.IEnemyStateMachine;
+using Game_Project.Projectiles.Boomerang;
 
 namespace Game_Project.Enemies
 {
@@ -13,10 +14,11 @@ namespace Game_Project.Enemies
     {
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
-        ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft, goriyaSpriteUp, goriyaSpriteDown;
+        ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
         SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
+        Boomerang weapon;
         
 
         public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
@@ -26,8 +28,6 @@ namespace Game_Project.Enemies
             locationVector = vector; //game will state where it wants the enemy when it is created
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
-            goriyaSpriteUp = SpriteFactory.Instance.CreateSprite("goriyaUp");
-            goriyaSpriteDown = SpriteFactory.Instance.CreateSprite("goriyaDown");
         }
         public void ChangeDirection()
         {
@@ -52,8 +52,9 @@ namespace Game_Project.Enemies
         public void Update()
         {
 
-            if (lengthOfAction > new Random().Next(50))
+            if (lengthOfAction > new Random().Next(100))
             {
+                Attack();
                 ChangeDirection();
                 lengthOfAction = 0;
             }
@@ -61,22 +62,33 @@ namespace Game_Project.Enemies
             stateTuple = goriya.getState();
 
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
-                currentGoriyaSprite = goriyaSpriteLeft;
-                locationVector.X--;
-            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
-                currentGoriyaSprite = goriyaSpriteRight;
-                locationVector.X++;
-            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.up))
-            {
-                currentGoriyaSprite = goriyaSpriteUp;
-                locationVector.Y--;
+            if(stateTuple.Item1.Equals(actions.moving)){
+                if (stateTuple.Item2.Equals(directions.right)){
+                    currentGoriyaSprite = goriyaSpriteRight;
+                    locationVector++;
+                }
+                else{
+                    currentGoriyaSprite = goriyaSpriteLeft;
+                    locationVector--;
+                }
             }
-            else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.down)){
-                currentGoriyaSprite = goriyaSpriteDown;
-                locationVector.Y++;
+            else if (stateTuple.Item1.Equals(actions.attacking)){
+                if (stateTuple.Item1.Equals(directions.right))
+                {
+                    currentGoriyaSprite = goriyaSpriteRight;
+                    weapon = new Boomerang(locationVector, spriteBatch, true);
+                }
+                else
+                {
+                    currentGoriyaSprite = goriyaSpriteLeft;
+                    weapon = new Boomerang(locationVector, spriteBatch, false);
+                }
+                weapon.Draw();
+                for(int i = 0; i < 25, i++)
+                {
+                    weapon.Update();
+                }
             }
-
             currentGoriyaSprite.Update();
             lengthOfAction++;
         }
