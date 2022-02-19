@@ -6,37 +6,30 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerManager
+    class Player
     {
-        public IPlayer state;
+        public IPlayerState state;
+        public IProjectile projectile;
         public ISprite sprite;
       
         private int health;
         private string animationToCreate;
         public Vector2 location;
-        public bool faceRight;
       
         // Constructor
-        public PlayerManager()
+        public Player()
         {
-            state = new RightIdle(this);
+            state = new IdleState(this, true);
             animationToCreate = "idleRight";
-            faceRight = true;
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
         
             health = 3;
         }
 
-        // BackToIdleRight and BackToIdleLeft will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
-        public void BackToIdleRight()
+        // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
+        public void BackToIdle()
         {
-            state.BackToIdleRight();
-            faceRight = true;
-        }
-        public void BackToIdleLeft()
-        {
-            state.BackToIdleLeft();
-            faceRight = false;
+            state.BackToIdle();
         }
         
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
@@ -44,7 +37,6 @@ namespace Game_Project
         {
             health--;
             state.TakeDamage();
-            animationToCreate = "TakeDamage";
         } 
         
         public void Draw(SpriteBatch spriteBatch)
@@ -54,9 +46,19 @@ namespace Game_Project
             }
         }
         
-        public void setState(IPlayer state)
+        public void setState(IPlayerState state)
         {
-            this.state = state;
+            if(this.state != state)
+            {
+                this.state = state;
+            }
+        }
+
+        public IProjectile CreateProjectile()
+        {
+            projectile.Draw();
+
+            return projectile;
         }
     }
 }
