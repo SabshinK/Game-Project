@@ -6,16 +6,16 @@ namespace Game_Project
 {
     class PlayerMoveRightCommand : ICommand
     {
-        private PlayerManager player;
+        private Player player;
 
-        public PlayerMoveRightCommand(PlayerManager manager)
+        public PlayerMoveRightCommand(Player manager)
         {
             player = manager;
         }
 
         public void Execute()
         {
-            player.setState(new PlayerMoveRight(player.location, player));
+            player.setState(new PlayerMoveState(player.location, player, true));
             
             player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
         }
