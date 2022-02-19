@@ -9,7 +9,6 @@ namespace Game_Project
 	{
 		// Will change name and replace the Keyboard Controller file after finishing PlayerManager.cs file!
 		private Dictionary<Keys, ICommand> controllerMappings;
-		private SpriteBatch spriteBatch;
 
 		public KeyboardControllerDraft()
 		{
@@ -41,7 +40,7 @@ namespace Game_Project
 
 		}
 
-		public void LoadContent(Game1 game, Player player, TileManager tiles, EnemyManager enemies ItemManager items)
+		public void LoadContent(Game1 game, Player player, TileManager tiles, EnemyManager enemies, ItemManager items)
 		{
 			RegisterCommand(Keys.None, new IdleCommand(player));
 			RegisterCommand(Keys.Q, new QuitCommand(game));

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class NextTileCommand
+    class NextTileCommand : ICommand
     {
         private TileManager manager;
 

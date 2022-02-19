@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class Player
+    public class Player
     {
         public IPlayerState state;
         public IProjectile projectile;
