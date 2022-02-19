@@ -9,41 +9,41 @@ using static Game_Project.Interfaces.IEnemyStateMachine;
 
 namespace Game_Project.Enemies
 {
-    class BatEnemy : Game_Project.Interfaces.IEnemy
+    class GelEnemy : Game_Project.Interfaces.IEnemy
     {
         Tuple<actions, direction> stateTuple;
-        BatStateMachine bat;
-        ISprite batSprite;
+        GelStateMachine gel;
+        ISprite gelSprite;
         SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(200, 200);
+        Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         
 
         public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
         {
-            bat = new BatStateMachine();
-            locationVector = vector;
+            gel = new GelStateMachine();
             spriteBatch = gameSpriteBatch;
-            batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
+            locationVector = vector; //game will state where it wants the enemy when it is created
+            gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
         }
         public void ChangeDirection()
         {
-            bat.ChangeDirection();
+            gel.ChangeDirection();
         }
 
         public void Attack()
         {
-            bat.Attack();
+            gel.Attack();
         }
 
         public void TakeDamage()
         {
-            bat.TakeDamage();
+            gel.TakeDamage();
         }
 
         public void Draw()
         {
-            batSprite.Draw(spriteBatch, locationVector);
+            gelSprite.Draw(spriteBatch, locationVector);
         }
 
         public void Update()
@@ -55,7 +55,7 @@ namespace Game_Project.Enemies
                 lengthOfAction = 0;
             }
 
-            stateTuple = bat.getState();
+            stateTuple = gel.getState();
 
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
             if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
@@ -64,7 +64,7 @@ namespace Game_Project.Enemies
                 locationVector.X++;
             }
 
-            batSprite.Update();
+            gelSprite.Update();
             lengthOfAction++;
         }
 

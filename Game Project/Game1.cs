@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Game_Project.Sprites;
+using Game_Project.Enemies;
+using Game_Project.Interfaces;
 
 namespace Game_Project
 {
@@ -51,6 +54,7 @@ namespace Game_Project
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Texture2DStorage.LoadContent(Content);
 
             keyboard.LoadContent(this);
         }
@@ -68,6 +72,8 @@ namespace Game_Project
             player.Update();
             keyboard.Update();
             batEnemy.bat.Update();
+
+            mrGoriya.Update();
 
             base.Update(gameTime);
         }
