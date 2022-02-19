@@ -10,7 +10,7 @@ namespace Game_Project
     {
         public Vector2 position;
         public SpriteBatch spriteBatch;
-        private ISprite sprite;
+        private ISprite sprite, fireSprite, despawnSprite;
         private int moveFactor;
         private bool userDirection;
         private float lifeSpan;
@@ -18,6 +18,9 @@ namespace Game_Project
         private Vector2 finalPositionRight;
         private Vector2 finalPositionLeft;
         private bool stopFire;
+        fireSprite = SpriteFactory.Instance.CreateSprite("candleFileGeneric");
+        despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+        
         
         //constructor
         public Candle(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
@@ -39,7 +42,7 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //get sprite
-            sprite = SpriteFactory.Instance.CreateSprite("CandleFireGeneric");
+            sprite = fireSprite;
 
             //if user is facing right
             if(userDirection)
@@ -79,7 +82,7 @@ namespace Game_Project
                 if(timer >= lifeSpan)
                 {
                     //despawn sprite
-                    sprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+                    sprite = despawnSprite;
                     timer = 0f;
                 }
             }
