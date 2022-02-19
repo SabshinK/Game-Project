@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Game_Project.Interfaces;
 using static Game_Project.Interfaces.IEnemyStateMachine;
+using Game_Propject.Projectiles.Candle;
 
 namespace Game_Project.Enemies
 {
@@ -17,6 +18,7 @@ namespace Game_Project.Enemies
         SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(200, 200);
         int lengthOfAction = 0;
+        Candle weapon;
         
 
         public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
@@ -51,8 +53,9 @@ namespace Game_Project.Enemies
         public void Update()
         {
 
-            if (lengthOfAction > new Random().Next(50))
+            if (lengthOfAction > 25)
             {
+                Attack();
                 ChangeDirection();
                 lengthOfAction = 0;
             }
@@ -60,10 +63,26 @@ namespace Game_Project.Enemies
             stateTuple = dragon.getState();
 
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
-                locationVector.X--;
-            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
-                locationVector.X++;
+            if (stateTuple.Item1.Equals(actions.moving))
+            {
+                if (stateTuple.Item2.Equals(direction.right))
+                {
+                    locationVector.X++;
+                }
+                else
+                {
+                    locationVector.X--;
+                }
+            }
+            else if (stateTuple.Item1.Equals(actions.attacking))
+            {
+                dragonSprite = attackSprite;
+                weapon = new Candle(locationVector, spriteBatch, false);
+                weapon.Draw();
+                for(int i = 0, i < 10, i++)
+                {
+                    weapon.Update();
+                }
             }
 
             dragonSprite.Update();
