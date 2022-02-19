@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class DefaultPlayerStanding : ISprite
+    class DefaultPlayerStanding : Game_Project.Interfaces.ISprite
     {
         public Texture2D Texture { get; set; }
         // Vector needed to determine location of sprite to render, this is a bandaid solution for the problem of getting a
@@ -40,11 +40,12 @@ namespace Game_Project
             // Do nothing
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Vector2 vector)
         {
             // Calculate size of individual sprites in spritesheet
             int width = Texture.Width / Columns;
             int height = Texture.Height / Rows;
+            location = vector;
 
             // Get the current frame to draw from the sheet and display it at the position in destinationRectangle
             Rectangle sourceRectangle = new Rectangle(width * 1, height * 1, width, height);
