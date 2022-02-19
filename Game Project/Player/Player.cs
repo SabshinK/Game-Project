@@ -11,14 +11,17 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+        // just for use in CreateProjectile
+        private SpriteBatch spriteBatch;
       
         private int health;
         private string animationToCreate;
         public Vector2 location;
       
         // Constructor
-        public Player()
+        public Player(SpriteBatch spriteBatch)
         {
+            this.spriteBatch = spriteBatch;
             state = new IdleState(this, true);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
@@ -54,11 +57,33 @@ namespace Game_Project
             }
         }
 
-        public IProjectile CreateProjectile()
+        public void Attack()
         {
-            projectile.Draw();
+            state.Attack();
+        }
+        
+        public void UseItem(IProjectile projectile)
+        {
+            state.UseItem(projectile);
+        }
 
-            return projectile;
+        public IProjectile CreateProjectile(int code)
+        {
+            switch(code)
+            {
+                case 0:
+                    return new Arrow(location, spriteBatch, state.FaceRight);
+                case 1:
+                    return new Bomb(location, spriteBatch);
+                case 2:
+                    return new Boomerang(location, spriteBatch, state.FaceRight);
+                case 3:
+                    return new Candle(location, spriteBatch, state.FaceRight);
+                case 4:
+                    return new SwordBeam(location, spriteBatch, state.FaceRight);
+                default:
+                    return null;
+            }
         }
     }
 }

@@ -14,20 +14,30 @@ namespace Game_Project
         private const int acceleration = 2;
 
         private Player player;
-        public bool faceRight;
+        public bool FaceRight { get; set; }
 
         public PlayerMoveState(Vector2 location, Player manager, bool faceright)
         {
             this.location = location;
             player = manager;
             velocity = 0;
-            faceRight = faceright;
+            FaceRight = faceright;
 
+        }
+
+        public void Attack()
+        {
+            player.setState(new PlayerMoveState(location, player, FaceRight));
+        }
+
+        public void UseItem(IProjectile projectile)
+        {
+            player.setState(new PlayerItemState(player, FaceRight, projectile));
         }
 
         public void Update(GameTime gameTime)
         {
-            if (faceRight == false)
+            if (FaceRight == false)
             {
                 if (location.X > 0)
                 {
@@ -58,12 +68,12 @@ namespace Game_Project
 
         public void BackToIdle() 
         {
-            player.state = new IdleState(player, faceRight);
+            player.setState(new IdleState(player, FaceRight));
         }
 
         public void TakeDamage()
         {
-            //hey whats up
+            player.setState(new DamageState(player, FaceRight));
         }
     }
 }

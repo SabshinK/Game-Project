@@ -18,6 +18,11 @@ namespace Game_Project
         // and the animation speed
         private Dictionary<string, Tuple<string, Rectangle[], int>> frames;
 
+        public SpriteFactory()
+        {
+            frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
+        }
+
         /// <summary>
         /// Method for other classes to call when they need an ISprite implementation. Given the name of the animation needed,
         /// the corresponding texture and the animation parameters are found and a GenericSprite is returned

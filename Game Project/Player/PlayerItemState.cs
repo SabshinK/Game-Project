@@ -5,41 +5,42 @@ using System.Text;
 
 namespace Game_Project
 {
-    class DamageState : IPlayerState
+    class PlayerItemState : IPlayerState
     {
         private Player player;
         public bool FaceRight { get; set; }
+        private IProjectile projectile;
 
-        public DamageState(Player manager, bool faceRight)
+        public PlayerItemState(Player player, bool faceRight, IProjectile projectile)
         {
-            player = manager;
+            this.player = player;
             FaceRight = faceRight;
-        }
-
-        public void TakeDamage()
-        {
-            // Already in the Damage state
+            this.projectile = projectile;
         }
 
         public void BackToIdle()
         {
-            // Can't go to idle in the damaged state until the animation is finished
+            player.setState(new IdleState(player, FaceRight));
         }
 
         public void Attack()
         {
-            // Can't attack in the damaged state
+            // Can't attack while using an item
         }
 
         public void UseItem(IProjectile projectile)
         {
-            // Can't use item in the damaged state
+            // Already using an item
+        }
+
+        public void TakeDamage()
+        {
+            player.setState(new DamageState(player, FaceRight));
         }
 
         public void Update(GameTime gameTime)
         {
-            
+
         }
-        
     }
 }
