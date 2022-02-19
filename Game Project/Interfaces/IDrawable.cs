@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace Game_Project.Interfaces
+namespace Game_Project
 {
-    internal interface IDrawable
+    public interface IDrawable
     {
-        public void Draw(); // Draw function for creating any animations.
+        public void Draw(SpriteBatch spriteBatch, Vector2 location); // Draw function for creating any animations.
     }
 }

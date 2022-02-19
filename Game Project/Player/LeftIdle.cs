@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Interfaces;
 
-namespace Game_Project.Sprites
+namespace Game_Project
 {
     class LeftIdle : IPlayer
     {

@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game_Project.Interfaces
+namespace Game_Project
 {
-    internal interface IObjectInteractable
+    public interface IInteractable
     {
         public void Interact(); // Changing states and updating the game for when an interactable object is influenced by the player.
     }
