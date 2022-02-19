@@ -9,7 +9,7 @@ namespace Game_Project.Enemies
         BatStateMachine bat;
         Boolean[] batState = new Boolean[4];
 
-        public void CreateBat()
+        public BatEnemy()
         {
             bat = new BatStateMachine();
         }
