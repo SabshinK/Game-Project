@@ -14,6 +14,13 @@ namespace Game_Project
         {
             player = manager;
             FaceRight = faceright;
+            if (FaceRight)
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
+            } else
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
+            }
         }
 
         public void BackToIdle()

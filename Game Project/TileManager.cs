@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class TileManager
+    public class TileManager
     {
         private ISprite sprite;
         

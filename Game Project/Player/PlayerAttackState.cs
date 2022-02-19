@@ -8,12 +8,22 @@ namespace Game_Project
     class PlayerAttackState : IPlayerState
     {
         private Player player;
+        private float timeElapsed;
         public bool FaceRight { get; set; }
 
         public PlayerAttackState(Player player, bool faceRight)
         {
             this.player = player;
             FaceRight = faceRight;
+
+            if (FaceRight)
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("attackRight");
+            }
+            else
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("attackLeft");
+            }
         }
 
         public void BackToIdle()
@@ -38,7 +48,14 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-
+            if (timeElapsed < 0.5)
+            {
+                timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                player.setState(new IdleState(player, FaceRight));
+            }
         }
     }
 }

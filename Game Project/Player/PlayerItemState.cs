@@ -8,6 +8,7 @@ namespace Game_Project
     class PlayerItemState : IPlayerState
     {
         private Player player;
+        private float timeElapsed;
         public bool FaceRight { get; set; }
         private IProjectile projectile;
 
@@ -15,6 +16,13 @@ namespace Game_Project
         {
             this.player = player;
             FaceRight = faceRight;
+            if (FaceRight)
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("useItemRight");
+            } else
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("useItemLeft");
+            }
             this.projectile = projectile;
         }
 
@@ -40,7 +48,14 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-
+            if (timeElapsed < 0.5)
+            {
+                timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                player.setState(new IdleState(player, FaceRight));
+            }
         }
     }
 }

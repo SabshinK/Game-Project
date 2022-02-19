@@ -4,17 +4,17 @@ using System.Text;
 
 namespace Game_Project
 {
-    class UseWeaponCommand : ICommand
+    class AttackCommand : ICommand
     {
         private Player player;
-
-        public UseWeaponCommand(Player manager)
+        public AttackCommand(Player manager)
         {
             player = manager;
         }
         public void Execute()
         {
-            player.projectile = WeaponManager.Instance.GetCurrentWeapon();
+            player.setState(new PlayerAttackState(player));
+
         }
     }
 }

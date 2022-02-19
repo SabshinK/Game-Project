@@ -16,7 +16,7 @@ namespace Game_Project
 
         // A Dictionary that contains a string key and a tuple containing the name of the texture, an array of the frame rectangles,
         // and the animation speed
-        private Dictionary<string, Tuple<string, Rectangle[], int>> frames;
+        private Dictionary<string, Tuple<string, Rectangle[], int>> frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
 
         public SpriteFactory()
         {

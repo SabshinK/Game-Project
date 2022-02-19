@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class Player
+    public class Player
     {
         public IPlayerState state;
         public IProjectile projectile;
@@ -25,6 +25,8 @@ namespace Game_Project
             state = new IdleState(this, true);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
+
+            location = new Vector2(GraphicsDevice.Viewport.Width / 2 - 48, GraphicsDevice.Viewport.Height / 2 - 64);
         
             health = 3;
         }
