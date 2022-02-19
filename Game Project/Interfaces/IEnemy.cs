@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game_Project.Interfaces
+﻿namespace Game_Project
 {
-    interface IEnemy
+    public interface IEnemy
     {
         public void ChangeDirection();
 

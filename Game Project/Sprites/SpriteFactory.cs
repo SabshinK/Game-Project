@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Interfaces;
 
-namespace Game_Project.Sprites
+namespace Game_Project
 {
     // most of the functionality of this class may be changed based on how sprites are loaded
     public class SpriteFactory
@@ -65,6 +64,8 @@ namespace Game_Project.Sprites
             frames.Add("bombWaiting", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(1, 35, 16, 16) }, 2));
             frames.Add("bombExplosion", new Tuple<string, Rectangle[], int>("TempProjectiles", 
                 new Rectangle[] { new Rectangle(18, 35, 16, 16), new Rectangle(35, 35, 16, 16), new Rectangle(52, 35, 16, 16) }, 2));
+            frames.Add("swordBeamRight", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(69, 35, 16, 16), new Rectangle(86, 35, 16, 16) }, 2));
+            frames.Add("swordBeamLeft", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(103, 35, 16, 16), new Rectangle(120, 35, 16, 16) }, 2));
 
             // Player animations
             frames.Add("idleRight", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(0, 0, 128, 128) }, 1));
