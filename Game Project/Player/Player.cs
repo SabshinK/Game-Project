@@ -49,6 +49,11 @@ namespace Game_Project
             if (sprite != null) {
                 sprite.Draw(spriteBatch, location);
             }
+
+            if (projectile != null)
+            {
+                projectile.Draw(spriteBatch);
+            }
         }
         
         public void setState(IPlayerState state)
