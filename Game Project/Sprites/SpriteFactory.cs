@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Interfaces;
 
-namespace Game_Project.Sprites
+namespace Game_Project
 {
     // most of the functionality of this class may be changed based on how sprites are loaded
     public class SpriteFactory

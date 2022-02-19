@@ -10,7 +10,7 @@ namespace Game_Project
     {
         public Vector2 position;
         public SpriteBatch spriteBatch;
-        private Interfaces.ISprite sprite;
+        private ISprite sprite;
         private int moveFactor;
         private bool userDirection;
         private float lifeSpan;
@@ -39,7 +39,7 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //get sprite
-            sprite = Sprites.SpriteFactory.Instance.CreateSprite("CandleFireGeneric");
+            sprite = SpriteFactory.Instance.CreateSprite("CandleFireGeneric");
 
             //if user is facing right
             if(userDirection)
@@ -79,7 +79,7 @@ namespace Game_Project
                 if(timer >= lifeSpan)
                 {
                     //despawn sprite
-                    sprite = Sprites.SpriteFactory.Instance.CreateSprite("despawnGeneric");
+                    sprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
                     timer = 0f;
                 }
             }

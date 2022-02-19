@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game_Project.Sprites
+namespace Game_Project
 {
     public static class Texture2DStorage
     {

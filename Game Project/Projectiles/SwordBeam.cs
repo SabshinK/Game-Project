@@ -10,7 +10,7 @@ namespace Game_Project
     {
         private Vector2 position;
         private SpriteBatch spriteBatch;
-        private Interfaces.ISprite sprite;
+        private ISprite sprite;
         private int moveFactor;
         public bool userDirection;
 
@@ -31,7 +31,7 @@ namespace Game_Project
             if (userDirection)
             {
                 //get the sprite for sword beam
-                sprite = Sprites.SpriteFactory.Instance.CreateSprite("swordBeamRight");
+                sprite = SpriteFactory.Instance.CreateSprite("swordBeamRight");
                 position.X += moveFactor;
 
             }
@@ -39,7 +39,7 @@ namespace Game_Project
             else
             {
                 //get the sprite for sword beam
-                sprite = Sprites.SpriteFactory.Instance.CreateSprite("swordBeamLeft");
+                sprite = SpriteFactory.Instance.CreateSprite("swordBeamLeft");
                 position.X -= moveFactor;
             }
 
