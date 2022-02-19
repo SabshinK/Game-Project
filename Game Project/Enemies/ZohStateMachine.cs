@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 
 //MAKE THIS INTO A STATE MACHINE BASED ON THE GOOMBA STATE MACHINE ON KIRBY'S SITE
 {
-    class ZohStateMachine : Game_Project.Interfaces.IEnemyStateMachine
+    class ZohStateMachine : IEnemyStateMachine
     {
         private int health = 25;
 

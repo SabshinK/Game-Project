@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 
 {
-    class DragonStateMachine : Game_Project.Interfaces.IEnemyStateMachine
+    class DragonStateMachine : IEnemyStateMachine
     {
         private int health = 500;
 
