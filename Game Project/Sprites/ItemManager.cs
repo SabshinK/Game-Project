@@ -5,10 +5,6 @@ using System.Collections.Generic;
 using System.Text;
 
 
-// HEY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// huuuuge disclaimer im not super confident about any of this and my feelings will not be hurt if u rip it to shreds
-// this is me trying to change stuff so that it will let me commit
-
 namespace Game_Project.Sprites
 {
     class ItemManager
