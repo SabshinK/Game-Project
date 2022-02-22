@@ -1,34 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
-using Game_Project.Projectiles.Boomerang;
+using static Game_Project.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 {
-    class GoriyaEnemy : Game_Project.Interfaces.IEnemy
+    class GoriyaEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         Boomerang weapon;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public GoriyaEnemy(Vector2 location)
         {
             goriya = new GoriyaStateMachine();
-            spriteBatch = gameSpriteBatch;
-            locationVector = vector; //game will state where it wants the enemy when it is created
+            locationVector = location;
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
+            currentGoriyaSprite = goriyaSpriteRight;
         }
+        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+        //    goriya = new GoriyaStateMachine();
+        //    spriteBatch = gameSpriteBatch;
+        //    locationVector = vector; //game will state where it wants the enemy when it is created
+        //    goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
+        //    goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
+        //}
         public void ChangeDirection()
         {
             goriya.ChangeDirection();
@@ -44,12 +48,17 @@ namespace Game_Project.Enemies
             goriya.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
+            stateTuple = goriya.getState();
             currentGoriyaSprite.Draw(spriteBatch, locationVector);
+            if (stateTuple.Item1.Equals(actions.attacking))
+            {
+                weapon.Draw(spriteBatch);
+            }
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > new Random().Next(100))
@@ -63,30 +72,29 @@ namespace Game_Project.Enemies
 
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
             if(stateTuple.Item1.Equals(actions.moving)){
-                if (stateTuple.Item2.Equals(directions.right)){
+                if (stateTuple.Item2.Equals(direction.right)){
                     currentGoriyaSprite = goriyaSpriteRight;
-                    locationVector++;
+                    locationVector.X++;
                 }
                 else{
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    locationVector--;
+                    locationVector.X--;
                 }
             }
             else if (stateTuple.Item1.Equals(actions.attacking)){
-                if (stateTuple.Item1.Equals(directions.right))
+                if (stateTuple.Item1.Equals(direction.right))
                 {
                     currentGoriyaSprite = goriyaSpriteRight;
-                    weapon = new Boomerang(locationVector, spriteBatch, true);
+                    weapon = new Boomerang(locationVector, true);
                 }
                 else
                 {
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    weapon = new Boomerang(locationVector, spriteBatch, false);
+                    weapon = new Boomerang(locationVector, false);
                 }
-                weapon.Draw();
-                for(int i = 0; i < 25, i++)
+                for(int i = 0; i < 25; i++)
                 {
-                    weapon.Update();
+                    weapon.Update(gameTime);
                 }
             }
             currentGoriyaSprite.Update();

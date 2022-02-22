@@ -10,15 +10,13 @@ namespace Game_Project
     {
         private Vector2 position;
         private ISprite sprite;
-        private SpriteBatch spriteBatch;
         private float timer;
         private float lifeSpan;
        
         //constructor
-        public Bomb(Vector2 position, SpriteBatch spriteBatch)
+        public Bomb(Vector2 position)
         {
             this.position = position;
-            this.spriteBatch = spriteBatch;
             timer = 0f;
             lifeSpan = 50f;
         }
@@ -39,7 +37,7 @@ namespace Game_Project
 
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             //draw bomb
             if (sprite != null)
