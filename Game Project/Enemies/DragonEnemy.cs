@@ -1,35 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
-using Game_Propject.Projectiles.Candle;
+using static Game_Project.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 {
-    class DragonEnemy : Game_Project.Interfaces.IEnemy
+    class DragonEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
-        BatStateMachine dragon;
+        DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
-        SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(200, 200);
-        int lengthOfAction = 0;
+       // SpriteBatch spriteBatch;
+        Vector2 locationVector;
+        int lengthOfAction;
         Candle weapon;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public DragonEnemy(Vector2 vector)
         {
-            dragon = new BatStateMachine();
+            dragon = new DragonStateMachine();
             locationVector = vector;
-            spriteBatch = gameSpriteBatch;
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;
+
         }
+
+       // public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+        //    dragon = new BatStateMachine();
+        //    locationVector = vector;
+        //    spriteBatch = gameSpriteBatch;
+        //    waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
+        //    attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
+        //    dragonSprite = waitingSprite;
+        //}
         public void ChangeDirection()
         {
             dragon.ChangeDirection();
@@ -45,12 +51,18 @@ namespace Game_Project.Enemies
             dragon.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
+            stateTuple = dragon.getState();
             dragonSprite.Draw(spriteBatch, locationVector);
+            if (stateTuple.Item1.Equals(actions.attacking))
+            {
+                weapon.Draw(spriteBatch);
+            }
+
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > 25)
@@ -77,11 +89,10 @@ namespace Game_Project.Enemies
             else if (stateTuple.Item1.Equals(actions.attacking))
             {
                 dragonSprite = attackSprite;
-                weapon = new Candle(locationVector, spriteBatch, false);
-                weapon.Draw();
-                for(int i = 0, i < 10, i++)
+                weapon = new Candle(locationVector, false);
+                for(int i = 0; i < 10; i++)
                 {
-                    weapon.Update();
+                    weapon.Update(gameTime);
                 }
             }
 

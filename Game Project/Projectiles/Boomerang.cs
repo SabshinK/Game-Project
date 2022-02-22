@@ -13,21 +13,20 @@ namespace Game_Project
         private int boomerangLimit;
         private int moveFactor;
         public ISprite sprite, movingSprite, despawnSprite;
-        private SpriteBatch spriteBatch;
         private bool userDirection;
-        movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
-        despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
         
 
         //constructor
-        public Boomerang(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
+        public Boomerang(Vector2 position, bool userDirection)
         {
             this.position = position;
             this.initialPosition = position;
             boomerangLimit = 100;
             moveFactor = 8;
-            this.spriteBatch = spriteBatch;
             this.userDirection = userDirection;
+            movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
+            despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+
         }
 
 
@@ -62,7 +61,7 @@ namespace Game_Project
 
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             //draw boomerang if it still needs to be drawn
             if(sprite != null)
