@@ -9,7 +9,7 @@ The Google Drive and Trello have been shared with our grader Chris Lenart (lenar
 ***Written below is a copy of our planning document that is in the Google Drive for the project.***
 
 
-Code Priorities and To-Do’s for Sprint 3:
+**Code Priorities and To-Do’s for Sprint 3:**
 
 -Sprint 2 fixes
 
@@ -32,11 +32,11 @@ Code Priorities and To-Do’s for Sprint 3:
 *need someone
 
 
-Member Assignments (code stuffs):
+**Member Assignments (code stuffs):**
 ***Due dates are mainly for when you should have drafts of those classes or functionalities ready to be reviewed.***
 DO NOT START WORKING UNTIL THE SPRINT3 BRANCH HAS BEEN MADE AND THE MEMBER BRANCHES HAVE BEEN REMADE!!!
 
-***Sebastian***
+**Sebastian**
 
 -Level-loading 
 
@@ -44,7 +44,7 @@ DO NOT START WORKING UNTIL THE SPRINT3 BRANCH HAS BEEN MADE AND THE MEMBER BRANC
 
 -Sprint2 bug fixes (complete by: 2/26)
 
-***Rachel***
+**Rachel**
 
 -Update and Draw fixes (complete by: 2/26)
 
@@ -54,19 +54,19 @@ DO NOT START WORKING UNTIL THE SPRINT3 BRANCH HAS BEEN MADE AND THE MEMBER BRANC
 
 -Help with ObjectManager
 
-***Aadya***
+**Aadya**
 
 -Object Manager
   (Combined version of all current object managers.
   All different kinds of objects are stored in lists and the first item in that list will be the default state))
 
-***Maria***
+**Maria**
 
 -Class for collision detection (complete by: 2/26)
 
 -Help with Object Manager?
 
-***Anooj***
+**Anooj**
 
 -Sprint2 bug fixes (complete by: 2/26)
 
@@ -74,7 +74,7 @@ DO NOT START WORKING UNTIL THE SPRINT3 BRANCH HAS BEEN MADE AND THE MEMBER BRANC
   (Object Manager would have a reset function to implement.
   This function would return to the first element in each object list (default state))
 
-***AJ***
+**AJ**
 
 -Sprint2 bug fixes (complete by: 2/26)
 
