@@ -30,15 +30,30 @@ namespace Game_Project
             }
         }
 
+        public void BackToIdle() 
+        {
+            player.SetState(new IdleState(player, FaceRight));
+        }
+
+        public void Move()
+        {
+            // Already moving
+        }
+
+        public void TakeDamage()
+        {
+            player.SetState(new DamageState(player, FaceRight));
+        }
+
         public void Attack()
         {
-            player.setState(new PlayerMoveState(player, FaceRight));
+            player.SetState(new PlayerMoveState(player, FaceRight));
         }
 
         public void UseItem(IProjectile projectile)
         {
             player.projectile = projectile;
-            player.setState(new PlayerItemState(player, FaceRight));
+            player.SetState(new PlayerItemState(player, FaceRight));
         }
 
         public void Update(GameTime gameTime)
@@ -75,16 +90,6 @@ namespace Game_Project
             }
 
             player.sprite.Update();
-        }
-
-        public void BackToIdle() 
-        {
-            player.setState(new IdleState(player, FaceRight));
-        }
-
-        public void TakeDamage()
-        {
-            player.setState(new DamageState(player, FaceRight));
         }
     }
 }

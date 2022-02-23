@@ -28,7 +28,17 @@ namespace Game_Project
 
         public void BackToIdle()
         {
-            player.setState(new IdleState(player, FaceRight));
+            player.SetState(new IdleState(player, FaceRight));
+        }
+
+        public void Move()
+        {
+            // Can't move until attack is over
+        }
+
+        public void TakeDamage()
+        {
+            player.SetState(new DamageState(player, FaceRight));
         }
 
         public void Attack()
@@ -41,11 +51,6 @@ namespace Game_Project
             // Can't use an item while attacking
         }
 
-        public void TakeDamage()
-        {
-            player.setState(new DamageState(player, FaceRight));
-        }
-
         public void Update(GameTime gameTime)
         {
             if (timeElapsed < 0.5)
@@ -54,7 +59,7 @@ namespace Game_Project
             }
             else
             {
-                player.setState(new IdleState(player, FaceRight));
+                player.SetState(new IdleState(player, FaceRight));
             }
 
             if (player.projectile != null)

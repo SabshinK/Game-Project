@@ -28,20 +28,25 @@ namespace Game_Project
             // Already in the idle state
         }
 
+        public void Move()
+        {
+            player.SetState(new PlayerMoveState(player, FaceRight));
+        }
+
         public void TakeDamage()
         {
-            player.setState(new DamageState(player, FaceRight));
+            player.SetState(new DamageState(player, FaceRight));
         }
 
         public void Attack()
         {
-            player.setState(new PlayerAttackState(player, FaceRight));
+            player.SetState(new PlayerAttackState(player, FaceRight));
         }
 
         public void UseItem(IProjectile projectile)
         {
             player.projectile = projectile;
-            player.setState(new PlayerItemState(player, FaceRight));
+            player.SetState(new PlayerItemState(player, FaceRight));
         }
         
         public void Update(GameTime gameTime)

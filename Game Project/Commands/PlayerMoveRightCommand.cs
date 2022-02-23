@@ -15,7 +15,7 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.setState(new PlayerMoveState(player, true));
+            player.Move();
         }
     }
 }

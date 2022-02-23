@@ -27,18 +27,30 @@ namespace Game_Project
 			foreach (Keys key in pressedKeys)
 			{
 				// Need to check if the key is valid first
-				if (controllerMappings.ContainsKey(key))
+				if (controllerMappings.ContainsKey(key) /*&& key != Keys.A && key != Keys.D*/)
 				{
 					controllerMappings[key].Execute();
 				}
 			}
 
-			if(!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-				controllerMappings[Keys.None].Execute();
-            }
+            //if (Keyboard.GetState().IsKeyDown(Keys.A))
+            //{
+            //    controllerMappings[Keys.A].Execute();
+            //}
+            //else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            //{
+            //    controllerMappings[Keys.D].Execute();
+            //}
+            //else
+            //{
+            //    controllerMappings[Keys.None].Execute();
+            //}
 
-		}
+            if (!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                controllerMappings[Keys.None].Execute();
+            }
+        }
 
 		public void LoadContent(Game1 game, Player player, TileManager tiles, EnemyManager enemies, ItemManager items)
 		{

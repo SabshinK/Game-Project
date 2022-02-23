@@ -11,6 +11,7 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+        public bool FaceRight { get; private set; }
       
         private int health;
         private string animationToCreate;
@@ -34,13 +35,27 @@ namespace Game_Project
             state.BackToIdle();
         }
         
+        public void Move()
+        {
+            state.Move();
+        }
+        
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
         public void DamageTaken()
         {
             health--;
             state.TakeDamage();
         } 
+        public void Attack()
+        {
+            state.Attack();
+        }
         
+        public void UseItem(int code)
+        {
+            state.UseItem(CreateProjectile(code));
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if (sprite != null) {
@@ -53,22 +68,12 @@ namespace Game_Project
             }
         }
         
-        public void setState(IPlayerState state)
+        public void SetState(IPlayerState state)
         {
-            if(this.state != state)
+            if(this.state.GetType() != state.GetType())
             {
                 this.state = state;
             }
-        }
-
-        public void Attack()
-        {
-            state.Attack();
-        }
-        
-        public void UseItem(int code)
-        {
-            state.UseItem(CreateProjectile(code));
         }
 
         public IProjectile CreateProjectile(int code)
