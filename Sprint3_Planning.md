@@ -32,7 +32,7 @@ The Google Drive and Trello have been shared with our grader Chris Lenart (lenar
 *need someone
 
 
-**Member Assignments (code stuffs):**
+**Member Assignments (code stuff):**
 ***Due dates are mainly for when you should have drafts of those classes or functionalities ready to be reviewed.***
 DO NOT START WORKING UNTIL THE SPRINT3 BRANCH HAS BEEN MADE AND THE MEMBER BRANCHES HAVE BEEN REMADE!!!
 
@@ -50,7 +50,7 @@ DO NOT START WORKING UNTIL THE SPRINT3 BRANCH HAS BEEN MADE AND THE MEMBER BRANC
 
 -Class for collision resolution (complete by: 2/26)
 
--Update sprite sheets (possible math tings :3)
+-Update sprite sheets (possible math things)
 
 -Help with ObjectManager
 
