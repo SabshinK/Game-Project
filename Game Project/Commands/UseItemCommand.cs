@@ -7,15 +7,16 @@ namespace Game_Project
     class UseItemCommand : ICommand
     {
         private Player player;
-        private IProjectile projectile;
-        public UseItemCommand(Player manager, IProjectile projectileWeapon)
+        private int code;
+
+        public UseItemCommand(Player manager, int code)
         {
             player = manager;
-            projectile = projectileWeapon;
+            this.code = code;
         }
         public void Execute()
         {
-            player.UseItem(projectile);
+            player.UseItem(code);
         }
     }
 }

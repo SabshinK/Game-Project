@@ -54,11 +54,11 @@ namespace Game_Project
 			RegisterCommand(Keys.P, new NextEnemyCommand(enemies));
 			RegisterCommand(Keys.U, new PreviousItemCommand(items));
 			RegisterCommand(Keys.I, new NextItemCommand(items));
-			RegisterCommand(Keys.D1, new UseItemCommand(player, player.CreateProjectile(1)));
-			RegisterCommand(Keys.D2, new UseItemCommand(player, player.CreateProjectile(2)));
-			RegisterCommand(Keys.D3, new UseItemCommand(player, player.CreateProjectile(3)));
-			RegisterCommand(Keys.D4, new UseItemCommand(player, player.CreateProjectile(4)));
-			RegisterCommand(Keys.D5, new UseItemCommand(player, player.CreateProjectile(5)));
+			RegisterCommand(Keys.D1, new UseItemCommand(player, 1));
+			RegisterCommand(Keys.D2, new UseItemCommand(player, 2));
+			RegisterCommand(Keys.D3, new UseItemCommand(player, 3));
+			RegisterCommand(Keys.D4, new UseItemCommand(player, 4));
+			RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
 			RegisterCommand(Keys.E, new TakeDamageCommand(player));
 		}
 	}

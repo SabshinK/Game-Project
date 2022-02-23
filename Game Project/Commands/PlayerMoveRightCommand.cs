@@ -15,9 +15,7 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.setState(new PlayerMoveState(player.location, player, true));
-            
-            player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+            player.setState(new PlayerMoveState(player, true));
         }
     }
 }

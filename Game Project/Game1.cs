@@ -39,7 +39,7 @@ namespace Game_Project
 
             
             keyboard = new KeyboardController();
-            player = new Player(spriteBatch);
+            player = new Player();
             tiles = new TileManager();
             enemies = new EnemyManager();
             items = new ItemManager();
@@ -68,6 +68,7 @@ namespace Game_Project
                 Exit();
 
             player.state.Update(gameTime);
+            enemies.Update(gameTime);
             keyboard.Update();
 
             base.Update(gameTime);

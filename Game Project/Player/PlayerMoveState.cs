@@ -7,8 +7,6 @@ namespace Game_Project
 {
     class PlayerMoveState : IPlayerState
     {
-    
-        public Vector2 location;
 
         private double velocity;
         private const int acceleration = 2;
@@ -16,32 +14,40 @@ namespace Game_Project
         private Player player;
         public bool FaceRight { get; set; }
 
-        public PlayerMoveState(Vector2 location, Player manager, bool faceright)
+        public PlayerMoveState(Player manager, bool faceright)
         {
-            this.location = location;
             player = manager;
-            velocity = 2;
+            velocity = 10;
             FaceRight = faceright;
 
+            if (FaceRight)
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+            }
+            else
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+            }
         }
 
         public void Attack()
         {
-            player.setState(new PlayerMoveState(location, player, FaceRight));
+            player.setState(new PlayerMoveState(player, FaceRight));
         }
 
         public void UseItem(IProjectile projectile)
         {
-            player.setState(new PlayerItemState(player, FaceRight, projectile));
+            player.projectile = projectile;
+            player.setState(new PlayerItemState(player, FaceRight));
         }
 
         public void Update(GameTime gameTime)
         {
             if (FaceRight == false)
             {
-                if (location.X > 0)
+                if (player.location.X > 0)
                 {
-                    location.X -= (float)velocity;
+                    player.location.X -= (float)velocity;
                 }
                 else
                 {
@@ -49,9 +55,9 @@ namespace Game_Project
                 }
             } else
             {
-                if (location.X < 800)
+                if (player.location.X < 800)
                 {
-                    location.X += (float)velocity;
+                    player.location.X += (float)velocity;
                 }
                 else
                 {
@@ -63,7 +69,12 @@ namespace Game_Project
             //{
             //    velocity += acceleration * gameTime.ElapsedGameTime.TotalMilliseconds;
             //}
+            if (player.projectile != null)
+            {
+                player.projectile.Update(gameTime);
+            }
 
+            player.sprite.Update();
         }
 
         public void BackToIdle() 

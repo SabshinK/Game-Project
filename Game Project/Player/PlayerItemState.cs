@@ -10,9 +10,8 @@ namespace Game_Project
         private Player player;
         private float timeElapsed;
         public bool FaceRight { get; set; }
-        private IProjectile projectile;
 
-        public PlayerItemState(Player player, bool faceRight, IProjectile projectile)
+        public PlayerItemState(Player player, bool faceRight)
         {
             this.player = player;
             FaceRight = faceRight;
@@ -23,7 +22,6 @@ namespace Game_Project
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("useItemLeft");
             }
-            this.projectile = projectile;
         }
 
         public void BackToIdle()
@@ -56,6 +54,13 @@ namespace Game_Project
             {
                 player.setState(new IdleState(player, FaceRight));
             }
+
+            if (player.projectile != null)
+            {
+                player.projectile.Update(gameTime);
+            }
+
+            player.sprite.Update();
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Game_Project
             gelSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > new Random().Next(50))

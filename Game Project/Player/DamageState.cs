@@ -56,6 +56,13 @@ namespace Game_Project
             {
                 player.setState(new IdleState(player, FaceRight));
             }
+
+            if (player.projectile != null)
+            {
+                player.projectile.Update(gameTime);
+            }
+
+            player.sprite.Update();
         }
         
     }

@@ -92,13 +92,19 @@ namespace Game_Project
                     currentGoriyaSprite = goriyaSpriteLeft;
                     weapon = new Boomerang(locationVector, false);
                 }
-                for(int i = 0; i < 25; i++)
-                {
-                    weapon.Update(gameTime);
-                }
+                //for(int i = 0; i < 25; i++)
+                //{
+                //    weapon.Update(gameTime);
+                //}
+                
             }
             currentGoriyaSprite.Update();
             lengthOfAction++;
+
+            if (weapon != null)
+            {
+                weapon.Update(gameTime);
+            }
         }
 
 

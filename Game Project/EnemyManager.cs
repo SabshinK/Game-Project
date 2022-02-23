@@ -54,6 +54,11 @@ namespace Game_Project
             enemies.Add(new ZohEnemy(new Vector2(500, 300)));
         }
 
+        public void Update(GameTime gameTime)
+        {
+            enemy.Update(gameTime);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             enemy.Draw(spriteBatch);

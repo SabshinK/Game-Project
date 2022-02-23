@@ -40,12 +40,18 @@ namespace Game_Project
 
         public void UseItem(IProjectile projectile)
         {
-            player.setState(new PlayerItemState(player, FaceRight, projectile));
+            player.projectile = projectile;
+            player.setState(new PlayerItemState(player, FaceRight));
         }
         
         public void Update(GameTime gameTime)
         {
-            //Nothing to see here! Have a good day!
+            if (player.projectile != null)
+            {
+                player.projectile.Update(gameTime);
+            }
+
+            player.sprite.Update();
         }
     }
 }
