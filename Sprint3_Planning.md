@@ -8,33 +8,35 @@ The Google Drive and Trello have been shared with our grader Chris Lenart (lenar
 
 ***Written below is a copy of our planning document that is in the Google Drive for the project.***
 
+
 Code Priorities and To-Do’s for Sprint 3:
 
-Sprint 2 fixes
+-Sprint 2 fixes
 
-Reset-to-default function in game1
+-Reset-to-default function in game1
 
-Update() and Draw() needs to be removed from each object interface and defined inside IUpdateable and IDrawable. The classes like “Player” or “BatEnemy” will then also implement IUpdateable and IDrawable in addition to any object interfaces. 
+-Update() and Draw() needs to be removed from each object interface and defined inside IUpdateable and IDrawable. The classes like “Player” or “BatEnemy” will then also implement IUpdateable and IDrawable in addition to any object interfaces. 
 
-Object manager
+-Object manager
 
-Class for collision detection
+-Class for collision detection
 
-Class for collision resolution
+-Class for collision resolution
 
-Level loading
+-Level loading
 
-Loading data from xml files
+-Loading data from xml files
 
-Update sprite sheets and tile maps as new sprites are made, and adjust the XML files
+-Update sprite sheets and tile maps as new sprites are made, and adjust the XML files
 
 *need someone
+
 
 Member Assignments (code stuffs):
 ***Due dates are mainly for when you should have drafts of those classes or functionalities ready to be reviewed.***
 DO NOT START WORKING UNTIL THE SPRINT3 BRANCH HAS BEEN MADE AND THE MEMBER BRANCHES HAVE BEEN REMADE!!!
 
-Sebastian
+***Sebastian***
 
 -Level-loading 
 
@@ -42,7 +44,7 @@ Sebastian
 
 -Sprint2 bug fixes (complete by: 2/26)
 
-Rachel
+***Rachel***
 
 -Update and Draw fixes (complete by: 2/26)
 
@@ -52,19 +54,19 @@ Rachel
 
 -Help with ObjectManager
 
-Aadya
+***Aadya***
 
 -Object Manager
   (Combined version of all current object managers.
   All different kinds of objects are stored in lists and the first item in that list will be the default state))
 
-Maria
+***Maria***
 
 -Class for collision detection (complete by: 2/26)
 
 -Help with Object Manager?
 
-Anooj
+***Anooj***
 
 -Sprint2 bug fixes (complete by: 2/26)
 
@@ -72,7 +74,7 @@ Anooj
   (Object Manager would have a reset function to implement.
   This function would return to the first element in each object list (default state))
 
-AJ
+***AJ***
 
 -Sprint2 bug fixes (complete by: 2/26)
 
