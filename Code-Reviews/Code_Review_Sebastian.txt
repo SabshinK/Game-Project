@@ -1,1 +1,13 @@
+Code reviews by Sebastian King
+02-19-22
+Sprint 2
 
+Readability:
+Reviewing KeyBoardControllerDraft.cs by Aadya Jain
+The code is fairly readable, it adheres to naming conventions, there are a few useless comments about wanting to make a new file and getting rid of the old keyboard controller when PlayerManager.cs is finished, which became Player.cs. Code is not cluttered and is spaced evenly, most methods have no need for comments so their absence is fine here. Method names adhere to what they do in the class and are cohesive.
+Review time: 10 minutes
+
+Maintainability:
+Reviewing ItemManager.cs by Maria Stein
+There is a bug in the code, when trying to initialize the List<ISprite> it is trying to be initialized like an array but Lists are a dynamic type so numItems is not needed. There is a cleaner way of changing the array index in both NextItem() and PreviousItem() so that the double index is not necessary using the modulo operator. Eventually this manager class will be deleted and replaced with an ObjectManager that keeps track of all the objects currently in the game, as well as the List being loaded a different way instead of in one large block, that becomes a data problem
+Review time: 20 minutes

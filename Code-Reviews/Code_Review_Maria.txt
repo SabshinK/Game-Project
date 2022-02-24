@@ -1,1 +1,37 @@
+Author of Code Review:	Maria Stein
+Date of Code Review:	2/19/2022
+Sprint Number:			2
+Name of File:			PlayerItemState.cs	
+Author of File:			Sebastian King
 
+Comments On Code Quality:
+Projectiles shouldn't need to be passed here.
+The use of a timer to determine when the state is over will probably need to be changed for future sprints.
+The Attack and UseItem methods are useless here (and in some other classes, maybe should refactor).
+One thing that I found confusing my first time looking at the code was "FaceRight" and "faceRight" having near identical names.
+Personally I would use different names for these.
+Each method is concise. Comments could be more descriptive.
+The code is readable, and the spacing, variable naming, and other syntactic decisions are consistent (with the exception of the brackets on 22-23).
+I understand that projectile and this.projectile are different and there is nothing technically incorrect or problematic about this 
+naming decision, but personally I find using the same name to be confusing.
+
+Hypothetical Change(s) to to the Game that Are/Are Not Supported by This Code:
+Transition to next state should happen when the animation is complete, but with the current implementation the length of time before the state
+changesis not guaranteed to match the length of the animation.
+
+
+Author of Code Review:	Maria Stein
+Date of Code Review:	2/19/2022
+Sprint Number:			2
+Name of File:			GoriyaEnemy.cs
+Author of File:			AJ Waizmann
+
+Minutes It Took To Complete Review:  18
+
+Comments on Code Readability:
+There is only one descriptive comment.
+None of the variables are classified as private, public, etc.
+It might be better to have one enemy class with sprite, health, etc. instead of having different classes for each enemy. This is more about 
+maintainability than readability, but there's a lot of duplicated code.
+All of the methods are concise with the exception of Update(), which looks messy and should be refactored. The brackets and spacing are inconsistent
+and the function looks a little squished and difficult to read.

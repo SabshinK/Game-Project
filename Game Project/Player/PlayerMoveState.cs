@@ -20,7 +20,7 @@ namespace Game_Project
         {
             this.location = location;
             player = manager;
-            velocity = 0;
+            velocity = 2;
             FaceRight = faceright;
 
         }

@@ -1,1 +1,27 @@
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    2/19/2022
+Sprint Number:    2
+Name of File:     Player.cs
+Author of File:    Rachel Watters
 
+Code Quality Comments: 
+	The thing that jumps out at me right away is the player manager holding a "health" variable, which the player state already has. Overall, the code looks very simple and 
+	the length is perfect, it's clear and concise, yet not lacking. I was worried about a potential middle man smell, but right now I don't see anything that would lead
+	me to believe this class is acting as a middle man.
+
+Hypothetical Fix:
+	Separate Player more from the rest of the states, potentially create a decorator that inherits the current state of the player. Right now, I really only see the
+	health variable being the problem, just because it's kept track of in more than one place.
+
+
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    2/19/2022
+Sprint Number:    2
+Name of File:     SpriteFactory.cs
+Author of File:    Sebastian King
+
+Code Readability Comments:
+	For the plethora of data here, this code is quite readable. The comments defining each section of what specific textures are being added where is incredibly helpful. Without
+	these comments it would be very easy to get lost among the sea of very similar lines, yet each is split up and properly marked. The function names are also perfectly descriptive,
+	which is great for the amount of data we're working with. My favorite readability piece in this code is the comment above the "CreateSprite" function that describes how to use it,
+	and I referred to it many times when creating my enemy sprites. For having all of these sprites in one place, this class is incredibly readable.
