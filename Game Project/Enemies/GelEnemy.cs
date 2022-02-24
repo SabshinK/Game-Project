@@ -1,31 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
+using static Game_Project.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 {
-    class GelEnemy : Game_Project.Interfaces.IEnemy
+    class GelEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         GelStateMachine gel;
         ISprite gelSprite;
-        SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(500, 300);
+        Vector2 locationVector;
         int lengthOfAction = 0;
         
 
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public GelEnemy(Vector2 vector)
         {
+            locationVector = vector;
+            lengthOfAction = 0;
             gel = new GelStateMachine();
-            spriteBatch = gameSpriteBatch;
-            locationVector = vector; //game will state where it wants the enemy when it is created
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
         }
+
+      //  public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+          //  gel = new GelStateMachine();
+            //spriteBatch = gameSpriteBatch;
+            //locationVector = vector; //game will state where it wants the enemy when it is created
+           // gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
+        //}
         public void ChangeDirection()
         {
             gel.ChangeDirection();
@@ -41,12 +46,12 @@ namespace Game_Project.Enemies
             gel.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             gelSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > new Random().Next(50))

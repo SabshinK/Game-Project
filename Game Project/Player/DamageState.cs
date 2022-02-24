@@ -9,15 +9,13 @@ namespace Game_Project
     {
         private Player player;
         private float timeElapsed;
-        public bool FaceRight { get; set; }
 
-        public DamageState(Player manager, bool faceRight)
+        public DamageState(Player manager)
         {
             player = manager;
-            FaceRight = faceRight;
             timeElapsed = 0;
 
-            if (FaceRight)
+            if (player.FaceRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("damagedRight");
             }
@@ -26,15 +24,19 @@ namespace Game_Project
                 player.sprite = SpriteFactory.Instance.CreateSprite("damagedLeft");
             }
         }
+        public void BackToIdle()
+        {
+            // Can't go to idle in the damaged state until the animation is finished
+        }
 
         public void TakeDamage()
         {
             // Already in the Damage state
         }
 
-        public void BackToIdle()
+        public void Move()
         {
-            // Can't go to idle in the damaged state until the animation is finished
+            // Can't move while being damaged
         }
 
         public void Attack()
@@ -54,8 +56,15 @@ namespace Game_Project
                 timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             } else
             {
-                player.setState(new IdleState(player, FaceRight));
+                player.SetState(new IdleState(player));
             }
+
+            if (player.projectile != null)
+            {
+                player.projectile.Update(gameTime);
+            }
+
+            player.sprite.Update();
         }
         
     }
