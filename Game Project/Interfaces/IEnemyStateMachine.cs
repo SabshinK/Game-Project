@@ -1,4 +1,6 @@
-﻿namespace Game_Project
+﻿using System;
+
+namespace Game_Project
 {
     public interface IEnemyStateMachine
     {

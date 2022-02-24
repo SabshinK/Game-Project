@@ -1,31 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
+using static Game_Project.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 {
-    class BatEnemy : Game_Project.Interfaces.IEnemy
+    class BatEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         BatStateMachine bat;
         ISprite batSprite;
-        SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(200, 200);
-        int lengthOfAction = 0;
+       // SpriteBatch spriteBatch;
+        Vector2 locationVector;
+        int lengthOfAction;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public BatEnemy(Vector2 vector)
         {
-            bat = new BatStateMachine();
             locationVector = vector;
-            spriteBatch = gameSpriteBatch;
+            lengthOfAction = 0;
+            bat = new BatStateMachine();
             batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
         }
+        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+          //  bat = new BatStateMachine();
+           // locationVector = vector;
+            //spriteBatch = gameSpriteBatch;
+            //batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
+        //}
         public void ChangeDirection()
         {
             bat.ChangeDirection();
@@ -41,12 +45,12 @@ namespace Game_Project.Enemies
             bat.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             batSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > new Random().Next(50))

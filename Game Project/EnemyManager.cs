@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -21,14 +23,7 @@ namespace Game_Project
 
         public void NextEnemy()
         {
-            if (enemyNumber == (enemies.Count - 1))
-            {
-                enemyNumber = 0;
-            }
-            else
-            {
-                enemyNumber++;
-            }
+            enemyNumber = (enemyNumber + 1) % enemies.Count; 
             enemy = enemies[enemyNumber];
         }
 
@@ -41,14 +36,32 @@ namespace Game_Project
             else
             {
                 enemyNumber--;
+                if(enemyNumber < 0)
+                {
+                    enemyNumber = enemies.Count;
+                }
             }
             enemy = enemies[enemyNumber];
         }
 
         private void LoadEnemies()
         {
-            enemies.Add(new BatEnemy());
+            enemies.Add(new BatEnemy(new Vector2(500, 300)));
+            enemies.Add(new DragonEnemy(new Vector2(500, 300)));
+            enemies.Add(new GelEnemy(new Vector2(500, 300)));
+            enemies.Add(new GoriyaEnemy(new Vector2(500, 300)));
+            enemies.Add(new StalfosEnemy(new Vector2(500, 300)));
+            enemies.Add(new ZohEnemy(new Vector2(500, 300)));
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            enemy.Update(gameTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            enemy.Draw(spriteBatch);
         }
     }
-}
 }
