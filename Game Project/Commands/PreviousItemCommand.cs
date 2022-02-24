@@ -6,15 +6,15 @@ namespace Game_Project
 {
     class PreviousItemCommand : ICommand
     {
-        private ItemManager item;
+        private ItemManager items;
 
         public PreviousItemCommand(ItemManager item)
         {
-            item = items;
+            this.items = item;
         }
         public void Execute()
         {
-            item.PreviousItem();
+            items.PreviousItem();
         }
     }
 }

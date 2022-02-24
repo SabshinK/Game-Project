@@ -6,9 +6,9 @@ using System.Text;
 
 // Sprint 2 - cycling thru items
 
-namespace Game_Project.Sprites
+namespace Game_Project
 {
-    class ItemManager
+    public class ItemManager
     {
         private int numItems = 15;
         private List<ISprite> itemList;
@@ -21,9 +21,12 @@ namespace Game_Project.Sprites
         public ItemManager()
         {
             itemId = 0;
-            sprite = itemList[itemId];
             itemList = new List<ISprite>(numItems);
             FeedItemList(); //Creating the Item List
+            sprite = itemList[itemId];
+            location = new Vector2(100, 300);
+            
+            
         }
 
         public void FeedItemList()
@@ -55,6 +58,10 @@ namespace Game_Project.Sprites
             {
                 itemId = itemList.IndexOf(sprite) + 1;
             }
+            if(itemId >= numItems)
+            {
+                itemId = 0;
+            }
             sprite = itemList[itemId];
         }
 
@@ -62,11 +69,15 @@ namespace Game_Project.Sprites
         {
             if (itemList.IndexOf(sprite) == (0))
             {
-                itemId = numItems;
+                itemId = numItems-1;
             }
             else
             {
                 itemId = itemList.IndexOf(sprite) - 1;
+                if(itemId < 0)
+                {
+                    itemId = numItems-1;
+                }
             }
             sprite = itemList[itemId];
         }

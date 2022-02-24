@@ -31,10 +31,11 @@ namespace Game_Project
         /// <returns>A GenericSprite implementation</returns>
         public ISprite CreateSprite(string animationName)
         {
-            return new GenericSprite(Texture2DStorage.GetTexture(frames[animationName].Item1), frames[animationName].Item2, 
+            return new GenericSprite(Texture2DStorage.GetTexture(frames[animationName].Item1), frames[animationName].Item2,
                 frames[animationName].Item3);
         }
-        
+
+
         // All this will be changed when data starts being loaded from XML files, just a temporary way of loading things in
         public void LoadDictionary()
         {
@@ -73,22 +74,22 @@ namespace Game_Project
             frames.Add("swordBeamLeft", new Tuple<string, Rectangle[], int>("TempProjectiles", new Rectangle[] { new Rectangle(103, 35, 16, 16), new Rectangle(120, 35, 16, 16) }, 2));
 
             // Player animations
-            frames.Add("idleRight", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(0, 0, 128, 128) }, 1));
-            frames.Add("idleLeft", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(129, 0, 128, 128) }, 1));
+            frames.Add("idleRight", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(0, 0, 128, 128) }, 2));
+            frames.Add("idleLeft", new Tuple<string, Rectangle[], int>("ClarySage", new Rectangle[] { new Rectangle(129, 0, 128, 128) }, 2));
             frames.Add("movingRight", new Tuple<string, Rectangle[], int>("ClarySage", 
                 new Rectangle[] 
                 { 
                     new Rectangle(0, 128, 128, 128), new Rectangle(128, 128, 128, 128), new Rectangle(256, 128, 128, 128), new Rectangle(384, 128, 128, 128),
                     new Rectangle(512, 128, 128, 128), new Rectangle(640, 128, 128, 128), new Rectangle(768, 128, 128, 128), new Rectangle(896, 128, 128, 128),
                     new Rectangle(1024, 128, 128, 128), new Rectangle(1152, 128, 128, 128), new Rectangle(1280, 128, 128, 128), new Rectangle(1408, 128, 128, 128)
-                }, 1));
+                }, 2));
             frames.Add("movingLeft", new Tuple<string, Rectangle[], int>("ClarySage", 
                 new Rectangle[] 
                 {
                     new Rectangle(0, 256, 128, 128), new Rectangle(128, 256, 128, 128), new Rectangle(256, 256, 128, 128), new Rectangle(384, 256, 128, 128),
                     new Rectangle(512, 256, 128, 128), new Rectangle(640, 256, 128, 128), new Rectangle(768, 256, 128, 128), new Rectangle(896, 256, 128, 128),
                     new Rectangle(1024, 256, 128, 128), new Rectangle(1152, 256, 128, 128), new Rectangle(1280, 256, 128, 128), new Rectangle(1408, 256, 128, 128)
-                }, 1));
+                }, 2));
             frames.Add("useItemRight", new Tuple<string, Rectangle[], int>("TempPlayer", new Rectangle[] { new Rectangle(1, 1, 16, 16) }, 2));
             frames.Add("useItemLeft", new Tuple<string, Rectangle[], int>("TempPlayer", new Rectangle[] { new Rectangle(18, 1, 16, 16) }, 2));
             frames.Add("attackRight", new Tuple<string, Rectangle[], int>("TempPlayer", 
@@ -133,5 +134,8 @@ namespace Game_Project
             frames.Add("triforce", new Tuple<string, Rectangle[], int>("TempItemsAndCollectables", new Rectangle[] { new Rectangle(272, 0, 16, 16), new Rectangle(272, 16, 16, 16) }, 2));
 
         }
+
+        
+
     }
 }

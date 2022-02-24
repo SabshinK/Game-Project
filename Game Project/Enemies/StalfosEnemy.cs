@@ -1,31 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
+using static Game_Project.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 {
-    class StalfosEnemy : Game_Project.Interfaces.IEnemy
+    class StalfosEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         StalfosStateMachine stalfos;
         ISprite stalfosSprite;
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         
-
-        public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        public StalfosEnemy(Vector2 location)
         {
             stalfos = new StalfosStateMachine();
-            spriteBatch = gameSpriteBatch;
-            locationVector = vector; //game will state where it wants the enemy when it is created
+            locationVector = location; //game will state where it wants the enemy when it is created
             stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
         }
+        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
+        //{
+        //    stalfos = new StalfosStateMachine();
+        //    spriteBatch = gameSpriteBatch;
+        //    locationVector = vector; //game will state where it wants the enemy when it is created
+        //    stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
+        //}
         public void ChangeDirection()
         {
             stalfos.ChangeDirection();
@@ -41,12 +44,12 @@ namespace Game_Project.Enemies
             stalfos.TakeDamage();
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             stalfosSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (lengthOfAction > new Random().Next(50))
