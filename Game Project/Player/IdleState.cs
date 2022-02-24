@@ -8,13 +8,11 @@ namespace Game_Project
     class IdleState : IPlayerState
     {
         private Player player;
-        public bool FaceRight { get; set; }
 
-        public IdleState(Player manager, bool faceright)
+        public IdleState(Player manager)
         {
             player = manager;
-            FaceRight = faceright;
-            if (FaceRight)
+            if (player.FaceRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             } else
@@ -30,23 +28,23 @@ namespace Game_Project
 
         public void Move()
         {
-            player.SetState(new PlayerMoveState(player, FaceRight));
+            player.SetState(new PlayerMoveState(player));
         }
 
         public void TakeDamage()
         {
-            player.SetState(new DamageState(player, FaceRight));
+            player.SetState(new DamageState(player));
         }
 
         public void Attack()
         {
-            player.SetState(new PlayerAttackState(player, FaceRight));
+            player.SetState(new PlayerAttackState(player));
         }
 
         public void UseItem(IProjectile projectile)
         {
             player.projectile = projectile;
-            player.SetState(new PlayerItemState(player, FaceRight));
+            player.SetState(new PlayerItemState(player));
         }
         
         public void Update(GameTime gameTime)

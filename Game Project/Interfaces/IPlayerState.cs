@@ -4,8 +4,6 @@ namespace Game_Project
 {
     public interface IPlayerState
     {
-        public bool FaceRight { get; set; }
-
         public void BackToIdle();
         
         public void Move();

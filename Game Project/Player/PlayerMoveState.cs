@@ -12,27 +12,22 @@ namespace Game_Project
         private const int acceleration = 2;
 
         private Player player;
-        public bool FaceRight { get; set; }
 
-        public PlayerMoveState(Player manager, bool faceright)
+        public PlayerMoveState(Player manager)
         {
             player = manager;
             velocity = 10;
-            FaceRight = faceright;
 
-            if (FaceRight)
-            {
+            // This snippet might be able to be put in a method or something it's used a few times I think
+            if (player.FaceRight)
                 player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-            }
             else
-            {
                 player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
-            }
         }
 
         public void BackToIdle() 
         {
-            player.SetState(new IdleState(player, FaceRight));
+            player.SetState(new IdleState(player));
         }
 
         public void Move()
@@ -42,23 +37,23 @@ namespace Game_Project
 
         public void TakeDamage()
         {
-            player.SetState(new DamageState(player, FaceRight));
+            player.SetState(new DamageState(player));
         }
 
         public void Attack()
         {
-            player.SetState(new PlayerMoveState(player, FaceRight));
+            player.SetState(new PlayerMoveState(player));
         }
 
         public void UseItem(IProjectile projectile)
         {
             player.projectile = projectile;
-            player.SetState(new PlayerItemState(player, FaceRight));
+            player.SetState(new PlayerItemState(player));
         }
 
         public void Update(GameTime gameTime)
         {
-            if (FaceRight == false)
+            if (!player.FaceRight)
             {
                 if (player.location.X > 0)
                 {
@@ -68,7 +63,8 @@ namespace Game_Project
                 {
                     BackToIdle();
                 }
-            } else
+            } 
+            else
             {
                 if (player.location.X < 800)
                 {

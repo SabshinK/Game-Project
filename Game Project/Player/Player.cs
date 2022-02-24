@@ -15,17 +15,21 @@ namespace Game_Project
         private int health;
         private string animationToCreate;
         public Vector2 location;
+
+        public bool FaceRight { get; private set; }
       
         // Constructor
         public Player()
         {
-            state = new IdleState(this, true);
+            state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
 
             location = new Vector2(800 / 2 - 48, 400 / 2 - 64);
         
             health = 3;
+
+            FaceRight = true;
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
@@ -34,8 +38,16 @@ namespace Game_Project
             state.BackToIdle();
         }
         
-        public void Move()
+        public void Move(bool faceRight)
         {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+            }
             state.Move();
         }
         
@@ -57,14 +69,8 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (sprite != null) {
-                sprite.Draw(spriteBatch, location);
-            }
-
-            if (projectile != null)
-            {
-                projectile.Draw(spriteBatch);
-            }
+            sprite?.Draw(spriteBatch, location);
+            projectile?.Draw(spriteBatch);
         }
         
         public void SetState(IPlayerState state)
@@ -80,15 +86,15 @@ namespace Game_Project
             switch(code)
             {
                 case 1:
-                    return new Arrow(location, state.FaceRight);
+                    return new Arrow(location, FaceRight);
                 case 2:
                     return new Bomb(location);
                 case 3:
-                    return new Boomerang(location, state.FaceRight);
+                    return new Boomerang(location, FaceRight);
                 case 4:
-                    return new Candle(location, state.FaceRight);
+                    return new Candle(location, FaceRight);
                 case 5 :
-                    return new SwordBeam(location, state.FaceRight);
+                    return new SwordBeam(location, FaceRight);
                 default:
                     return null;
             }

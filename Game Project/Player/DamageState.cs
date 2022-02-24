@@ -9,15 +9,13 @@ namespace Game_Project
     {
         private Player player;
         private float timeElapsed;
-        public bool FaceRight { get; set; }
 
-        public DamageState(Player manager, bool faceRight)
+        public DamageState(Player manager)
         {
             player = manager;
-            FaceRight = faceRight;
             timeElapsed = 0;
 
-            if (FaceRight)
+            if (player.FaceRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("damagedRight");
             }
@@ -58,7 +56,7 @@ namespace Game_Project
                 timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             } else
             {
-                player.SetState(new IdleState(player, FaceRight));
+                player.SetState(new IdleState(player));
             }
 
             if (player.projectile != null)

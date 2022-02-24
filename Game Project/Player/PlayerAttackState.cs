@@ -9,14 +9,12 @@ namespace Game_Project
     {
         private Player player;
         private float timeElapsed;
-        public bool FaceRight { get; set; }
 
-        public PlayerAttackState(Player player, bool faceRight)
+        public PlayerAttackState(Player player)
         {
             this.player = player;
-            FaceRight = faceRight;
 
-            if (FaceRight)
+            if (player.FaceRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("attackRight");
             }
@@ -28,7 +26,7 @@ namespace Game_Project
 
         public void BackToIdle()
         {
-            player.SetState(new IdleState(player, FaceRight));
+            player.SetState(new IdleState(player));
         }
 
         public void Move()
@@ -38,7 +36,7 @@ namespace Game_Project
 
         public void TakeDamage()
         {
-            player.SetState(new DamageState(player, FaceRight));
+            player.SetState(new DamageState(player));
         }
 
         public void Attack()
@@ -59,7 +57,7 @@ namespace Game_Project
             }
             else
             {
-                player.SetState(new IdleState(player, FaceRight));
+                player.SetState(new IdleState(player));
             }
 
             if (player.projectile != null)
