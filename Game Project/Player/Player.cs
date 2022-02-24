@@ -11,7 +11,6 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
-        public bool FaceRight { get; private set; }
       
         private int health;
         private string animationToCreate;
