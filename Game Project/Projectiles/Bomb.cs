@@ -18,14 +18,15 @@ namespace Game_Project
         {
             this.position = position;
             timer = 0f;
-            lifeSpan = 50f;
+            lifeSpan = 2f;
+            sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
         }
 
 
         public void Update(GameTime gameTime)
         {
             //get sprite for bomb that has not yet exploded and update timer
-            sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
+            //sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             //if bomb timer exceeds its life span, update sprite, reset timer
             if (timer >= lifeSpan)
