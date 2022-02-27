@@ -7,7 +7,7 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class StalfosEnemy : IEnemy
+    class StalfosEnemy : IEnemy : IUpdateable : IDrawable
     {
         Tuple<actions, direction> stateTuple;
         StalfosStateMachine stalfos;

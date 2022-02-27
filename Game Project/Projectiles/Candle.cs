@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class Candle : IProjectile
+    class Candle : IProjectile : IUpdateable : IDrawable
     {
         public Vector2 position;
         private ISprite sprite, fireSprite, despawnSprite;
