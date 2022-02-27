@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Player
+    public class Player : IDrawable
     {
         public IPlayerState state;
         public IProjectile projectile;

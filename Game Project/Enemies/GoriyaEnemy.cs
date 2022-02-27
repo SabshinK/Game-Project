@@ -7,7 +7,7 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class GoriyaEnemy : IEnemy
+    class GoriyaEnemy : IEnemy : IUpdateable : IDrawable
     {
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;

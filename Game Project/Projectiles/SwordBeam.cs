@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class SwordBeam : IProjectile
+    class SwordBeam : IProjectile : IUpdateable : IDrawable
     {
         private Vector2 position;
         private SpriteBatch spriteBatch;

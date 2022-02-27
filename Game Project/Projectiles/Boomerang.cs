@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class Boomerang : IProjectile
+    class Boomerang : IProjectile : IUpdateable : IDrawable
     {
         public Vector2 position;
         public Vector2 initialPosition;
