@@ -5,30 +5,36 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerItemState : IPlayerState
+    class PlayerItemState : IPlayerState : IUpdateable
     {
         private Player player;
         private float timeElapsed;
-        public bool FaceRight { get; set; }
-        private IProjectile projectile;
 
-        public PlayerItemState(Player player, bool faceRight, IProjectile projectile)
+        public PlayerItemState(Player player)
         {
             this.player = player;
-            FaceRight = faceRight;
-            if (FaceRight)
+            if (player.FaceRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("useItemRight");
             } else
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("useItemLeft");
             }
-            this.projectile = projectile;
         }
 
         public void BackToIdle()
         {
-            player.setState(new IdleState(player, FaceRight));
+            player.SetState(new IdleState(player));
+        }
+
+        public void Move()
+        {
+            // Can't move while using an item
+        }
+        
+        public void TakeDamage()
+        {
+            player.SetState(new DamageState(player));
         }
 
         public void Attack()
@@ -41,11 +47,6 @@ namespace Game_Project
             // Already using an item
         }
 
-        public void TakeDamage()
-        {
-            player.setState(new DamageState(player, FaceRight));
-        }
-
         public void Update(GameTime gameTime)
         {
             if (timeElapsed < 0.5)
@@ -54,8 +55,15 @@ namespace Game_Project
             }
             else
             {
-                player.setState(new IdleState(player, FaceRight));
+                player.SetState(new IdleState(player));
             }
+
+            if (player.projectile != null)
+            {
+                player.projectile.Update(gameTime);
+            }
+
+            player.sprite.Update();
         }
     }
 }

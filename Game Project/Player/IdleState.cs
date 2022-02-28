@@ -5,16 +5,14 @@ using System.Text;
 
 namespace Game_Project
 {
-    class IdleState : IPlayerState
+    class IdleState : IPlayerState : IUpdateable
     {
         private Player player;
-        public bool FaceRight { get; set; }
 
-        public IdleState(Player manager, bool faceright)
+        public IdleState(Player manager)
         {
             player = manager;
-            FaceRight = faceright;
-            if (FaceRight)
+            if (player.FaceRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             } else
@@ -28,24 +26,35 @@ namespace Game_Project
             // Already in the idle state
         }
 
+        public void Move()
+        {
+            player.SetState(new PlayerMoveState(player));
+        }
+
         public void TakeDamage()
         {
-            player.setState(new DamageState(player, FaceRight));
+            player.SetState(new DamageState(player));
         }
 
         public void Attack()
         {
-            player.setState(new PlayerAttackState(player, FaceRight));
+            player.SetState(new PlayerAttackState(player));
         }
 
         public void UseItem(IProjectile projectile)
         {
-            player.setState(new PlayerItemState(player, FaceRight, projectile));
+            player.projectile = projectile;
+            player.SetState(new PlayerItemState(player));
         }
         
         public void Update(GameTime gameTime)
         {
-            //Nothing to see here! Have a good day!
+            if (player.projectile != null)
+            {
+                player.projectile.Update(gameTime);
+            }
+
+            player.sprite.Update();
         }
     }
 }

@@ -6,28 +6,27 @@ using System.Text;
 
 namespace Game_Project
 {
-    class Bomb : IProjectile
+    class Bomb : IProjectile : IUpdateable : IDrawable
     {
         private Vector2 position;
         private ISprite sprite;
-        private SpriteBatch spriteBatch;
         private float timer;
         private float lifeSpan;
        
         //constructor
-        public Bomb(Vector2 position, SpriteBatch spriteBatch)
+        public Bomb(Vector2 position)
         {
             this.position = position;
-            this.spriteBatch = spriteBatch;
             timer = 0f;
-            lifeSpan = 50f;
+            lifeSpan = 2f;
+            sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
         }
 
 
         public void Update(GameTime gameTime)
         {
             //get sprite for bomb that has not yet exploded and update timer
-            sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
+            //sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             //if bomb timer exceeds its life span, update sprite, reset timer
             if (timer >= lifeSpan)
@@ -39,7 +38,7 @@ namespace Game_Project
 
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             //draw bomb
             if (sprite != null)

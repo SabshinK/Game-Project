@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class SwordBeam : IProjectile
+    class SwordBeam : IProjectile : IUpdateable : IDrawable
     {
         private Vector2 position;
         private SpriteBatch spriteBatch;
@@ -15,10 +15,9 @@ namespace Game_Project
         public bool userDirection;
 
         //constructor
-        public SwordBeam(Vector2 position, SpriteBatch spriteBatch, bool userDirection)
+        public SwordBeam(Vector2 position, bool userDirection)
         {
             this.position = position;
-            this.spriteBatch = spriteBatch;
             moveFactor = 16;
             this.userDirection = userDirection;
 
@@ -45,7 +44,7 @@ namespace Game_Project
 
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             //draw sprite
             if (sprite != null)
