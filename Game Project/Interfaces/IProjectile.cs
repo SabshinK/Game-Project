@@ -5,7 +5,6 @@ namespace Game_Project
 {
     public interface IProjectile
     {
-        public void Update(GameTime gameTime);
-        public void Draw(SpriteBatch spriteBatch);
+
     }
 }
