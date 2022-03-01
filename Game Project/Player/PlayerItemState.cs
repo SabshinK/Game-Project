@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerItemState : IPlayerState : IUpdateable
+    class PlayerItemState : IPlayerState
     {
         private Player player;
         private float timeElapsed;

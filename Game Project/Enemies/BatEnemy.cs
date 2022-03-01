@@ -7,7 +7,7 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class BatEnemy : IEnemy : IUpdateable : IDrawable
+    class BatEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         BatStateMachine bat;

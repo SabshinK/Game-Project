@@ -7,7 +7,7 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class GelEnemy : IEnemy : IUpdateable : IDrawable
+    class GelEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         GelStateMachine gel;

@@ -10,14 +10,14 @@ namespace Game_Project
     {
         private XmlReader reader;
 
-        public XmlParser()
+        public XmlParser(string fileName)
         {
             // load reader settings with XML Schema validation
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.Schemas.Add("urn:level-schema", "level.xsd");
             settings.ValidationType = ValidationType.Schema;
 
-            reader = XmlReader.Create("level.xml", settings);
+            reader = XmlReader.Create(fileName, settings);
         }
 
         public void Parse()

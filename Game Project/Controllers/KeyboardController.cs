@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Game_Project
 			controllerMappings.Add(key, command);
 		}
 
-		public void Update()
+		public void Update(GameTime gameTime)
 		{
 			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 
