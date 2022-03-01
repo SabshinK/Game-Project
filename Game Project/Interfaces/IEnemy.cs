@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Game_Project
 {
-    public interface IEnemy
+    public interface IEnemy : IUpdateable, IDrawable
     {
       //  public void Create(SpriteBatch spriteBatch, Vector2 vector);
         public void ChangeDirection();
@@ -11,6 +11,5 @@ namespace Game_Project
         public void Attack();
 
         public void TakeDamage();
-
     }
 }

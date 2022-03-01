@@ -7,7 +7,7 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class ZohEnemy : IEnemy : IUpdateable : IDrawable
+    class ZohEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         ZohStateMachine zoh;
