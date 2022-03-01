@@ -2,7 +2,7 @@
 
 namespace Game_Project
 {
-    public interface IPlayerState
+    public interface IPlayerState : IUpdateable
     {
         public void BackToIdle();
         

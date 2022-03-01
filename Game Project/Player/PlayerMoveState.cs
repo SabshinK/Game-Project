@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerMoveState : IPlayerState : IUpdateable
+    class PlayerMoveState : IPlayerState
     {
 
         private double velocity;

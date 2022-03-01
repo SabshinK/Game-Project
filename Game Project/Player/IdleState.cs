@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class IdleState : IPlayerState : IUpdateable
+    class IdleState : IPlayerState
     {
         private Player player;
 
