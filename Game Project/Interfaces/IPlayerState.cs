@@ -13,7 +13,5 @@ namespace Game_Project
         public void Attack();
 
         public void UseItem(IProjectile projectile);
-
-        public void Update(GameTime gameTime);
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class Bomb : IProjectile
+    class Bomb : IProjectile : IUpdateable : IDrawable
     {
         private Vector2 position;
         private ISprite sprite;

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class Arrow : IProjectile
+    class Arrow : IProjectile : IUpdateable : IDrawable
     {
         public Vector2 position;
         private float timer;
