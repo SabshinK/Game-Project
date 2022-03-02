@@ -7,7 +7,7 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class DragonEnemy : IEnemy : IUpdateable : IDrawable
+    class DragonEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         DragonStateMachine dragon;
