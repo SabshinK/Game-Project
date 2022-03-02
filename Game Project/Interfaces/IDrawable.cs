@@ -5,6 +5,6 @@ namespace Game_Project
 {
     public interface IDrawable
     {
-        public void Draw(SpriteBatch spriteBatch, Vector2 location); // Draw function for creating any animations.
+        public void Draw(SpriteBatch spriteBatch); // Draw function for creating any animations.
     }
 }

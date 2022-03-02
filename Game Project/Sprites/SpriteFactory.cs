@@ -15,7 +15,7 @@ namespace Game_Project
         public static SpriteFactory Instance => instance;
 
         // A Dictionary that contains a string key and a tuple containing the name of the texture, an array of the frame rectangles,
-        // and the animation speed
+        // and the scale
         private Dictionary<string, Tuple<string, Rectangle[], int>> frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
 
         public SpriteFactory()
@@ -31,10 +31,11 @@ namespace Game_Project
         /// <returns>A GenericSprite implementation</returns>
         public ISprite CreateSprite(string animationName)
         {
-            return new GenericSprite(Texture2DStorage.GetTexture(frames[animationName].Item1), frames[animationName].Item2, 
-                frames[animationName].Item3);
+            return new GenericSprite(new Tuple<Texture2D, Rectangle[], int, int>(Texture2DStorage.GetTexture(frames[animationName].Item1), 
+                frames[animationName].Item2, frames[animationName].Item3, 3));
         }
-        
+
+
         // All this will be changed when data starts being loaded from XML files, just a temporary way of loading things in
         public void LoadDictionary()
         {
@@ -133,5 +134,8 @@ namespace Game_Project
             frames.Add("triforce", new Tuple<string, Rectangle[], int>("TempItemsAndCollectables", new Rectangle[] { new Rectangle(272, 0, 16, 16), new Rectangle(272, 16, 16, 16) }, 2));
 
         }
+
+        
+
     }
 }

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="C:/Users/sebas/source/repos/Game Project"
+		   elementFormDefault="qualified">
+	<xs:element name="XmlContent">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Asset" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Item" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ObjectType" type="xs:string"/>
+										<xs:element name="ObjectName" type="xs:string"/>
+										<xs:element name="Location" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
