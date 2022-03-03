@@ -69,7 +69,7 @@ namespace Game_Project
 
             player.state.Update(gameTime);
             enemies.Update(gameTime);
-            keyboard.Update();
+            keyboard.Update(gameTime);
 
             base.Update(gameTime);
         }
