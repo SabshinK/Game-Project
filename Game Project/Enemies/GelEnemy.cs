@@ -23,14 +23,6 @@ namespace Game_Project
             gel = new GelStateMachine();
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
         }
-
-      //  public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-          //  gel = new GelStateMachine();
-            //spriteBatch = gameSpriteBatch;
-            //locationVector = vector; //game will state where it wants the enemy when it is created
-           // gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
-        //}
         public void ChangeDirection()
         {
             gel.ChangeDirection();
