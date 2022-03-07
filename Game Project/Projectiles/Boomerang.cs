@@ -14,7 +14,7 @@ namespace Game_Project
         private int moveFactor;
         public ISprite sprite, movingSprite, despawnSprite;
         private bool userDirection;
-        private bool finished;
+        public bool finished;
 
         //constructor
         public Boomerang(Vector2 position, bool userDirection)

@@ -21,6 +21,7 @@ namespace Game_Project
 
         public void ChangeDirection()
         {
+            goriyaAction = actions.moving;
             goriyaDirection = directionsArr[random.Next(4)];
         }
 
