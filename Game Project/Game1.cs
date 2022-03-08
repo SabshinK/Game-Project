@@ -1,21 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Game_Project.Sprites;
-using Game_Project.Enemies;
-using Game_Project.Interfaces;
 
 namespace Game_Project
 {
+    // Names: Sebastian King, Rachel Watters, AJ Waizmann, Maria Stein, Aadya Jain, and Anooj Deshpande
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private SpriteBatch spriteBatch;
 
         // Interfaces to use
         public IController keyboard;
         public Player player;
-        public BatEnemy batEnemy;
         public TileManager tiles;
         public EnemyManager enemies;
         public ItemManager items;
@@ -36,10 +33,13 @@ namespace Game_Project
         protected override void Initialize()
         {
             //GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-
+            
+            Texture2DStorage.LoadContent(Content);
+            SpriteFactory.Instance.LoadDictionary();
+            LevelLoader.Instance.LoadLevel();
+            
             keyboard = new KeyboardController();
-            player = new Player(spriteBatch);
-            batEnemy = new BatEnemy();
+            player = new Player();
             tiles = new TileManager();
             enemies = new EnemyManager();
             items = new ItemManager();
@@ -53,10 +53,8 @@ namespace Game_Project
         /// </summary>
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Texture2DStorage.LoadContent(Content);
-
-            keyboard.LoadContent(this);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            keyboard.LoadContent(this, player, tiles, enemies, items);
         }
 
         /// <summary>
@@ -69,11 +67,9 @@ namespace Game_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.Update();
-            keyboard.Update();
-            batEnemy.bat.Update();
-
-            mrGoriya.Update();
+            player.state.Update(gameTime);
+            enemies.Update(gameTime);
+            keyboard.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -85,6 +81,11 @@ namespace Game_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            player.Draw(spriteBatch);
+            tiles.Draw(spriteBatch);
+            enemies.Draw(spriteBatch);
+            items.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

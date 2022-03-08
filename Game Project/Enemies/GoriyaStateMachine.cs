@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Game_Project.Interfaces;
-using static Game_Project.Interfaces.IEnemyStateMachine;
+using static Game_Project.IEnemyStateMachine;
 
-namespace Game_Project.Enemies
+namespace Game_Project
 
 //MAKE THIS INTO A STATE MACHINE BASED ON THE GOOMBA STATE MACHINE ON KIRBY'S SITE
 {
-    class GoriyaStateMachine : Game_Project.Interfaces.IEnemyStateMachine
+    class GoriyaStateMachine : IEnemyStateMachine
     {
         private int health = 25;
 
@@ -22,6 +21,7 @@ namespace Game_Project.Enemies
 
         public void ChangeDirection()
         {
+            goriyaAction = actions.moving;
             goriyaDirection = directionsArr[random.Next(4)];
         }
 
