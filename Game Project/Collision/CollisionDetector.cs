@@ -19,7 +19,7 @@ namespace Game_Project
             */
         }
         
-        public void Collide(Player Player, ICollideable Block, ICollideable CollideDirection) {
+        public void Collide() {
             //collisionResolution = new CollisionResolution(Player, Block, CollideDirection);
         }       
     }

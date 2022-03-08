@@ -8,15 +8,14 @@ namespace Game_Project
     class PlayerMoveState : IPlayerState
     {
 
-        private double velocity;
-        private const int acceleration = 2;
-
         private Player player;
+        private int velocity;
 
         public PlayerMoveState(Player manager)
         {
             player = manager;
-            velocity = 10;
+
+            velocity = (int)player.physics.horizontalVelocity;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
@@ -76,10 +75,6 @@ namespace Game_Project
                 }
             }
 
-            //if (velocity <= 6)
-            //{
-            //    velocity += acceleration * gameTime.ElapsedGameTime.TotalMilliseconds;
-            //}
             if (player.projectile != null)
             {
                 player.projectile.Update(gameTime);

@@ -11,13 +11,16 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+
+        public Physics physics;
       
         private int health;
         private string animationToCreate;
         public Vector2 location;
 
         public bool FaceRight { get; private set; }
-      
+        public bool Falling { get; private set; }
+
         // Constructor
         public Player()
         {
@@ -30,6 +33,9 @@ namespace Game_Project
             health = 3;
 
             FaceRight = true;
+            Falling = false;
+
+            physics = new Physics(Falling);
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
