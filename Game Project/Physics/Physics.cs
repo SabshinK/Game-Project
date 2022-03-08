@@ -7,18 +7,18 @@ namespace Game_Project
 {
     public class Physics
     {
-        private double horizontalVelocity;
-        private double verticalVelocity;
+        public double horizontalVelocity;
+        public double verticalVelocity;
 
         private const double horizontalAcceleration = 2;
         private const double verticalAcceleration = 9.8;
 
-        private double horizontalDistance;
-        private double verticalDistance;
+        public double horizontalDistance;
+        public double verticalDistance;
 
         private double timePassed;
 
-        private bool falling;
+        public bool falling;
         private GameTime gameTime;
 
         public Physics(bool Falling)
@@ -34,8 +34,9 @@ namespace Game_Project
             falling = Falling;
         }
 
-        public int HorizontalChangeVelocity()
+        public void HorizontalChange()
         {
+            int previousVelocity = (int)horizontalVelocity;
 
             if ((int)horizontalVelocity == 0)
             {
@@ -44,16 +45,22 @@ namespace Game_Project
 
             timePassed = gameTime.ElapsedGameTime.TotalSeconds - timePassed;
 
-            if (horizontalVelocity < 10)
+            if (horizontalVelocity < 10) //terminal velocity is 10
             {
                 horizontalVelocity += horizontalAcceleration * timePassed;
-            }
+                horizontalDistance += ((previousVelocity + (int)horizontalVelocity) / 2) * timePassed;
 
-            return (int)horizontalVelocity;
+            } else if (horizontalVelocity == 10) //what happens when move is released and the player slows down
+            {
+                horizontalVelocity -= horizontalAcceleration * timePassed;
+                horizontalDistance += ((previousVelocity + (int)horizontalVelocity) / 2) * timePassed; 
+                //the distance will always increase for horizontal movement. it will increase by less and less when slowing down.
+            }
         }
 
-        public int VerticalChangeVelocity()
+        public void VerticalChange()
         {
+            int previousVelocity = (int)verticalVelocity;
 
             if ((int)verticalVelocity == 0 && timePassed > 0)
             {
@@ -66,23 +73,14 @@ namespace Game_Project
             if (!falling)
             {
                 verticalVelocity -= verticalAcceleration * timePassed;
+                verticalDistance += ((previousVelocity + (int)verticalVelocity) / 2) * timePassed;
             }
             else
             {
                 verticalVelocity += verticalAcceleration * timePassed;
+                verticalDistance -= ((previousVelocity + (int)verticalVelocity) / 2) * timePassed;
             }
 
-            return (int)verticalVelocity;
-        }
-
-        public int HorizontalChangePosition()
-        {
-            return (int)horizontalDistance;
-        }
-
-        public int VerticalChangePosition()
-        {
-            return (int)verticalDistance;
         }
     }
 }

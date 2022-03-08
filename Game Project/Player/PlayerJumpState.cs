@@ -25,7 +25,7 @@ namespace Game_Project
 
         public void Move()
         {
-            // Already moving
+            player.SetState(new PlayerMoveState(player));
         }
 
         public void TakeDamage()
@@ -34,7 +34,7 @@ namespace Game_Project
         }
         public void Attack()
         {
-            player.SetState(new PlayerMoveState(player));
+            player.SetState(new PlayerAttackState(player));
         }
 
         public void UseItem(IProjectile projectile)
@@ -45,7 +45,40 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            
+            player.physics.VerticalChange();
+
+            //I left the FaceRight condition because ideally, jumps will also move horizontally.
+            //Right now, the if and else conditions have the same block of code.
+            if (!player.FaceRight)
+            {
+                if (player.location.Y < 480 && !player.physics.falling)
+                {
+                    player.location.Y += (int)player.physics.verticalDistance;
+                }
+                else if (player.location.Y > 0 && player.physics.falling)
+                {
+                    player.location.Y += (int)player.physics.verticalDistance;
+                } else
+                {
+                    BackToIdle();
+                }
+            }
+            else
+            {
+                if (player.location.Y < 480 && !player.physics.falling)
+                {
+                    player.location.Y += (int)player.physics.verticalDistance;
+                }
+                else if (player.location.Y > 0 && player.physics.falling)
+                {
+                    player.location.Y -= (int)player.physics.verticalDistance;
+                }
+                else
+                {
+                    BackToIdle();
+                }
+            }
+
             if (player.projectile != null)
             {
                 player.projectile.Update(gameTime);

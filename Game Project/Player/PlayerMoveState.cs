@@ -15,7 +15,7 @@ namespace Game_Project
         {
             player = manager;
 
-            velocity = (int)player.physics.horizontalVelocity;
+            velocity = 0;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
@@ -41,7 +41,7 @@ namespace Game_Project
 
         public void Attack()
         {
-            player.SetState(new PlayerMoveState(player));
+            player.SetState(new PlayerAttackState(player));
         }
 
         public void UseItem(IProjectile projectile)
@@ -52,11 +52,13 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            player.physics.HorizontalChange();
+
             if (!player.FaceRight)
             {
                 if (player.location.X > 0)
                 {
-                    player.location.X -= (float)velocity;
+                    player.location.X -= (int)player.physics.horizontalDistance;
                 }
                 else
                 {
@@ -67,7 +69,7 @@ namespace Game_Project
             {
                 if (player.location.X < 800)
                 {
-                    player.location.X += (float)velocity;
+                    player.location.X += (int)player.physics.horizontalDistance;
                 }
                 else
                 {
