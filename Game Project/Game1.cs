@@ -36,7 +36,7 @@ namespace Game_Project
             
             Texture2DStorage.LoadContent(Content);
             SpriteFactory.Instance.LoadDictionary();
-
+            LevelLoader.Instance.LoadLevel();
             
             keyboard = new KeyboardController();
             player = new Player();

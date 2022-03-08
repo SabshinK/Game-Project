@@ -1,26 +1,46 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<xs:schema xmlns:xs="C:/Users/sebas/source/repos/Game Project"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
-	<xs:element name="XmlContent">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Asset" maxOccurs="unbounded">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Item" maxOccurs="unbounded">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="ObjectType" type="xs:string"/>
-										<xs:element name="ObjectName" type="xs:string"/>
-										<xs:element name="Location" type="xs:string"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:element name="Asset">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="Item" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:choice>
+								<xs:group ref="ObjectData"/>
+								<xs:group ref="KeyboardMappings"/>
+								<xs:group ref="AnimationData"/>
+							</xs:choice>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="Type" type="xs:string"/>
+			</xs:complexType>
+		</xs:element>
+	
+	<xs:group name="ObjectData">
+		<xs:sequence>
+			<xs:element name="ObjectType" type="xs:string"/>
+			<xs:element name="X" type="xs:string"/>
+			<xs:element name="Y" type="xs:string"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="KeyboardMappings">
+		<xs:sequence>
+			<xs:element name="Key" type="xs:string"/>
+			<xs:element name="Command" type="xs:string"/>			
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="AnimationData">
+		<xs:sequence>
+			<xs:element name="AnimationName" type="xs:string"/>
+			<xs:element name="Texture" type="xs:string"/>
+			<xs:element name="Speed" type="xs:string"/>
+			<xs:element name="Scale" type="xs:string"/>
+			<xs:element name="Rectangle" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
 </xs:schema>
