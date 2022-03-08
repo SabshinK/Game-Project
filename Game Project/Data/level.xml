@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0"?>
 
-<XmlContent>
-	<Asset Type="MyDataTypes.LevelObjectData[]">
-		<Item>
-			<ObjectType></ObjectType>
-			<ObjectName></ObjectName>
-			<Location></Location>
-		</Item>
-	</Asset>
-</XmlContent>
+<Asset Type="ObjectData">
+	<Item>
+		<ObjectType>Player</ObjectType>
+		<X>0</X>
+		<Y>16</Y>
+	</Item>
+	<Item>
+		<AnimationName>gelGeneric</AnimationName>
+		<Texture>TempDungeonEnemies</Texture>
+		<Speed>
+		<Scale>
+		<Rectangle>1 1 8 16</Rectangle>
+		<Rectangle>10 1 8 16</Rectangle>
+	</Item>
+</Asset>

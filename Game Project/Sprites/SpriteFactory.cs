@@ -15,12 +15,12 @@ namespace Game_Project
         public static SpriteFactory Instance => instance;
 
         // A Dictionary that contains a string key and a tuple containing the name of the texture, an array of the frame rectangles,
-        // and the scale
-        private Dictionary<string, Tuple<string, Rectangle[], int>> frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
+        // the scale, and the animation speed
+        private Dictionary<string, Tuple<string, Rectangle[], int, int>> frames = new Dictionary<string, Tuple<string, Rectangle[], int, int>>();
 
         public SpriteFactory()
         {
-            frames = new Dictionary<string, Tuple<string, Rectangle[], int>>();
+            frames = new Dictionary<string, Tuple<string, Rectangle[], int, int>>();
         }
 
         /// <summary>
@@ -32,9 +32,13 @@ namespace Game_Project
         public ISprite CreateSprite(string animationName)
         {
             return new GenericSprite(new Tuple<Texture2D, Rectangle[], int, int>(Texture2DStorage.GetTexture(frames[animationName].Item1), 
-                frames[animationName].Item2, frames[animationName].Item3, 3));
+                frames[animationName].Item2, frames[animationName].Item3, frames[animationName].Item4));
         }
 
+        public void RegisterAnimation(string name, Tuple<string, Rectangle[], int, int> data)
+        {
+            frames.Add(name, data);
+        }
 
         // All this will be changed when data starts being loaded from XML files, just a temporary way of loading things in
         public void LoadDictionary()

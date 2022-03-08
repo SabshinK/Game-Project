@@ -36,7 +36,7 @@ namespace Game_Project
             
             Texture2DStorage.LoadContent(Content);
             SpriteFactory.Instance.LoadDictionary();
-
+            LevelLoader.Instance.LoadLevel();
             
             keyboard = new KeyboardController();
             player = new Player();
@@ -69,7 +69,7 @@ namespace Game_Project
 
             player.state.Update(gameTime);
             enemies.Update(gameTime);
-            keyboard.Update();
+            keyboard.Update(gameTime);
 
             base.Update(gameTime);
         }
