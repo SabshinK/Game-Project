@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?> 
+
+<Asset Type="ObjectData">
+	<Item>
+		<ObjectType>Player</ObjectType>
+		<X>0</X>
+		<Y>0</Y>
+	</Item>
+	<Item>
+		<ObjectType>BatEnemy</ObjectType>
+		<X>200</X>
+		<Y>0</Y>
+	</Item>
+	<Item>
+		<ObjectType>Arrow</ObjectType>
+		<X>0</X>
+		<Y>200</Y>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>200</X>
+		<Y>200</Y>
+	</Item>
+</Asset>
