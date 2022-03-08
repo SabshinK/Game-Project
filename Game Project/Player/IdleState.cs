@@ -30,6 +30,10 @@ namespace Game_Project
         {
             player.SetState(new PlayerMoveState(player));
         }
+        public void Jump()
+        {
+            player.SetState(new PlayerJumpState(player));
+        }
 
         public void TakeDamage()
         {

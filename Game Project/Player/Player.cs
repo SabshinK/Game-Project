@@ -56,6 +56,19 @@ namespace Game_Project
             }
             state.Move();
         }
+
+        public void Jump(bool faceRight)
+        {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            }
+            state.Jump();
+        }
         
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
         public void DamageTaken()

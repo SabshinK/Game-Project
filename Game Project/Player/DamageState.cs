@@ -38,6 +38,10 @@ namespace Game_Project
         {
             // Can't move while being damaged
         }
+        public void Jump()
+        {
+            player.SetState(new PlayerJumpState(player));
+        }
 
         public void Attack()
         {

@@ -27,6 +27,10 @@ namespace Game_Project
         {
             player.SetState(new PlayerMoveState(player));
         }
+        public void Jump()
+        {
+            // Already in the jump state
+        }
 
         public void TakeDamage()
         {
