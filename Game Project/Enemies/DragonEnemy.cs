@@ -12,7 +12,6 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
-       // SpriteBatch spriteBatch;
         Vector2 locationVector;
         int lengthOfAction;
         Candle weapon;
@@ -27,15 +26,6 @@ namespace Game_Project
 
         }
 
-       // public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-        //    dragon = new BatStateMachine();
-        //    locationVector = vector;
-        //    spriteBatch = gameSpriteBatch;
-        //    waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
-        //    attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
-        //    dragonSprite = waitingSprite;
-        //}
         public void ChangeDirection()
         {
             dragon.ChangeDirection();

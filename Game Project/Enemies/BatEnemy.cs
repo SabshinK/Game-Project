@@ -12,7 +12,6 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         BatStateMachine bat;
         ISprite batSprite;
-       // SpriteBatch spriteBatch;
         Vector2 locationVector;
         int lengthOfAction;
         
@@ -23,13 +22,6 @@ namespace Game_Project
             bat = new BatStateMachine();
             batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
         }
-        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-          //  bat = new BatStateMachine();
-           // locationVector = vector;
-            //spriteBatch = gameSpriteBatch;
-            //batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
-        //}
         public void ChangeDirection()
         {
             bat.ChangeDirection();
