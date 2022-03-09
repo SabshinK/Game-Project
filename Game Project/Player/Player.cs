@@ -11,13 +11,16 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+
+        public Physics physics;
       
         private int health;
         private string animationToCreate;
         public Vector2 location;
 
         public bool FaceRight { get; private set; }
-      
+        public bool Falling { get; private set; }
+
         // Constructor
         public Player()
         {
@@ -30,6 +33,9 @@ namespace Game_Project
             health = 3;
 
             FaceRight = true;
+            Falling = false;
+
+            physics = new Physics(Falling);
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
@@ -49,6 +55,19 @@ namespace Game_Project
                     sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
             }
             state.Move();
+        }
+
+        public void Jump(bool faceRight)
+        {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            }
+            state.Jump();
         }
         
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.

@@ -8,15 +8,14 @@ namespace Game_Project
     class PlayerMoveState : IPlayerState
     {
 
-        private double velocity;
-        private const int acceleration = 2;
-
         private Player player;
+        private int velocity;
 
         public PlayerMoveState(Player manager)
         {
             player = manager;
-            velocity = 10;
+
+            velocity = 0;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
@@ -34,6 +33,10 @@ namespace Game_Project
         {
             // Already moving
         }
+        public void Jump()
+        {
+            player.SetState(new PlayerJumpState(player));
+        }
 
         public void TakeDamage()
         {
@@ -42,7 +45,7 @@ namespace Game_Project
 
         public void Attack()
         {
-            player.SetState(new PlayerMoveState(player));
+            player.SetState(new PlayerAttackState(player));
         }
 
         public void UseItem(IProjectile projectile)
@@ -53,11 +56,13 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            player.physics.HorizontalChange();
+
             if (!player.FaceRight)
             {
                 if (player.location.X > 0)
                 {
-                    player.location.X -= (float)velocity;
+                    player.location.X -= (int)player.physics.horizontalDistance;
                 }
                 else
                 {
@@ -68,7 +73,7 @@ namespace Game_Project
             {
                 if (player.location.X < 800)
                 {
-                    player.location.X += (float)velocity;
+                    player.location.X += (int)player.physics.horizontalDistance;
                 }
                 else
                 {
@@ -76,10 +81,6 @@ namespace Game_Project
                 }
             }
 
-            //if (velocity <= 6)
-            //{
-            //    velocity += acceleration * gameTime.ElapsedGameTime.TotalMilliseconds;
-            //}
             if (player.projectile != null)
             {
                 player.projectile.Update(gameTime);

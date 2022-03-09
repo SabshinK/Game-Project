@@ -31,7 +31,11 @@ namespace Game_Project
         {
             // Can't move while using an item
         }
-        
+        public void Jump()
+        {
+            player.SetState(new PlayerJumpState(player));
+        }
+
         public void TakeDamage()
         {
             player.SetState(new DamageState(player));
