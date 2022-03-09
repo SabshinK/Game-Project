@@ -60,7 +60,7 @@ namespace Game_Project
 
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Left), new Tuple<ICommand, ICommand>(new TakeDamageCommand(player), null));
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Right), new Tuple<ICommand, ICommand>(new TakeDamageCommand(player), null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Top), new Tuple<ICommand, ICommand>(new TakeDamageCommand(player), new StalfosTakeDamageCommand()>);
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Top), new Tuple<ICommand, ICommand>(new TakeDamageCommand(player), new StalfosTakeDamageCommand()));
 
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Left), new Tuple<ICommand, ICommand>(new TakeDamageCommand(player), null));
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Right), new Tuple<ICommand, ICommand>(new TakeDamageCommand(player), null));
