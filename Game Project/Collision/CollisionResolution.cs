@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class CollisionHandler : ICollideable
+    class CollisionResolution : ICollideable
     {
         private ICollideable collideDirection;
         private ICollideable block;
@@ -14,7 +14,7 @@ namespace Game_Project
 
         private Dictionary<Tuple<Type, Type, ICollideable>, Tuple<ICommand, ICommand>> collisionDictionary;
 
-        public CollisionHandler(Player Player, ICollideable Block, ICollideable CollideDirection)
+        public CollisionResolution(Player Player, ICollideable Block, ICollideable CollideDirection)
         {
             collideDirection = CollideDirection;
             player = Player;
