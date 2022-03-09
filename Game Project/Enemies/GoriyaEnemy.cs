@@ -12,7 +12,6 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
-        //SpriteBatch spriteBatch;
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         Boomerang weapon;
@@ -25,14 +24,6 @@ namespace Game_Project
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
             currentGoriyaSprite = goriyaSpriteRight;
         }
-        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-        //    goriya = new GoriyaStateMachine();
-        //    spriteBatch = gameSpriteBatch;
-        //    locationVector = vector; //game will state where it wants the enemy when it is created
-        //    goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
-        //    goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
-        //}
         public void ChangeDirection()
         {
             goriya.ChangeDirection();
@@ -61,11 +52,23 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > new Random().Next(100))
+            if(weapon != null && !weapon.finished)
             {
-                Attack();
-                ChangeDirection();
-                lengthOfAction = 0;
+                weapon.Update(gameTime);
+            }
+            else
+            {
+                int random = new Random().Next(200);
+                if(lengthOfAction > random)
+                {
+                    Attack();
+                    lengthOfAction = 0;
+                }
+                else if(lengthOfAction > random - 50)
+                {
+                    ChangeDirection();
+                    lengthOfAction = 0;
+                }
             }
 
             stateTuple = goriya.getState();
@@ -81,7 +84,7 @@ namespace Game_Project
                     locationVector.X--;
                 }
             }
-            else if (stateTuple.Item1.Equals(actions.attacking)){
+            else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0){
                 if (stateTuple.Item1.Equals(direction.right))
                 {
                     currentGoriyaSprite = goriyaSpriteRight;
@@ -92,19 +95,10 @@ namespace Game_Project
                     currentGoriyaSprite = goriyaSpriteLeft;
                     weapon = new Boomerang(locationVector, false);
                 }
-                //for(int i = 0; i < 25; i++)
-                //{
-                //    weapon.Update(gameTime);
-                //}
                 
             }
             currentGoriyaSprite.Update();
             lengthOfAction++;
-
-            if (weapon != null)
-            {
-                weapon.Update(gameTime);
-            }
         }
 
 

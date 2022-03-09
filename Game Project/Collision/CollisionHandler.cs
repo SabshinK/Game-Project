@@ -9,6 +9,7 @@ namespace Game_Project
     {
         private ICollideable collideDirection;
         private ICollideable block;
+        
         private Player player;
 
         private Dictionary<Tuple<Type, Type, ICollideable>, Tuple<ICommand, ICommand>> collisionDictionary;
