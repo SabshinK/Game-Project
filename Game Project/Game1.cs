@@ -35,7 +35,7 @@ namespace Game_Project
             //GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             
             Texture2DStorage.LoadContent(Content);
-            SpriteFactory.Instance.LoadDictionary();
+            //SpriteFactory.Instance.LoadDictionary();
             LevelLoader.Instance.LoadLevel();
             
             keyboard = new KeyboardController();

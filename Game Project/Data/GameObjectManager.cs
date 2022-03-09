@@ -41,7 +41,7 @@ namespace Game_Project
 
 
         //Very rough draft of this methodd
-        public void registerObject(Object T)
+        public void RegisterObject(Object T)
         {
             if (T is IEnemy) enemyList.Add((IEnemy)T);
             else if (T is IProjectile) projectileList.Add((IProjectile)T);
