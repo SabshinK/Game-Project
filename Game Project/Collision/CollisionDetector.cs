@@ -7,7 +7,7 @@ namespace Game_Project
 {
     class CollisionDetector : ICollideable, IUpdateable
     {
-        CollisionHandler collisionResolution;
+        CollisionResolution collisionResolution;
         public CollisionDetector() {
             
         }
