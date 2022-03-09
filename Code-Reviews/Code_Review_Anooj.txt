@@ -1,14 +1,3 @@
-Readability-
-Author of the code review: Anooj Deshpande
-Date of the code review: 19 February 2022
-Sprint number: Sprint 2
-Name of the .cs file being reviewed: IdleState.cs
-Author of the .cs file being reviewed: Rachel Watters
-Number of minutes taken to complete the review: 5 minutes
-Specific comments on what is readable and what is not:
--Code is very clean and precise
--Short lines(one lines) of code for each function
--Maybe should add comments describing functions and variables, but function names seem descriptive enough
 
 Code Quality-
 Author of the code review: Anooj Deshpande
