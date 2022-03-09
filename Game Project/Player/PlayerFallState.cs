@@ -1,37 +1,31 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Game_Project
 {
-    class PlayerMoveState : IPlayerState
+    class PlayerFallState : IPlayerState
     {
-
-        private Player player;
-        private int velocity;
-
-        public PlayerMoveState(Player manager)
+        Player player;
+        public PlayerFallState(Player manager)
         {
             player = manager;
 
-            velocity = 0;
-
-            // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+                player.sprite = SpriteFactory.Instance.CreateSprite("fallRight");
             else
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+                player.sprite = SpriteFactory.Instance.CreateSprite("fallLeft");
         }
 
-        public void BackToIdle() 
+        public void BackToIdle()
         {
             player.SetState(new IdleState(player));
         }
 
         public void Move()
         {
-            // Already moving
+            player.SetState(new PlayerMoveState(player));
         }
         public void Jump()
         {
@@ -40,14 +34,13 @@ namespace Game_Project
 
         public void Fall()
         {
-            player.SetState(new PlayerFallState(player));
+            //already falling
         }
 
         public void TakeDamage()
         {
             player.SetState(new DamageState(player));
         }
-
         public void Attack()
         {
             player.SetState(new PlayerAttackState(player));
@@ -61,24 +54,25 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            player.physics.HorizontalChange();
+            player.physics.VerticalChange(true);
 
+            //I left the FaceRight condition because ideally, jumps will also move horizontally.
+            //Right now, the if and else conditions have the same block of code.
             if (!player.FaceRight)
             {
-                if (player.location.X > 0)
+                if (player.location.Y > 0)
                 {
-                    player.location.X -= (int)player.physics.horizontalDistance;
-                }
-                else
+                    player.location.Y -= (int)player.physics.verticalDistance;
+                } else
                 {
                     BackToIdle();
                 }
-            } 
+            }
             else
             {
-                if (player.location.X < 800)
+                if (player.location.Y > 0)
                 {
-                    player.location.X += (int)player.physics.horizontalDistance;
+                    player.location.Y -= (int)player.physics.verticalDistance;
                 }
                 else
                 {
@@ -93,5 +87,6 @@ namespace Game_Project
 
             player.sprite.Update();
         }
+
     }
 }
