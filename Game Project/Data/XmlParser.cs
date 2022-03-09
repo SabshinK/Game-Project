@@ -9,7 +9,6 @@ namespace Game_Project
 {
     class XmlParser
     {
-        private XmlReader reader;
         private XmlReaderSettings settings;
         private string fileName;
 
@@ -18,12 +17,10 @@ namespace Game_Project
             // load reader settings with XML Schema validation
             settings = new XmlReaderSettings();
             // change so that full path name isn't necessary
-            settings.Schemas.Add("urn:level-schema", @"Data/level.xsd");
+            settings.Schemas.Add("urn:level-schema", Path.GetFullPath(@"..\..\..\..\Game Project\Data\level.xsd"));
             settings.ValidationType = ValidationType.Schema;
 
             this.fileName = fileName;
-
-            //reader = XmlReader.Create(fileName, settings);
         }
 
         public Tuple<string, List<List<string>>> ParseAsset()
@@ -35,7 +32,7 @@ namespace Game_Project
             using (XmlReader reader = XmlReader.Create(fileName, settings))
             {
                 // Jump to asset, store type for LevelLoader
-                ReadToFollowing("Asset");
+                ReadToFollowing(reader, "Asset");
                 type = reader[0];
 
                 while (reader.Read())
@@ -84,7 +81,7 @@ namespace Game_Project
         /// Reads content until the XmlNodeType with the given name is found
         /// </summary>
         /// <param name="element"></param>
-        private void ReadToFollowing(string element)
+        private void ReadToFollowing(XmlReader reader, string element)
         {
             while (!reader.Name.Equals(element))
             {
