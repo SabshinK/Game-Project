@@ -40,7 +40,11 @@ namespace Game_Project
         }
         public void Jump()
         {
-            player.SetState(new PlayerJumpState(player));
+            // Can't jump while being damaged
+        }
+        public void Fall()
+        {
+            // Can't fall while being damaged
         }
 
         public void Attack()
