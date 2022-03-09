@@ -14,13 +14,15 @@ namespace Game_Project
         private int currentFrame;
         private int animationSpeed;
         private int frameCount;
+        private int scale;
 
-        public GenericSprite(Texture2D spriteSheet, Rectangle[] frames, int animationSpeed)
+        public GenericSprite(Tuple<Texture2D, Rectangle[], int, int> spriteData)
         {
-            this.spriteSheet = spriteSheet;
-            this.frames = frames;
+            this.spriteSheet = spriteData.Item1;
+            this.frames = spriteData.Item2;
+            this.scale = spriteData.Item3;
+            this.animationSpeed = spriteData.Item4;
             currentFrame = 0;
-            this.animationSpeed = animationSpeed;
         }
 
         // Count frames
@@ -37,10 +39,10 @@ namespace Game_Project
         // Display the current frame
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, frames[currentFrame].Width, 
-                frames[currentFrame].Height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, frames[currentFrame].Width * scale, 
+                frames[currentFrame].Height * scale);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             spriteBatch.Draw(spriteSheet, destinationRectangle, frames[currentFrame], Color.White);
             spriteBatch.End();
         }

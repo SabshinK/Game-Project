@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -20,31 +21,45 @@ namespace Game_Project
 			controllerMappings.Add(key, command);
 		}
 
-		public void Update()
+		public void Update(GameTime gameTime)
 		{
 			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 
 			foreach (Keys key in pressedKeys)
 			{
 				// Need to check if the key is valid first
-				if (controllerMappings.ContainsKey(key))
+				if (controllerMappings.ContainsKey(key) /*&& key != Keys.A && key != Keys.D*/)
 				{
 					controllerMappings[key].Execute();
 				}
 			}
 
-			if(!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-				controllerMappings[Keys.None].Execute();
-            }
+            //if (Keyboard.GetState().IsKeyDown(Keys.A))
+            //{
+            //    controllerMappings[Keys.A].Execute();
+            //}
+            //else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            //{
+            //    controllerMappings[Keys.D].Execute();
+            //}
+            //else
+            //{
+            //    controllerMappings[Keys.None].Execute();
+            //}
 
-		}
+			// This statement translates to NOT XOR because we want either both keys or none
+            if (!(Keyboard.GetState().IsKeyDown(Keys.A) ^ Keyboard.GetState().IsKeyDown(Keys.D)))
+            {
+                controllerMappings[Keys.None].Execute();
+            }
+        }
 
 		public void LoadContent(Game1 game, Player player, TileManager tiles, EnemyManager enemies, ItemManager items)
 		{
 			RegisterCommand(Keys.None, new IdleCommand(player));
 			RegisterCommand(Keys.Q, new QuitCommand(game));
 			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
+			RegisterCommand(Keys.W, new PlayerJumpCommand(player));
 			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player)); 
 			RegisterCommand(Keys.Z, new AttackCommand(player));
 			RegisterCommand(Keys.N, new AttackCommand(player));
@@ -54,11 +69,11 @@ namespace Game_Project
 			RegisterCommand(Keys.P, new NextEnemyCommand(enemies));
 			RegisterCommand(Keys.U, new PreviousItemCommand(items));
 			RegisterCommand(Keys.I, new NextItemCommand(items));
-			RegisterCommand(Keys.D1, new UseItemCommand(player, player.CreateProjectile(1)));
-			RegisterCommand(Keys.D2, new UseItemCommand(player, player.CreateProjectile(2)));
-			RegisterCommand(Keys.D3, new UseItemCommand(player, player.CreateProjectile(3)));
-			RegisterCommand(Keys.D4, new UseItemCommand(player, player.CreateProjectile(4)));
-			RegisterCommand(Keys.D5, new UseItemCommand(player, player.CreateProjectile(5)));
+			RegisterCommand(Keys.D1, new UseItemCommand(player, 1));
+			RegisterCommand(Keys.D2, new UseItemCommand(player, 2));
+			RegisterCommand(Keys.D3, new UseItemCommand(player, 3));
+			RegisterCommand(Keys.D4, new UseItemCommand(player, 4));
+			RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
 			RegisterCommand(Keys.E, new TakeDamageCommand(player));
 		}
 	}

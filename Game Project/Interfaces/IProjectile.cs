@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Game_Project
 {
-    public interface IProjectile
+    public interface IProjectile : IUpdateable, IDrawable
     {
-        public void Update(GameTime gameTime);
-        public void Draw();
+        // There are no projectile specific methods currently
     }
 }

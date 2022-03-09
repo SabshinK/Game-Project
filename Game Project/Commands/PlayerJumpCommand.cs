@@ -4,19 +4,18 @@ using System.Text;
 
 namespace Game_Project
 {
-    class UseItemCommand : ICommand
+    class PlayerJumpCommand : ICommand
     {
         private Player player;
-        private int code;
 
-        public UseItemCommand(Player manager, int code)
+        public PlayerJumpCommand(Player manager)
         {
             player = manager;
-            this.code = code;
         }
+
         public void Execute()
         {
-            player.UseItem(code);
+            player.Jump(false);
         }
     }
 }

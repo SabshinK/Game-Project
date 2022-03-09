@@ -25,11 +25,7 @@ namespace Game_Project
       
         public void NextTile()
         {
-            if (tileNumber == (lengthOfList - 1)) {
-                tileNumber = 0;
-            } else {
-                tileNumber++;
-            }
+            tileNumber = (tileNumber + 1) % lengthOfList;
             sprite = tileList[tileNumber];
         }
       
@@ -39,7 +35,11 @@ namespace Game_Project
                 tileNumber = (lengthOfList - 1);
             } else {
                 tileNumber--;
-            }
+                if(tileNumber < 0)
+                {
+                    tileNumber = lengthOfList;
+                }
+            } 
             sprite = tileList[tileNumber];
         }
         

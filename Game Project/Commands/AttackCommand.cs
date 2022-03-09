@@ -13,7 +13,7 @@ namespace Game_Project
         }
         public void Execute()
         {
-            player.setState(new PlayerAttackState(player));
+            player.Attack();
 
         }
     }
