@@ -19,7 +19,6 @@ namespace Game_Project
         public Vector2 location;
 
         public bool FaceRight { get; private set; }
-        public bool Falling { get; private set; }
 
         // Constructor
         public Player()
@@ -33,9 +32,8 @@ namespace Game_Project
             health = 3;
 
             FaceRight = true;
-            Falling = false;
 
-            physics = new Physics(Falling);
+            physics = new Physics();
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
@@ -69,7 +67,20 @@ namespace Game_Project
             }
             state.Jump();
         }
-        
+
+        public void Fall(bool faceRight)
+        {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("fallingRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("fallingLeft");
+            }
+            state.Fall();
+        }
+
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
         public void DamageTaken()
         {

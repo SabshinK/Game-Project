@@ -18,10 +18,9 @@ namespace Game_Project
 
         private double timePassed;
 
-        public bool falling;
         private GameTime gameTime;
 
-        public Physics(bool Falling)
+        public Physics()
         {
             horizontalVelocity = 0;
             verticalVelocity = 10;
@@ -30,8 +29,6 @@ namespace Game_Project
             verticalDistance = 0;
 
             timePassed = 0;
-
-            falling = Falling;
         }
 
         public void HorizontalChange()
@@ -58,19 +55,19 @@ namespace Game_Project
             }
         }
 
-        public void VerticalChange()
+        public void VerticalChange(bool Falling)
         {
             int previousVelocity = (int)verticalVelocity;
 
             if ((int)verticalVelocity == 0 && timePassed > 0)
             {
                 timePassed = 0;
-                falling = true;
+                Falling = true;
             }
 
             timePassed = gameTime.ElapsedGameTime.TotalSeconds - timePassed;
 
-            if (!falling)
+            if (!Falling)
             {
                 verticalVelocity -= verticalAcceleration * timePassed;
                 verticalDistance += ((previousVelocity + (int)verticalVelocity) / 2) * timePassed;

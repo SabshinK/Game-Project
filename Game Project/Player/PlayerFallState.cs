@@ -5,17 +5,17 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerJumpState : IPlayerState
+    class PlayerFallState : IPlayerState
     {
         Player player;
-        public PlayerJumpState(Player manager)
+        public PlayerFallState(Player manager)
         {
             player = manager;
 
             if (player.FaceRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("jumpRight");
+                player.sprite = SpriteFactory.Instance.CreateSprite("fallRight");
             else
-                player.sprite = SpriteFactory.Instance.CreateSprite("jumpLeft");
+                player.sprite = SpriteFactory.Instance.CreateSprite("fallLeft");
         }
 
         public void BackToIdle()
@@ -29,12 +29,12 @@ namespace Game_Project
         }
         public void Jump()
         {
-            // Already in the jump state
+            player.SetState(new PlayerJumpState(player));
         }
 
         public void Fall()
         {
-            player.SetState(new PlayerFallState(player));
+            //already falling
         }
 
         public void TakeDamage()
@@ -54,29 +54,29 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            player.physics.VerticalChange(false);
+            player.physics.VerticalChange(true);
 
             //I left the FaceRight condition because ideally, jumps will also move horizontally.
             //Right now, the if and else conditions have the same block of code.
             if (!player.FaceRight)
             {
-                if (player.location.Y < 480)
+                if (player.location.Y > 0)
                 {
-                    player.location.Y += (int)player.physics.verticalDistance;
+                    player.location.Y -= (int)player.physics.verticalDistance;
                 } else
                 {
-                    Fall();
+                    BackToIdle();
                 }
             }
             else
             {
-                if (player.location.Y < 480)
+                if (player.location.Y > 0)
                 {
-                    player.location.Y += (int)player.physics.verticalDistance;
+                    player.location.Y -= (int)player.physics.verticalDistance;
                 }
                 else
                 {
-                    Fall();
+                    BackToIdle();
                 }
             }
 
