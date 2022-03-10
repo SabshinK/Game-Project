@@ -15,9 +15,9 @@ namespace Game_Project
         Vector2 locationVector;
         int lengthOfAction;
         
-        public BatEnemy(Vector2 vector)
+        public BatEnemy(UniversalParameterObject parameters)
         {
-            locationVector = vector;
+            locationVector = parameters.Position;
             lengthOfAction = 0;
             bat = new BatStateMachine();
             batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");

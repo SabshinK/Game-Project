@@ -9,8 +9,10 @@ namespace Game_Project
 {
     class XmlParser
     {
+        private XmlReader reader;
         private XmlReaderSettings settings;
         private string fileName;
+        private Dictionary<string, Func<object>> readTypes;
 
         public XmlParser(string fileName)
         {
@@ -87,6 +89,11 @@ namespace Game_Project
             {
                 reader.Read();
             }
+        }
+
+        private void LoadDictionary()
+        {
+            Func<object> GetType = () => reader.ReadContentAsInt();
         }
     }
 }
