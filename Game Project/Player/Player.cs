@@ -6,11 +6,12 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Player : IDrawable
+    public class Player : IPlayer
     {
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+        private CollisionDetector collisionDetector;
 
         public Physics physics;
       
@@ -26,6 +27,7 @@ namespace Game_Project
             state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
+            collisionDetector = new CollisionDetector();
 
             location = new Vector2(800 / 2 - 48, 400 / 2 - 64);
         
@@ -128,6 +130,18 @@ namespace Game_Project
                 default:
                     return null;
             }
+        }
+
+        public void Collide()
+        {
+            //boink
+            
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            state.Update(gameTime);
+            collisionDetector.Update(gameTime);
         }
     }
 }
