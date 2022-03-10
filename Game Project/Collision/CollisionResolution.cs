@@ -100,8 +100,8 @@ namespace Game_Project
 
         public void LoadCollisionDictionary()
         {
-            /*Many of these additions create an ICommand called "FallBackCommand". 
-             * This command would be seperate from "FallDownCommand" and would cause the player to be launched backwards after stepping on top of an enemy.
+            /*Many of these could use an ICommand called "FallBackCommand". 
+             * This command would cause the player to be launched backwards after stepping on top of an enemy (if stepping on an enemy damages the player).
              * The player would fall back in the opposite direction thaat they were facing. 
              * For animators: For FallBackLeft, the player would be facing right, but be falling back left.
              */
