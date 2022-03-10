@@ -6,10 +6,9 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Tile
+    public class Item
     {
-
-        public Tile()
+        public Item()
         {
 
         }
