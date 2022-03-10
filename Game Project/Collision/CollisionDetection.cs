@@ -5,52 +5,66 @@ using System.Text;
 
 namespace Game_Project
 {
-    class CollisionDetection : ICollideable
+    class CollisionDetection : ICollideable, IUpdateable
     {
-        // collideDirection is side of block that collides with player
         private Player player;
+        private Object block; // type?
+        private ICollideable direction; // type?
+        private int player_top;
+        private int player_bottom;
+        private int player_left;
+        private int player_right;
+        private int block_top;
+        private int block_bottom;
+        private int block_left;
+        private int block_right;
+        CollisionResolution collisionResolution; // -> Rachel what is this for?
 
-        public CollisionDetection(Player Player)
+        public CollisionDetection(Player Player, Object Block)
         {
-            player = Player;            
+            player = Player;
+            block = Block;
+            direction = null; // is this bad? i just feel weird about not defining direction outside of an if-else statement in Update()
+            player_top = player.location.y;
+            player_bottom = player.location.y + player.size.height;
+            player_left = player.location.x;
+            player_right = player.location.x + player.size.width;
+            block_top = block.location.y;
+            block_bottom = block.location.y + block.size.height;
+            block_left = block.location.x;
+            block_right = block.location.x + block.size.width;
+
+            Update();
         }
 
-        public void Collide(ICollideable Block, ICollideable Direction)
+        public void Collide()
         {
-            // i literally have no idea what this is supposed to do or how to do it
-            // trying to send to collision resolution
-            CollisionResolution collision = new CollisionResolution(player, Block, Direction);
-            collision.Collide();
+
+            collisionResolution = new CollisionResolution(player, block, direction); // am i supposed to do anything else with this?
+
         }
 
-        public void Update(?)
+        public void Update()
         {
-            int player_top = player.location.y;
-            int player_bottom = player.location.y + player.size.height;
-            int player_left = player.location.x;
-            int player_right = player.location.x + player.size.width;
-            int block_top = block.location.y;
-            int block_bottom = block.location.y + block.size.height;
-            int block_left = block.location.x;
-            int block_right = block.location.x + block.size.width;
-
-            if !(player_right<block_left || block_right<player_left || player_bottom<block_top || block_bottom < player_top)
+            // objects collide:
+            if !(player_right < block_left || block_right < player_left || player_bottom < block_top || block_bottom < player_top)
             {
                 if (player_right >= block_left)
                 {
-                    // left overlap (right side of player)
+                    // left overlap (right side of player):
                     side_overlap = player_right - block_left;
                     direction = LEFT;
                 }
                 else
                 {
-                    // right overlap (left side of player)
+                    // right overlap (left side of player):
                     side_overlap = block_right - player_left;
                     direction = RIGHT;
                 }
 
-                if(player_top <= block_bottom) {
-                    // bottom overlap (top side of player)
+                if (player_top <= block_bottom)
+                {
+                    // bottom overlap (top side of player):
                     updown_overlap = block_bottom - player_top;
                     if (updown_overlap > side_overlap)
                     {
@@ -59,17 +73,18 @@ namespace Game_Project
                 }
                 else
                 {
-                    // top overlap (bottom side of player)
+                    // top overlap (bottom side of player):
                     updown_overlap = player_bottom - block_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = BOTTTOM;
+                        direction = TOP;
                     }
                 }
 
                 Collide(player, block, direction);
 
             }
+
         }
     }
 }
