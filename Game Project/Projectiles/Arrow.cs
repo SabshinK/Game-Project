@@ -15,13 +15,13 @@ namespace Game_Project
         private ISprite sprite;
         private bool userDirection;
         //constructor
-        public Arrow(Vector2 position, bool userDirection)
+        public Arrow(UniversalParameterObject parameters)
         {
-            this.position = position;
+            position = parameters.Position;
             timer = 0f;
             lifeSpan = 300f;
             moveFactor = 8;
-            this.userDirection = userDirection;
+            userDirection = parameters.Direction;
         }
 
         public void Update(GameTime gameTime)
