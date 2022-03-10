@@ -22,8 +22,9 @@
 	<xs:group name="ObjectData">
 		<xs:sequence>
 			<xs:element name="ObjectType" type="xs:string"/>
-			<xs:element name="X" type="xs:string"/>
-			<xs:element name="Y" type="xs:string"/>
+			<xs:element name="X" type="xs:integer"/>
+			<xs:element name="Y" type="xs:integer"/>
+			<xs:element name="FacingRight" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:group>
 
@@ -38,8 +39,8 @@
 		<xs:sequence>
 			<xs:element name="AnimationName" type="xs:string"/>
 			<xs:element name="Texture" type="xs:string"/>
-			<xs:element name="Speed" type="xs:string"/>
-			<xs:element name="Scale" type="xs:string"/>
+			<xs:element name="Speed" type="xs:integer"/>
+			<xs:element name="Scale" type="xs:integer"/>
 			<xs:element name="Rectangle" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:group>
