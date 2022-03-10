@@ -5,13 +5,14 @@ using System.Text;
 
 namespace Game_Project
 {
-    class UniversalParameterObject
+    public class UniversalParameterObject
     {
         public Vector2 Position { get; private set; }
+        public bool Direction { get; private set; }
 
-        public UniversalParameterObject(Vector2 position)
+        public UniversalParameterObject(object[] parameters)
         {
-            Position = position;
+            
         }
     }
 }

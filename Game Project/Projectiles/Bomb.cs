@@ -14,9 +14,9 @@ namespace Game_Project
         private float lifeSpan;
        
         //constructor
-        public Bomb(Vector2 position)
+        public Bomb(UniversalParameterObject parameters)
         {
-            this.position = position;
+            position = parameters.Position;
             timer = 0f;
             lifeSpan = 2f;
             sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");

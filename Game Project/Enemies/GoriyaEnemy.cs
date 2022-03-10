@@ -16,10 +16,10 @@ namespace Game_Project
         int lengthOfAction = 0;
         Boomerang weapon;
         
-        public GoriyaEnemy(Vector2 location)
+        public GoriyaEnemy(UniversalParameterObject parameters)
         {
             goriya = new GoriyaStateMachine();
-            locationVector = location;
+            locationVector = parameters.Position;
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
             currentGoriyaSprite = goriyaSpriteRight;

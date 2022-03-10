@@ -16,10 +16,10 @@ namespace Game_Project
         int lengthOfAction;
         Candle weapon;
         
-        public DragonEnemy(Vector2 vector)
+        public DragonEnemy(UniversalParameterObject parameters)
         {
             dragon = new DragonStateMachine();
-            locationVector = vector;
+            locationVector = parameters.Position;
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;
