@@ -15,12 +15,12 @@ namespace Game_Project
         public static LevelLoader Instance => instance;
 
         private Dictionary<string, string> fileNames;
-        private List<Type> types;
+        private Dictionary<string, Type> types;
 
         public LevelLoader()
         {
             fileNames = new Dictionary<string, string>();
-            types = new List<Type>();
+            types = new Dictionary<string, Type>();
 
             LoadDictionary();
             LoadTypes();
@@ -32,7 +32,7 @@ namespace Game_Project
             {
                 XmlParser parser = new XmlParser(Path.GetFullPath(element.Value));
 
-                Tuple<string, List<List<string>>> result = parser.ParseAsset();
+                Tuple<string, List<List<object>>> result = parser.ParseAsset();
 
                 // This should probably be replaced with some sort of dictionary access at some point
                 switch (result.Item1)
@@ -52,30 +52,29 @@ namespace Game_Project
             }
         }
 
-        private void LoadObjectData(List<List<string>> data)
+        private void LoadObjectData(List<List<object>> data)
         {
-            foreach (List<string> dataList in data)
+            foreach (List<object> dataList in data)
             {
-                // Verify that the type given is a type that can be instantiated
-                for (int i = 0; i < types.Count; i++)
-                {
-                    if (types[i] == Type.GetType(dataList[0]))
-                    {
-                        // This only works currently because all game object constructors only have one parameter, this may not be the case
-                        // later and will have to be changed, simply add UPO
-                        var constructorInfo = types[i].GetConstructor(new[] { typeof(UniversalParameterObject) });
+                // Store object type
+                string type = dataList[0].ToString();
 
-                        // verify that constructor info isn't null
-                        if (constructorInfo != null)
+                // Verify that the type given is a type that can be instantiated
+                if (types.ContainsKey(type))
+                {
+                    var constructorInfo = types[type].GetConstructor(new[] { typeof(UniversalParameterObject) });
+
+                    if (constructorInfo != null)
+                    {
+                        // need to load in the data correctly
+                        object[] parameters = new object[]
                         {
-                            object[] parameters = new object[] 
-                            { 
-                                new UniversalParameterObject(new Vector2(Convert.ToInt32(dataList[1]), Convert.ToInt32(dataList[2]))) 
-                            };
-                            GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameters));
-                        }
+                            new UniversalParameterObject(new object[1]) 
+                        };
+                        GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameters));
                     }
                 }
+                
             }
         }
 
@@ -87,9 +86,9 @@ namespace Game_Project
             }
         }
 
-        private void LoadAnimationData(List<List<string>> data)
+        private void LoadAnimationData(List<List<object>> data)
         {
-            foreach (List<string> dataList in data)
+            foreach (List<object> dataList in data)
             {
                 Rectangle[] frames = new Rectangle[dataList.Count - 4];
 
@@ -97,37 +96,37 @@ namespace Game_Project
                 for (int i = 4; i < dataList.Count; i++)
                 {
                     // Rectangle parameters with be in form '%i %i %i %i', so the strings must be split and converted
-                    string[] numbers = dataList[i].Split(' ', 4);
+                    string[] numbers = dataList[i].ToString().Split(' ', 4);
                     frames[i - 4] = new Rectangle(Convert.ToInt32(numbers[0]), Convert.ToInt32(numbers[1]),
                         Convert.ToInt32(numbers[2]), Convert.ToInt32(numbers[3]));
                 }
 
-                SpriteFactory.Instance.RegisterAnimation(dataList[0], 
-                    new Tuple<string, Rectangle[], int, int>(dataList[1], frames, Convert.ToInt32(dataList[2]), Convert.ToInt32(dataList[3])));
+                SpriteFactory.Instance.RegisterAnimation(dataList[0].ToString(), 
+                    new Tuple<string, Rectangle[], int, int>(dataList[1].ToString(), frames, Convert.ToInt32(dataList[2]), Convert.ToInt32(dataList[3])));
             }
         }
 
         private void LoadDictionary()
         {
-            fileNames.Add("forest", @"..\..\..\..\Game Project\Data\Objects.xml");
             fileNames.Add("sprites", @"..\..\..\..\Game Project\Data\Animation.xml");
+            fileNames.Add("forest", @"..\..\..\..\Game Project\Data\Objects.xml");            
         }
 
         private void LoadTypes()
         {
-            types.Add(typeof(Player));
-            types.Add(typeof(BatEnemy));
-            types.Add(typeof(DragonEnemy));
-            types.Add(typeof(GelEnemy));
-            types.Add(typeof(GoriyaEnemy));
-            types.Add(typeof(StalfosEnemy));
-            types.Add(typeof(ZohEnemy));
-            types.Add(typeof(Tile));
-            types.Add(typeof(Arrow));
-            types.Add(typeof(Bomb));
-            types.Add(typeof(Boomerang));
-            types.Add(typeof(Candle));
-            types.Add(typeof(SwordBeam));
+            types.Add("Player", typeof(Player));
+            types.Add("BatEnemy", typeof(BatEnemy));
+            types.Add("DragonEnemy", typeof(DragonEnemy));
+            types.Add("GelEnemy", typeof(GelEnemy));
+            types.Add("GoriyaEnemy", typeof(GoriyaEnemy));
+            types.Add("StalfosEnemy", typeof(StalfosEnemy));
+            types.Add("ZohEnemy", typeof(ZohEnemy));
+            types.Add("Tile", typeof(Tile));
+            types.Add("Arrow", typeof(Arrow));
+            types.Add("Bomb", typeof(Bomb));
+            types.Add("Boomerang", typeof(Boomerang));
+            types.Add("Candle", typeof(Candle));
+            types.Add("SwordBeam", typeof(SwordBeam));
         }
     }
 }
