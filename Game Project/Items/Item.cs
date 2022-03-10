@@ -6,14 +6,11 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Tile
+    public class Item
     {
-        Vector2 position;
-        ISprite sprite;
-
-        public Tile(UniversalParameterObject parameters)
+        public Item()
         {
-            position = parameters.Position;
+
         }
     }
 }

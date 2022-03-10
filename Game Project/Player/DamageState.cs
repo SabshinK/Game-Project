@@ -38,6 +38,14 @@ namespace Game_Project
         {
             // Can't move while being damaged
         }
+        public void Jump()
+        {
+            // Can't jump while being damaged
+        }
+        public void Fall()
+        {
+            // Can't fall while being damaged
+        }
 
         public void Attack()
         {

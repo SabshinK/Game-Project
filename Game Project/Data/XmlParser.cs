@@ -7,73 +7,72 @@ using System.Xml;
 
 namespace Game_Project
 {
-    class XmlParser
+    public class XmlParser
     {
         private XmlReader reader;
         private XmlReaderSettings settings;
-        private string fileName;
+        private Dictionary<string, Func<object>> readTypes;
 
         public XmlParser(string fileName)
         {
             // load reader settings with XML Schema validation
             settings = new XmlReaderSettings();
             // change so that full path name isn't necessary
-            settings.Schemas.Add("urn:level-schema", @"Data/level.xsd");
+            settings.Schemas.Add("urn:level-schema", Path.GetFullPath(@"..\..\..\..\Game Project\Data\level.xsd"));
             settings.ValidationType = ValidationType.Schema;
 
-            this.fileName = fileName;
+            //this.fileName = fileName;
+            reader = XmlReader.Create(fileName, settings);
 
-            //reader = XmlReader.Create(fileName, settings);
+            readTypes = new Dictionary<string, Func<object>>();
+            LoadDictionary();
         }
 
-        public Tuple<string, List<List<string>>> ParseAsset()
+        public Tuple<string, List<List<object>>> ParseAsset()
         {
             // Declare data storage variables
-            List<List<string>> data = new List<List<string>>();
+            List<List<object>> data = new List<List<object>>();
             string type;
 
-            using (XmlReader reader = XmlReader.Create(fileName, settings))
-            {
-                // Jump to asset, store type for LevelLoader
-                ReadToFollowing("Asset");
-                type = reader[0];
+            // Jump to asset, store type for LevelLoader
+            ReadToFollowing("Asset");
+            type = reader[0];
 
-                while (reader.Read())
+            // looking for next item subtree
+            while (reader.Read())
+            {
+                if (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement())
+                    if (reader.Name.Equals("Item"))
                     {
-                        if (reader.Name.Equals("Item"))
-                        {
-                            data.Add(ParseItem(reader.ReadSubtree()));
-                        }
+                        // Store the original position of the reader and set the reader to a subtree for easy reading
+                        XmlReader storedReader = reader;
+                        reader = reader.ReadSubtree();
+                        // Call on ParseItem to read the subtree and store the data
+                        data.Add(ParseItem());
+                        // set reader back and skip to the end Item tag
+                        reader = storedReader;
+                        ReadToFollowing("Item");
                     }
                 }
             }
 
-            //// Parse until the end tag
-            //while (!(reader.NodeType == XmlNodeType.EndElement && reader.Name.Equals("Asset")))
-            //{
-            //    reader.Read();
-            //    if (reader.Name.Equals("Item"))
-            //    {
-            //        data.Add(ParseItem());
-            //    }
-            //}
-            //// move past the end tag for next call
-
-            return new Tuple<string, List<List<string>>>(type, data);
+            return new Tuple<string, List<List<object>>>(type, data);
         }
 
-        private List<string> ParseItem(XmlReader reader)
+        private List<object> ParseItem()
         {
             // Initialize list of string data
-            List<string> data = new List<string>();
+            List<object> data = new List<object>();
 
             while (reader.Read())
             {
-                if (reader.NodeType == XmlNodeType.Text)
+                if (reader.IsStartElement())
                 {
-                    data.Add(reader.Value);
+                    if (readTypes.ContainsKey(reader.Name))
+                    {
+                        data.Add(readTypes[reader.Name].Invoke());
+                    }
                 }
             }
 
@@ -90,6 +89,20 @@ namespace Game_Project
             {
                 reader.Read();
             }
+        }
+
+        private void LoadDictionary()
+        {
+            readTypes.Add("ObjectType", () => reader.ReadElementContentAsString());
+            readTypes.Add("X", () => reader.ReadElementContentAsInt());
+            readTypes.Add("Y", () => reader.ReadElementContentAsInt());
+            readTypes.Add("Key", () => reader.ReadElementContentAsString());
+            readTypes.Add("Command", () => reader.ReadElementContentAsString());
+            readTypes.Add("AnimationName", () => reader.ReadElementContentAsString());
+            readTypes.Add("Texture", () => reader.ReadElementContentAsString());
+            readTypes.Add("Speed", () => reader.ReadElementContentAsInt());
+            readTypes.Add("Scale", () => reader.ReadElementContentAsInt());
+            readTypes.Add("Rectangle", () => reader.ReadElementContentAsString());
         }
     }
 }

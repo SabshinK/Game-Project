@@ -15,10 +15,10 @@ namespace Game_Project
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         
-        public ZohEnemy(Vector2 location)
+        public ZohEnemy(UniversalParameterObject parameters)
         {
             zoh = new ZohStateMachine();
-            locationVector = location; //game will state where it wants the enemy when it is created
+            locationVector = parameters.Position; //game will state where it wants the enemy when it is created
             zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
         }
         public void ChangeDirection()

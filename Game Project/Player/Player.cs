@@ -11,25 +11,29 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+
+        public Physics physics;
       
         private int health;
         private string animationToCreate;
         public Vector2 location;
 
         public bool FaceRight { get; private set; }
-      
+
         // Constructor
-        public Player()
+        public Player(UniversalParameterObject parameters)
         {
             state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
 
-            location = new Vector2(800 / 2 - 48, 400 / 2 - 64);
+            location = parameters.Position;
         
             health = 3;
 
             FaceRight = true;
+
+            physics = new Physics();
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
@@ -50,7 +54,33 @@ namespace Game_Project
             }
             state.Move();
         }
-        
+
+        public void Jump(bool faceRight)
+        {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            }
+            state.Jump();
+        }
+
+        public void Fall(bool faceRight)
+        {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("fallingRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("fallingLeft");
+            }
+            state.Fall();
+        }
+
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
         public void DamageTaken()
         {
@@ -86,15 +116,15 @@ namespace Game_Project
             switch(code)
             {
                 case 1:
-                    return new Arrow(location, FaceRight);
+                    return new Arrow(new UniversalParameterObject());
                 case 2:
-                    return new Bomb(location);
+                    return new Bomb(new UniversalParameterObject());
                 case 3:
-                    return new Boomerang(location, FaceRight);
+                    return new Boomerang(new UniversalParameterObject());
                 case 4:
-                    return new Candle(location, FaceRight);
+                    return new Candle(new UniversalParameterObject());
                 case 5 :
-                    return new SwordBeam(location, FaceRight);
+                    return new SwordBeam(new UniversalParameterObject());
                 default:
                     return null;
             }
