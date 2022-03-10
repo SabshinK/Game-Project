@@ -14,7 +14,6 @@ namespace Game_Project
         private static LevelLoader instance = new LevelLoader();
         public static LevelLoader Instance => instance;
 
-        private XmlParser parser;
         private Dictionary<string, string> fileNames;
         private List<Type> types;
 
@@ -29,18 +28,13 @@ namespace Game_Project
 
         public void LoadLevel()
         {
-            //// change so that full path name isn't necessary
-            //parser = new XmlParser(@"Data/level.xml");
-            //// Get data from the parser and give that data to the classes needed
-            //ObjectManager.Instance.LoadDictionary(parser.ParseAsset());
-            //SpriteFactory.Instance.LoadDictionary(parser.ParseAsset());
-            //KeyboardController.Instance.LoadDictionary(parser.ParseAsset());
             foreach (KeyValuePair<string, string> element in fileNames)
             {
                 XmlParser parser = new XmlParser(Path.GetFullPath(element.Value));
 
                 Tuple<string, List<List<string>>> result = parser.ParseAsset();
 
+                // This should probably be replaced with some sort of dictionary access at some point
                 switch (result.Item1)
                 {
                     case "ObjectData":

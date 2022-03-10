@@ -8,10 +8,12 @@ namespace Game_Project
 {
     public class Tile
     {
+        Vector2 position;
+        ISprite sprite;
 
-        public Tile()
+        public Tile(UniversalParameterObject parameters)
         {
-
+            position = parameters.Position;
         }
     }
 }

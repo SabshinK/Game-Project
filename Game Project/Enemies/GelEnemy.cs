@@ -16,9 +16,9 @@ namespace Game_Project
         int lengthOfAction = 0;
         
 
-        public GelEnemy(Vector2 vector)
+        public GelEnemy(UniversalParameterObject parameters)
         {
-            locationVector = vector;
+            locationVector = parameters.Position;
             lengthOfAction = 0;
             gel = new GelStateMachine();
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");

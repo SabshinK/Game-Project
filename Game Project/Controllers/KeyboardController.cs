@@ -34,19 +34,6 @@ namespace Game_Project
 				}
 			}
 
-            //if (Keyboard.GetState().IsKeyDown(Keys.A))
-            //{
-            //    controllerMappings[Keys.A].Execute();
-            //}
-            //else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            //{
-            //    controllerMappings[Keys.D].Execute();
-            //}
-            //else
-            //{
-            //    controllerMappings[Keys.None].Execute();
-            //}
-
 			// This statement translates to NOT XOR because we want either both keys or none
             if (!(Keyboard.GetState().IsKeyDown(Keys.A) ^ Keyboard.GetState().IsKeyDown(Keys.D)))
             {

@@ -15,10 +15,10 @@ namespace Game_Project
         Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         
-        public StalfosEnemy(Vector2 location)
+        public StalfosEnemy(UniversalParameterObject parameters)
         {
             stalfos = new StalfosStateMachine();
-            locationVector = location; //game will state where it wants the enemy when it is created
+            locationVector = parameters.Position; //game will state where it wants the enemy when it is created
             stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
         }
         public void ChangeDirection()
