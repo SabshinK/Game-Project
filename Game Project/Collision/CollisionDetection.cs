@@ -18,7 +18,7 @@ namespace Game_Project
         private int block_bottom;
         private int block_left;
         private int block_right;
-        CollisionResolution collisionResolution; // -> Rachel what is this for?
+        private CollisionResolution collisionResolution; // ??
 
         public CollisionDetection(Player Player, Object Block)
         {
