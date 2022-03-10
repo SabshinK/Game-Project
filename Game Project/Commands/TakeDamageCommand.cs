@@ -7,6 +7,7 @@ namespace Game_Project
     class TakeDamageCommand : ICommand
     {
         private Player player;
+
         public TakeDamageCommand(Player manager)
         {
             player = manager;

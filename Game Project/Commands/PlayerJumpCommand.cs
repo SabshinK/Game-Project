@@ -17,7 +17,14 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.Jump(falling);
+            if (falling)
+            {
+                player.Fall(player.FaceRight);
+            }
+            else
+            {
+                player.Jump(player.FaceRight);
+            }
         }
     }
 }
