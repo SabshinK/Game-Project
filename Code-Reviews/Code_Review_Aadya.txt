@@ -1,3 +1,28 @@
+---- SPRINT THREE ----
+
+READABILTY REVIEW:
+
+Author of the code review: Aadya Jain
+Date of the code review: 03/10/22
+Sprint number: 3
+Name of the .cs file being reviewed: LevelLoader.cs
+Author of the .cs file being reviewed: Sebastian King
+Number of minutes taken to complete the review: 30
+At first glance, the code is easy to follow with consistent naming conventions with the usage of camel case, and there is consistent grouping and spacing to follow along with the blocks of code. The variables are also self-explanatory and good descriptors of their goal. There are comments to make it easy to understand the code, particularly with LoadObjectData function which uses multiple variables and handles constructors. There are a few magic numbers and line 100 is long enough to be cut into two lines for easier readbility. To effect, the variables and functions are named well and the spacing and grouping allows for an easier read. Some of the lines are a little longer. It was also good choice to have the list of types of enemies and objects at the very end instead of in the middle as well. 
+
+MAINTAINABILITY:
+
+Author of the code review: Aadya Jain
+Date of the code review: 03/22
+Sprint number: 3
+Name of the .cs file being reviewed: CollisionResolution.cs
+Author of the .cs file being reviewed: Rachel Watters
+Specific comments on code quality
+One change I would make: 
+The author of the code makes a good design choice for maintainability with the dictionary which holds the direction, objects involved in the collision and the type of collision resolution they would require. Unfortunately, this does cause a lot of similar code to handle the different types as well as the giant list in the end to add every single type of enemy or player that could be taking damage. One change could be having an EnemyTakeDamageCommand rather than specific types which would have a list of enemies to loop through and match which type of enemy and then the damage is handled appropriately. This would reduce the work later in terms of maintainability if we add more types of collideable objects. The comments also do highlight that the FallBackCommand would work and implementing that would be a good idea since we can access the directions and change the boolean for the direction as needed.
+
+---- SPRINT TWO ----
+
 READABILTY REVIEW:
 
 Author of the code review: Aadya Jain
