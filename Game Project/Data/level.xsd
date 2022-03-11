@@ -24,7 +24,24 @@
 			<xs:element name="ObjectType" type="xs:string"/>
 			<xs:element name="X" type="xs:integer"/>
 			<xs:element name="Y" type="xs:integer"/>
-			<xs:element name="FacingRight" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="FacingRight" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:boolean">
+							<xs:attribute name="index" type="xs:integer"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Animation" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="index" type="xs:integer"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:group>
 

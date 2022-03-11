@@ -6,16 +6,16 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Item : IDrawable, ICollideable
+    public class Item : IItem
     {
         public Vector2 position;
         public ISprite sprite, despawnSprite;
         public bool finished;
 
-        public Item(UniversalParameterObject parameters, string animationName)
+        public Item(UniversalParameterObject parameters)
         {
-            position = parameters.Position();
-            sprite = SpriteFactory.Instance.CreateSprite(animationName);
+            position = parameters.Position;
+            sprite = SpriteFactory.Instance.CreateSprite(parameters.AnimationName);
             finished = false;
         }
 
