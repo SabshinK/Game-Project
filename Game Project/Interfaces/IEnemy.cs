@@ -11,5 +11,7 @@ namespace Game_Project
         public void Attack();
 
         public void TakeDamage();
+
+        public void Fall();
     }
 }

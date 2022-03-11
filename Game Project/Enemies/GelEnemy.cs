@@ -53,29 +53,46 @@ namespace Game_Project
 
         public void Fall()
         {
-            gel.Fall(); // implement .Fall
-            physics.VerticalChange(true);
+            gel.Fall();
         }
 
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > new Random().Next(50))
-            {
-                ChangeDirection();
-                lengthOfAction = 0;
-            }
-
             stateTuple = gel.getState();
 
-            //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
-                locationVector.X--;
-            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
-                locationVector.X++;
-            }
+            switch (stateTuple.Item1)
+            {
+                case actions.dead:
+                    //GameObjectManager.remove(this);
+                    gelSprite = null;
+                    break;
+                case actions.falling:
+                    locationVector.Y++;
+                    physics.VerticalChange(true);
+                    gelSprite.Update();
+                    break;
+                case actions.moving:
+                    if (stateTuple.Item2.Equals(direction.left))
+                    {
+                        locationVector.X--;
+                    }
+                    else
+                    {
+                        locationVector.X++;
+                    }
+                    gelSprite.Update();
 
-            gelSprite.Update();
+                    if (lengthOfAction > new Random().Next(100))
+                    {
+                        ChangeDirection();
+                        lengthOfAction = 0;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
             lengthOfAction++;
         }
 
