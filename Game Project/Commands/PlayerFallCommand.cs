@@ -4,19 +4,21 @@ using System.Text;
 
 namespace Game_Project
 {
-    class PlayerJumpCommand : ICommand
+    class PlayerFallCommand : ICommand
     {
         private Player player;
+        private bool falling;
 
-        public PlayerJumpCommand(Player manager)
+        public PlayerFallCommand(Player manager)
         {
             player = manager;
         }
 
         public void Execute()
         {
-            player.Jump(player.FaceRight);
-            
+
+                player.Fall(player.FaceRight);
+
         }
     }
 }

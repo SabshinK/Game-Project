@@ -25,3 +25,32 @@ Code Readability Comments:
 	these comments it would be very easy to get lost among the sea of very similar lines, yet each is split up and properly marked. The function names are also perfectly descriptive,
 	which is great for the amount of data we're working with. My favorite readability piece in this code is the comment above the "CreateSprite" function that describes how to use it,
 	and I referred to it many times when creating my enemy sprites. For having all of these sprites in one place, this class is incredibly readable.
+
+
+
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    3/10/2022
+Sprint Number:    3
+Name of File:     XmlParser.cs
+Author of File:    Sebastian King
+
+Code Quality Comments:
+	Line 26, the last line in the constructor, seems to be dead code commented out. Other than that, the constructor seems to have very simple usage and allows for the XML file to be in almost any directory, not specific to Sebastian's drive.
+	The ParseAsset() function also makes intuitive sense. It took me a second to really get a grip of what was going on, so comments might be useful, however it seems to essentially take in a subtree of an asset, and create a list of strings
+	based on the name and location of that object. This list is then added to a list of lists that hold the data to be passed to the LevelLoader from the Game1 class. I'm guessing the code Sebastian commented out has to do with checking if 
+	the end tag is present, which seems to already have been done by the .Read() method of the XML reader, hence the comment out. My initial thought with the ParseItem method was too similar to the ParseAsset() function, but upon further 
+	inspection I see that they have different uses, and their return types need to be very distinct. They both need to be formatted as they are, because other classes are going to use their return values and are expecting a specific output.
+	The ReadToElement function should also be very useful when constructing specific items/tiles/etc. and is perfectly straightforward. Other than the dead code, I don't see any issues, and the hypothetical removal of said dead code is absurdly
+	easy, just removing comments. We just have to be sure as a group that the XML files are all formatted as the parser is expecting.
+
+
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    3/10/2022
+Sprint Number:    3
+Name of File:     Physics.cs
+Author of File:    Rachel Watters
+Minutes Taken: 10
+
+Code Readability Comments:
+	The thing I notice immediately is the lack of full uppercase names for the constant variables. I also see magic numbers, yet the comments associated with the lines explain them. Other than that, the variable names are incredibly
+	straightforward and make reading the vast amount of physics formulas rather intuitive. More comments on the VerticalChange() method may also shed some light on what all the formulas practically mean. 

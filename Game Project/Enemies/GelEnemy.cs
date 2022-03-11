@@ -4,16 +4,18 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
+using Game_Project.Physics;
 
 namespace Game_Project
 {
-    class GelEnemy : IEnemy
+    class GelEnemy : IEnemy, ICollideable
     {
         Tuple<actions, direction> stateTuple;
         GelStateMachine gel;
         ISprite gelSprite;
         Vector2 locationVector;
         int lengthOfAction = 0;
+        Physics physics;
         
 
         public GelEnemy(UniversalParameterObject parameters)
@@ -22,6 +24,7 @@ namespace Game_Project
             lengthOfAction = 0;
             gel = new GelStateMachine();
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
+            physics = new Physics();
         }
         public void ChangeDirection()
         {
@@ -41,6 +44,17 @@ namespace Game_Project
         public void Draw(SpriteBatch spriteBatch)
         {
             gelSprite.Draw(spriteBatch, locationVector);
+        }
+
+        public void Collide()
+        {
+            //TODO
+        }
+
+        public void Fall()
+        {
+            gel.Fall(); // implement .Fall
+            physics.VerticalChange(true);
         }
 
         public void Update(GameTime gameTime)
