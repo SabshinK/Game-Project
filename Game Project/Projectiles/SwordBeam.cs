@@ -15,11 +15,11 @@ namespace Game_Project
         public bool userDirection;
 
         //constructor
-        public SwordBeam(Vector2 position, bool userDirection)
+        public SwordBeam(UniversalParameterObject parameters)
         {
-            this.position = position;
+            position = parameters.Position;
             moveFactor = 16;
-            this.userDirection = userDirection;
+            userDirection = parameters.Direction;
 
         }
 
