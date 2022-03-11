@@ -60,24 +60,11 @@ namespace Game_Project
             //Right now, the if and else conditions have the same block of code.
             if (!player.FaceRight)
             {
-                if (player.location.Y > 0)
-                {
-                    player.location.Y -= (int)player.physics.verticalDistance;
-                } else
-                {
-                    BackToIdle();
-                }
+                player.location.Y += (int)player.physics.verticalDistance;
             }
             else
             {
-                if (player.location.Y > 0)
-                {
-                    player.location.Y -= (int)player.physics.verticalDistance;
-                }
-                else
-                {
-                    BackToIdle();
-                }
+                player.location.Y += (int)player.physics.verticalDistance;
             }
 
             if (player.projectile != null)

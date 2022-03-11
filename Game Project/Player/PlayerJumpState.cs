@@ -60,9 +60,9 @@ namespace Game_Project
             //Right now, the if and else conditions have the same block of code.
             if (!player.FaceRight)
             {
-                if (player.location.Y < 480)
+                if (player.location.Y > 0)
                 {
-                    player.location.Y += (int)player.physics.verticalDistance;
+                    player.location.Y -= (int)player.physics.verticalDistance;
                 } else
                 {
                     Fall();
@@ -70,9 +70,9 @@ namespace Game_Project
             }
             else
             {
-                if (player.location.Y < 480)
+                if (player.location.Y > 0)
                 {
-                    player.location.Y += (int)player.physics.verticalDistance;
+                    player.location.Y -= (int)player.physics.verticalDistance;
                 }
                 else
                 {

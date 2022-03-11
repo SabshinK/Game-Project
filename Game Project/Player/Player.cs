@@ -11,7 +11,7 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
-        private CollisionDetector collisionDetector;
+        private CollisionDetection collisionDetector;
 
         public Physics physics;
       
@@ -27,7 +27,6 @@ namespace Game_Project
             state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
-            collisionDetector = new CollisionDetector();
 
             location = parameters.Position;
         
