@@ -22,7 +22,7 @@ namespace Game_Project
         private float updown_overlap;
         private Vector2 firstObjectLocation;
         private Vector2 secondObjectLocation;
-        private CollisionResolution collisionResolution; // ??
+        private CollisionResolution collisionResolution;
 
         private CollisionResolution.collideDirection direction;
 
@@ -34,12 +34,15 @@ namespace Game_Project
             **/
             firstObject = Object1;
             secondObject = Object2;
+
+            firstObjectLocation = locationObject1;
+            secondObjectLocation = locationObject2;
         }
 
         public void Collide()
         {
 
-            collisionResolution = new CollisionResolution(firstObject, secondObject, direction); // am i supposed to do anything else with this?
+            collisionResolution = new CollisionResolution(firstObject, secondObject, direction);
 
         }
 
@@ -47,13 +50,23 @@ namespace Game_Project
         {
             //check locations
             firstObject_top = firstObjectLocation.Y;
-            firstObject_bottom = firstObjectLocation.Y + firstObject.size.height;
+            firstObject_bottom = firstObjectLocation.Y + 128;
             firstObject_left = firstObjectLocation.X;
-            firstObject_right = firstObjectLocation.X + firstObject.size.width;
-            secondObject_top = secondObjectLocation.Y;
-            secondObject_bottom = secondObjectLocation.Y + secondObject.size.height;
-            secondObject_left = secondObjectLocation.X;
-            secondObject_right = secondObjectLocation.X + secondObject.size.width;
+            firstObject_right = firstObjectLocation.X + 128;
+
+            if (secondObject.GetType() == typeof(Tile))
+            {
+                secondObject_top = secondObjectLocation.Y;
+                secondObject_bottom = secondObjectLocation.Y + 64;
+                secondObject_left = secondObjectLocation.X;
+                secondObject_right = secondObjectLocation.X + 64;
+            } else
+            {
+                secondObject_top = secondObjectLocation.Y;
+                secondObject_bottom = secondObjectLocation.Y + 128;
+                secondObject_left = secondObjectLocation.X;
+                secondObject_right = secondObjectLocation.X + 128;
+            }
 
 
             // objects collide:
