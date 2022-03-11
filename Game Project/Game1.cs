@@ -12,10 +12,13 @@ namespace Game_Project
 
         // Interfaces to use
         public IController keyboard;
-        public Player player;
-        public TileManager tiles;
-        public EnemyManager enemies;
-        public ItemManager items;
+        public IController mouse;
+        private GameObjectManager objectManager;
+        private CollisionResolution collisionResolution;
+        //public Player player;
+        //public TileManager tiles;
+        //public EnemyManager enemies;
+        //public ItemManager items;
 
         public Game1()
         {
@@ -35,14 +38,21 @@ namespace Game_Project
             //GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             
             Texture2DStorage.LoadContent(Content);
-            SpriteFactory.Instance.LoadDictionary();
+            //SpriteFactory.Instance.LoadDictionary();
             LevelLoader.Instance.LoadLevel();
             
             keyboard = new KeyboardController();
-            player = new Player();
-            tiles = new TileManager();
-            enemies = new EnemyManager();
-            items = new ItemManager();
+            objectManager = new GameObjectManager();
+
+            //This is here to be able to load the collision dictionary
+            collisionResolution = new CollisionResolution(null, null, CollisionResolution.collideDirection.Left);
+
+            //player = new Player();
+            //tiles = new TileManager();
+            //enemies = new EnemyManager();
+            //items = new ItemManager();
+
+            collisionResolution.LoadCollisionDictionary();
 
             base.Initialize();
         }
@@ -54,7 +64,7 @@ namespace Game_Project
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            keyboard.LoadContent(this, player, tiles, enemies, items);
+            //keyboard.LoadContent(this, player, tiles, enemies, items);
         }
 
         /// <summary>
@@ -67,9 +77,9 @@ namespace Game_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.state.Update(gameTime);
-            enemies.Update(gameTime);
-            keyboard.Update(gameTime);
+            //player.state.Update(gameTime);
+            //enemies.Update(gameTime);
+            //keyboard.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -82,10 +92,10 @@ namespace Game_Project
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            player.Draw(spriteBatch);
-            tiles.Draw(spriteBatch);
-            enemies.Draw(spriteBatch);
-            items.Draw(spriteBatch);
+            //player.Draw(spriteBatch);
+            //tiles.Draw(spriteBatch);
+            //enemies.Draw(spriteBatch);
+            //items.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

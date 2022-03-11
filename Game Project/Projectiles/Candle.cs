@@ -20,9 +20,9 @@ namespace Game_Project
         private bool finished;
         
         //constructor
-        public Candle(Vector2 position, bool userDirection)
+        public Candle(UniversalParameterObject parameters)
         {
-            this.position = position;
+            position = parameters.Position;
             moveFactor = 8;
             finalPositionRight = position;
             finalPositionRight.X += 80;
@@ -30,7 +30,7 @@ namespace Game_Project
             finalPositionLeft.X -= 80;
             timer = 0f;
             lifeSpan = 1f;
-            this.userDirection = userDirection;
+            userDirection = parameters.Direction;
             stopFire = false;
             fireSprite = SpriteFactory.Instance.CreateSprite("candleFireGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");

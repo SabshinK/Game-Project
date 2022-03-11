@@ -6,11 +6,12 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Player : IDrawable
+    public class Player : IPlayer
     {
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+        private CollisionDetector collisionDetector;
 
         public Physics physics;
       
@@ -21,13 +22,14 @@ namespace Game_Project
         public bool FaceRight { get; private set; }
 
         // Constructor
-        public Player()
+        public Player(UniversalParameterObject parameters)
         {
             state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
+            collisionDetector = new CollisionDetector();
 
-            location = new Vector2(800 / 2 - 48, 400 / 2 - 64);
+            location = parameters.Position;
         
             health = 3;
 
@@ -116,18 +118,30 @@ namespace Game_Project
             switch(code)
             {
                 case 1:
-                    return new Arrow(location, FaceRight);
+                    return new Arrow(new UniversalParameterObject());
                 case 2:
-                    return new Bomb(location);
+                    return new Bomb(new UniversalParameterObject());
                 case 3:
-                    return new Boomerang(location, FaceRight);
+                    return new Boomerang(new UniversalParameterObject());
                 case 4:
-                    return new Candle(location, FaceRight);
+                    return new Candle(new UniversalParameterObject());
                 case 5 :
-                    return new SwordBeam(location, FaceRight);
+                    return new SwordBeam(new UniversalParameterObject());
                 default:
                     return null;
             }
+        }
+
+        public void Collide()
+        {
+            //boink
+            
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            state.Update(gameTime);
+            collisionDetector.Update(gameTime);
         }
     }
 }
