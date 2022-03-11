@@ -15,10 +15,12 @@
 		<ObjectType>Arrow</ObjectType>
 		<X>0</X>
 		<Y>200</Y>
+		<FacingRight index="1">true</FacingRight>
 	</Item>
 	<Item>
 		<ObjectType>Tile</ObjectType>
 		<X>200</X>
 		<Y>200</Y>
+		<Animation index="2">darkGrottoGround</Animation>
 	</Item>
 </Asset>

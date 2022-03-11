@@ -28,10 +28,10 @@ namespace Game_Project
             LoadDictionary();
         }
 
-        public Tuple<string, List<List<object>>> ParseAsset()
+        public Tuple<string, List<List<Tuple<int, object>>>> ParseAsset()
         {
             // Declare data storage variables
-            List<List<object>> data = new List<List<object>>();
+            List<List<Tuple<int, object>>> data = new List<List<Tuple<int, object>>>();
             string type;
 
             // Jump to asset, store type for LevelLoader
@@ -57,13 +57,13 @@ namespace Game_Project
                 }
             }
 
-            return new Tuple<string, List<List<object>>>(type, data);
+            return new Tuple<string, List<List<Tuple<int, object>>>>(type, data);
         }
 
-        private List<object> ParseItem()
+        private List<Tuple<int, object>> ParseItem()
         {
             // Initialize list of string data
-            List<object> data = new List<object>();
+            List<Tuple<int, object>> data = new List<Tuple<int, object>>();
 
             while (reader.Read())
             {
@@ -71,7 +71,11 @@ namespace Game_Project
                 {
                     if (readTypes.ContainsKey(reader.Name))
                     {
-                        data.Add(readTypes[reader.Name].Invoke());
+                        // if the item has an attribute, it is the index for the parameter object and should be returned
+                        int parameterIndex = -1;
+                        if (reader.HasAttributes)
+                            parameterIndex = Convert.ToInt32(reader[0]);
+                        data.Add(new Tuple<int, object>(parameterIndex, readTypes[reader.Name].Invoke()));
                     }
                 }
             }
@@ -96,6 +100,8 @@ namespace Game_Project
             readTypes.Add("ObjectType", () => reader.ReadElementContentAsString());
             readTypes.Add("X", () => reader.ReadElementContentAsInt());
             readTypes.Add("Y", () => reader.ReadElementContentAsInt());
+            readTypes.Add("FacingRight", () => reader.ReadElementContentAsBoolean());
+            readTypes.Add("Animation", () => reader.ReadElementContentAsString());
             readTypes.Add("Key", () => reader.ReadElementContentAsString());
             readTypes.Add("Command", () => reader.ReadElementContentAsString());
             readTypes.Add("AnimationName", () => reader.ReadElementContentAsString());

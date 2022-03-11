@@ -42,6 +42,11 @@ namespace Game_Project
             batAction = actions.attacking;
         }
 
+        public void Fall()
+        {
+            //Null, because bat cannot fall
+        }
+
         public Tuple<actions, direction> getState()
         {
 
