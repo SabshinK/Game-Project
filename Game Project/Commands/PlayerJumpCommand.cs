@@ -7,17 +7,16 @@ namespace Game_Project
     class PlayerJumpCommand : ICommand
     {
         private Player player;
-        private bool falling;
 
-        public PlayerJumpCommand(Player manager, bool Falling)
+        public PlayerJumpCommand(Player manager)
         {
             player = manager;
-            falling = Falling;
         }
 
         public void Execute()
         {
-            player.Jump(falling);
+            player.Jump(player.FaceRight);
+            
         }
     }
 }

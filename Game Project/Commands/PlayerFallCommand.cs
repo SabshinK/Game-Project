@@ -4,17 +4,21 @@ using System.Text;
 
 namespace Game_Project
 {
-    class TakeDamageCommand : ICommand
+    class PlayerFallCommand : ICommand
     {
         private Player player;
+        private bool falling;
 
-        public TakeDamageCommand(Player manager)
+        public PlayerFallCommand(Player manager)
         {
             player = manager;
         }
+
         public void Execute()
         {
-            player.DamageTaken();
+
+                player.Fall(player.FaceRight);
+
         }
     }
 }

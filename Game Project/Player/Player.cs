@@ -6,11 +6,12 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Player : IDrawable
+    public class Player : IPlayer
     {
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+        private CollisionDetection collisionDetector;
 
         public Physics physics;
       
@@ -128,6 +129,18 @@ namespace Game_Project
                 default:
                     return null;
             }
+        }
+
+        public void Collide()
+        {
+            //boink
+            
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            state.Update(gameTime);
+            collisionDetector.Update(gameTime);
         }
     }
 }
