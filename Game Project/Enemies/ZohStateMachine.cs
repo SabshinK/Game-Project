@@ -48,6 +48,5 @@ namespace Game_Project
             stateTuple = new Tuple<actions, direction>(zohAction, zohDirection);
             return stateTuple;
         }
-
     }
 }

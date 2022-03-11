@@ -14,6 +14,7 @@ namespace Game_Project
         public IController keyboard;
         public IController mouse;
         private GameObjectManager objectManager;
+        private CollisionResolution collisionResolution;
         //public Player player;
         //public TileManager tiles;
         //public EnemyManager enemies;
@@ -42,10 +43,16 @@ namespace Game_Project
             
             keyboard = new KeyboardController();
             objectManager = new GameObjectManager();
+
+            //This is here to be able to load the collision dictionary
+            collisionResolution = new CollisionResolution(null, null, CollisionResolution.collideDirection.Left);
+
             //player = new Player();
             //tiles = new TileManager();
             //enemies = new EnemyManager();
             //items = new ItemManager();
+
+            collisionResolution.LoadCollisionDictionary();
 
             base.Initialize();
         }

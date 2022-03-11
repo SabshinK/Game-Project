@@ -65,25 +65,11 @@ namespace Game_Project
 
             if (!player.FaceRight)
             {
-                if (player.location.X > 0)
-                {
-                    player.location.X -= (int)player.physics.horizontalDistance;
-                }
-                else
-                {
-                    BackToIdle();
-                }
+                player.location.X -= (int)player.physics.horizontalDistance;
             } 
             else
             {
-                if (player.location.X < 800)
-                {
-                    player.location.X += (int)player.physics.horizontalDistance;
-                }
-                else
-                {
-                    BackToIdle();
-                }
+                player.location.X += (int)player.physics.horizontalDistance;
             }
 
             if (player.projectile != null)

@@ -7,81 +7,104 @@ namespace Game_Project
 {
     class CollisionDetection : ICollideable, IUpdateable
     {
-        private Player player;
-        private Object block; // type?
-        private ICollideable direction; // type?
-        private int player_top;
-        private int player_bottom;
-        private int player_left;
-        private int player_right;
-        private int block_top;
-        private int block_bottom;
-        private int block_left;
-        private int block_right;
-        private CollisionResolution collisionResolution; // ??
+        private ICollideable firstObject;
+        private ICollideable secondObject;
 
-        public CollisionDetection(Player Player, Object Block)
+        private float firstObject_top;
+        private float firstObject_bottom;
+        private float firstObject_left;
+        private float firstObject_right;
+        private float secondObject_top;
+        private float secondObject_bottom;
+        private float secondObject_left;
+        private float secondObject_right;
+        private float side_overlap;
+        private float updown_overlap;
+        private Vector2 firstObjectLocation;
+        private Vector2 secondObjectLocation;
+        private CollisionResolution collisionResolution;
+
+        private CollisionResolution.collideDirection direction;
+
+        public CollisionDetection(ICollideable Object1, ICollideable Object2, Vector2 locationObject1, Vector2 locationObject2)
         {
-            player = Player;
-            block = Block;
-            direction = null; // is this bad? i just feel weird about not defining direction outside of an if-else statement in Update()
-            player_top = player.location.y;
-            player_bottom = player.location.y + player.size.height;
-            player_left = player.location.x;
-            player_right = player.location.x + player.size.width;
-            block_top = block.location.y;
-            block_bottom = block.location.y + block.size.height;
-            block_left = block.location.x;
-            block_right = block.location.x + block.size.width;
+            //direction = null; // is this bad? i just feel weird about not defining direction outside of an if-else statement in Update()
+            /*  So I think all the stuff that was in here should go in update? I think the object manager or game will call
+            *   Update on the collision detector object which will check for all collisions with the info that was in here.
+            **/
+            firstObject = Object1;
+            secondObject = Object2;
 
-            Update();
+            firstObjectLocation = locationObject1;
+            secondObjectLocation = locationObject2;
         }
 
         public void Collide()
         {
 
-            collisionResolution = new CollisionResolution(player, block, direction); // am i supposed to do anything else with this?
+            collisionResolution = new CollisionResolution(firstObject, secondObject, direction);
 
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            // objects collide:
-            if !(player_right < block_left || block_right < player_left || player_bottom < block_top || block_bottom < player_top)
+            //check locations
+            firstObject_top = firstObjectLocation.Y;
+            firstObject_bottom = firstObjectLocation.Y + 128;
+            firstObject_left = firstObjectLocation.X;
+            firstObject_right = firstObjectLocation.X + 128;
+
+            if (secondObject.GetType() == typeof(Tile))
             {
-                if (player_right >= block_left)
+                secondObject_top = secondObjectLocation.Y;
+                secondObject_bottom = secondObjectLocation.Y + 64;
+                secondObject_left = secondObjectLocation.X;
+                secondObject_right = secondObjectLocation.X + 64;
+            } else
+            {
+                secondObject_top = secondObjectLocation.Y;
+                secondObject_bottom = secondObjectLocation.Y + 128;
+                secondObject_left = secondObjectLocation.X;
+                secondObject_right = secondObjectLocation.X + 128;
+            }
+
+
+            // objects collide:
+            if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top)) 
+            {
+                if (firstObject_right >= secondObject_left)
                 {
                     // left overlap (right side of player):
-                    side_overlap = player_right - block_left;
-                    direction = LEFT;
+                    side_overlap = firstObject_right - secondObject_left;
+                    direction = CollisionResolution.collideDirection.Left;
                 }
                 else
                 {
                     // right overlap (left side of player):
-                    side_overlap = block_right - player_left;
-                    direction = RIGHT;
+                    side_overlap = secondObject_right - firstObject_left;
+                    direction = CollisionResolution.collideDirection.Right;
                 }
 
-                if (player_top <= block_bottom)
+                if (firstObject_top <= secondObject_bottom)
                 {
                     // bottom overlap (top side of player):
-                    updown_overlap = block_bottom - player_top;
+                    updown_overlap = secondObject_bottom - firstObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = BOTTTOM;
+                        direction = CollisionResolution.collideDirection.Bottom;
                     }
                 }
                 else
                 {
                     // top overlap (bottom side of player):
-                    updown_overlap = player_bottom - block_top;
+                    updown_overlap = firstObject_bottom - secondObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = TOP;
+                        direction = CollisionResolution.collideDirection.Bottom;
                     }
                 }
 
-                Collide(player, block, direction);
+                Collide();
 
             }
 
