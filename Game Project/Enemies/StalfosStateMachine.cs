@@ -37,6 +37,11 @@ namespace Game_Project
             }
         }
 
+        public void Fall()
+        {
+            stalfosAction = actions.falling;
+        }
+
         public void Attack()
         {
             stalfosAction = actions.attacking;
