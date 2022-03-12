@@ -12,7 +12,7 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         BatStateMachine bat;
         ISprite batSprite;
-        Vector2 locationVector;
+        public Vector2 locationVector;
         int lengthOfAction;
         Physics physics;
         

@@ -12,7 +12,7 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         GelStateMachine gel;
         ISprite gelSprite;
-        Vector2 locationVector;
+        public Vector2 locationVector;
         int lengthOfAction = 0;
         Physics physics;
         
