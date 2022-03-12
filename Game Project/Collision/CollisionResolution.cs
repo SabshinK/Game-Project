@@ -59,36 +59,37 @@ namespace Game_Project
              * For animators: For FallBackLeft, the player would be facing right, but be falling back left.
              */
 
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Bottom), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Top), new Tuple<string, string>(null, "BatDamageCommand"));
+            // player colliding with the enemies
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", "BatFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", "BatFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Top), new Tuple<string, string>("TakeDamageCommand", "BatFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "BatDamageCommand"));
 
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(DragonEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(DragonEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(DragonEnemy), collideDirection.Top), new Tuple<string, string>(null, "DragonDamageCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(DragonEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", "DragonFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(DragonEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", "DragonFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(DragonEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "DragonDamageCommand"));
 
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GelEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GelEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GelEnemy), collideDirection.Top), new Tuple<string, string>(null, "GelDamageCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GelEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", "GelFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GelEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", "GelFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GelEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "GelDamageCommand"));
 
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GoriyaEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GoriyaEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GoriyaEnemy), collideDirection.Top), new Tuple<string, string>(null, "GoriyaDamageCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GoriyaEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", "GoriyaFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GoriyaEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", "GoriyaFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GoriyaEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "GoriyaDamageCommand"));
 
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Top), new Tuple<string, string>(null, "StalfosDamageCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", "StalfosFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", "StalfosFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "StalfosDamageCommand"));
 
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Top), new Tuple<string, string>(null, "ZohDamageCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Left), new Tuple<string, string>("TakeDamageCommand", "ZohFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Right), new Tuple<string, string>("TakeDamageCommand", "ZohFlipCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "ZohDamageCommand"));
 
-            // marked the tile type as Tile
+            // player colliding with the tiles
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Tile), collideDirection.Left), new Tuple<string, string>("IdleCommand", null));
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Tile), collideDirection.Right), new Tuple<string, string>("IdleCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Tile), collideDirection.Bottom), new Tuple<string, string>("IdleCommand", null));
-            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Tile), collideDirection.Top), new Tuple<string, string>("PlayerFallCommand", null));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Tile), collideDirection.Top), new Tuple<string, string>("IdleCommand", null));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Tile), collideDirection.Bottom), new Tuple<string, string>("PlayerFallCommand", null));
 
             //enemies colliding with the tiles
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(BatEnemy), typeof(Tile), collideDirection.Bottom), new Tuple<string, string>("BatFlipCommand", null));

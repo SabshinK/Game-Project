@@ -18,6 +18,7 @@ namespace Game_Project
         private int health;
         private string animationToCreate;
         public Vector2 location;
+        public Vector2 Position => location;
 
         public bool FaceRight { get; private set; }
 
@@ -114,21 +115,27 @@ namespace Game_Project
 
         public IProjectile CreateProjectile(int code)
         {
+            object[] parameters = new object[3];
+            parameters[0] = new Vector2((int)physics.horizontalDistance, (int)physics.horizontalVelocity);
+            parameters[1] = FaceRight;
+
             switch(code)
             {
                 case 1:
-                    return new Arrow(new UniversalParameterObject());
+                    return new Arrow(new UniversalParameterObject(parameters));
                 case 2:
-                    return new Bomb(new UniversalParameterObject());
+                    return new Bomb(new UniversalParameterObject(parameters));
                 case 3:
-                    return new Boomerang(new UniversalParameterObject());
+                    return new Boomerang(new UniversalParameterObject(parameters));
                 case 4:
-                    return new Candle(new UniversalParameterObject());
+                    return new Candle(new UniversalParameterObject(parameters));
                 case 5 :
-                    return new SwordBeam(new UniversalParameterObject());
+                    return new SwordBeam(new UniversalParameterObject(parameters));
                 default:
                     return null;
             }
+
+
         }
 
         public void Collide()
