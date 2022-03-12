@@ -1,5 +1,6 @@
 **Backlog Elements From Sprint 3:**
 
+
 **Art:**
 
 **Incomplete:**
@@ -12,14 +13,16 @@
 - Player animation for sword attacking was created.
 - Concept art for the enemies
 
-Code:
-Incomplete:
-TESTING
-The team did not have enough time for testing Sprint 3.
-Before the content for Sprint 4 is developed, the team has to test the content of Sprint3 and make sure it is working correctly.
-Debugging
-While the team debugged for a significant amount of time, more time must be put into debugging. (This coincides with testing).
-As of right now, the object classes implement ICollideable, and therefore implement a Collide() method. However, given the behavior of CollisionDetection and CollisionResolution, these methods have no code inside them (they are doing nothing for each object class). More thought needs to be put into the design of ICollideable, and the team needs to determine what the Collide() methods will do, if they do anything at all. (If they do not perform any functions, they need to be removed and which classes implement ICollideable needs to be rethought).
+**Code:**
+
+**Incomplete:**
+
+- TESTING
+- The team did not have enough time for testing Sprint 3.
+- Before the content for Sprint 4 is developed, the team has to test the content of Sprint3 and make sure it is working correctly.
+- Debugging
+    - While the team debugged for a significant amount of time, more time must be put into debugging. (This coincides with testing).
+- As of right now, the object classes implement ICollideable, and therefore implement a Collide() method. However, given the behavior of CollisionDetection and CollisionResolution, these methods have no code inside them (they are doing nothing for each object class). More thought needs to be put into the design of ICollideable, and the team needs to determine what the Collide() methods will do, if they do anything at all. (If they do not perform any functions, they need to be removed and which classes implement ICollideable needs to be rethought).
 Within the object interfaces, there needs to be a declared variable for the size of each object sprite. The team created a variable like this for the position of the objects. For example, in IEnemy, there is a public variable of type Vector2 called Position that can be implemented by every enemy class. This same idea must apply to a variable that indicates the sprite size.
 Tiles must be placed in specific locations on the game screen when the game is loaded to the first level. 
 
