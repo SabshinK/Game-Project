@@ -1,35 +1,34 @@
 Author of Code Review:    Rachel Watters
-Date of Code Review:	    2/19/2022
-Sprint Number:    2
-Name of File:     BatStateMachine.cs
-Author of File:    AJ Waizmann
+Date of Code Review:	    3/12/2022
+Sprint Number:    3
+Name of File:     CollisionDetection.cs
+Author of File:    Maria Stein
 
 Code Quality Comments:
-The variables above the class constructor are well sorted and easy to read through.
-Perhaps, to limit confusion, the variable names could have the word “Enemy” in them so that they aren’t accidentally compared to the Player’s states and variables. 
-It looks like the variable names have good syntax, which really helped with my ability to understand the code.
-The example for “GoombaStateMachine” on our class website talks about utilizing an if/else structure as well as looking at the enemy’s health to determine movement. That might be an option to look at.
+- The variables listed at the beginning of the class are well sorted, and clearly indicate what they will be manipulating. 
+- Problems are consolidated to specific methods, which makes debugging easier and makes it clear what will happen in the case of a collision. 
+- Because collision is so complex, it might help to have some comments that explain the logic behind when there is a collision and when there is not a collision.
+- If statements verifying the type of the object can likely be removed by refactoring the code. The code needs to be reworked so that it can perform operations on each object regardless of the type. 
+- There are a lot of float values. Can these values be consolidated into one data structure?
 
 Hypothetical Change(s) to to the Game that Are/Are Not Supported by This Code:
-	This StateMachine uses random numbers to determine the pathing of the enemies. Given that some enemies will be on platforms, some will be in secluded areas, and some won’t stray a certain distance away from where they started, we may want to conduct this moment differently. Random movement doesn’t allow for much control over where enemies are going, so we may want to try another method so that we ensure enemies stay in certain areas (eg. more difficult enemies should stay near the end of the level, flaying enemies should stay above ground, enemies on a platform should stay on that platform, etc.). 
-	We could potentially do this by defining a range for each enemy type, and then placing those distinct types in similar locations (eg. on/off a platform, in the air, on the ground level, etc.). The enemies could either move randomly in this range, or they could move in a set pattern. We could also implement a radius, where they chase the player when they get close, and otherwise maintain a constant movement pattern. As stated earlier, the example on our class website called “GoombaStateMachine” suggests using an if/else structure and the “health” variable.
-	I think the “stateArray” is a cool way to keep track of an enemy’s behavior, but I worry that the array is getting changed too often, and the player won’t be able to discern a pattern with which to defeat the enemy. I think, as I stated before, we want the enemies to follow some king of pattern to give the player visual cues.
-	Awesome work!
-  
+	This code relies on the values 128 and 64 to calculate the size of the sprite. The author correctly wants to use code that directly accesses the size of each sprite, but that is not possible at this time. Moving forward, there needs to be a variable established (potentially in the IDrawable interface) that is implemented by all of the drawable classes, and can therefore be accessed when the class type of the variable is unknown. This will create a better design for accessing the size that can be used in the future. This should hopefully remove any “if” statements that assess the type of the object, making cleaner and more efficient code. Additionally, in general, there are a lot of float values. It may be beneficial to create some kind of data structure or reworking of those variables to make the class less crowded and more clear. 
+	
 
 Author of Code Review:    Rachel Watters
-Date of Code Review:	    2/19/2022
-Sprint Number:    2
-Name of File:     ItemManager.cs
-Author of File:    Maria Stein
-Minutes It Took To Complete Review:  20  
+Date of Code Review:	    3/12/2022
+Sprint Number:    3
+Name of File:     GameObjectManager.cs
+Author of File:    AJ Waizmann
+Minutes It Took To Complete Review:     15 
 
-Comments On Readability:
-Some portions of variable names are abbreviated like “numItems”, which is an int indicating the total number of items in the game. It may be clearer to simply write “numberOfItems'' as the variable name. 
-The author needs to be sure to classify “public”, “private”, etc. for every variable to avoid confusion and error. 
-To improve readability, it may be a good idea for the author to group variable declarations above the constructor class by functionality, type, or available. (Eg. all the private variables are grouped, all the int’s are grouped, all of the variables contributing to the item List are grouped, etc.).
-The code could use some comments explaining what is happening for each method, or for the author’s general thought process. 
-Because the method “FeedItemList()” is called only once, it may be better to rename it to something like “CreateItemList()”. I think the word “feed” implies something like “add”, where it could occur more than once in the code. 
-NextItem() and PreviousItem() were very clear to me in terms of their logic and readability. The names of the variables and methods were descriptive, and the code was spaced so that it was easy to read. 
-Overall, I would say this code reads pretty well. I think variable name changes could make variable and method functionalities clearer, and there could be more thought put into where certain code is written. Arranging lines with purpose could make the variable declarations, in particular, much clearer. Great work!
+Comments On Readability: 
+- Variable names are clear and easy to work with.
+- Comments make it clear that the GameObjectManager is a singleton, and hence it is easier to work with it throughout the code, since that knowledge is laid out clearly. 
+- Update cycles through only a few of the lists that are created at the top of the file. Because of this, it may be a good idea to include small comments that detail exactly what is happening when cycling through each list. 
+- The variable names combined with the method names make it very clear what is happening in each method. 
+
+Overall, I think this code is clear and efficient. There may be a way to refactor this code so that it uses only one, large list. However, the application of the four distinct lists makes it obvious what is happening to each object in the list, and what each method is trying to do with the method calls. This class will change as the code develops, so we need to be sure it remains clear what is happening in each method (especially in the case where the lists are combined into one list of all the objects).
+
+
 
