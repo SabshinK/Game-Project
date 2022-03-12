@@ -12,7 +12,8 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         BatStateMachine bat;
         ISprite batSprite;
-        Vector2 locationVector;
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction;
         Physics physics;
         
@@ -42,6 +43,11 @@ namespace Game_Project
         public void Fall()
         {
             //bat cannot fall, so will never be used
+        }
+
+        public void Collide()
+        {
+            // TODO
         }
 
         public void Draw(SpriteBatch spriteBatch)

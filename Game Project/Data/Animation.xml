@@ -68,7 +68,7 @@
 	</Item>
 	<Item>
 		<AnimationName>dragonWaiting</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<Texture>TempBosses</Texture>
 		<Speed>3</Speed>
 		<Scale>2</Scale>
 		<Rectangle>1 11 24 32</Rectangle>
@@ -78,7 +78,7 @@
 	</Item>
 	<Item>
 		<AnimationName>dragonAttack</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<Texture>TempBosses</Texture>
 		<Speed>3</Speed>
 		<Scale>2</Scale>
 		<Rectangle>1 11 24 32</Rectangle>

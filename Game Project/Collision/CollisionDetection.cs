@@ -10,6 +10,8 @@ namespace Game_Project
         private ICollideable firstObject;
         private ICollideable secondObject;
 
+        private IPlayer player;
+
         private float firstObject_top;
         private float firstObject_bottom;
         private float firstObject_left;
@@ -26,17 +28,27 @@ namespace Game_Project
 
         private CollisionResolution.collideDirection direction;
 
-        public CollisionDetection(ICollideable Object1, ICollideable Object2, Vector2 locationObject1, Vector2 locationObject2)
-        {
-            //direction = null; // is this bad? i just feel weird about not defining direction outside of an if-else statement in Update()
-            /*  So I think all the stuff that was in here should go in update? I think the object manager or game will call
-            *   Update on the collision detector object which will check for all collisions with the info that was in here.
-            **/
-            firstObject = Object1;
-            secondObject = Object2;
+        GameObjectManager gameObjectManager;
 
-            firstObjectLocation = locationObject1;
-            secondObjectLocation = locationObject2;
+        GameTime gameTime;
+
+        List<IEnemy> enemies;
+        List<IProjectile> projectiles;
+        List<IItem> items;
+        List<ITile> tiles;
+
+        private const int movingObjectSize = 128;
+        private const int tileSize = 64;
+
+        public CollisionDetection()
+        {
+            player = GameObjectManager.Instance.player;
+
+            //Ask Object Manager for the lists
+            enemies = GameObjectManager.Instance.enemyList;
+            projectiles = GameObjectManager.Instance.projectileList;
+            items = GameObjectManager.Instance.itemList;
+            tiles = GameObjectManager.Instance.tileList;
         }
 
         public void Collide()
@@ -46,31 +58,32 @@ namespace Game_Project
 
         }
 
-        public void Update(GameTime gameTime)
+        public void CheckCollision()
         {
             //check locations
             firstObject_top = firstObjectLocation.Y;
-            firstObject_bottom = firstObjectLocation.Y + 128;
+            firstObject_bottom = firstObjectLocation.Y + movingObjectSize;
             firstObject_left = firstObjectLocation.X;
-            firstObject_right = firstObjectLocation.X + 128;
+            firstObject_right = firstObjectLocation.X + movingObjectSize;
 
             if (secondObject.GetType() == typeof(Tile))
             {
                 secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + 64;
+                secondObject_bottom = secondObjectLocation.Y + tileSize;
                 secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + 64;
-            } else
+                secondObject_right = secondObjectLocation.X + tileSize;
+            }
+            else
             {
                 secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + 128;
+                secondObject_bottom = secondObjectLocation.Y + movingObjectSize;
                 secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + 128;
+                secondObject_right = secondObjectLocation.X + movingObjectSize;
             }
 
 
             // objects collide:
-            if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top)) 
+            if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
             {
                 if (firstObject_right >= secondObject_left)
                 {
@@ -105,9 +118,67 @@ namespace Game_Project
                 }
 
                 Collide();
-
             }
+        }
 
+        public void Update(GameTime gameTime)
+        {
+            foreach (IEnemy enemy in enemies)
+            {
+                foreach (ITile tile in tiles)
+                {
+                    foreach (IItem item in items) 
+                    {
+                        foreach (IProjectile projectile in projectiles)
+                        {
+                            // player and enemies
+                            firstObjectLocation = player.Position;
+                            firstObject = player;
+
+                            secondObjectLocation = enemy.Position;
+                            secondObject = enemy;
+
+                            CheckCollision();
+
+                            // player and tiles
+                            firstObjectLocation = player.Position;
+                            firstObject = player;
+
+                            secondObjectLocation = tile.Position;
+                            secondObject = tile;
+
+                            CheckCollision();
+
+                            // enemies and tiles
+                            firstObjectLocation = enemy.Position;
+                            firstObject = enemy;
+
+                            secondObjectLocation = tile.Position;
+                            secondObject = tile;
+
+                            CheckCollision();
+
+                            // player and items
+                            firstObjectLocation = player.Position;
+                            firstObject = player;
+
+                            secondObjectLocation = item.Position;
+                            secondObject = item;
+
+                            CheckCollision();
+
+                            // enemies and projectiles
+                            firstObjectLocation = enemy.Position;
+                            firstObject = enemy;
+
+                            secondObjectLocation = projectile.Position;
+                            secondObject = projectile;
+
+                            CheckCollision();
+                        }
+                    }
+                }
+            }
         }
     }
 }

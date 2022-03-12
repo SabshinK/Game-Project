@@ -15,29 +15,45 @@ namespace Game_Project
         public static GameObjectManager Instance => instance;
 
         //I don't know if separating these is worth it, we don't quite have enough classes to make it worth it to hold a list of lists
-        List<IEnemy> enemyList = new List<IEnemy>();
-        List<IProjectile> projectileList = new List<IProjectile>();
-        List<IItem> itemList = new List<IItem>();
-        List<ITile> tileList = new List<ITile>();
+        public List<IEnemy> enemyList = new List<IEnemy>();
+        public List<IProjectile> projectileList = new List<IProjectile>();
+        public List<IItem> itemList = new List<IItem>();
+        public List<ITile> tileList = new List<ITile>();
+        public IPlayer player;
 
-        List<IUpdateable> updateableList = new List<IUpdateable>();
-        List<IDrawable> drawList = new List<IDrawable>();
 
-        List<IList> masterList = new List<IList>();
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(IDrawable drawable in drawList)
+            foreach (ITile tile in tileList)
             {
-                drawable.Draw(spriteBatch);
+                tile.Draw(spriteBatch);
             }
+            foreach (IItem item in itemList)
+            {
+                item.Draw(spriteBatch);
+            }
+            foreach (IEnemy enemy in enemyList)
+            {
+                enemy.Draw(spriteBatch);
+            }
+            foreach (IProjectile projectile in projectileList)
+            {
+                projectile.Draw(spriteBatch);
+            }
+           
+           
         }
 
         public void Update(GameTime gameTime)
         {
-            foreach(IUpdateable updateable in updateableList)
+            foreach (IEnemy enemy in enemyList)
             {
-                updateable.Update(gameTime);
+                enemy.Update(gameTime);
+            }
+            foreach (IProjectile projectile in projectileList)
+            {
+                projectile.Update(gameTime);
             }
         }
 
@@ -49,6 +65,17 @@ namespace Game_Project
             else if (T is IProjectile) projectileList.Add((IProjectile)T);
             else if (T is IItem) itemList.Add((IItem)T);
             else if (T is ITile) tileList.Add((ITile)T);
+            else if (T is IPlayer) player = T as IPlayer;
         }
+
+        public void RemoveObject(IDrawable dead)
+        {
+            // added casts to "dead" for each of these remove calls.
+            if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
+            else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
+            else if (dead is IItem) itemList.Remove((IItem)dead);
+            //else if (T is IPlayer) ???????
+        }
+
     }
 }

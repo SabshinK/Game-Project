@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game_Project.Commands
+namespace Game_Project
 {
     public class GoriyaFlipCommand : ICommand
     {
@@ -15,7 +15,7 @@ namespace Game_Project.Commands
 
         public void Execute()
         {
-            goriya.Flip();
+           // goriya.Flip();
         }
     }
 }

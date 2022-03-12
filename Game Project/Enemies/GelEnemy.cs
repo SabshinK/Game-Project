@@ -4,19 +4,18 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
-using Game_Project.Physics;
 
 namespace Game_Project
 {
-    class GelEnemy : IEnemy, ICollideable
+    public class GelEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         GelStateMachine gel;
         ISprite gelSprite;
-        Vector2 locationVector;
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction = 0;
         Physics physics;
-        
 
         public GelEnemy(UniversalParameterObject parameters)
         {
