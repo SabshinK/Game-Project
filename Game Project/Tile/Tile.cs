@@ -6,9 +6,10 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Tile : IDrawable, ICollideable
+    public class Tile : ITile
     {
         public Vector2 position;
+        public Vector2 Position => position;
         public ISprite sprite;
 
         public Tile(UniversalParameterObject parameters)

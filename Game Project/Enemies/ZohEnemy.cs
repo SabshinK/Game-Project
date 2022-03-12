@@ -7,19 +7,23 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class ZohEnemy : IEnemy
+    public class ZohEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         ZohStateMachine zoh;
         ISprite zohSprite;
-        Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
+
         int lengthOfAction = 0;
+        Physics physics;
         
         public ZohEnemy(UniversalParameterObject parameters)
         {
             zoh = new ZohStateMachine();
             locationVector = parameters.Position; //game will state where it wants the enemy when it is created
             zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
+            physics = new Physics();
         }
         public void ChangeDirection()
         {
@@ -36,6 +40,14 @@ namespace Game_Project
             zoh.TakeDamage();
         }
 
+        public void Fall()
+        {
+            zoh.Fall();
+        }
+        public void Collide()
+        {
+            //TODO
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
             zohSprite.Draw(spriteBatch, locationVector);
@@ -44,22 +56,40 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > new Random().Next(50))
-            {
-                ChangeDirection();
-                lengthOfAction = 0;
-            }
-
             stateTuple = zoh.getState();
 
-            //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
-                locationVector.X--;
-            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
-                locationVector.X++;
-            }
+            switch (stateTuple.Item1)
+            {
+                case actions.dead:
+                    //GameObjectManager.remove(this);
+                    zohSprite = null;
+                    break;
+                case actions.falling:
+                    locationVector.Y++;
+                    physics.VerticalChange(true);
+                    zohSprite.Update();
+                    break;
+                case actions.moving:
+                    if (stateTuple.Item2.Equals(direction.left))
+                    {
+                        locationVector.X--;
+                    }
+                    else
+                    {
+                        locationVector.X++;
+                    }
+                    zohSprite.Update();
 
-            zohSprite.Update();
+                    if (lengthOfAction > new Random().Next(100))
+                    {
+                        ChangeDirection();
+                        lengthOfAction = 0;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
             lengthOfAction++;
         }
 

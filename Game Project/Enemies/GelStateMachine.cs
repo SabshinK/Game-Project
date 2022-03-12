@@ -42,6 +42,11 @@ namespace Game_Project
             gelAction = actions.attacking;
         }
 
+        public void Fall()
+        {
+            gelAction = actions.falling;
+        }
+
         public Tuple<actions, direction> getState()
         {
 
