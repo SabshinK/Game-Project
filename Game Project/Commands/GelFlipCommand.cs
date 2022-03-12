@@ -15,7 +15,7 @@ namespace Game_Project
 
         public void Execute()
         {
-            gel.Flip();
+          //  gel.Flip();
         }
     }
 }

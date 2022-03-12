@@ -4,18 +4,15 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class ZohFlipCommand : ICommand
+    class ResetCommand : ICommand
     {
-        private ZohEnemy zoh;
-
-        public ZohFlipCommand(ZohEnemy zoh)
+        public ResetCommand()
         {
-            this.zoh = zoh;
         }
 
         public void Execute()
         {
-          //  zoh.Flip();
+            LevelLoader.Instance.LoadLevel();
         }
     }
 }
