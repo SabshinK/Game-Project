@@ -15,6 +15,7 @@ namespace Game_Project
         public ISprite sprite, movingSprite, despawnSprite;
         private bool userDirection;
         public bool finished;
+        public Vector2 Position => position;
 
         //constructor
         public Boomerang(UniversalParameterObject parameters)
@@ -29,6 +30,10 @@ namespace Game_Project
             finished = false;
         }
 
+        public void Collide()
+        {
+            moveFactor = -moveFactor;
+        }
 
         public void Update(GameTime gameTime)
         {

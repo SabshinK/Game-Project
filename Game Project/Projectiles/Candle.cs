@@ -18,6 +18,7 @@ namespace Game_Project
         private Vector2 finalPositionLeft;
         private bool stopFire;
         private bool finished;
+        public Vector2 Position => position;
         
         //constructor
         public Candle(UniversalParameterObject parameters)
@@ -35,6 +36,11 @@ namespace Game_Project
             fireSprite = SpriteFactory.Instance.CreateSprite("candleFireGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
             finished = false;
+
+        }
+
+        public void Collide()
+        {
 
         }
 

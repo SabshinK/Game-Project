@@ -6,5 +6,6 @@ namespace Game_Project
     public interface IProjectile : IUpdateable, IDrawable, ICollideable
     {
         // There are no projectile specific methods currently
+        public Vector2 Position { get; }
     }
 }

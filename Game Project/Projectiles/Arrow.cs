@@ -14,6 +14,7 @@ namespace Game_Project
         private int moveFactor;
         private ISprite sprite;
         private bool userDirection;
+        public Vector2 Position => position;
         //constructor
         public Arrow(UniversalParameterObject parameters)
         {
@@ -22,6 +23,11 @@ namespace Game_Project
             lifeSpan = 300f;
             moveFactor = 8;
             userDirection = parameters.Direction;
+        }
+
+        public void Collide()
+        {
+            GameObjectManager.Instance.RemoveObject(this);
         }
 
         public void Update(GameTime gameTime)
