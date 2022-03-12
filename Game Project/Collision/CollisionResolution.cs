@@ -110,6 +110,43 @@ namespace Game_Project
 
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(ZohEnemy), typeof(Tile), collideDirection.Left), new Tuple<string, string>("ZohFlipCommand", null));
             collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(ZohEnemy), typeof(Tile), collideDirection.Right), new Tuple<string, string>("ZohFlipCommand", null));
+
+            // player colliding with items
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Item), collideDirection.Left), new Tuple<string, string>(null, "RemoveItemCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Item), collideDirection.Right), new Tuple<string, string>(null, "RemoveItemCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Item), collideDirection.Top), new Tuple<string, string>(null, "RemoveItemCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Item), collideDirection.Bottom), new Tuple<string, string>(null, "RemoveItemCommand"));
+
+            // enemies colliding with projectiles
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(BatEnemy), typeof(IProjectile), collideDirection.Left), new Tuple<string, string>("BatDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(BatEnemy), typeof(IProjectile), collideDirection.Right), new Tuple<string, string>("BatDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(BatEnemy), typeof(IProjectile), collideDirection.Top), new Tuple<string, string>("BatDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(BatEnemy), typeof(IProjectile), collideDirection.Bottom), new Tuple<string, string>("BatDamageCommand", "RemoveProjectileCommand"));
+
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(DragonEnemy), typeof(IProjectile), collideDirection.Left), new Tuple<string, string>("DragonDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(DragonEnemy), typeof(IProjectile), collideDirection.Right), new Tuple<string, string>("DragonDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(DragonEnemy), typeof(IProjectile), collideDirection.Top), new Tuple<string, string>("DragonDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(DragonEnemy), typeof(IProjectile), collideDirection.Bottom), new Tuple<string, string>("DragonDamageCommand", "RemoveProjectileCommand"));
+
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GelEnemy), typeof(IProjectile), collideDirection.Left), new Tuple<string, string>("GelDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GelEnemy), typeof(IProjectile), collideDirection.Right), new Tuple<string, string>("GelDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GelEnemy), typeof(IProjectile), collideDirection.Top), new Tuple<string, string>("GelDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GelEnemy), typeof(IProjectile), collideDirection.Bottom), new Tuple<string, string>("GelDamageCommand", "RemoveProjectileCommand"));
+
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GoriyaEnemy), typeof(IProjectile), collideDirection.Left), new Tuple<string, string>("GoriyaDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GoriyaEnemy), typeof(IProjectile), collideDirection.Right), new Tuple<string, string>("GoriyaDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GoriyaEnemy), typeof(IProjectile), collideDirection.Top), new Tuple<string, string>("GoriyaDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(GoriyaEnemy), typeof(IProjectile), collideDirection.Bottom), new Tuple<string, string>("GoriyaDamageCommand", "RemoveProjectileCommand"));
+
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(StalfosEnemy), typeof(IProjectile), collideDirection.Left), new Tuple<string, string>("StalfosDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(StalfosEnemy), typeof(IProjectile), collideDirection.Right), new Tuple<string, string>("StalfosDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(StalfosEnemy), typeof(IProjectile), collideDirection.Top), new Tuple<string, string>("StalfosDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(StalfosEnemy), typeof(IProjectile), collideDirection.Bottom), new Tuple<string, string>("StalfosDamageCommand", "RemoveProjectileCommand"));
+
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(ZohEnemy), typeof(IProjectile), collideDirection.Left), new Tuple<string, string>("ZohDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(ZohEnemy), typeof(IProjectile), collideDirection.Right), new Tuple<string, string>("ZohDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(ZohEnemy), typeof(IProjectile), collideDirection.Top), new Tuple<string, string>("ZohDamageCommand", "RemoveProjectileCommand"));
+            collisionDictionary.Add(new Tuple<Type, Type, collideDirection>(typeof(ZohEnemy), typeof(IProjectile), collideDirection.Bottom), new Tuple<string, string>("ZohDamageCommand", "RemoveProjectileCommand"));
         }
     }
 }
