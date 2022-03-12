@@ -8,12 +8,13 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class StalfosEnemy : IEnemy
+    public class StalfosEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         StalfosStateMachine stalfos;
         ISprite stalfosSprite;
-        public Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction = 0;
         Physics physics;
         
@@ -51,6 +52,11 @@ namespace Game_Project
             physics.VerticalChange(true);
         }
 
+        public void Collide()
+        {
+            // TODO
+        }
+
         public void Update(GameTime gameTime)
         {
 
@@ -59,7 +65,6 @@ namespace Game_Project
             if (stateTuple.Item1.Equals(actions.dead))
             {
                 //GameObjectManager.remove(this);
-                this = null;
             }
             else { 
 

@@ -10,6 +10,7 @@ namespace Game_Project
     {
         private Texture2D spriteSheet;
         private Rectangle[] frames;
+        public Vector2 size;
 
         private int currentFrame;
         private int animationSpeed;
@@ -23,6 +24,8 @@ namespace Game_Project
             this.scale = spriteData.Item3;
             this.animationSpeed = spriteData.Item4;
             currentFrame = 0;
+
+            size = new Vector2(frames[0].Width, frames[0].Height);
         }
 
         // Count frames

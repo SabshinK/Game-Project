@@ -18,6 +18,7 @@ namespace Game_Project
         private int health;
         private string animationToCreate;
         public Vector2 location;
+        public Vector2 Position => location;
 
         public bool FaceRight { get; private set; }
 
