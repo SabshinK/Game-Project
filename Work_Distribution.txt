@@ -1,14 +1,22 @@
-ARTWORK: Rachel Watters (concept art for player, player animations and blocks) and Maria Stein (concept art, Background)
-Player: Aadya Jain (MoveLeft and right, keyboardController for player, player commands) and Rachel Watters (PayerManager, left and rightIdle, damage state) However both members helped critique to make it cohesive. 
-ItemManager.cs: Aadya Jain
-TileManager: Aadya Jain and Racel Watters (Zoom call working on same file)
-Sprint TWO planning documentation: Aadya Jain and Rachel Watters (synopsis for the game approved by all of the team)
-Backlog: Aadya Jain
-Trello Management: Sebastian King (Code priorities) and Aadya Jain
-SpriteFactory: Sebastian King (These include genericSprite.cs as well as other files.)
-Projectiles: Anooj Deshpande
-Enemies: AJ Waizmann
+ARTWORK: 
+Player animations: Rachel Watters 
+Tiles: Rachel Watters
+Enemy concept designs and development: Maria Stein
+
+CODE:
 Code Lead: Sebastian King (Looked over, helped debug, and advised all members for their code design!!) Managed branches on git
-Spritesheet: Sebastian King and Rachel Watters
-Item Commands: Rachel Watters and Sebastian King
-Notable contributions: Rachel Watters and Sebastian King pulled an all-nighter before due date to refactor and make sure everything was running smoothly. 
+Enemy interface and class updates: AJ Waizmann
+GameObjectManager: AJ Waizmann and Maria Stein
+CollisionDetection: Maria Stein
+Collision Resolution: Rachel Watters
+LevelLoader: Sebastian King
+Reading Data from XML files: Sebastian King
+
+DOCUMENTATION:
+Sprint THREE planning documentation: Entire team
+Backlog: Rachel Watters
+Trello Management: Aadya Jain
+Sprint 3 Reflection: Maria Stein 
+  (The sprint3 reflection was written by Maria Stein and is a compilation of all the thoughts the team had when working on the sprint and finishing it).
+Code Reviews: Entire team
+
