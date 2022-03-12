@@ -15,7 +15,7 @@ namespace Game_Project
 
         public void Execute()
         {
-            goriya.Flip();
+           // goriya.Flip();
         }
     }
 }

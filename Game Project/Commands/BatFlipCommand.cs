@@ -15,7 +15,7 @@ namespace Game_Project
 
         public void Execute()
         {
-            bat.Flip();
+            //bat.Flip();
         }
     }
 }

@@ -7,16 +7,16 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class DragonEnemy : IEnemy
+    public class DragonEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
         Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction;
         Candle weapon;
         Physics physics;
-        UniversalParameterObject weaponParameterObject;
 
         public DragonEnemy(UniversalParameterObject parameters)
         {
@@ -47,6 +47,11 @@ namespace Game_Project
         public void Fall()
         {
             dragon.Fall();
+        }
+
+        public void Collide()
+        {
+            // TODO
         }
 
         public void Draw(SpriteBatch spriteBatch)

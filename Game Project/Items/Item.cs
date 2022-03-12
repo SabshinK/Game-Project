@@ -9,6 +9,7 @@ namespace Game_Project
     public class Item : IItem
     {
         public Vector2 position;
+        public Vector2 Position => position;
         public ISprite sprite, despawnSprite;
         public bool finished;
 
@@ -22,7 +23,7 @@ namespace Game_Project
         public void Collide()
         {
             //remove item from screen
-            finished = true;
+            GameObjectManager.Instance.RemoveObject(this);
         }
 
         public void Draw(SpriteBatch spriteBatch)

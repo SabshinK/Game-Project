@@ -15,7 +15,7 @@ namespace Game_Project
 
         public void Execute()
         {
-            dragon.Flip();
+            //dragon.Flip();
         }
     }
 }

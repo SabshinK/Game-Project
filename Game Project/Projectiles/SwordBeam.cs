@@ -13,6 +13,7 @@ namespace Game_Project
         private ISprite sprite;
         private int moveFactor;
         public bool userDirection;
+        public Vector2 Position => position;
 
         //constructor
         public SwordBeam(UniversalParameterObject parameters)
@@ -21,6 +22,11 @@ namespace Game_Project
             moveFactor = 16;
             userDirection = parameters.Direction;
 
+        }
+
+        public void Collide()
+        {
+         //   GameObjectManager.Instance.RemoveObject(this);
         }
 
         public void Update(GameTime gameTime)

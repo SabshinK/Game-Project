@@ -6,5 +6,6 @@ namespace Game_Project
     public interface IItem : IDrawable, ICollideable
     {
         //  no item specific methods rn
+        public Vector2 Position { get; }
     }
 }
