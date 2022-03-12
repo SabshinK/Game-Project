@@ -1,19 +1,6 @@
 # Backlog Elements From Sprint 3:
 
 
-## Art:
-
-**Incomplete:**
-- The player sprites for using an item, jumping, and falling have yet to be created, and must be created for Sprint 4.
-- The enemy sprites must be made. As of right now, enemies from Zelda are being implemented. They must be replaced by our own original enemies so that original levels can be designed.
-- 3 more tiles must be created. 
-    - 6 tiles (3 for each level) were created. The final 3 must be made so that all of the levels can be designed and loaded.
-
-**Complete:**
-- Tiles for level 1 and 2 were created.
-- Player animation for sword attacking was created.
-- Concept art for the enemies
-
 ## Code:
 
 **Incomplete:**
@@ -39,14 +26,24 @@
 - A LevelLoader class and reading data through XML files was created. 
     - Sprite sheets are updated and tile maps are updated as new sprites are made, and the XML files are adjusted. 
 
+## Art:
+
+**Incomplete:**
+- The player sprites for using an item, jumping, and falling have yet to be created, and must be created for Sprint 4.
+- The enemy sprites must be made. As of right now, enemies from Zelda are being implemented. They must be replaced by our own original enemies so that original levels can be designed.
+- 3 more tiles must be created. 
+    - 6 tiles (3 for each level) were created. The final 3 must be made so that all of the levels can be designed and loaded.
+
+**Complete:**
+- Tiles for level 1 and 2 were created.
+- Player animation for sword attacking was created.
+- Concept art for the enemies
 
 ## Music:
 
 **Incomplete:**
 
 - An original score is going to be created for the game. Because Sprint 3 focused on the first level, one of the songs needed to be made. For sprint4, music must be made to accompany one or more of the levels.
-
-
 
 ## Documentation:
 
