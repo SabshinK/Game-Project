@@ -1,13 +1,41 @@
 Code reviews by Sebastian King
+
 02-19-22
 Sprint 2
 
 Readability:
 Reviewing KeyBoardControllerDraft.cs by Aadya Jain
-The code is fairly readable, it adheres to naming conventions, there are a few useless comments about wanting to make a new file and getting rid of the old keyboard controller when PlayerManager.cs is finished, which became Player.cs. Code is not cluttered and is spaced evenly, most methods have no need for comments so their absence is fine here. Method names adhere to what they do in the class and are cohesive.
+The code is fairly readable, it adheres to naming conventions, there are a few useless comments about wanting to make a new file and getting rid 
+of the old keyboard controller when PlayerManager.cs is finished, which became Player.cs. Code is not cluttered and is spaced evenly, most methods 
+have no need for comments so their absence is fine here. Method names adhere to what they do in the class and are cohesive.
 Review time: 10 minutes
 
 Maintainability:
 Reviewing ItemManager.cs by Maria Stein
-There is a bug in the code, when trying to initialize the List<ISprite> it is trying to be initialized like an array but Lists are a dynamic type so numItems is not needed. There is a cleaner way of changing the array index in both NextItem() and PreviousItem() so that the double index is not necessary using the modulo operator. Eventually this manager class will be deleted and replaced with an ObjectManager that keeps track of all the objects currently in the game, as well as the List being loaded a different way instead of in one large block, that becomes a data problem
+There is a bug in the code, when trying to initialize the List<ISprite> it is trying to be initialized like an array but Lists are a dynamic type 
+so numItems is not needed. There is a cleaner way of changing the array index in both NextItem() and PreviousItem() so that the double index is not 
+necessary using the modulo operator. Eventually this manager class will be deleted and replaced with an ObjectManager that keeps track of all the 
+objects currently in the game, as well as the List being loaded a different way instead of in one large block, that becomes a data problem
+Review time: 20 minutes
+
+03-11-22
+Sprint 3
+
+Readability:
+Reviewing Boomerang.cs by Anooj Deshpande
+The code is readable, the names are coherent but generally not super long, they adhere to most naming conventions. There are just enough comments
+to explain the logic inside of the update method (though it's mostly self explanitory). Method and class names are capitalized as they should be, no
+major issues
+Review time: 6 minutes
+
+Maintainability:
+Reviewing GoriyaEnemy.cs by AJ Waizmann
+For keeping track of the states of the Goriya, using an enum makes sense for the actions but not for the direction, there is only left or right and
+having direction be an enum makes loading object data more difficult. The state of the Goriya should also probably only be declared in one place and
+for the sake of simplicity and cohesion that should be the state machine, since that is the class that is keeping track of the state. Any projectile
+that is created should be referenced as an IProjectile if it has been declared, though there should be no reference to a projectile as the 
+GameObjectManager takes care of keeping track of projectiles. Most of the methods are coherent, they call on the state machine to do state logic as
+they should. The update logic is fine for the most part but could be cleaner, and once again all references to updating/drawing the projectile should
+be moved into the GameObjectManager. As an aside, many of the values that are instantiated in the constructor could have values that are loaded in 
+from the data file, that's more of a note to myself for what to move over into LevelLoader
 Review time: 20 minutes
