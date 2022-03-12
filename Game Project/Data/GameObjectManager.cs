@@ -70,9 +70,10 @@ namespace Game_Project
 
         public void RemoveObject(IDrawable dead)
         {
-            if (dead is IEnemy) enemyList.Remove(dead);
-            else if (dead is IProjectile) projectileList.Remove(dead);
-            else if (dead is IItem) itemList.Remove(dead);
+            // added casts to "dead" for each of these remove calls.
+            if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
+            else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
+            else if (dead is IItem) itemList.Remove((IItem)dead);
             //else if (T is IPlayer) ???????
         }
 

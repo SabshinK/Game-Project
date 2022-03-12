@@ -10,7 +10,7 @@ namespace Game_Project
         private ICollideable firstObject;
         private ICollideable secondObject;
 
-        private Player player;
+        private IPlayer player;
 
         private float firstObject_top;
         private float firstObject_bottom;
@@ -37,6 +37,9 @@ namespace Game_Project
         List<IItem> items;
         List<ITile> tiles;
 
+        private const int movingObjectSize = 128;
+        private const int tileSize = 64;
+
         public CollisionDetection()
         {
             player = GameObjectManager.Instance.player;
@@ -59,23 +62,23 @@ namespace Game_Project
         {
             //check locations
             firstObject_top = firstObjectLocation.Y;
-            firstObject_bottom = firstObjectLocation.Y + 128;
+            firstObject_bottom = firstObjectLocation.Y + movingObjectSize;
             firstObject_left = firstObjectLocation.X;
-            firstObject_right = firstObjectLocation.X + 128;
+            firstObject_right = firstObjectLocation.X + movingObjectSize;
 
             if (secondObject.GetType() == typeof(Tile))
             {
                 secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + 64;
+                secondObject_bottom = secondObjectLocation.Y + tileSize;
                 secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + 64;
+                secondObject_right = secondObjectLocation.X + tileSize;
             }
             else
             {
                 secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + 128;
+                secondObject_bottom = secondObjectLocation.Y + movingObjectSize;
                 secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + 128;
+                secondObject_right = secondObjectLocation.X + movingObjectSize;
             }
 
 
@@ -122,13 +125,59 @@ namespace Game_Project
         {
             foreach (IEnemy enemy in enemies)
             {
-                firstObjectLocation = player.location;
-                firstObject = player;
+                foreach (ITile tile in tiles)
+                {
+                    foreach (IItem item in items) 
+                    {
+                        foreach (IProjectile projectile in projectiles)
+                        {
+                            // player and enemies
+                            firstObjectLocation = player.Position;
+                            firstObject = player;
 
-                secondObjectLocation = enemy.Position;
-                secondObject = enemy;
-                
-                CheckCollision();
+                            secondObjectLocation = enemy.Position;
+                            secondObject = enemy;
+
+                            CheckCollision();
+
+                            // player and tiles
+                            firstObjectLocation = player.Position;
+                            firstObject = player;
+
+                            secondObjectLocation = tile.Position;
+                            secondObject = tile;
+
+                            CheckCollision();
+
+                            // enemies and tiles
+                            firstObjectLocation = enemy.Position;
+                            firstObject = enemy;
+
+                            secondObjectLocation = tile.Position;
+                            secondObject = tile;
+
+                            CheckCollision();
+
+                            // player and items
+                            firstObjectLocation = player.Position;
+                            firstObject = player;
+
+                            secondObjectLocation = item.Position;
+                            secondObject = item;
+
+                            CheckCollision();
+
+                            // enemies and projectiles
+                            firstObjectLocation = enemy.Position;
+                            firstObject = enemy;
+
+                            secondObjectLocation = projectile.Position;
+                            secondObject = projectile;
+
+                            CheckCollision();
+                        }
+                    }
+                }
             }
         }
     }
