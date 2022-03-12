@@ -19,25 +19,41 @@ namespace Game_Project
         public List<IProjectile> projectileList = new List<IProjectile>();
         public List<IItem> itemList = new List<IItem>();
         public List<ITile> tileList = new List<ITile>();
+        public IPlayer player;
 
-        List<IUpdateable> updateableList = new List<IUpdateable>();
-        List<IDrawable> drawList = new List<IDrawable>();
 
-        List<IList> masterList = new List<IList>();
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(IDrawable drawable in drawList)
+            foreach (ITile tile in tileList)
             {
-                drawable.Draw(spriteBatch);
+                tile.Draw(spriteBatch);
             }
+            foreach (IItem item in itemList)
+            {
+                item.Draw(spriteBatch);
+            }
+            foreach (IEnemy enemy in enemyList)
+            {
+                enemy.Draw(spriteBatch);
+            }
+            foreach (IProjectile projectile in projectileList)
+            {
+                projectile.Draw(spriteBatch);
+            }
+           
+           
         }
 
         public void Update(GameTime gameTime)
         {
-            foreach(IUpdateable updateable in updateableList)
+            foreach (IEnemy enemy in enemyList)
             {
-                updateable.Update(gameTime);
+                enemy.Update(gameTime);
+            }
+            foreach (IProjectile projectile in projectileList)
+            {
+                projectile.Update(gameTime);
             }
         }
 
@@ -49,6 +65,7 @@ namespace Game_Project
             else if (T is IProjectile) projectileList.Add((IProjectile)T);
             else if (T is IItem) itemList.Add((IItem)T);
             else if (T is ITile) tileList.Add((ITile)T);
+            else if (T is IPlayer) player = T as IPlayer;
         }
     }
 }
