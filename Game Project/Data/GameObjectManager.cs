@@ -15,13 +15,19 @@ namespace Game_Project
         public static GameObjectManager Instance => instance;
 
         //I don't know if separating these is worth it, we don't quite have enough classes to make it worth it to hold a list of lists
-        public List<IEnemy> enemyList = new List<IEnemy>();
-        public List<IProjectile> projectileList = new List<IProjectile>();
-        public List<IItem> itemList = new List<IItem>();
-        public List<ITile> tileList = new List<ITile>();
+        public List<IEnemy> enemyList;
+        public List<IProjectile> projectileList;
+        public List<IItem> itemList;
+        public List<ITile> tileList;
         public IPlayer player;
 
-
+        public GameObjectManager()
+        {
+            enemyList = new List<IEnemy>();
+            projectileList = new List<IProjectile>();
+            itemList = new List<IItem>();
+            tileList = new List<ITile>();
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -79,5 +85,12 @@ namespace Game_Project
             //else if (T is IPlayer) ???????
         }
 
+        public void Reset()
+        {
+            enemyList = new List<IEnemy>();
+            projectileList = new List<IProjectile>();
+            itemList = new List<IItem>();
+            tileList = new List<ITile>();
+        }
     }
 }

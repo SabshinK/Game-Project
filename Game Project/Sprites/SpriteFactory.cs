@@ -37,5 +37,10 @@ namespace Game_Project
         {
             frames.Add(name, data);
         }
+
+        public void Reset()
+        {
+            frames = new Dictionary<string, Tuple<string, Rectangle[], int, int>>();
+        }
     }
 }

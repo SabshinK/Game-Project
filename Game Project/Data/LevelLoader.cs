@@ -32,6 +32,10 @@ namespace Game_Project
 
         public void LoadLevel()
         {
+            // Guarantee new instances of the dictionaries and lists of data
+            SpriteFactory.Instance.Reset();
+            GameObjectManager.Instance.Reset();
+
             foreach (KeyValuePair<string, string> element in fileNames)
             {
                 XmlParser parser = new XmlParser(Path.GetFullPath(element.Value));
