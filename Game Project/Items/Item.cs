@@ -9,6 +9,7 @@ namespace Game_Project
     public class Item : IItem
     {
         public Vector2 position;
+        public Vector2 Position => position;
         public ISprite sprite, despawnSprite;
         public bool finished;
 
