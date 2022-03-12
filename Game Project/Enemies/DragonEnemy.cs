@@ -87,7 +87,8 @@ namespace Game_Project
             else if (stateTuple.Item1.Equals(actions.attacking))
             {
                 dragonSprite = attackSprite;
-                weapon = new Candle(locationVector, false);
+                
+                weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
                 for(int i = 0; i < 10; i++)
                 {
                     weapon.Update(gameTime);
