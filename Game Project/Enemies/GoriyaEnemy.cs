@@ -12,7 +12,7 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
-        Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         Boomerang weapon;
         

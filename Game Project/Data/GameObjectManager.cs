@@ -15,10 +15,10 @@ namespace Game_Project
         public static GameObjectManager Instance => instance;
 
         //I don't know if separating these is worth it, we don't quite have enough classes to make it worth it to hold a list of lists
-        List<IEnemy> enemyList = new List<IEnemy>();
-        List<IProjectile> projectileList = new List<IProjectile>();
-        List<IItem> itemList = new List<IItem>();
-        List<ITile> tileList = new List<ITile>();
+        public List<IEnemy> enemyList = new List<IEnemy>();
+        public List<IProjectile> projectileList = new List<IProjectile>();
+        public List<IItem> itemList = new List<IItem>();
+        public List<ITile> tileList = new List<ITile>();
 
         List<IUpdateable> updateableList = new List<IUpdateable>();
         List<IDrawable> drawList = new List<IDrawable>();

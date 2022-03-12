@@ -13,7 +13,7 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         StalfosStateMachine stalfos;
         ISprite stalfosSprite;
-        Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         Physics physics;
         

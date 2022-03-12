@@ -12,7 +12,13 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         ZohStateMachine zoh;
         ISprite zohSprite;
-        Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector;
+        public Vector2 Position
+        {
+            get { return locationVector; }
+
+        }
+
         int lengthOfAction = 0;
         Physics physics;
         
@@ -38,6 +44,14 @@ namespace Game_Project
             zoh.TakeDamage();
         }
 
+        public void Fall()
+        {
+            zoh.Fall();
+        }
+        public void Collide()
+        {
+            //TODO
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
             zohSprite.Draw(spriteBatch, locationVector);

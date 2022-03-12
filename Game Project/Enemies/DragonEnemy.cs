@@ -17,7 +17,7 @@ namespace Game_Project
         Candle weapon;
         Physics physics;
         UniversalParameterObject weaponParameterObject;
-        
+
         public DragonEnemy(UniversalParameterObject parameters)
         {
             dragon = new DragonStateMachine();
@@ -87,9 +87,9 @@ namespace Game_Project
             else if (stateTuple.Item1.Equals(actions.attacking))
             {
                 dragonSprite = attackSprite;
-                
+
                 weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
-                for(int i = 0; i < 10; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     weapon.Update(gameTime);
                 }
@@ -115,7 +115,7 @@ namespace Game_Project
                     break;
                 case actions.attacking:
                     dragonSprite = attackSprite;
-                    if(lengthOfAction == 0)
+                    if (lengthOfAction == 0)
                     {
                         //weaponParameterObject = new UniversalParameterObject(new object [ locationVector, false ]());
                     }
