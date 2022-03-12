@@ -12,7 +12,7 @@ namespace Game_Project
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
-        Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector = new Vector2(500, 300);
         int lengthOfAction = 0;
         Boomerang weapon;
         
@@ -88,12 +88,12 @@ namespace Game_Project
                 if (stateTuple.Item1.Equals(direction.right))
                 {
                     currentGoriyaSprite = goriyaSpriteRight;
-                    weapon = new Boomerang(locationVector, true);
+                    weapon = new Boomerang(new UniversalParameterObject(new object[] { locationVector, true, null }));
                 }
                 else
                 {
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    weapon = new Boomerang(locationVector, false);
+                    weapon = new Boomerang(new UniversalParameterObject(new object[] { locationVector, false, null }));
                 }
                 
             }

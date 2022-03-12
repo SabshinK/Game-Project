@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Tile : IDrawable, ICollideable
+    public class Tile : ITile
     {
         public Vector2 position;
         public ISprite sprite;
