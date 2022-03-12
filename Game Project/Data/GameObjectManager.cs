@@ -50,5 +50,14 @@ namespace Game_Project
             else if (T is IItem) itemList.Add((IItem)T);
             else if (T is ITile) tileList.Add((ITile)T);
         }
+
+        public void RemoveObject(IDrawable dead)
+        {
+            if (dead is IEnemy) enemyList.Remove(dead);
+            else if (dead is IProjectile) projectileList.Remove(dead);
+            else if (dead is IItem) itemList.Remove(dead);
+            //else if (T is IPlayer) ???????
+        }
+
     }
 }

@@ -22,7 +22,7 @@ namespace Game_Project
         public void Collide()
         {
             //remove item from screen
-            finished = true;
+            GameObjectManager.Instance.RemoveObject(this);
         }
 
         public void Draw(SpriteBatch spriteBatch)
