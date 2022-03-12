@@ -19,6 +19,8 @@ namespace Game_Project
 
         public void ChangeDirection()
         {
+
+            dragonAction = actions.moving;
             if (dragonDirection.Equals(direction.right)){
                 dragonDirection = direction.left;
             }
