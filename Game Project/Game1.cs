@@ -42,15 +42,9 @@ namespace Game_Project
             LevelLoader.Instance.LoadLevel();
             
             keyboard = new KeyboardController();
-            objectManager = new GameObjectManager();
 
             //This is here to be able to load the collision dictionary
             collisionResolution = new CollisionResolution(null, null, CollisionResolution.collideDirection.Left);
-
-            //player = new Player();
-            //tiles = new TileManager();
-            //enemies = new EnemyManager();
-            //items = new ItemManager();
 
             collisionResolution.LoadCollisionDictionary();
 
@@ -64,7 +58,7 @@ namespace Game_Project
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //keyboard.LoadContent(this, player, tiles, enemies, items);
+            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
 
         /// <summary>
@@ -77,9 +71,9 @@ namespace Game_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //player.state.Update(gameTime);
-            //enemies.Update(gameTime);
-            //keyboard.Update(gameTime);
+           
+            keyboard.Update(gameTime);
+            GameObjectManager.Instance.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -92,10 +86,7 @@ namespace Game_Project
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //player.Draw(spriteBatch);
-            //tiles.Draw(spriteBatch);
-            //enemies.Draw(spriteBatch);
-            //items.Draw(spriteBatch);
+            GameObjectManager.Instance.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

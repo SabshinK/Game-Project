@@ -28,9 +28,10 @@ namespace Game_Project
 
         public void Collide()
         {
-            commandObject1 = collisionDictionary[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item1;
-            commandObject2 = collisionDictionary[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item2;
-
+            if (object1 != null && object2 != null) {
+                commandObject1 = collisionDictionary[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item1;
+                commandObject2 = collisionDictionary[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item2;
+            }
             if (commandObject1 != null)
             {
                 Type commandType1 = Type.GetType(commandObject1);

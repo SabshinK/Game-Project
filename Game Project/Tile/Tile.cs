@@ -15,6 +15,7 @@ namespace Game_Project
         public Tile(UniversalParameterObject parameters)
         {
             position = parameters.Position;
+            sprite = SpriteFactory.Instance.CreateSprite(parameters.AnimationName);
         }
 
         public void Collide()
