@@ -1,8 +1,8 @@
 CODE:
 
 Code Lead: Sebastian King (Advised all members for their code design!!)
-Significant debugging: Sebastian King and Anooj Deshpande 
-  (Other members of the team debugged as well, but these team members had significant contributions to debugging)
+Significant debugging: Sebastian King and Anooj Deshpande (among the team, these members had the most significant contributions to debugging)
+  Also: Rachel Watters
 New Command Files: Rachel Watters and Sebastian King
 Enemy interface and class updates: AJ Waizmann
 Projectile interface and class updates: Anooj Deshpande
@@ -13,6 +13,7 @@ CollisionResolution: Rachel Watters
   Rachel Watters and Maria Stein worked together to consolidate the logic of these classes.
 LevelLoader: Sebastian King
 Reading Data from XML files: Sebastian King and Anooj Deshpande
+New ITile and IItem interfaces with classes Tile and Interface that implement them: Maria Stein
 
 
 DOCUMENTATION:
