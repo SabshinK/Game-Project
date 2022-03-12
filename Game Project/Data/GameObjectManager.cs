@@ -25,6 +25,7 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            player?.Draw(spriteBatch);
             foreach (ITile tile in tileList)
             {
                 tile.Draw(spriteBatch);
@@ -47,6 +48,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            player.Update(gameTime);
             foreach (IEnemy enemy in enemyList)
             {
                 enemy.Update(gameTime);
@@ -67,5 +69,15 @@ namespace Game_Project
             else if (T is ITile) tileList.Add((ITile)T);
             else if (T is IPlayer) player = T as IPlayer;
         }
+
+        public void RemoveObject(IDrawable dead)
+        {
+            // added casts to "dead" for each of these remove calls.
+            if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
+            else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
+            else if (dead is IItem) itemList.Remove((IItem)dead);
+            //else if (T is IPlayer) ???????
+        }
+
     }
 }
