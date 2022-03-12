@@ -4,7 +4,6 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
-using Game_Project.Physics;
 
 namespace Game_Project
 {
