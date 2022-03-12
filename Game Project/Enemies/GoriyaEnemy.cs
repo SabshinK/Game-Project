@@ -7,12 +7,13 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class GoriyaEnemy : IEnemy
+    public class GoriyaEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
-        public Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction = 0;
         Boomerang weapon;
         
@@ -37,6 +38,16 @@ namespace Game_Project
         public void TakeDamage()
         {
             goriya.TakeDamage();
+        }
+
+        public void Fall()
+        {
+            // TODO 
+        }
+
+        public void Collide() 
+        { 
+            // TODO
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -7,17 +7,13 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class ZohEnemy : IEnemy
+    public class ZohEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         ZohStateMachine zoh;
         ISprite zohSprite;
         public Vector2 locationVector;
-        public Vector2 Position
-        {
-            get { return locationVector; }
-
-        }
+        public Vector2 Position => locationVector;
 
         int lengthOfAction = 0;
         Physics physics;
