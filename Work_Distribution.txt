@@ -9,7 +9,8 @@ Projectile interface and class updates: Anooj Deshpande
 GameObjectManager: Maria Stein and AJ Waizmann
 Physics and implementation of physics in the object states: Rachel Watters
 CollisionDetection: Maria Stein
-Collision Resolution: Rachel Watters
+CollisionResolution: Rachel Watters
+  Rachel Watters and Maria Stein worked together to consolidate the logic of these classes.
 LevelLoader: Sebastian King
 Reading Data from XML files: Sebastian King and Anooj Deshpande
 
