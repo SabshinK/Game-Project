@@ -25,6 +25,7 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            player?.Draw(spriteBatch);
             foreach (ITile tile in tileList)
             {
                 tile.Draw(spriteBatch);
@@ -47,6 +48,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            player.Update(gameTime);
             foreach (IEnemy enemy in enemyList)
             {
                 enemy.Update(gameTime);

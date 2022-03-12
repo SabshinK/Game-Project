@@ -49,7 +49,7 @@ namespace Game_Project
         public void Fall()
         {
             stalfos.Fall();
-            physics.VerticalChange(true);
+            //physics.VerticalChange(true);
         }
 
         public void Collide()

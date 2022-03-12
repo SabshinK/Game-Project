@@ -13,7 +13,7 @@ namespace Game_Project
         public static SpriteFactory Instance => instance;
 
         // A Dictionary that contains a string key and a tuple containing the name of the texture, an array of the frame rectangles,
-        // the scale, and the animation speed
+        // the animation speed, and the scale
         private Dictionary<string, Tuple<string, Rectangle[], int, int>> frames = new Dictionary<string, Tuple<string, Rectangle[], int, int>>();
 
         public SpriteFactory()

@@ -125,59 +125,59 @@ namespace Game_Project
         {
             foreach (IEnemy enemy in enemies)
             {
+                // player and enemies
+                firstObjectLocation = player.Position;
+                firstObject = player;
+
+                secondObjectLocation = enemy.Position;
+                        secondObject = enemy;
+                
+                CheckCollision();
+
                 foreach (ITile tile in tiles)
                 {
-                    foreach (IItem item in items) 
-                    {
-                        foreach (IProjectile projectile in projectiles)
-                        {
-                            // player and enemies
-                            firstObjectLocation = player.Position;
-                            firstObject = player;
+                    // enemies and tiles
+                        firstObjectLocation = enemy.Position;
+                        firstObject = enemy;
 
-                            secondObjectLocation = enemy.Position;
-                            secondObject = enemy;
+                        secondObjectLocation = tile.Position;
+                        secondObject = tile;
 
-                            CheckCollision();
-
-                            // player and tiles
-                            firstObjectLocation = player.Position;
-                            firstObject = player;
-
-                            secondObjectLocation = tile.Position;
-                            secondObject = tile;
-
-                            CheckCollision();
-
-                            // enemies and tiles
-                            firstObjectLocation = enemy.Position;
-                            firstObject = enemy;
-
-                            secondObjectLocation = tile.Position;
-                            secondObject = tile;
-
-                            CheckCollision();
-
-                            // player and items
-                            firstObjectLocation = player.Position;
-                            firstObject = player;
-
-                            secondObjectLocation = item.Position;
-                            secondObject = item;
-
-                            CheckCollision();
-
-                            // enemies and projectiles
-                            firstObjectLocation = enemy.Position;
-                            firstObject = enemy;
-
-                            secondObjectLocation = projectile.Position;
-                            secondObject = projectile;
-
-                            CheckCollision();
-                        }
-                    }
+                        CheckCollision();
                 }
+                foreach (IProjectile projectile in projectiles)
+                {
+                    // enemies and projectiles
+                        firstObjectLocation = enemy.Position;
+                        firstObject = enemy;
+
+                        secondObjectLocation = projectile.Position;
+                        secondObject = projectile;
+
+                        CheckCollision();
+                }
+            }
+            foreach (ITile tile in tiles)
+            {
+                // player and tiles
+                        firstObjectLocation = player.Position;
+                        firstObject = player;
+
+                        secondObjectLocation = tile.Position;
+                        secondObject = tile;
+
+                        CheckCollision();
+            }
+            foreach (IItem item in items) 
+            {
+                    // player and items
+                        firstObjectLocation = player.Position;
+                        firstObject = player;
+
+                        secondObjectLocation = item.Position;
+                        secondObject = item;
+
+                        CheckCollision();
             }
         }
     }
