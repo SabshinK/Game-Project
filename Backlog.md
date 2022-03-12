@@ -26,6 +26,17 @@
 - A LevelLoader class and reading data through XML files was created. 
     - Sprite sheets are updated and tile maps are updated as new sprites are made, and the XML files are adjusted. 
 
+## Documentation:
+
+**Complete:**
+
+- Planning
+- Backlog
+- README File
+- Sprint3 Reflection
+- Code reviews for all team members
+- Trello and Google Drive updates
+
 ## Art:
 
 **Incomplete:**
@@ -44,14 +55,3 @@
 **Incomplete:**
 
 - An original score is going to be created for the game. Because Sprint 3 focused on the first level, one of the songs needed to be made. For sprint4, music must be made to accompany one or more of the levels.
-
-## Documentation:
-
-**Complete:**
-
-- Planning
-- Backlog
-- README File
-- Sprint3 Reflection
-- Code reviews for all team members
-- Trello and Google Drive updates
