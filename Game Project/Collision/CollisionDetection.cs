@@ -37,9 +37,9 @@ namespace Game_Project
         List<IItem> items;
         List<ITile> tiles;
 
-        public CollisionDetection(Player manager)
+        public CollisionDetection()
         {
-            player = manager;
+            player = GameObjectManager.Instance.player;
 
             //Ask Object Manager for the lists
             enemies = GameObjectManager.Instance.enemyList;
