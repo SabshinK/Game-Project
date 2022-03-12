@@ -26,17 +26,15 @@ namespace Game_Project
 
         private CollisionResolution.collideDirection direction;
 
-        public CollisionDetection(ICollideable Object1, ICollideable Object2, Vector2 locationObject1, Vector2 locationObject2)
-        {
-            //direction = null; // is this bad? i just feel weird about not defining direction outside of an if-else statement in Update()
-            /*  So I think all the stuff that was in here should go in update? I think the object manager or game will call
-            *   Update on the collision detector object which will check for all collisions with the info that was in here.
-            **/
-            firstObject = Object1;
-            secondObject = Object2;
+        Tuple<ICollideable, ICollideable> twoObjects;
 
-            firstObjectLocation = locationObject1;
-            secondObjectLocation = locationObject2;
+        GameTime gameTime;
+
+        public CollisionDetection()
+        {
+            //Ask Object Manager for the lists
+
+
         }
 
         public void Collide()
@@ -46,8 +44,17 @@ namespace Game_Project
 
         }
 
+        public Tuple<ICollideable, ICollideable> GetTwoObjects()
+        {
+            Tuple<ICollideable, ICollideable> twoObjectsToCollide;
+
+            return twoObjectsToCollide;
+        }
+
         public void Update(GameTime gameTime)
         {
+            twoObjects = GetTwoObjects();
+
             //check locations
             firstObject_top = firstObjectLocation.Y;
             firstObject_bottom = firstObjectLocation.Y + 128;
