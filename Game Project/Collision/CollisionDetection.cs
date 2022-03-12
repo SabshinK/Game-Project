@@ -10,6 +10,8 @@ namespace Game_Project
         private ICollideable firstObject;
         private ICollideable secondObject;
 
+        private Player player;
+
         private float firstObject_top;
         private float firstObject_bottom;
         private float firstObject_left;
@@ -26,15 +28,24 @@ namespace Game_Project
 
         private CollisionResolution.collideDirection direction;
 
-        Tuple<ICollideable, ICollideable> twoObjects;
+        GameObjectManager gameObjectManager;
 
         GameTime gameTime;
 
-        public CollisionDetection()
+        List<IEnemy> enemies;
+        List<IProjectile> projectiles;
+        List<IItem> items;
+        List<ITile> tiles;
+
+        public CollisionDetection(Player manager)
         {
+            player = manager;
+
             //Ask Object Manager for the lists
-
-
+            enemies = GameObjectManager.Instance.enemyList;
+            projectiles = GameObjectManager.Instance.projectileList;
+            items = GameObjectManager.Instance.itemList;
+            tiles = GameObjectManager.Instance.tileList;
         }
 
         public void Collide()
@@ -44,17 +55,8 @@ namespace Game_Project
 
         }
 
-        public Tuple<ICollideable, ICollideable> GetTwoObjects()
+        public void CheckCollision()
         {
-            Tuple<ICollideable, ICollideable> twoObjectsToCollide;
-
-            return twoObjectsToCollide;
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            twoObjects = GetTwoObjects();
-
             //check locations
             firstObject_top = firstObjectLocation.Y;
             firstObject_bottom = firstObjectLocation.Y + 128;
@@ -67,7 +69,8 @@ namespace Game_Project
                 secondObject_bottom = secondObjectLocation.Y + 64;
                 secondObject_left = secondObjectLocation.X;
                 secondObject_right = secondObjectLocation.X + 64;
-            } else
+            }
+            else
             {
                 secondObject_top = secondObjectLocation.Y;
                 secondObject_bottom = secondObjectLocation.Y + 128;
@@ -77,7 +80,7 @@ namespace Game_Project
 
 
             // objects collide:
-            if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top)) 
+            if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
             {
                 if (firstObject_right >= secondObject_left)
                 {
@@ -112,9 +115,21 @@ namespace Game_Project
                 }
 
                 Collide();
-
             }
+        }
 
+        public void Update(GameTime gameTime)
+        {
+            foreach (IEnemy enemy in enemies)
+            {
+                firstObjectLocation = player.location;
+                firstObject = player;
+
+                secondObjectLocation = enemy.Position;
+                secondObject = enemy;
+                
+                CheckCollision();
+            }
         }
     }
 }
