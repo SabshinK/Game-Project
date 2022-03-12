@@ -7,9 +7,9 @@ namespace Game_Project
     class BoomerangChangeDirectionCommand : ICommand
     {
         Boomerang boomerang;
-        public BoomerangChangeDirectionCommand()
+        public BoomerangChangeDirectionCommand(Boomerang boomerang)
         {
-
+            this.boomerang = boomerang;
         }
 
         public void Execute()

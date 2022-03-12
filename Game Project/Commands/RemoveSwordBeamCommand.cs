@@ -7,9 +7,9 @@ namespace Game_Project
     class RemoveSwordBeamCommand : ICommand
     {
         SwordBeam swordBeam;
-        public RemoveSwordBeamCommand()
+        public RemoveSwordBeamCommand(SwordBeam swordBeam)
         {
-
+            this.swordBeam = swordBeam;
         }
 
         public void Execute()

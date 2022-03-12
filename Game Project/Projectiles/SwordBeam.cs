@@ -26,7 +26,7 @@ namespace Game_Project
 
         public void Collide()
         {
-         //   GameObjectManager.Instance.RemoveObject(this);
+            GameObjectManager.Instance.RemoveObject(this);
         }
 
         public void Update(GameTime gameTime)
