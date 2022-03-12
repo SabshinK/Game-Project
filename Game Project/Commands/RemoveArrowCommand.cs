@@ -7,9 +7,10 @@ namespace Game_Project
     class RemoveArrowCommand : ICommand
     {
         Arrow arrow;
-        public RemoveArrowCommand()
-        {
 
+        public RemoveArrowCommand(Arrow arrow)
+        {
+            this.arrow = arrow;
         }
 
         public void Execute()
