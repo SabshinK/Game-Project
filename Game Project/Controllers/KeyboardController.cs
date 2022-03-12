@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Game_Project
 			controllerMappings.Add(key, command);
 		}
 
-		public void Update()
+		public void Update(GameTime gameTime)
 		{
 			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 
@@ -33,19 +34,6 @@ namespace Game_Project
 				}
 			}
 
-            //if (Keyboard.GetState().IsKeyDown(Keys.A))
-            //{
-            //    controllerMappings[Keys.A].Execute();
-            //}
-            //else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            //{
-            //    controllerMappings[Keys.D].Execute();
-            //}
-            //else
-            //{
-            //    controllerMappings[Keys.None].Execute();
-            //}
-
 			// This statement translates to NOT XOR because we want either both keys or none
             if (!(Keyboard.GetState().IsKeyDown(Keys.A) ^ Keyboard.GetState().IsKeyDown(Keys.D)))
             {
@@ -53,26 +41,22 @@ namespace Game_Project
             }
         }
 
-		public void LoadContent(Game1 game, Player player, TileManager tiles, EnemyManager enemies, ItemManager items)
+		public void LoadContent(Game1 game, Player player)
 		{
 			RegisterCommand(Keys.None, new IdleCommand(player));
 			RegisterCommand(Keys.Q, new QuitCommand(game));
 			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
+			RegisterCommand(Keys.W, new PlayerJumpCommand(player));
 			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player)); 
 			RegisterCommand(Keys.Z, new AttackCommand(player));
 			RegisterCommand(Keys.N, new AttackCommand(player));
-			RegisterCommand(Keys.T, new PreviousTileCommand(tiles)); // This will go to the previous tile in the block.
-			RegisterCommand(Keys.Y, new NextTileCommand(tiles)); // This will go to the next tile in the block
-			RegisterCommand(Keys.O, new PreviousEnemyCommand(enemies));
-			RegisterCommand(Keys.P, new NextEnemyCommand(enemies));
-			RegisterCommand(Keys.U, new PreviousItemCommand(items));
-			RegisterCommand(Keys.I, new NextItemCommand(items));
 			RegisterCommand(Keys.D1, new UseItemCommand(player, 1));
 			RegisterCommand(Keys.D2, new UseItemCommand(player, 2));
 			RegisterCommand(Keys.D3, new UseItemCommand(player, 3));
 			RegisterCommand(Keys.D4, new UseItemCommand(player, 4));
 			RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
 			RegisterCommand(Keys.E, new TakeDamageCommand(player));
+			RegisterCommand(Keys.R, new ResetCommand());
 		}
 	}
 }

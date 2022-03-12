@@ -1,3 +1,29 @@
+SPRINT 3:
+
+Readability-
+Author of the code review: Anooj Deshpande
+Date of the code review: 11 March 2022
+Sprint number: Sprint 3
+Name of the .cs file being reviewed: CollisionDetection.cs
+Author of the .cs file being reviewed: Maria Stein
+Number of minutes taken to complete the review: 7 minutes
+Specific comments on what is readable and what is not:
+-Code is a lot, but well commented
+-function and variable names are descriptive enough to understand their usage
+
+Code Quality-
+Author of the code review: Anooj Deshpande
+Date of the code review: 11 March 2022
+Sprint number: Sprint 3
+Name of the .cs file being reviewed: AJ Waizmann
+Author of the .cs file being reviewed: GameObjectManager.cs
+Specific comments on code quality:
+-code is concise and to the point
+-could have used switch statements for RegisterObject(), but if-else block is short and does the job
+-Should work in most situations
+
+SPRINT 2:
+
 Readability-
 Author of the code review: Anooj Deshpande
 Date of the code review: 19 February 2022

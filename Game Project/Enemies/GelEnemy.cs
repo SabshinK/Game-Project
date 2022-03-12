@@ -7,30 +7,24 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class GelEnemy : IEnemy
+    public class GelEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         GelStateMachine gel;
         ISprite gelSprite;
-        Vector2 locationVector;
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction = 0;
-        
+        Physics physics;
 
-        public GelEnemy(Vector2 vector)
+        public GelEnemy(UniversalParameterObject parameters)
         {
-            locationVector = vector;
+            locationVector = parameters.Position;
             lengthOfAction = 0;
             gel = new GelStateMachine();
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
+            physics = new Physics();
         }
-
-      //  public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-          //  gel = new GelStateMachine();
-            //spriteBatch = gameSpriteBatch;
-            //locationVector = vector; //game will state where it wants the enemy when it is created
-           // gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
-        //}
         public void ChangeDirection()
         {
             gel.ChangeDirection();
@@ -51,25 +45,53 @@ namespace Game_Project
             gelSprite.Draw(spriteBatch, locationVector);
         }
 
+        public void Collide()
+        {
+            //TODO
+        }
+
+        public void Fall()
+        {
+            gel.Fall();
+        }
+
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > new Random().Next(50))
-            {
-                ChangeDirection();
-                lengthOfAction = 0;
-            }
-
             stateTuple = gel.getState();
 
-            //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
-                locationVector.X--;
-            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
-                locationVector.X++;
-            }
+            switch (stateTuple.Item1)
+            {
+                case actions.dead:
+                    //GameObjectManager.remove(this);
+                    gelSprite = null;
+                    break;
+                case actions.falling:
+                    locationVector.Y++;
+                    physics.VerticalChange(true, gameTime);
+                    gelSprite.Update();
+                    break;
+                case actions.moving:
+                    if (stateTuple.Item2.Equals(direction.left))
+                    {
+                        locationVector.X--;
+                    }
+                    else
+                    {
+                        locationVector.X++;
+                    }
+                    gelSprite.Update();
 
-            gelSprite.Update();
+                    if (lengthOfAction > new Random().Next(100))
+                    {
+                        ChangeDirection();
+                        lengthOfAction = 0;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
             lengthOfAction++;
         }
 

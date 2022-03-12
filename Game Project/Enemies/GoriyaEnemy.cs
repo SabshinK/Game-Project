@@ -7,32 +7,24 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class GoriyaEnemy : IEnemy
+    public class GoriyaEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         GoriyaStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
-        //SpriteBatch spriteBatch;
-        Vector2 locationVector = new Vector2(500, 300);
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction = 0;
         Boomerang weapon;
         
-        public GoriyaEnemy(Vector2 location)
+        public GoriyaEnemy(UniversalParameterObject parameters)
         {
             goriya = new GoriyaStateMachine();
-            locationVector = location;
+            locationVector = parameters.Position;
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
             currentGoriyaSprite = goriyaSpriteRight;
         }
-        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-        //    goriya = new GoriyaStateMachine();
-        //    spriteBatch = gameSpriteBatch;
-        //    locationVector = vector; //game will state where it wants the enemy when it is created
-        //    goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
-        //    goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
-        //}
         public void ChangeDirection()
         {
             goriya.ChangeDirection();
@@ -48,6 +40,16 @@ namespace Game_Project
             goriya.TakeDamage();
         }
 
+        public void Fall()
+        {
+            // TODO 
+        }
+
+        public void Collide() 
+        { 
+            // TODO
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             stateTuple = goriya.getState();
@@ -61,11 +63,23 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > new Random().Next(100))
+            if(weapon != null && !weapon.finished)
             {
-                Attack();
-                ChangeDirection();
-                lengthOfAction = 0;
+                weapon.Update(gameTime);
+            }
+            else
+            {
+                int random = new Random().Next(200);
+                if(lengthOfAction > random)
+                {
+                    Attack();
+                    lengthOfAction = 0;
+                }
+                else if(lengthOfAction > random - 50)
+                {
+                    ChangeDirection();
+                    lengthOfAction = 0;
+                }
             }
 
             stateTuple = goriya.getState();
@@ -81,30 +95,21 @@ namespace Game_Project
                     locationVector.X--;
                 }
             }
-            else if (stateTuple.Item1.Equals(actions.attacking)){
+            else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0){
                 if (stateTuple.Item1.Equals(direction.right))
                 {
                     currentGoriyaSprite = goriyaSpriteRight;
-                    weapon = new Boomerang(locationVector, true);
+                    weapon = new Boomerang(new UniversalParameterObject(new object[] { locationVector, true, null }));
                 }
                 else
                 {
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    weapon = new Boomerang(locationVector, false);
+                    weapon = new Boomerang(new UniversalParameterObject(new object[] { locationVector, false, null }));
                 }
-                //for(int i = 0; i < 25; i++)
-                //{
-                //    weapon.Update(gameTime);
-                //}
                 
             }
             currentGoriyaSprite.Update();
             lengthOfAction++;
-
-            if (weapon != null)
-            {
-                weapon.Update(gameTime);
-            }
         }
 
 

@@ -7,29 +7,24 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class BatEnemy : IEnemy
+    public class BatEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         BatStateMachine bat;
         ISprite batSprite;
-       // SpriteBatch spriteBatch;
-        Vector2 locationVector;
+        public Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction;
+        Physics physics;
         
-        public BatEnemy(Vector2 vector)
+        public BatEnemy(UniversalParameterObject parameters)
         {
-            locationVector = vector;
+            locationVector = parameters.Position;
             lengthOfAction = 0;
             bat = new BatStateMachine();
             batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
+            physics = new Physics();
         }
-        //public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-          //  bat = new BatStateMachine();
-           // locationVector = vector;
-            //spriteBatch = gameSpriteBatch;
-            //batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
-        //}
         public void ChangeDirection()
         {
             bat.ChangeDirection();
@@ -45,6 +40,16 @@ namespace Game_Project
             bat.TakeDamage();
         }
 
+        public void Fall()
+        {
+            //bat cannot fall, so will never be used
+        }
+
+        public void Collide()
+        {
+            // TODO
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             batSprite.Draw(spriteBatch, locationVector);
@@ -53,25 +58,42 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > new Random().Next(50))
-            {
-                ChangeDirection();
-                lengthOfAction = 0;
-            }
-
             stateTuple = bat.getState();
 
-            //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
-                locationVector.X--;
-            }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
-                locationVector.X++;
-            }
+                switch (stateTuple.Item1) {
+                    case actions.dead:
+                    //GameObjectManager.remove(this);
+                    batSprite = null;
+                        break;
+                    case actions.falling:
+                        locationVector.Y++;
+                        physics.VerticalChange(true, gameTime);
+                        batSprite.Update();
+                        break;
+                    case actions.moving:
+                        if (stateTuple.Item2.Equals(direction.left))
+                        {
+                            locationVector.X--;
+                        }
+                        else
+                        {
+                            locationVector.X++;
+                        }
+                        batSprite.Update();
 
-            batSprite.Update();
-            lengthOfAction++;
+                        if(lengthOfAction > new Random().Next(100))
+                        {
+                            ChangeDirection();
+                            lengthOfAction = 0;
+                        }
+                        break;
+
+                     default:
+                        break;
+                }
+                lengthOfAction++;
         }
-
-
     }
+
+
 }

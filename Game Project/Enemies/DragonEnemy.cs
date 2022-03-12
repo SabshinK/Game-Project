@@ -7,35 +7,28 @@ using static Game_Project.IEnemyStateMachine;
 
 namespace Game_Project
 {
-    class DragonEnemy : IEnemy
+    public class DragonEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
         DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
-       // SpriteBatch spriteBatch;
         Vector2 locationVector;
+        public Vector2 Position => locationVector;
         int lengthOfAction;
         Candle weapon;
-        
-        public DragonEnemy(Vector2 vector)
+        Physics physics;
+
+        public DragonEnemy(UniversalParameterObject parameters)
         {
             dragon = new DragonStateMachine();
-            locationVector = vector;
+            locationVector = parameters.Position;
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;
+            physics = new Physics();
 
         }
 
-       // public void Create(SpriteBatch gameSpriteBatch, Vector2 vector)
-        //{
-        //    dragon = new BatStateMachine();
-        //    locationVector = vector;
-        //    spriteBatch = gameSpriteBatch;
-        //    waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
-        //    attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
-        //    dragonSprite = waitingSprite;
-        //}
         public void ChangeDirection()
         {
             dragon.ChangeDirection();
@@ -51,6 +44,16 @@ namespace Game_Project
             dragon.TakeDamage();
         }
 
+        public void Fall()
+        {
+            dragon.Fall();
+        }
+
+        public void Collide()
+        {
+            // TODO
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             stateTuple = dragon.getState();
@@ -62,13 +65,13 @@ namespace Game_Project
 
         }
 
+        //The current AI for the dragon is a bit unnatural, and will be refactored. See commented code for the start.
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > 25)
+            if (lengthOfAction > new Random().Next(500) && !stateTuple.Item1.Equals(actions.attacking))
             {
                 Attack();
-                ChangeDirection();
                 lengthOfAction = 0;
             }
 
@@ -89,17 +92,84 @@ namespace Game_Project
             else if (stateTuple.Item1.Equals(actions.attacking))
             {
                 dragonSprite = attackSprite;
-                weapon = new Candle(locationVector, false);
-                for(int i = 0; i < 10; i++)
+
+                if (lengthOfAction == 0)
                 {
-                    weapon.Update(gameTime);
+                    weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
+                    GameObjectManager.Instance.RegisterObject(weapon);
+                }
+                else if (lengthOfAction < 50)
+                {
+                }
+                else
+                {
+                    ChangeDirection();
                 }
             }
 
             dragonSprite.Update();
             lengthOfAction++;
-        }
 
+
+
+            //Will refactor this method to the comments below in a later sprint
+
+            //    stateTuple = dragon.getState();
+
+            //    switch (stateTuple.Item1)
+            //    {
+            //        case actions.dead:
+            //            //GameObjectManager.remove(this);
+            //            dragonSprite = null;
+            //            break;
+            //        case actions.falling:
+            //            locationVector.Y++;
+            //            physics.VerticalChange(true);
+            //            dragonSprite.Update();
+            //            break;
+            //        case actions.attacking:
+            //            if (lengthOfAction <= 1)
+            //            {
+            //                dragonSprite = attackSprite;
+            //                weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
+            //            }
+            //            else
+            //            {
+            //                if (lengthOfAction < 10)
+            //                {
+            //                    weapon.Update(gameTime);
+            //                }
+            //                else{
+            //                    ChangeDirection();
+            //                }
+            //                dragonSprite.Update();
+            //            }
+            //            break;
+            //        case actions.moving:
+            //            if (stateTuple.Item2.Equals(direction.left))
+            //            {
+            //                locationVector.X--;
+            //            }
+            //            else
+            //            {
+            //                locationVector.X++;
+            //            }
+            //            dragonSprite.Update();
+
+            //            if (lengthOfAction > new Random().Next(100))
+            //            {
+            //                Attack();
+            //                ChangeDirection();
+            //                lengthOfAction = 0;
+            //            }
+            //            break;
+
+            //        default:
+            //            break;
+            //    }
+            //    lengthOfAction++;
+            //
+        }
 
     }
 }

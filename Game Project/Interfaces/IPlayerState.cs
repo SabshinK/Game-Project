@@ -2,18 +2,20 @@
 
 namespace Game_Project
 {
-    public interface IPlayerState
+    public interface IPlayerState : IUpdateable
     {
         public void BackToIdle();
         
         public void Move();
+
+        public void Jump();
+
+        public void Fall();
 
         public void TakeDamage();
 
         public void Attack();
 
         public void UseItem(IProjectile projectile);
-
-        public void Update(GameTime gameTime);
     }
 }

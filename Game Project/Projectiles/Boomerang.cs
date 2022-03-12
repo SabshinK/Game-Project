@@ -14,21 +14,26 @@ namespace Game_Project
         private int moveFactor;
         public ISprite sprite, movingSprite, despawnSprite;
         private bool userDirection;
-        private bool finished;
+        public bool finished;
+        public Vector2 Position => position;
 
         //constructor
-        public Boomerang(Vector2 position, bool userDirection)
+        public Boomerang(UniversalParameterObject parameters)
         {
-            this.position = position;
-            this.initialPosition = position;
+            position = parameters.Position;
+            initialPosition = position;
             boomerangLimit = 160;
             moveFactor = 8;
-            this.userDirection = userDirection;
+            userDirection = parameters.Direction;
             movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
             finished = false;
         }
 
+        public void Collide()
+        {
+            moveFactor = -moveFactor;
+        }
 
         public void Update(GameTime gameTime)
         {

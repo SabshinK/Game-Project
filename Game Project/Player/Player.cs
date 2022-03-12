@@ -6,30 +6,35 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Player
+    public class Player : IPlayer
     {
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
+
+        public Physics physics;
       
         private int health;
         private string animationToCreate;
         public Vector2 location;
+        public Vector2 Position => location;
 
         public bool FaceRight { get; private set; }
-      
+
         // Constructor
-        public Player()
+        public Player(UniversalParameterObject parameters)
         {
             state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
 
-            location = new Vector2(800 / 2 - 48, 400 / 2 - 64);
+            location = parameters.Position;
         
             health = 3;
 
             FaceRight = true;
+
+            physics = new Physics();
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
@@ -50,7 +55,33 @@ namespace Game_Project
             }
             state.Move();
         }
-        
+
+        public void Jump(bool faceRight)
+        {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
+            }
+            state.Jump();
+        }
+
+        public void Fall(bool faceRight)
+        {
+            if (FaceRight != faceRight)
+            {
+                FaceRight = faceRight;
+                if (FaceRight)
+                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
+                else
+                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
+            }
+            state.Fall();
+        }
+
         // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
         public void DamageTaken()
         {
@@ -83,21 +114,38 @@ namespace Game_Project
 
         public IProjectile CreateProjectile(int code)
         {
+            object[] parameters = new object[3];
+            parameters[0] = new Vector2((int)physics.horizontalDistance, (int)physics.horizontalVelocity);
+            parameters[1] = FaceRight;
+
             switch(code)
             {
                 case 1:
-                    return new Arrow(location, FaceRight);
+                    return new Arrow(new UniversalParameterObject(parameters));
                 case 2:
-                    return new Bomb(location);
+                    return new Bomb(new UniversalParameterObject(parameters));
                 case 3:
-                    return new Boomerang(location, FaceRight);
+                    return new Boomerang(new UniversalParameterObject(parameters));
                 case 4:
-                    return new Candle(location, FaceRight);
+                    return new Candle(new UniversalParameterObject(parameters));
                 case 5 :
-                    return new SwordBeam(location, FaceRight);
+                    return new SwordBeam(new UniversalParameterObject(parameters));
                 default:
                     return null;
             }
+
+
+        }
+
+        public void Collide()
+        {
+            //boink
+            
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            state.Update(gameTime);
         }
     }
 }
