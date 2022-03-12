@@ -35,6 +35,10 @@ namespace Game_Project
             {
                 health = health - 5;
             }
+            else
+            {
+                stalfosAction = actions.dead;
+            }
         }
 
         public void Fall()

@@ -34,11 +34,20 @@ namespace Game_Project
             {
                 health = health - 5;
             }
+            else
+            {
+                dragonAction = actions.dead;
+            }
         }
 
         public void Attack()
         {
             dragonAction = actions.attacking;
+        }
+
+        public void Fall()
+        {
+            dragonAction = actions.falling;
         }
 
         public Tuple<actions, direction> getState()

@@ -15,6 +15,8 @@ namespace Game_Project
         Vector2 locationVector;
         int lengthOfAction;
         Candle weapon;
+        Physics physics;
+        UniversalParameterObject weaponParameterObject;
         
         public DragonEnemy(UniversalParameterObject parameters)
         {
@@ -23,6 +25,7 @@ namespace Game_Project
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;
+            physics = new Physics();
 
         }
 
@@ -39,6 +42,11 @@ namespace Game_Project
         public void TakeDamage()
         {
             dragon.TakeDamage();
+        }
+
+        public void Fall()
+        {
+            dragon.Fall();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -79,7 +87,8 @@ namespace Game_Project
             else if (stateTuple.Item1.Equals(actions.attacking))
             {
                 dragonSprite = attackSprite;
-                weapon = new Candle(locationVector, false);
+                
+                weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
                 for(int i = 0; i < 10; i++)
                 {
                     weapon.Update(gameTime);
@@ -87,6 +96,55 @@ namespace Game_Project
             }
 
             dragonSprite.Update();
+            lengthOfAction++;
+
+
+
+            stateTuple = dragon.getState();
+
+            switch (stateTuple.Item1)
+            {
+                case actions.dead:
+                    //GameObjectManager.remove(this);
+                    dragonSprite = null;
+                    break;
+                case actions.falling:
+                    locationVector.Y++;
+                    physics.VerticalChange(true);
+                    dragonSprite.Update();
+                    break;
+                case actions.attacking:
+                    dragonSprite = attackSprite;
+                    if(lengthOfAction == 0)
+                    {
+                        //weaponParameterObject = new UniversalParameterObject(new object [ locationVector, false ]());
+                    }
+                    else
+                    {
+                        weapon.Update(gameTime);
+                    }
+                    break;
+                case actions.moving:
+                    if (stateTuple.Item2.Equals(direction.left))
+                    {
+                        locationVector.X--;
+                    }
+                    else
+                    {
+                        locationVector.X++;
+                    }
+                    dragonSprite.Update();
+
+                    if (lengthOfAction > new Random().Next(100))
+                    {
+                        ChangeDirection();
+                        lengthOfAction = 0;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
             lengthOfAction++;
         }
 

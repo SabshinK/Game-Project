@@ -31,6 +31,10 @@ namespace Game_Project
             {
                 health = health - 5;
             }
+            else
+            {
+                goriyaAction = actions.dead;
+            }
         }
 
         public void Attack()

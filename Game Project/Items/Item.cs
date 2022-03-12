@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Item : IDrawable, ICollideable
+    public class Item : IItem
     {
         public Vector2 position;
         public ISprite sprite, despawnSprite;
