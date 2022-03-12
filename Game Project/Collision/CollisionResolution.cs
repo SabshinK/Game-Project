@@ -31,25 +31,27 @@ namespace Game_Project
             if (object1 != null && object2 != null) {
                 commandObject1 = collisionDictionary[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item1;
                 commandObject2 = collisionDictionary[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item2;
-            }
-            if (commandObject1 != null)
-            {
-                Type commandType1 = Type.GetType(commandObject1);
-                Type[] types1 = { object1.GetType() };
-                object[] parameters1 = { object1 };
-                
-                ConstructorInfo constructor1 = commandType1.GetConstructor(types1);
-                constructor1.Invoke(parameters1);
-            }
-            if (commandObject2 != null)
-            {
-                Type commandType2 = Type.GetType(commandObject1);
-                Type[] types2 = { object2.GetType() };
-                object[] parameters2 = { object2 };
 
-                ConstructorInfo constructor2 = commandType2.GetConstructor(types2);
-                constructor2.Invoke(parameters2);
-            }  
+                if (commandObject1 != null)
+                {
+                    Type commandType1 = Type.GetType("Game_Project." + commandObject1);
+                    Type[] types1 = { object1.GetType() };
+                    object[] parameters1 = { object1 };
+                
+                    ConstructorInfo constructor1 = commandType1.GetConstructor(types1);
+                    constructor1.Invoke(parameters1);
+                }
+                if (commandObject2 != null)
+                {
+                    Type commandType2 = Type.GetType("Game_Project." + commandObject2);
+                    Type[] types2 = { object2.GetType() };
+                    object[] parameters2 = { object2 };
+
+                     ConstructorInfo constructor2 = commandType2.GetConstructor(types2);
+                    constructor2.Invoke(parameters2);
+                }
+            }
+              
         }
 
         public void LoadCollisionDictionary()

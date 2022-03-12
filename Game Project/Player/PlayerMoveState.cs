@@ -61,7 +61,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            player.physics.HorizontalChange();
+            player.physics.HorizontalChange(gameTime);
 
             if (!player.FaceRight)
             {

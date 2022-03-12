@@ -21,8 +21,8 @@ namespace Game_Project
         {
             this.spriteSheet = spriteData.Item1;
             this.frames = spriteData.Item2;
-            this.scale = spriteData.Item3;
-            this.animationSpeed = spriteData.Item4;
+            this.animationSpeed = spriteData.Item3;
+            this.scale = spriteData.Item4;
             currentFrame = 0;
 
             size = new Vector2(frames[0].Width, frames[0].Height);
