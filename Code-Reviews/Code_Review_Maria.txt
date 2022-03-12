@@ -1,4 +1,40 @@
 Author of Code Review:	Maria Stein
+Date of Code Review:	3/11/2022
+Sprint Number:			3
+Name of File:			PlayerMoveState.cs
+Author of File:			Anooj Deshpande
+
+Comments On Code Quality:
+*Note: this file was created for Sprint2, but significant changes were made since.
+Overall this code is well-organized and easy to follow. The original code for this class had nested if-else statements comparing the location to magic numbers
+and increasing/decreasing it by velocity. This code handles movement more cleanly by using the physics class to add/subtract the appropriate distance from the
+player's location, and by making location and direction be accessed and updated directly using the Player player, rather than relying on unnecessary parameters and
+variables in the constructor. There is still a lot of duplicated code, since each of the Player_State classes are nearly identical other than in their Updatemethods.
+I think that the sprite creation is very awkwardly placed in the file and should have its own method.
+I'm not sure if this is an error or if this is being saved for a future sprint (there isn't a comment explaining the future purpose or anything), but although I agree
+with the decision to use player.physics.horizontalDistance instead of velocity, now velocity is completely useless. Also I'm not sure why it stays at zero.
+
+Hypothetical Change(s) to to the Game that Are/Are Not Supported by This Code:
+Adding different possible speeds would require use of the velocity variable, but I doubt this was the reason it is still included in the code.
+
+
+Author of Code Review:	Maria Stein
+Date of Code Review:	3/11/2022
+Sprint Number:			3
+Name of File:			CollisionResolution.cs
+Author of File:			Rachel Watters
+
+Minutes It Took To Complete Review:  20
+
+Comments on Code Readability:
+I think it would be worth having a comment to clarify what the directions mean (if collideDirection=right, which object is being hit on the right? etc).
+The decision to store everything in this collisionDictionary minimizes unnecessary code and allows the class to be concise and significantly shorter than it could be.
+That being said I think it also makes the code a little bit overly complicated and difficult to read. I would recommend using comments to explain the logic and purpose
+of the different statements.
+
+
+
+Author of Code Review:	Maria Stein
 Date of Code Review:	2/19/2022
 Sprint Number:			2
 Name of File:			PlayerItemState.cs	
