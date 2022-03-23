@@ -23,6 +23,10 @@ Debug movement/jumping with physics
 Collision classes should not implement ICollideable
 Simplify collision resolution dictionary entries
 Art:
+Player animations
+Item icons
+Pick-up items
+Projectile animations
 
 **Aadya**
 Removing magic numbers and put them in a utility class
