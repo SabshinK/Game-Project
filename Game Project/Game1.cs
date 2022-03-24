@@ -35,12 +35,6 @@ namespace Game_Project
         /// </summary>
         protected override void Initialize()
         {
-            //GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-            
-            Texture2DStorage.LoadContent(Content);
-            //SpriteFactory.Instance.LoadDictionary();
-            LevelLoader.Instance.LoadLevel();
-            
             keyboard = new KeyboardController();
 
             //This is here to be able to load the collision dictionary
@@ -59,6 +53,11 @@ namespace Game_Project
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Texture2DStorage.LoadContent(Content);
+            SpriteFactory.Instance.LoadDictionary();
+
+            LevelLoader.Instance.LoadLevel();
+
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
 
@@ -91,6 +90,12 @@ namespace Game_Project
             GameObjectManager.Instance.Draw(spriteBatch);
 
             base.Draw(gameTime);
+        }
+
+        public void Reset()
+        {
+            LevelLoader.Instance.LoadLevel();
+            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
     }
 }
