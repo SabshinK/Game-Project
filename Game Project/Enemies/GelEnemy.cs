@@ -68,7 +68,7 @@ namespace Game_Project
                     break;
                 case actions.falling:
                     locationVector.Y++;
-                    physics.VerticalChange(true);
+                    physics.VerticalChange(true, gameTime);
                     gelSprite.Update();
                     break;
                 case actions.moving:

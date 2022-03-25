@@ -1,3 +1,40 @@
+SPRINT 3
+
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    3/12/2022
+Sprint Number:    3
+Name of File:     CollisionDetection.cs
+Author of File:    Maria Stein
+
+Code Quality Comments:
+- The variables listed at the beginning of the class are well sorted, and clearly indicate what they will be manipulating. 
+- Problems are consolidated to specific methods, which makes debugging easier and makes it clear what will happen in the case of a collision. 
+- Because collision is so complex, it might help to have some comments that explain the logic behind when there is a collision and when there is not a collision.
+- If statements verifying the type of the object can likely be removed by refactoring the code. The code needs to be reworked so that it can perform operations on each object regardless of the type. 
+- There are a lot of float values. Can these values be consolidated into one data structure?
+
+Hypothetical Change(s) to to the Game that Are/Are Not Supported by This Code:
+	This code relies on the values 128 and 64 to calculate the size of the sprite. The author correctly wants to use code that directly accesses the size of each sprite, but that is not possible at this time. Moving forward, there needs to be a variable established (potentially in the IDrawable interface) that is implemented by all of the drawable classes, and can therefore be accessed when the class type of the variable is unknown. This will create a better design for accessing the size that can be used in the future. This should hopefully remove any “if” statements that assess the type of the object, making cleaner and more efficient code. Additionally, in general, there are a lot of float values. It may be beneficial to create some kind of data structure or reworking of those variables to make the class less crowded and more clear. 
+	
+
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    3/12/2022
+Sprint Number:    3
+Name of File:     GameObjectManager.cs
+Author of File:    AJ Waizmann
+Minutes It Took To Complete Review:     15 
+
+Comments On Readability: 
+- Variable names are clear and easy to work with.
+- Comments make it clear that the GameObjectManager is a singleton, and hence it is easier to work with it throughout the code, since that knowledge is laid out clearly. 
+- Update cycles through only a few of the lists that are created at the top of the file. Because of this, it may be a good idea to include small comments that detail exactly what is happening when cycling through each list. 
+- The variable names combined with the method names make it very clear what is happening in each method. 
+
+Overall, I think this code is clear and efficient. There may be a way to refactor this code so that it uses only one, large list. However, the application of the four distinct lists makes it obvious what is happening to each object in the list, and what each method is trying to do with the method calls. This class will change as the code develops, so we need to be sure it remains clear what is happening in each method (especially in the case where the lists are combined into one list of all the objects).
+
+
+SPRINT 2
+
 Author of Code Review:    Rachel Watters
 Date of Code Review:	    2/19/2022
 Sprint Number:    2

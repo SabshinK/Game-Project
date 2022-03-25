@@ -11,7 +11,6 @@ namespace Game_Project
         public IPlayerState state;
         public IProjectile projectile;
         public ISprite sprite;
-        private CollisionDetection collisionDetector;
 
         public Physics physics;
       
@@ -63,9 +62,9 @@ namespace Game_Project
             {
                 FaceRight = faceRight;
                 if (FaceRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
                 else
-                    sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
             }
             state.Jump();
         }
@@ -76,9 +75,9 @@ namespace Game_Project
             {
                 FaceRight = faceRight;
                 if (FaceRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("fallingRight");
+                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
                 else
-                    sprite = SpriteFactory.Instance.CreateSprite("fallingLeft");
+                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
             }
             state.Fall();
         }
@@ -147,7 +146,6 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             state.Update(gameTime);
-            collisionDetector.Update(gameTime);
         }
     }
 }

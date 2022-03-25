@@ -4,15 +4,18 @@ using System.Text;
 
 namespace Game_Project
 {
-    class ResetCommand : ICommand
+    class RemoveArrowCommand : ICommand
     {
-        public ResetCommand()
+        Arrow arrow;
+
+        public RemoveArrowCommand(Arrow arrow)
         {
+            this.arrow = arrow;
         }
 
         public void Execute()
         {
-            LevelLoader.Instance.LoadLevel();
+            arrow.Collide();
         }
     }
 }
