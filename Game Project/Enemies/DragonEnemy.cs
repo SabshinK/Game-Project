@@ -60,6 +60,11 @@ namespace Game_Project
             dragonSprite.Draw(spriteBatch, locationVector);
             if (stateTuple.Item1.Equals(actions.attacking))
             {
+                if (weapon == null)
+                {
+                    weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
+                    GameObjectManager.Instance.RegisterObject(weapon);
+                }
                 weapon.Draw(spriteBatch);
             }
 
@@ -69,106 +74,107 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            if (lengthOfAction > new Random().Next(500) && !stateTuple.Item1.Equals(actions.attacking))
-            {
-                Attack();
-                lengthOfAction = 0;
-            }
+            //if (lengthOfAction > new Random().Next(500) && !stateTuple.Item1.Equals(actions.attacking))
+            //{
+            //    Attack();
+            //    lengthOfAction = 0;
+            //}
 
-            stateTuple = dragon.getState();
+            //stateTuple = dragon.getState();
 
-            //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if (stateTuple.Item1.Equals(actions.moving))
-            {
-                if (stateTuple.Item2.Equals(direction.right))
-                {
-                    locationVector.X++;
-                }
-                else
-                {
-                    locationVector.X--;
-                }
-            }
-            else if (stateTuple.Item1.Equals(actions.attacking))
-            {
-                dragonSprite = attackSprite;
+            ////This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
+            //if (stateTuple.Item1.Equals(actions.moving))
+            //{
+            //    if (stateTuple.Item2.Equals(direction.right))
+            //    {
+            //        locationVector.X++;
+            //    }
+            //    else
+            //    {
+            //        locationVector.X--;
+            //    }
+            //}
+            //else if (stateTuple.Item1.Equals(actions.attacking))
+            //{
+            //    dragonSprite = attackSprite;
 
-                if (lengthOfAction == 0)
-                {
-                    weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
-                    GameObjectManager.Instance.RegisterObject(weapon);
-                }
-                else if (lengthOfAction < 50)
-                {
-                }
-                else
-                {
-                    ChangeDirection();
-                }
-            }
+            //    if (lengthOfAction == 0)
+            //    {
+            //        weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
+            //        GameObjectManager.Instance.RegisterObject(weapon);
+            //    }
+            //    else if (lengthOfAction < 50)
+            //    {
+            //    }
+            //    else
+            //    {
+            //        ChangeDirection();
+            //    }
+            //}
 
-            dragonSprite.Update();
-            lengthOfAction++;
+            //dragonSprite.Update();
+            //lengthOfAction++;
 
 
 
             //Will refactor this method to the comments below in a later sprint
 
-            //    stateTuple = dragon.getState();
+            stateTuple = dragon.getState();
 
-            //    switch (stateTuple.Item1)
-            //    {
-            //        case actions.dead:
-            //            //GameObjectManager.remove(this);
-            //            dragonSprite = null;
-            //            break;
-            //        case actions.falling:
-            //            locationVector.Y++;
-            //            physics.VerticalChange(true);
-            //            dragonSprite.Update();
-            //            break;
-            //        case actions.attacking:
-            //            if (lengthOfAction <= 1)
-            //            {
-            //                dragonSprite = attackSprite;
-            //                weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
-            //            }
-            //            else
-            //            {
-            //                if (lengthOfAction < 10)
-            //                {
-            //                    weapon.Update(gameTime);
-            //                }
-            //                else{
-            //                    ChangeDirection();
-            //                }
-            //                dragonSprite.Update();
-            //            }
-            //            break;
-            //        case actions.moving:
-            //            if (stateTuple.Item2.Equals(direction.left))
-            //            {
-            //                locationVector.X--;
-            //            }
-            //            else
-            //            {
-            //                locationVector.X++;
-            //            }
-            //            dragonSprite.Update();
+            switch (stateTuple.Item1)
+            {
+                case actions.dead:
+                    //GameObjectManager.remove(this);
+                    dragonSprite = null;
+                    break;
+                case actions.falling:
+                    locationVector.Y++;
+                    physics.VerticalChange(true, gameTime);
+                    dragonSprite.Update();
+                    break;
+                case actions.attacking:
+                    if (lengthOfAction <= 1)
+                    {
+                        dragonSprite = attackSprite;
+                    }
+                    else
+                    {
+                        if (lengthOfAction < 50)
+                        {
+                            weapon.Update(gameTime);
+                        }
+                        else
+                        {
+                            GameObjectManager.Instance.RemoveObject(weapon);
+                            weapon = null;
+                            ChangeDirection();
+                        }
+                        dragonSprite.Update();
+                    }
+                    break;
+                case actions.moving:
+                    if (stateTuple.Item2.Equals(direction.left))
+                    {
+                        locationVector.X--;
+                    }
+                    else
+                    {
+                        locationVector.X++;
+                    }
+                    dragonSprite.Update();
 
-            //            if (lengthOfAction > new Random().Next(100))
-            //            {
-            //                Attack();
-            //                ChangeDirection();
-            //                lengthOfAction = 0;
-            //            }
-            //            break;
+                    if (lengthOfAction > 300)
+                    {
+                        Attack();
+                        lengthOfAction = 0;
+                    }
+                    break;
 
-            //        default:
-            //            break;
-            //    }
-            //    lengthOfAction++;
-            //
+                default:
+                    break;
+            }
+            lengthOfAction++;
+
         }
 
     }
