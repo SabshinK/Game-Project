@@ -4,15 +4,18 @@ using System.Text;
 
 namespace Game_Project
 {
-    class ResetCommand : ICommand
+    public class ResetCommand : ICommand
     {
-        public ResetCommand()
+        private Game1 game;
+
+        public ResetCommand(Game1 game)
         {
+            this.game = game;
         }
 
         public void Execute()
         {
-            LevelLoader.Instance.LoadLevel();
+            game.Reset();
         }
     }
 }

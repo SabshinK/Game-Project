@@ -13,7 +13,7 @@ namespace Game_Project
 
 		public KeyboardController()
 		{
-			controllerMappings = new Dictionary<Keys, ICommand>();
+			//controllerMappings = new Dictionary<Keys, ICommand>();
 		}
 
 		public void RegisterCommand(Keys key, ICommand command)
@@ -43,6 +43,8 @@ namespace Game_Project
 
 		public void LoadContent(Game1 game, Player player)
 		{
+			controllerMappings = new Dictionary<Keys, ICommand>();
+
 			RegisterCommand(Keys.None, new IdleCommand(player));
 			RegisterCommand(Keys.Q, new QuitCommand(game));
 			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
@@ -56,7 +58,7 @@ namespace Game_Project
 			RegisterCommand(Keys.D4, new UseItemCommand(player, 4));
 			RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
 			RegisterCommand(Keys.E, new TakeDamageCommand(player));
-			RegisterCommand(Keys.R, new ResetCommand());
+			RegisterCommand(Keys.R, new ResetCommand(game));
 		}
 	}
 }
