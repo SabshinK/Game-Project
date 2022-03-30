@@ -1,31 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Game_Project.CollisionDetection;
+using Microsoft.Xna.Framework;
+using static Game_Project.CollisionDetection;
 
 namespace Game_Project
 {
     public class CollisionResolution
     {
-        private Dictionary<Tuple<Type, Type, collideDirection>, Tuple<string, string>> directionalCollisions = new Dictionary<Tuple<Type, Type, collideDirection>, Tuple<string, string>>();
+        private Dictionary<Tuple<Type, Type, CollideDirection>, Tuple<string, string>> directionalCollisions = new Dictionary<Tuple<Type, Type, CollideDirection>, Tuple<string, string>>();
         private Dictionary<Tuple<Type, Type>, Tuple<string, string>> directionlessCollisions = new Dictionary<Tuple<Type, Type>, Tuple<string, string>>();
 
         public CollisionResolution()
         {
-            
+            // constructor
         }
 
-        public void ResolveCollision(ICollideable object1, ICollideable object2, collideDirection direction)
+        public void ResolveCollision(ICollideable object1, ICollideable object2, CollideDirection direction, Rectangle FirstRectangle, Rectangle SecondRectangle)
         {
             string commandObject1 = null;
             string commandObject2 = null;
 
             if (object1 != null && object2 != null) 
             {
-                if (directionalCollisions.ContainsKey(new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)))
+                if (directionalCollisions.ContainsKey(new Tuple<Type, Type, CollideDirection>(object1.GetType(), object2.GetType(), direction)))
                 {
-                    commandObject1 = directionalCollisions[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item1;
-                    commandObject2 = directionalCollisions[new Tuple<Type, Type, collideDirection>(object1.GetType(), object2.GetType(), direction)].Item2;                    
+                    commandObject1 = directionalCollisions[new Tuple<Type, Type, CollideDirection>(object1.GetType(), object2.GetType(), direction)].Item1;
+                    commandObject2 = directionalCollisions[new Tuple<Type, Type, CollideDirection>(object1.GetType(), object2.GetType(), direction)].Item2;                    
                 }
                 else if (directionlessCollisions.ContainsKey(new Tuple<Type, Type>(object1.GetType(), object2.GetType())))
                 {
@@ -64,26 +65,26 @@ namespace Game_Project
 
             // player colliding with the enemies
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(BatEnemy)), new Tuple<string, string>("TakeDamageCommand", "BatFlipCommand"));
-            directionalCollisions.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(BatEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "BatDamageCommand"));
+            directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(BatEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "BatDamageCommand"));
 
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(DragonEnemy)), new Tuple<string, string>("TakeDamageCommand", "DragonFlipCommand"));
-            directionalCollisions.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(DragonEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "DragonDamageCommand"));
+            directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(DragonEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "DragonDamageCommand"));
 
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(GelEnemy)), new Tuple<string, string>("TakeDamageCommand", "GelFlipCommand"));
-            directionalCollisions.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GelEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "GelDamageCommand"));
+            directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(GelEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "GelDamageCommand"));
 
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(GoriyaEnemy)), new Tuple<string, string>("TakeDamageCommand", "GoriyaFlipCommand"));
-            directionalCollisions.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(GoriyaEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "GoriyaDamageCommand"));
+            directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(GoriyaEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "GoriyaDamageCommand"));
 
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(StalfosEnemy)), new Tuple<string, string>("TakeDamageCommand", "StalfosFlipCommand"));
-            directionalCollisions.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(StalfosEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "StalfosDamageCommand"));
+            directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(StalfosEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "StalfosDamageCommand"));
 
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(ZohEnemy)), new Tuple<string, string>("TakeDamageCommand", "ZohFlipCommand"));
-            directionalCollisions.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(ZohEnemy), collideDirection.Bottom), new Tuple<string, string>(null, "ZohDamageCommand"));
+            directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(ZohEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "ZohDamageCommand"));
 
             // player colliding with the tiles
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(Tile)), new Tuple<string, string>("IdleCommand", null));
-            directionalCollisions.Add(new Tuple<Type, Type, collideDirection>(typeof(Player), typeof(Tile), collideDirection.Bottom), new Tuple<string, string>("PlayerFallCommand", null));
+            directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(Tile), CollideDirection.Bottom), new Tuple<string, string>("PlayerFallCommand", null));
 
             //enemies colliding with the tiles
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(BatEnemy), typeof(Tile)), new Tuple<string, string>("BatFlipCommand", null));
