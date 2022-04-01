@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class CollisionDetection : IUpdateable
+    public class CollisionDetection : IUpdateable
     {
         private ICollideable firstObject;
         private ICollideable secondObject;
@@ -28,8 +28,8 @@ namespace Game_Project
         private Rectangle rectangleObject2;
 
         private CollisionResolution collisionResolution;
-        public enum collideDirection { Top, Bottom, Left, Right };
-        private collideDirection direction;
+        public enum CollideDirection { Top, Bottom, Left, Right };
+        public CollideDirection direction;
 
         GameObjectManager gameObjectManager;
 
@@ -91,13 +91,13 @@ namespace Game_Project
                 {
                     // left overlap (right side of player):
                     side_overlap = firstObject_right - secondObject_left;
-                    direction = collideDirection.Left;
+                    direction = CollideDirection.Left;
                 }
                 else
                 {
                     // right overlap (left side of player):
                     side_overlap = secondObject_right - firstObject_left;
-                    direction = collideDirection.Right;
+                    direction = CollideDirection.Right;
                 }
 
                 if (firstObject_top <= secondObject_bottom)
@@ -106,7 +106,7 @@ namespace Game_Project
                     updown_overlap = secondObject_bottom - firstObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = collideDirection.Bottom;
+                        direction = CollideDirection.Bottom;
                     }
                 }
                 else
@@ -115,11 +115,11 @@ namespace Game_Project
                     updown_overlap = firstObject_bottom - secondObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = collideDirection.Bottom;
+                        direction = CollideDirection.Bottom;
                     }
                 }
 
-                collisionResolution.Collide(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
+                collisionResolution.ResolveCollision(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
             }
         }
 
