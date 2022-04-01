@@ -15,27 +15,33 @@ namespace Game_Project
         private int height = 600; //height of window
         private int width = 1000; //width of window
         private GraphicsDeviceManager graphics;
+        private Viewport playerCam;
 
         public Camera(Player gamePlayer, GraphicsDeviceManager gameGraphics)
         {
             subject = gamePlayer;
             worldPosVector = gamePlayer.location;
             graphics = gameGraphics;
-            RenderTarget2D
+
+            playerCam.Width = width;
+            playerCam.Height = height;
+            playerCam.MinDepth = 0;
+            playerCam.MaxDepth = 1;
+
         }
 
-        public Matrix4x4 getFocusMatrix()
+        public Viewport Update(Player gamePlayer)
         {
-            float left = worldPosVector.X - width / 2f;
-            float right = worldPosVector.X + width / 2f;
-            float top = worldPosVector.Y - height / 2f;
-            float bottom = worldPosVector.Y + height / 2f;
+            worldPosVector = gamePlayer.location;
 
-            Matrix4x4 windowMatrix = Matrix4x4.CreateOrthographicOffCenter(left, right, bottom, top, 0, 0);
+            worldPosVector.X -= worldPosVector.X / 2f;
+            worldPosVector.Y -= worldPosVector.Y / 2f;
 
-            graphics.GraphicsDevice.SetRenderTarget(subject);
 
-            return windowMatrix;
+            playerCam.X = (int) worldPosVector.X;
+            playerCam.Y = (int)worldPosVector.Y;
+
+            return playerCam;
         }
     }
 }
