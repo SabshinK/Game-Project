@@ -30,7 +30,7 @@ namespace Game_Project
         {
             timePassed = gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (acceleration == drag)
+            if (horizontalVelocity >= 10)
             {
                 horizontalDistance = (horizontalVelocity * timePassed);
             }

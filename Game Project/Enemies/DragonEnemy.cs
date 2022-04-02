@@ -141,7 +141,10 @@ namespace Game_Project
                     {
                         if (lengthOfAction < 50)
                         {
-                            weapon.Update(gameTime);
+                            if (weapon != null)
+                            {
+                                weapon.Update(gameTime);
+                            }
                         }
                         else
                         {

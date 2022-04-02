@@ -10,6 +10,7 @@ namespace Game_Project
 
         private Player player;
         private double drag;
+        private double time;
 
         public PlayerMoveState(Player manager)
         {
@@ -29,6 +30,7 @@ namespace Game_Project
         {
             drag = 0;
             player.physics.horizontalVelocity = 0;
+            player.physics.horizontalDistance = 0;
             player.SetState(new IdleState(player));
         }
 
@@ -64,6 +66,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            //time += gameTime.ElapsedGameTime.TotalSeconds;
             player.physics.HorizontalChange(gameTime, player.acceleration, drag);
 
             if (!player.FaceRight)
@@ -80,9 +83,10 @@ namespace Game_Project
                 player.projectile.Update(gameTime);
             }
 
-            //if (player.acceleration != drag && gameTime.ElapsedGameTime.TotalSeconds >= 1)
+            //if (player.acceleration != drag && (time/0.25) >= 1)
             //{
             //    drag++;
+            //    time = 0;
             //}
 
             player.sprite.Update();
