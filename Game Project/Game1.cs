@@ -76,6 +76,7 @@ namespace Game_Project
             GameObjectManager.Instance.Update(gameTime);
             collisionDetection.Update(gameTime);
 
+
             base.Update(gameTime);
         }
 

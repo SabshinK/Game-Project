@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class CollisionDetection : ICollideable, IUpdateable
+    public class CollisionDetection : IUpdateable
     {
         private ICollideable firstObject;
         private ICollideable secondObject;
@@ -24,9 +24,12 @@ namespace Game_Project
         private float updown_overlap;
         private Vector2 firstObjectLocation;
         private Vector2 secondObjectLocation;
-        private CollisionResolution collisionResolution;
+        private Rectangle rectangleObject1;
+        private Rectangle rectangleObject2;
 
-        private CollisionResolution.collideDirection direction;
+        private CollisionResolution collisionResolution;
+        public enum CollideDirection { Top, Bottom, Left, Right };
+        public CollideDirection direction;
 
         GameObjectManager gameObjectManager;
 
@@ -49,13 +52,8 @@ namespace Game_Project
             projectiles = GameObjectManager.Instance.projectileList;
             items = GameObjectManager.Instance.itemList;
             tiles = GameObjectManager.Instance.tileList;
-        }
 
-        public void Collide()
-        {
-
-            collisionResolution = new CollisionResolution(firstObject, secondObject, direction);
-
+            collisionResolution = new CollisionResolution();
         }
 
         public void CheckCollision()
@@ -65,6 +63,9 @@ namespace Game_Project
             firstObject_bottom = firstObjectLocation.Y + movingObjectSize;
             firstObject_left = firstObjectLocation.X;
             firstObject_right = firstObjectLocation.X + movingObjectSize;
+
+            //calculate rectangles
+            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
 
             if (secondObject.GetType() == typeof(Tile))
             {
@@ -81,6 +82,7 @@ namespace Game_Project
                 secondObject_right = secondObjectLocation.X + movingObjectSize;
             }
 
+            rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
 
             // objects collide:
             if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
@@ -89,13 +91,13 @@ namespace Game_Project
                 {
                     // left overlap (right side of player):
                     side_overlap = firstObject_right - secondObject_left;
-                    direction = CollisionResolution.collideDirection.Left;
+                    direction = CollideDirection.Left;
                 }
                 else
                 {
                     // right overlap (left side of player):
                     side_overlap = secondObject_right - firstObject_left;
-                    direction = CollisionResolution.collideDirection.Right;
+                    direction = CollideDirection.Right;
                 }
 
                 if (firstObject_top <= secondObject_bottom)
@@ -104,7 +106,7 @@ namespace Game_Project
                     updown_overlap = secondObject_bottom - firstObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = CollisionResolution.collideDirection.Bottom;
+                        direction = CollideDirection.Bottom;
                     }
                 }
                 else
@@ -113,11 +115,11 @@ namespace Game_Project
                     updown_overlap = firstObject_bottom - secondObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = CollisionResolution.collideDirection.Bottom;
+                        direction = CollideDirection.Bottom;
                     }
                 }
 
-                Collide();
+                collisionResolution.ResolveCollision(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
             }
         }
 
