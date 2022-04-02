@@ -32,6 +32,9 @@ namespace Game_Project
 
         public void LoadLevel()
         {
+            // Guarantee new instances of the dictionaries and lists of data
+            GameObjectManager.Instance.Reset();
+
             foreach (KeyValuePair<string, string> element in fileNames)
             {
                 XmlParser parser = new XmlParser(Path.GetFullPath(element.Value));
@@ -43,12 +46,6 @@ namespace Game_Project
                 {
                     case "ObjectData":
                         LoadObjectData(result.Item2);
-                        break;
-                    case "KeyboardMappings":
-                        //LoadKeyboardMappings(result.Item2);
-                        break;
-                    case "AnimationData":
-                        LoadAnimationData(result.Item2);
                         break;
                     default:
                         break;
@@ -85,42 +82,11 @@ namespace Game_Project
                         GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameterObject));
                     }
                 }
-                
-            }
-        }
-
-        private void LoadKeyboardMappings(List<List<string>> data)
-        {
-            foreach (List<string> dataList in data)
-            {
-                var type = Type.GetType(dataList[1]);
-            }
-        }
-
-        private void LoadAnimationData(List<List<Tuple<int, object>>> data)
-        {
-            foreach (List<Tuple<int, object>> itemList in data)
-            {
-                Rectangle[] frames = new Rectangle[itemList.Count - 4];
-
-                // Convert all frames in the XML to rectangle objects
-                for (int i = 4; i < itemList.Count; i++)
-                {
-                    // Rectangle parameters with be in form '%i %i %i %i', so the strings must be split and converted
-                    string[] numbers = itemList[i].Item2.ToString().Split(' ', 4);
-                    frames[i - 4] = new Rectangle(Convert.ToInt32(numbers[0]), Convert.ToInt32(numbers[1]),
-                        Convert.ToInt32(numbers[2]), Convert.ToInt32(numbers[3]));
-                }
-
-                SpriteFactory.Instance.RegisterAnimation(itemList[0].Item2.ToString(), 
-                    new Tuple<string, Rectangle[], int, int>(itemList[1].Item2.ToString(), frames, Convert.ToInt32(itemList[2].Item2), 
-                    Convert.ToInt32(itemList[3].Item2)));
             }
         }
 
         private void LoadDictionary()
         {
-            fileNames.Add("sprites", @"..\..\..\..\Game Project\Data\Animation.xml");
             fileNames.Add("forest", @"..\..\..\..\Game Project\Data\Objects.xml");            
         }
 

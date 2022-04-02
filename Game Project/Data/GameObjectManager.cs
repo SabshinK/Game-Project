@@ -15,16 +15,23 @@ namespace Game_Project
         public static GameObjectManager Instance => instance;
 
         //I don't know if separating these is worth it, we don't quite have enough classes to make it worth it to hold a list of lists
-        public List<IEnemy> enemyList = new List<IEnemy>();
-        public List<IProjectile> projectileList = new List<IProjectile>();
-        public List<IItem> itemList = new List<IItem>();
-        public List<ITile> tileList = new List<ITile>();
+        public List<IEnemy> enemyList;
+        public List<IProjectile> projectileList;
+        public List<IItem> itemList;
+        public List<ITile> tileList;
         public IPlayer player;
 
-
+        public GameObjectManager()
+        {
+            enemyList = new List<IEnemy>();
+            projectileList = new List<IProjectile>();
+            itemList = new List<IItem>();
+            tileList = new List<ITile>();
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            player?.Draw(spriteBatch);
             foreach (ITile tile in tileList)
             {
                 tile.Draw(spriteBatch);
@@ -47,6 +54,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            player.Update(gameTime);
             foreach (IEnemy enemy in enemyList)
             {
                 enemy.Update(gameTime);
@@ -70,11 +78,19 @@ namespace Game_Project
 
         public void RemoveObject(IDrawable dead)
         {
-            if (dead is IEnemy) enemyList.Remove(dead);
-            else if (dead is IProjectile) projectileList.Remove(dead);
-            else if (dead is IItem) itemList.Remove(dead);
+            // added casts to "dead" for each of these remove calls.
+            if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
+            else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
+            else if (dead is IItem) itemList.Remove((IItem)dead);
             //else if (T is IPlayer) ???????
         }
 
+        public void Reset()
+        {
+            enemyList = new List<IEnemy>();
+            projectileList = new List<IProjectile>();
+            itemList = new List<IItem>();
+            tileList = new List<ITile>();
+        }
     }
 }

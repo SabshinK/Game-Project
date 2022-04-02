@@ -13,7 +13,7 @@ namespace Game_Project
         // Interfaces to use
         public IController keyboard;
         public IController mouse;
-        private GameObjectManager objectManager;
+        private CollisionDetection collisionDetection;
         private CollisionResolution collisionResolution;
         //public Player player;
         //public TileManager tiles;
@@ -35,16 +35,11 @@ namespace Game_Project
         /// </summary>
         protected override void Initialize()
         {
-            //GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-            
-            Texture2DStorage.LoadContent(Content);
-            //SpriteFactory.Instance.LoadDictionary();
-            LevelLoader.Instance.LoadLevel();
-            
             keyboard = new KeyboardController();
 
             //This is here to be able to load the collision dictionary
             collisionResolution = new CollisionResolution(null, null, CollisionResolution.collideDirection.Left);
+            collisionDetection = new CollisionDetection();
 
             collisionResolution.LoadCollisionDictionary();
 
@@ -58,6 +53,11 @@ namespace Game_Project
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Texture2DStorage.LoadContent(Content);
+            SpriteFactory.Instance.LoadDictionary();
+
+            LevelLoader.Instance.LoadLevel();
+
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
 
@@ -71,9 +71,11 @@ namespace Game_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-           
             keyboard.Update(gameTime);
+
             GameObjectManager.Instance.Update(gameTime);
+            collisionDetection.Update(gameTime);
+
 
             base.Update(gameTime);
         }
@@ -89,6 +91,12 @@ namespace Game_Project
             GameObjectManager.Instance.Draw(spriteBatch);
 
             base.Draw(gameTime);
+        }
+
+        public void Reset()
+        {
+            LevelLoader.Instance.LoadLevel();
+            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
     }
 }

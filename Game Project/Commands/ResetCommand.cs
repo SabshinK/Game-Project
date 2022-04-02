@@ -4,18 +4,18 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class BatFlipCommand : ICommand
+    public class ResetCommand : ICommand
     {
-        private BatEnemy bat;
+        private Game1 game;
 
-        public BatFlipCommand(BatEnemy bat)
+        public ResetCommand(Game1 game)
         {
-            this.bat = bat;
+            this.game = game;
         }
 
         public void Execute()
         {
-            //bat.Flip();
+            game.Reset();
         }
     }
 }

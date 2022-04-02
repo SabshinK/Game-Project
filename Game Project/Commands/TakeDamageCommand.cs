@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class TakeDamageCommand : ICommand
+    public class TakeDamageCommand : ICommand
     {
         private Player player;
 
@@ -12,6 +12,7 @@ namespace Game_Project
         {
             player = manager;
         }
+
         public void Execute()
         {
             player.DamageTaken();

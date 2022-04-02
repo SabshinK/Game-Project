@@ -13,9 +13,9 @@ namespace Game_Project
             player = manager;
 
             if (player.FaceRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("fallRight");
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             else
-                player.sprite = SpriteFactory.Instance.CreateSprite("fallLeft");
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
         }
 
         public void BackToIdle()
@@ -54,7 +54,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            player.physics.VerticalChange(true);
+            player.physics.VerticalChange(true, gameTime);
 
             //I left the FaceRight condition because ideally, jumps will also move horizontally.
             //Right now, the if and else conditions have the same block of code.

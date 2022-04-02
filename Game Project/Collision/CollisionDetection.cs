@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Game_Project
 {
-    class CollisionDetection : ICollideable, IUpdateable
+    public class CollisionDetection : IUpdateable
     {
         private ICollideable firstObject;
         private ICollideable secondObject;
 
-        private Player player;
+        private IPlayer player;
 
         private float firstObject_top;
         private float firstObject_bottom;
@@ -24,9 +24,12 @@ namespace Game_Project
         private float updown_overlap;
         private Vector2 firstObjectLocation;
         private Vector2 secondObjectLocation;
-        private CollisionResolution collisionResolution;
+        private Rectangle rectangleObject1;
+        private Rectangle rectangleObject2;
 
-        private CollisionResolution.collideDirection direction;
+        private CollisionResolution collisionResolution;
+        public enum CollideDirection { Top, Bottom, Left, Right };
+        public CollideDirection direction;
 
         GameObjectManager gameObjectManager;
 
@@ -37,47 +40,49 @@ namespace Game_Project
         List<IItem> items;
         List<ITile> tiles;
 
-        public CollisionDetection(Player manager)
+        private const int movingObjectSize = 128;
+        private const int tileSize = 64;
+
+        public CollisionDetection()
         {
-            player = manager;
+            player = GameObjectManager.Instance.player;
 
             //Ask Object Manager for the lists
             enemies = GameObjectManager.Instance.enemyList;
             projectiles = GameObjectManager.Instance.projectileList;
             items = GameObjectManager.Instance.itemList;
             tiles = GameObjectManager.Instance.tileList;
-        }
 
-        public void Collide()
-        {
-
-            collisionResolution = new CollisionResolution(firstObject, secondObject, direction);
-
+            collisionResolution = new CollisionResolution();
         }
 
         public void CheckCollision()
         {
             //check locations
             firstObject_top = firstObjectLocation.Y;
-            firstObject_bottom = firstObjectLocation.Y + 128;
+            firstObject_bottom = firstObjectLocation.Y + movingObjectSize;
             firstObject_left = firstObjectLocation.X;
-            firstObject_right = firstObjectLocation.X + 128;
+            firstObject_right = firstObjectLocation.X + movingObjectSize;
+
+            //calculate rectangles
+            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
 
             if (secondObject.GetType() == typeof(Tile))
             {
                 secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + 64;
+                secondObject_bottom = secondObjectLocation.Y + tileSize;
                 secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + 64;
+                secondObject_right = secondObjectLocation.X + tileSize;
             }
             else
             {
                 secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + 128;
+                secondObject_bottom = secondObjectLocation.Y + movingObjectSize;
                 secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + 128;
+                secondObject_right = secondObjectLocation.X + movingObjectSize;
             }
 
+            rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
 
             // objects collide:
             if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
@@ -86,13 +91,13 @@ namespace Game_Project
                 {
                     // left overlap (right side of player):
                     side_overlap = firstObject_right - secondObject_left;
-                    direction = CollisionResolution.collideDirection.Left;
+                    direction = CollideDirection.Left;
                 }
                 else
                 {
                     // right overlap (left side of player):
                     side_overlap = secondObject_right - firstObject_left;
-                    direction = CollisionResolution.collideDirection.Right;
+                    direction = CollideDirection.Right;
                 }
 
                 if (firstObject_top <= secondObject_bottom)
@@ -101,7 +106,7 @@ namespace Game_Project
                     updown_overlap = secondObject_bottom - firstObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = CollisionResolution.collideDirection.Bottom;
+                        direction = CollideDirection.Bottom;
                     }
                 }
                 else
@@ -110,11 +115,11 @@ namespace Game_Project
                     updown_overlap = firstObject_bottom - secondObject_top;
                     if (updown_overlap > side_overlap)
                     {
-                        direction = CollisionResolution.collideDirection.Bottom;
+                        direction = CollideDirection.Bottom;
                     }
                 }
 
-                Collide();
+                collisionResolution.ResolveCollision(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
             }
         }
 
@@ -122,13 +127,59 @@ namespace Game_Project
         {
             foreach (IEnemy enemy in enemies)
             {
-                firstObjectLocation = player.location;
+                // player and enemies
+                firstObjectLocation = player.Position;
                 firstObject = player;
 
                 secondObjectLocation = enemy.Position;
-                secondObject = enemy;
+                        secondObject = enemy;
                 
                 CheckCollision();
+
+                foreach (ITile tile in tiles)
+                {
+                    // enemies and tiles
+                        firstObjectLocation = enemy.Position;
+                        firstObject = enemy;
+
+                        secondObjectLocation = tile.Position;
+                        secondObject = tile;
+
+                        CheckCollision();
+                }
+                foreach (IProjectile projectile in projectiles)
+                {
+                    // enemies and projectiles
+                        firstObjectLocation = enemy.Position;
+                        firstObject = enemy;
+
+                        secondObjectLocation = projectile.Position;
+                        secondObject = projectile;
+
+                        CheckCollision();
+                }
+            }
+            foreach (ITile tile in tiles)
+            {
+                // player and tiles
+                        firstObjectLocation = player.Position;
+                        firstObject = player;
+
+                        secondObjectLocation = tile.Position;
+                        secondObject = tile;
+
+                        CheckCollision();
+            }
+            foreach (IItem item in items) 
+            {
+                    // player and items
+                        firstObjectLocation = player.Position;
+                        firstObject = player;
+
+                        secondObjectLocation = item.Position;
+                        secondObject = item;
+
+                        CheckCollision();
             }
         }
     }
