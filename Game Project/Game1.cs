@@ -38,7 +38,7 @@ namespace Game_Project
             keyboard = new KeyboardController();
 
             //This is here to be able to load the collision dictionary
-            collisionResolution = new CollisionResolution(null, null, CollisionResolution.collideDirection.Left);
+            collisionResolution = new CollisionResolution();
             collisionDetection = new CollisionDetection();
 
             collisionResolution.LoadCollisionDictionary();

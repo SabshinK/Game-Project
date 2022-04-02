@@ -7,10 +7,14 @@ namespace Game_Project
 {
     class PlayerJumpState : IPlayerState
     {
-        Player player;
+        private Player player;
+        private double acceleration;
         public PlayerJumpState(Player manager)
         {
             player = manager;
+            acceleration = -9.8;
+
+            player.physics.verticalVelocity = 10;
 
             if (player.FaceRight)
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
@@ -54,7 +58,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            player.physics.VerticalChange(false, gameTime);
+            player.physics.VerticalChange(false, gameTime, acceleration);
 
             //I left the FaceRight condition because ideally, jumps will also move horizontally.
             //Right now, the if and else conditions have the same block of code.
@@ -63,6 +67,12 @@ namespace Game_Project
                 if (player.location.Y > 0)
                 {
                     player.location.Y -= (int)player.physics.verticalDistance;
+
+                    if (player.physics.verticalVelocity == 0)
+                    {
+                        Fall();
+                    }
+
                 } else
                 {
                     Fall();
@@ -73,6 +83,12 @@ namespace Game_Project
                 if (player.location.Y > 0)
                 {
                     player.location.Y -= (int)player.physics.verticalDistance;
+
+                    if (player.physics.verticalVelocity == 0)
+                    {
+                        Fall();
+                    }
+
                 }
                 else
                 {

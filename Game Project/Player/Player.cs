@@ -13,8 +13,10 @@ namespace Game_Project
         public ISprite sprite;
 
         public Physics physics;
-      
-        private int health;
+        public double acceleration;
+
+        private int health;     
+
         private string animationToCreate;
         public Vector2 location;
         public Vector2 Position => location;
@@ -31,6 +33,8 @@ namespace Game_Project
             location = parameters.Position;
         
             health = 3;
+
+            acceleration = 10;
 
             FaceRight = true;
 

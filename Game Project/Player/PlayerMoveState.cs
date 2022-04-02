@@ -9,13 +9,14 @@ namespace Game_Project
     {
 
         private Player player;
-        private int velocity;
+        private double drag;
 
         public PlayerMoveState(Player manager)
         {
             player = manager;
+            drag = 0;
 
-            velocity = 0;
+            player.physics.horizontalVelocity = 0;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
@@ -26,6 +27,8 @@ namespace Game_Project
 
         public void BackToIdle() 
         {
+            drag = 0;
+            player.physics.horizontalVelocity = 0;
             player.SetState(new IdleState(player));
         }
 
@@ -61,7 +64,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            player.physics.HorizontalChange(gameTime);
+            player.physics.HorizontalChange(gameTime, player.acceleration, drag);
 
             if (!player.FaceRight)
             {
@@ -76,6 +79,11 @@ namespace Game_Project
             {
                 player.projectile.Update(gameTime);
             }
+
+            //if (player.acceleration != drag && gameTime.ElapsedGameTime.TotalSeconds >= 1)
+            //{
+            //    drag++;
+            //}
 
             player.sprite.Update();
         }
