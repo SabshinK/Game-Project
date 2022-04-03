@@ -15,6 +15,7 @@ namespace Game_Project
         public IController mouse;
         private CollisionDetection collisionDetection;
         private CollisionResolution collisionResolution;
+        private Camera camera;
         //public Player player;
         //public TileManager tiles;
         //public EnemyManager enemies;
@@ -38,10 +39,13 @@ namespace Game_Project
             keyboard = new KeyboardController();
 
             //This is here to be able to load the collision dictionary
+
             collisionResolution = new CollisionResolution();
             collisionDetection = new CollisionDetection();
 
-            collisionResolution.LoadCollisionDictionary();
+            //collisionResolution.LoadCollisionDictionary();
+
+            camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
             base.Initialize();
         }
@@ -75,6 +79,7 @@ namespace Game_Project
 
             GameObjectManager.Instance.Update(gameTime);
             collisionDetection.Update(gameTime);
+            camera.Update((Player)GameObjectManager.Instance.player);
 
 
             base.Update(gameTime);
@@ -87,10 +92,13 @@ namespace Game_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
             GameObjectManager.Instance.Draw(spriteBatch);
 
             base.Draw(gameTime);
+
+            spriteBatch.End();
         }
 
         public void Reset()
