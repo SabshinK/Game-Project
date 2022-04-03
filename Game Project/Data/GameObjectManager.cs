@@ -15,11 +15,11 @@ namespace Game_Project
         public static GameObjectManager Instance => instance;
 
         //I don't know if separating these is worth it, we don't quite have enough classes to make it worth it to hold a list of lists
-        public List<IEnemy> enemyList;
-        public List<IProjectile> projectileList;
-        public List<IItem> itemList;
-        public List<ITile> tileList;
-        public IPlayer player;
+        private List<IEnemy> enemyList;
+        private List<IProjectile> projectileList;
+        private List<IItem> itemList;
+        private List<ITile> tileList;
+        private IPlayer player;
 
         public GameObjectManager()
         {
@@ -27,11 +27,12 @@ namespace Game_Project
             projectileList = new List<IProjectile>();
             itemList = new List<IItem>();
             tileList = new List<ITile>();
+            player = new IPlayer(); // ?????? what should the player be set to
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            player?.Draw(spriteBatch);
+            player.Draw(spriteBatch); // not sure what the "?" was for
             foreach (ITile tile in tileList)
             {
                 tile.Draw(spriteBatch);
