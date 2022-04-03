@@ -40,6 +40,8 @@ namespace Game_Project
         List<IItem> items;
         List<ITile> tiles;
 
+        //////////////////// i thought we were gonna make enemies different sizes? also that seems kinda large for the 
+        //////////////////// items and projectiles to be twiceas big as tiles and the same size as the player/enemies
         private const int movingObjectSize = 128;
         private const int tileSize = 64;
 
@@ -56,7 +58,7 @@ namespace Game_Project
             collisionResolution = new CollisionResolution();
         }
 
-        public void CheckCollision()
+        public void CheckCollision() ///////////////////////////// im thinking this function is too big maybe
         {
             //check locations
             firstObject_top = firstObjectLocation.Y;
@@ -67,6 +69,8 @@ namespace Game_Project
             //calculate rectangles
             rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
 
+
+            //////////////////////////////////////// change this part so that we don't use constants for sizing and instead access something like secondObject.size?
             if (secondObject.GetType() == typeof(Tile))
             {
                 secondObject_top = secondObjectLocation.Y;
@@ -182,5 +186,6 @@ namespace Game_Project
                         CheckCollision();
             }
         }
+
     }
 }
