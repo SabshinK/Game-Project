@@ -9,13 +9,17 @@ namespace Game_Project
     {
 
         private Player player;
-        private int velocity;
+        private double drag;
+        private double time;
 
         public PlayerMoveState(Player manager)
         {
             player = manager;
+            drag = 0;
 
-            velocity = 0;
+            player.horizontalAcceleration = 2;
+            player.physics.horizontalVelocity = 0;
+            player.physics.horizontalDistance = 5;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
@@ -61,7 +65,8 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            player.physics.HorizontalChange(gameTime);
+            time += gameTime.ElapsedGameTime.TotalSeconds;
+            player.physics.HorizontalChange(gameTime, player.horizontalAcceleration, drag);
 
             if (!player.FaceRight)
             {
@@ -70,8 +75,19 @@ namespace Game_Project
             else
             {
                 player.location.X += (int)player.physics.horizontalDistance;
+            }  
+
+            if (player.horizontalAcceleration < 5 && (time/0.5) >= 1)
+            {
+                player.horizontalAcceleration++;
             }
 
+            if (player.horizontalAcceleration == 5 && player.horizontalAcceleration != drag && (time/0.5) >= 1)
+            {
+                drag++;
+                time = 0;
+            }
+            
             if (player.projectile != null)
             {
                 player.projectile.Update(gameTime);

@@ -14,7 +14,7 @@ namespace Game_Project
             // constructor
         }
 
-        public void ResolveCollision(ICollideable object1, ICollideable object2, CollideDirection direction, Rectangle FirstRectangle, Rectangle SecondRectangle)
+        public void ResolveCollision(ICollideable object1, ICollideable object2, CollideDirection direction, Rectangle firstRectangle, Rectangle secondRectangle)
         {
             string commandObject1 = null;
             string commandObject2 = null;
