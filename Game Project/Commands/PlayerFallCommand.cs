@@ -7,7 +7,6 @@ namespace Game_Project
     class PlayerFallCommand : ICommand
     {
         private Player player;
-        private bool falling;
 
         public PlayerFallCommand(Player manager)
         {

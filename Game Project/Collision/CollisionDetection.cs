@@ -40,6 +40,8 @@ namespace Game_Project
         List<IItem> items;
         List<ITile> tiles;
 
+        //////////////////// i thought we were gonna make enemies different sizes? also that seems kinda large for the 
+        //////////////////// items and projectiles to be twice as big as tiles and the same size as the player/enemies
         private const int movingObjectSize = 128;
         private const int tileSize = 64;
 
@@ -48,15 +50,16 @@ namespace Game_Project
             player = GameObjectManager.Instance.player;
 
             //Ask Object Manager for the lists
-            enemies = GameObjectManager.Instance.enemyList;
-            projectiles = GameObjectManager.Instance.projectileList;
-            items = GameObjectManager.Instance.itemList;
-            tiles = GameObjectManager.Instance.tileList;
+            // do i have to use strings or something or is it okay to pass interfaces as types as params
+            enemies = GetObjectList("enemy");
+            projectiles = GetObjectList("projectile");
+            items = GetObjectList("item");
+            tiles = GetObjectList("tile");
 
             collisionResolution = new CollisionResolution();
         }
 
-        public void CheckCollision()
+        public void CheckCollision() ///////////////////////////// im thinking this function is too big maybe,, if yall agree i volunteer to split it up
         {
             //check locations
             firstObject_top = firstObjectLocation.Y;
@@ -64,9 +67,7 @@ namespace Game_Project
             firstObject_left = firstObjectLocation.X;
             firstObject_right = firstObjectLocation.X + movingObjectSize;
 
-            //calculate rectangles
-            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
-
+            //////////////////////////////////////// change this part so that we don't use constants for sizing and instead access something like secondObject.size?
             if (secondObject.GetType() == typeof(Tile))
             {
                 secondObject_top = secondObjectLocation.Y;
@@ -81,12 +82,19 @@ namespace Game_Project
                 secondObject_left = secondObjectLocation.X;
                 secondObject_right = secondObjectLocation.X + movingObjectSize;
             }
-
+            
+            //calculate rectangles
+            //are we sure this is how to make rectangles bc idk where to find the right info but everything i'm finding is making me think it should include width/height
+            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
             rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
 
             // objects collide:
-            if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
+            //if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
+            if (rectangleObject1.Intersects(rectangleObject2)) // changed this so that we can make sure it works before changing everything else
             {
+                // TO DO : make third rectangle using intersect method, compare width and height to determine what kind of collision (vert or horizontal),
+                // not sure how to know what specific direction collision is without getting rid of the code we already have
+
                 if (firstObject_right >= secondObject_left)
                 {
                     // left overlap (right side of player):
@@ -132,16 +140,16 @@ namespace Game_Project
                 firstObject = player;
 
                 secondObjectLocation = enemy.Position;
-                        secondObject = enemy;
+                secondObject = enemy;
                 
                 CheckCollision();
+
+                firstObjectLocation = enemy.Position;
+                firstObject = enemy;
 
                 foreach (ITile tile in tiles)
                 {
                     // enemies and tiles
-                        firstObjectLocation = enemy.Position;
-                        firstObject = enemy;
-
                         secondObjectLocation = tile.Position;
                         secondObject = tile;
 
@@ -150,21 +158,19 @@ namespace Game_Project
                 foreach (IProjectile projectile in projectiles)
                 {
                     // enemies and projectiles
-                        firstObjectLocation = enemy.Position;
-                        firstObject = enemy;
-
                         secondObjectLocation = projectile.Position;
                         secondObject = projectile;
 
                         CheckCollision();
                 }
             }
+
+            firstObjectLocation = player.Position;
+            firstObject = player;
+
             foreach (ITile tile in tiles)
             {
                 // player and tiles
-                        firstObjectLocation = player.Position;
-                        firstObject = player;
-
                         secondObjectLocation = tile.Position;
                         secondObject = tile;
 
@@ -173,14 +179,12 @@ namespace Game_Project
             foreach (IItem item in items) 
             {
                     // player and items
-                        firstObjectLocation = player.Position;
-                        firstObject = player;
-
                         secondObjectLocation = item.Position;
                         secondObject = item;
 
                         CheckCollision();
             }
         }
+
     }
 }

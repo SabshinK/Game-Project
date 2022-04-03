@@ -2,40 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Numerics;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using Vector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace Game_Project
 {
     class Camera
     {
-        private Vector2 worldPosVector;
-        private Player subject;
-        private int height = 600; //height of window
-        private int width = 1000; //width of window
-        private GraphicsDeviceManager graphics;
 
-        public Camera(Player gamePlayer, GraphicsDeviceManager gameGraphics)
+        public Matrix zoomMatrix;
+        Viewport cameraView;
+        Vector2 cameraPos;
+
+        public Camera(Viewport gameCamera)
         {
-            subject = gamePlayer;
-            worldPosVector = gamePlayer.location;
-            graphics = gameGraphics;
-            RenderTarget2D
+            cameraView = gameCamera;
         }
 
-        public Matrix4x4 getFocusMatrix()
+        public void Update(Player gamePlayer)
         {
-            float left = worldPosVector.X - width / 2f;
-            float right = worldPosVector.X + width / 2f;
-            float top = worldPosVector.Y - height / 2f;
-            float bottom = worldPosVector.Y + height / 2f;
+            float cameraX = gamePlayer.location.X + 64 - (cameraView.Width / 2);
+            float cameraY = gamePlayer.location.Y + 64 - (cameraView.Height / 2);
 
-            Matrix4x4 windowMatrix = Matrix4x4.CreateOrthographicOffCenter(left, right, bottom, top, 0, 0);
+            cameraPos = new Vector2(cameraX, cameraY);
 
-            graphics.GraphicsDevice.SetRenderTarget(subject);
-
-            return windowMatrix;
+            //can be modified if needed, but tells the game how much to be zoomed in, this is standard zoom level
+            zoomMatrix = Matrix.CreateScale(new Vector3(1, 1, 0)) * Matrix.CreateTranslation(new Vector3(-cameraPos.X, -cameraPos.Y, 0));
         }
     }
 }
