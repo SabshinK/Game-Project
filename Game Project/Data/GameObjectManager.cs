@@ -22,6 +22,8 @@ namespace Game_Project
         private List<ITile> tileList;
         public IPlayer player;
 
+        private object[] listArray;
+
         private object[] playerAttributes;
         private Vector2 location;
         private bool direction;
@@ -30,10 +32,14 @@ namespace Game_Project
 
         public GameObjectManager()
         {
+            listArray = new object[4];
             enemyList = new List<IEnemy>();
             projectileList = new List<IProjectile>();
             itemList = new List<IItem>();
             tileList = new List<ITile>();
+
+            location = new Vector2();
+            playerAttributes = new object[3];
 
             playerAttributes[0] = location;
             playerAttributes[1] = direction;
@@ -42,14 +48,14 @@ namespace Game_Project
         }
 
         // right now this is just so collision detection can have access to the lists
-        public List<ICollideable> GetObjectList(String listType)
+        public object[] GetObjectLists()
         {
-            if (listType.Equals("enemy")) return enemyList;
-            else if (listType.Equals("projectile")) return projectileList;
-            else if (listType.Equals("item")) return itemList;
-            else if (listType.Equals("tile")) return tileList;
+            listArray[0] = enemyList;
+            listArray[1] = projectileList;
+            listArray[2] = itemList;
+            listArray[3] = tileList;
 
-            return null; // this shouldn't ever happen but i'm not sure what to do if it does?
+            return listArray; // this shouldn't ever happen but i'm not sure what to do if it does?
         }
 
         public void Draw(SpriteBatch spriteBatch)
