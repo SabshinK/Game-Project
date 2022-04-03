@@ -35,6 +35,8 @@ namespace Game_Project
 
         GameTime gameTime;
 
+        private object[] listArray;
+
         List<IEnemy> enemies;
         List<IProjectile> projectiles;
         List<IItem> items;
@@ -51,10 +53,11 @@ namespace Game_Project
 
             //Ask Object Manager for the lists
             // do i have to use strings or something or is it okay to pass interfaces as types as params
-            enemies = GetObjectList("enemy");
-            projectiles = GetObjectList("projectile");
-            items = GetObjectList("item");
-            tiles = GetObjectList("tile");
+
+            enemies = GameObjectManager.Instance.GetObjectList("enemy");
+            projectiles = GameObjectManager.Instance.GetObjectList("projectile");
+            items = GameObjectManager.Instance.GetObjectList("item");
+            tiles = GameObjectManager.Instance.GetObjectList("tile");
 
             collisionResolution = new CollisionResolution();
         }

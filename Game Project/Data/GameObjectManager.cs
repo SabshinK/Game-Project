@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Game_Project
 {
     class GameObjectManager
@@ -19,7 +20,13 @@ namespace Game_Project
         private List<IProjectile> projectileList;
         private List<IItem> itemList;
         private List<ITile> tileList;
-        private IPlayer player;
+        public IPlayer player;
+
+        private object[] playerAttributes;
+        private Vector2 location;
+        private bool direction;
+        private String animationName;
+
 
         public GameObjectManager()
         {
@@ -27,11 +34,15 @@ namespace Game_Project
             projectileList = new List<IProjectile>();
             itemList = new List<IItem>();
             tileList = new List<ITile>();
-            player = new IPlayer(); // ?????? what should the player be set to
+
+            playerAttributes[0] = location;
+            playerAttributes[1] = direction;
+            playerAttributes[2] = animationName;
+            player = new Player(new UniversalParameterObject(playerAttributes)); // ?????? what should the player be set to
         }
 
         // right now this is just so collision detection can have access to the lists
-        public List<T> GetList(String listType)
+        public List<ICollideable> GetObjectList(String listType)
         {
             if (listType.Equals("enemy")) return enemyList;
             else if (listType.Equals("projectile")) return projectileList;

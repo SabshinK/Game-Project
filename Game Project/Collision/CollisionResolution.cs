@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Xna.Framework;
+using static Game_Project.CollisionDetection;
 
 namespace Game_Project
 {
