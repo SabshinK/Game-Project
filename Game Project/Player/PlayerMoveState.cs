@@ -17,7 +17,9 @@ namespace Game_Project
             player = manager;
             drag = 0;
 
+            player.horizontalAcceleration = 2;
             player.physics.horizontalVelocity = 0;
+            player.physics.horizontalDistance = 5;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
@@ -28,9 +30,6 @@ namespace Game_Project
 
         public void BackToIdle() 
         {
-            drag = 0;
-            player.physics.horizontalVelocity = 0;
-            player.physics.horizontalDistance = 0;
             player.SetState(new IdleState(player));
         }
 
@@ -66,8 +65,8 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            //time += gameTime.ElapsedGameTime.TotalSeconds;
-            player.physics.HorizontalChange(gameTime, player.acceleration, drag);
+            time += gameTime.ElapsedGameTime.TotalSeconds;
+            player.physics.HorizontalChange(gameTime, player.horizontalAcceleration, drag);
 
             if (!player.FaceRight)
             {
@@ -76,18 +75,23 @@ namespace Game_Project
             else
             {
                 player.location.X += (int)player.physics.horizontalDistance;
+            }  
+
+            if (player.horizontalAcceleration < 5 && (time/0.5) >= 1)
+            {
+                player.horizontalAcceleration++;
             }
 
+            if (player.horizontalAcceleration == 5 && player.horizontalAcceleration != drag && (time/0.5) >= 1)
+            {
+                drag++;
+                time = 0;
+            }
+            
             if (player.projectile != null)
             {
                 player.projectile.Update(gameTime);
             }
-
-            //if (player.acceleration != drag && (time/0.25) >= 1)
-            //{
-            //    drag++;
-            //    time = 0;
-            //}
 
             player.sprite.Update();
         }

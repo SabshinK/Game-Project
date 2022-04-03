@@ -17,8 +17,8 @@ namespace Game_Project
 
         public Physics()
         {
-            horizontalVelocity = 0;
-            verticalVelocity = 10;
+            horizontalVelocity = 5;
+            verticalVelocity = -1;
 
             horizontalDistance = 0;
             verticalDistance = 0;
@@ -30,30 +30,26 @@ namespace Game_Project
         {
             timePassed = gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (horizontalVelocity >= 10)
+            if (acceleration != drag)
             {
-                horizontalDistance = (horizontalVelocity * timePassed);
-            }
-            else
-            {
+                horizontalDistance = horizontalDistance + (horizontalVelocity * timePassed) + ((acceleration - drag) * (timePassed * timePassed) * 0.5);
                 horizontalVelocity = horizontalVelocity + ((acceleration - drag) * timePassed);
-                horizontalDistance = (horizontalVelocity * timePassed) + ((acceleration - drag) * (timePassed * timePassed) * 0.5);
             }
         }
 
-        public void VerticalChange(bool Falling, GameTime gameTime, double acceleration)
+        public void VerticalChange(bool Falling, GameTime gameTime, double acceleration, double drag)
         {
             timePassed += gameTime.ElapsedGameTime.TotalSeconds;
 
             if (!Falling)
             {
-                verticalVelocity = verticalVelocity - (acceleration * timePassed);
-                verticalDistance = (verticalVelocity * timePassed) + (acceleration * (timePassed * timePassed) * 0.5);
+                verticalDistance = (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                verticalVelocity = verticalVelocity - ((acceleration + drag) * timePassed);
             }
             else
             {
-                verticalVelocity = verticalVelocity + (acceleration * timePassed);
-                verticalDistance = (verticalVelocity * timePassed) + (acceleration * (timePassed * timePassed) * 0.5);
+                verticalDistance = (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                verticalVelocity = verticalVelocity + ((acceleration + drag) * timePassed);
             }
 
         }

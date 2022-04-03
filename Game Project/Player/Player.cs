@@ -13,7 +13,8 @@ namespace Game_Project
         public ISprite sprite;
 
         public Physics physics;
-        public double acceleration;
+        public double horizontalAcceleration;
+        public double verticalAcceleration;
 
         private int health;     
 
@@ -34,7 +35,8 @@ namespace Game_Project
         
             health = 3;
 
-            acceleration = 10;
+            horizontalAcceleration = 2;
+            verticalAcceleration = -2;
 
             FaceRight = true;
 

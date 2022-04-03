@@ -67,7 +67,7 @@ namespace Game_Project
                         break;
                     case actions.falling:
                         locationVector.Y++;
-                        physics.VerticalChange(true, gameTime, -9.8);
+                        physics.VerticalChange(true, gameTime, -5, 2);
                         batSprite.Update();
                         break;
                     case actions.moving:
