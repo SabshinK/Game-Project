@@ -15,11 +15,11 @@ namespace Game_Project
         public static GameObjectManager Instance => instance;
 
         //I don't know if separating these is worth it, we don't quite have enough classes to make it worth it to hold a list of lists
-        public List<IEnemy> enemyList;
-        public List<IProjectile> projectileList;
-        public List<IItem> itemList;
-        public List<ITile> tileList;
-        public IPlayer player;
+        private List<IEnemy> enemyList;
+        private List<IProjectile> projectileList;
+        private List<IItem> itemList;
+        private List<ITile> tileList;
+        private IPlayer player;
 
         public GameObjectManager()
         {
@@ -27,11 +27,23 @@ namespace Game_Project
             projectileList = new List<IProjectile>();
             itemList = new List<IItem>();
             tileList = new List<ITile>();
+            player = new IPlayer(); // ?????? what should the player be set to
+        }
+
+        // right now this is just so collision detection can have access to the lists
+        public List<T> GetList(String listType)
+        {
+            if (listType.Equals("enemy")) return enemyList;
+            else if (listType.Equals("projectile")) return projectileList;
+            else if (listType.Equals("item")) return itemList;
+            else if (listType.Equals("tile")) return tileList;
+
+            return null; // this shouldn't ever happen but i'm not sure what to do if it does?
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            player?.Draw(spriteBatch);
+            player.Draw(spriteBatch); // not sure what the "?" was for
             foreach (ITile tile in tileList)
             {
                 tile.Draw(spriteBatch);
@@ -47,9 +59,7 @@ namespace Game_Project
             foreach (IProjectile projectile in projectileList)
             {
                 projectile.Draw(spriteBatch);
-            }
-           
-           
+            }  
         }
 
         public void Update(GameTime gameTime)
@@ -82,7 +92,7 @@ namespace Game_Project
             if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
             else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
             else if (dead is IItem) itemList.Remove((IItem)dead);
-            //else if (T is IPlayer) ???????
+            //else if (T is IPlayer) ??? how to remove dead player ?? do we not even need to do this, since the game over screen will play ?
         }
 
         public void Reset()
