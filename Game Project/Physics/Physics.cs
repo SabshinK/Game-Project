@@ -17,10 +17,10 @@ namespace Game_Project
 
         public Physics()
         {
-            horizontalVelocity = 5;
-            verticalVelocity = -1;
+            horizontalVelocity = 0;
+            verticalVelocity = -5;
 
-            horizontalDistance = 0;
+            horizontalDistance = 5;
             verticalDistance = 0;
 
             timePassed = 0;
@@ -43,13 +43,16 @@ namespace Game_Project
 
             if (!Falling)
             {
-                verticalDistance = (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
-                verticalVelocity = verticalVelocity - ((acceleration + drag) * timePassed);
+                verticalDistance = verticalDistance + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                verticalVelocity = verticalVelocity + ((acceleration + drag) * timePassed);
             }
             else
             {
-                verticalDistance = (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
-                verticalVelocity = verticalVelocity + ((acceleration + drag) * timePassed);
+                if (acceleration != drag)
+                {
+                    verticalDistance = verticalDistance + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                    verticalVelocity = verticalVelocity - ((acceleration + drag) * timePassed);
+                }
             }
 
         }

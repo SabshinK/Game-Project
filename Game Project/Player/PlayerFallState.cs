@@ -12,9 +12,11 @@ namespace Game_Project
         private double time;
         public PlayerFallState(Player manager)
         {
-            player = manager;
-            player.verticalAcceleration = 2;
+            player = manager;            
             drag = -2;
+            player.verticalAcceleration = 0;
+            //player.physics.verticalVelocity = 5;
+            //player.physics.verticalDistance = 0;
 
             if (player.FaceRight)
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
@@ -65,14 +67,14 @@ namespace Game_Project
             //Right now, the if and else conditions have the same block of code.
             if (!player.FaceRight)
             {
-                player.location.Y += (int)player.physics.verticalDistance;
+                player.location.Y -= (int)player.physics.verticalDistance;
             }
             else
             {
-                player.location.Y += (int)player.physics.verticalDistance;
+                player.location.Y -= (int)player.physics.verticalDistance;
             }
 
-            if (player.verticalAcceleration != drag && (time / 0.5) >= 1)
+            if (drag != player.verticalAcceleration && (time / 0.5) >= 1)
             {
                 drag++;
                 time = 0;

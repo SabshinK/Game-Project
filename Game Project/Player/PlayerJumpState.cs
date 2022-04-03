@@ -14,6 +14,9 @@ namespace Game_Project
         {
             player = manager;
             drag = 0;
+            player.verticalAcceleration = 0;
+            player.physics.verticalVelocity = -5;
+            player.physics.verticalDistance = 0;
 
             if (player.FaceRight)
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
@@ -66,7 +69,7 @@ namespace Game_Project
             {
                 if (player.location.Y > 0)
                 {
-                    player.location.Y -= (int)player.physics.verticalDistance;
+                    player.location.Y += (int)player.physics.verticalDistance;
 
                     if (player.physics.verticalVelocity == 0)
                     {
@@ -82,7 +85,7 @@ namespace Game_Project
             {
                 if (player.location.Y > 0)
                 {
-                    player.location.Y -= (int)player.physics.verticalDistance;
+                    player.location.Y += (int)player.physics.verticalDistance;
 
                     if (player.physics.verticalVelocity == 0)
                     {
@@ -96,13 +99,13 @@ namespace Game_Project
                 }
             }
 
-            if (player.verticalAcceleration != drag && (time / 0.5) >= 1)
+            if (drag < (player.verticalAcceleration * -2) && (time / 0.5) >= 1)
             {
                 drag++;
                 time = 0;
             }
 
-            if (player.physics.verticalVelocity == 0)
+            if (player.physics.verticalVelocity >= 0)
             {
                 Fall();
             }
