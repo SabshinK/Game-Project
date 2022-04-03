@@ -30,6 +30,17 @@ namespace Game_Project
             player = new IPlayer(); // ?????? what should the player be set to
         }
 
+        // right now this is just so collision detection can have access to the lists
+        public List<T> GetList(String listType)
+        {
+            if (listType.Equals("enemy")) return enemyList;
+            else if (listType.Equals("projectile")) return projectileList;
+            else if (listType.Equals("item")) return itemList;
+            else if (listType.Equals("tile")) return tileList;
+
+            return null; // this shouldn't ever happen but i'm not sure what to do if it does?
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             player.Draw(spriteBatch); // not sure what the "?" was for
@@ -48,9 +59,7 @@ namespace Game_Project
             foreach (IProjectile projectile in projectileList)
             {
                 projectile.Draw(spriteBatch);
-            }
-           
-           
+            }  
         }
 
         public void Update(GameTime gameTime)
@@ -83,7 +92,7 @@ namespace Game_Project
             if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
             else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
             else if (dead is IItem) itemList.Remove((IItem)dead);
-            //else if (T is IPlayer) ???????
+            //else if (T is IPlayer) ??? how to remove dead player ?? do we not even need to do this, since the game over screen will play ?
         }
 
         public void Reset()
