@@ -10,9 +10,6 @@ namespace Game_Project
         public double horizontalVelocity;
         public double verticalVelocity;
 
-        private const double horizontalAcceleration = 2;
-        private const double verticalAcceleration = 9.8;
-
         public double horizontalDistance;
         public double verticalDistance;
 
@@ -21,59 +18,41 @@ namespace Game_Project
         public Physics()
         {
             horizontalVelocity = 0;
-            verticalVelocity = 10;
+            verticalVelocity = -5;
 
-            horizontalDistance = 0;
+            horizontalDistance = 5;
             verticalDistance = 0;
 
             timePassed = 0;
         }
 
-        public void HorizontalChange(GameTime gameTime)
+        public void HorizontalChange(GameTime gameTime, double acceleration, double drag)
         {
-            int previousVelocity = (int)horizontalVelocity;
+            timePassed = gameTime.ElapsedGameTime.TotalSeconds;
 
-            if ((int)horizontalVelocity == 0)
+            if (acceleration != drag)
             {
-                timePassed = 0;
-            }
-
-            timePassed = gameTime.ElapsedGameTime.TotalSeconds - timePassed;
-
-            if (horizontalVelocity < 10) //terminal velocity is 10
-            {
-                horizontalVelocity += horizontalAcceleration * timePassed;
-                horizontalDistance += ((previousVelocity + (int)horizontalVelocity) / 2) * timePassed;
-
-            } else if (horizontalVelocity == 10) //what happens when move is released and the player slows down
-            {
-                horizontalVelocity -= horizontalAcceleration * timePassed;
-                horizontalDistance += ((previousVelocity + (int)horizontalVelocity) / 2) * timePassed; 
-                //the distance will always increase for horizontal movement. it will increase by less and less when slowing down.
+                horizontalDistance = horizontalDistance + (horizontalVelocity * timePassed) + ((acceleration - drag) * (timePassed * timePassed) * 0.5);
+                horizontalVelocity = horizontalVelocity + ((acceleration - drag) * timePassed);
             }
         }
 
-        public void VerticalChange(bool Falling, GameTime gameTime)
+        public void VerticalChange(bool Falling, GameTime gameTime, double acceleration, double drag)
         {
-            int previousVelocity = (int)verticalVelocity;
-
-            if ((int)verticalVelocity == 0 && timePassed > 0)
-            {
-                timePassed = 0;
-                Falling = true;
-            }
-
             timePassed += gameTime.ElapsedGameTime.TotalSeconds;
 
             if (!Falling)
             {
-                verticalVelocity -= verticalAcceleration * timePassed;
-                verticalDistance += ((previousVelocity + (int)verticalVelocity) / 2) * timePassed;
+                verticalDistance = verticalDistance + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                verticalVelocity = verticalVelocity + ((acceleration + drag) * timePassed);
             }
             else
             {
-                verticalVelocity += verticalAcceleration * timePassed;
-                verticalDistance -= ((previousVelocity + (int)verticalVelocity) / 2) * timePassed;
+                if (acceleration != drag)
+                {
+                    verticalDistance = verticalDistance + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                    verticalVelocity = verticalVelocity - ((acceleration + drag) * timePassed);
+                }
             }
 
         }
