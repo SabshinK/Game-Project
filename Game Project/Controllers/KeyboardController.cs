@@ -51,6 +51,9 @@ namespace Game_Project
 			RegisterCommand(Keys.W, new PlayerJumpCommand(player));
 			RegisterCommand(Keys.S, new PlayerFallCommand(player));
 			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player)); 
+			RegisterCommand(Keys.Left, new PlayerMoveLeftCommand(player));
+			RegisterCommand(Keys.Up, new PlayerJumpCommand(player, true));
+			RegisterCommand(Keys.Right, new PlayerMoveRightCommand(player)); 
 			RegisterCommand(Keys.Z, new AttackCommand(player));
 			RegisterCommand(Keys.N, new AttackCommand(player));
 			RegisterCommand(Keys.D1, new UseItemCommand(player, 1));
