@@ -35,6 +35,8 @@ namespace Game_Project
 
         GameTime gameTime;
 
+        private object[] listArray;
+
         List<IEnemy> enemies;
         List<IProjectile> projectiles;
         List<IItem> items;
@@ -48,10 +50,12 @@ namespace Game_Project
             player = GameObjectManager.Instance.player;
 
             //Ask Object Manager for the lists
-            enemies = GameObjectManager.Instance.enemyList;
-            projectiles = GameObjectManager.Instance.projectileList;
-            items = GameObjectManager.Instance.itemList;
-            tiles = GameObjectManager.Instance.tileList;
+            listArray = GameObjectManager.Instance.GetObjectLists();
+
+            enemies = (List<IEnemy>)listArray[0];
+            projectiles = (List<IProjectile>)listArray[1];
+            items = (List<IItem>)listArray[2];
+            tiles = (List<ITile>)listArray[3];
 
             collisionResolution = new CollisionResolution();
         }
@@ -64,9 +68,7 @@ namespace Game_Project
             firstObject_left = firstObjectLocation.X;
             firstObject_right = firstObjectLocation.X + movingObjectSize;
 
-            //calculate rectangles
-            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
-
+            // change this part so that we don't use constants for sizing and instead access something like secondObject.size?
             if (secondObject.GetType() == typeof(Tile))
             {
                 secondObject_top = secondObjectLocation.Y;
@@ -82,11 +84,14 @@ namespace Game_Project
                 secondObject_right = secondObjectLocation.X + movingObjectSize;
             }
 
+            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
             rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
 
             // objects collide:
-            if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
+            if (rectangleObject1.Intersects(rectangleObject2))
             {
+                // TO DO : make third rectangle using intersect method, compare width and height to determine what kind of collision (vert or horizontal)
+
                 if (firstObject_right >= secondObject_left)
                 {
                     // left overlap (right side of player):
@@ -132,16 +137,16 @@ namespace Game_Project
                 firstObject = player;
 
                 secondObjectLocation = enemy.Position;
-                        secondObject = enemy;
+                secondObject = enemy;
                 
                 CheckCollision();
+
+                firstObjectLocation = enemy.Position;
+                firstObject = enemy;
 
                 foreach (ITile tile in tiles)
                 {
                     // enemies and tiles
-                        firstObjectLocation = enemy.Position;
-                        firstObject = enemy;
-
                         secondObjectLocation = tile.Position;
                         secondObject = tile;
 
@@ -150,21 +155,19 @@ namespace Game_Project
                 foreach (IProjectile projectile in projectiles)
                 {
                     // enemies and projectiles
-                        firstObjectLocation = enemy.Position;
-                        firstObject = enemy;
-
                         secondObjectLocation = projectile.Position;
                         secondObject = projectile;
 
                         CheckCollision();
                 }
             }
+
+            firstObjectLocation = player.Position;
+            firstObject = player;
+
             foreach (ITile tile in tiles)
             {
                 // player and tiles
-                        firstObjectLocation = player.Position;
-                        firstObject = player;
-
                         secondObjectLocation = tile.Position;
                         secondObject = tile;
 
@@ -173,14 +176,12 @@ namespace Game_Project
             foreach (IItem item in items) 
             {
                     // player and items
-                        firstObjectLocation = player.Position;
-                        firstObject = player;
-
                         secondObjectLocation = item.Position;
                         secondObject = item;
 
                         CheckCollision();
             }
         }
+
     }
 }

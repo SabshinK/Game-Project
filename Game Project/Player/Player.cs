@@ -13,24 +13,31 @@ namespace Game_Project
         public ISprite sprite;
 
         public Physics physics;
-      
+        public double horizontalAcceleration;
+        public double verticalAcceleration;
+
         private int health;
+
+        private Rectangle collideRectangle;
+
         private string animationToCreate;
         public Vector2 location;
         public Vector2 Position => location;
-
         public bool FaceRight { get; private set; }
 
         // Constructor
         public Player(UniversalParameterObject parameters)
         {
-            state = new IdleState(this);
+            state = new PlayerFallState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
 
             location = parameters.Position;
         
             health = 3;
+
+            horizontalAcceleration = 2;
+            verticalAcceleration = 0;
 
             FaceRight = true;
 
@@ -82,7 +89,6 @@ namespace Game_Project
             state.Fall();
         }
 
-        // For Sprint 2, taking damage will be shown when we press 'e', but for future sprints, this will be triggered by contact with an enemy.
         public void DamageTaken()
         {
             health--;
@@ -139,8 +145,7 @@ namespace Game_Project
 
         public void Collide()
         {
-            //boink
-            
+            //collisions affecting the player based on the size of the rectangle          
         }
 
         public void Update(GameTime gameTime)

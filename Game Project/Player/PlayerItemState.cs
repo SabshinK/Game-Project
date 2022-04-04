@@ -63,7 +63,7 @@ namespace Game_Project
             }
             else
             {
-                player.SetState(new IdleState(player));
+                player.SetState(new PlayerFallState(player));
             }
 
             if (player.projectile != null)

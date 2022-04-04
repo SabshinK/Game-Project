@@ -129,7 +129,7 @@ namespace Game_Project
                     break;
                 case actions.falling:
                     locationVector.Y++;
-                    physics.VerticalChange(true, gameTime);
+                    physics.VerticalChange(true, gameTime, -5, 2);
                     dragonSprite.Update();
                     break;
                 case actions.attacking:
@@ -141,7 +141,10 @@ namespace Game_Project
                     {
                         if (lengthOfAction < 50)
                         {
-                            weapon.Update(gameTime);
+                            if (weapon != null)
+                            {
+                                weapon.Update(gameTime);
+                            }
                         }
                         else
                         {

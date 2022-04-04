@@ -57,6 +57,7 @@ namespace Game_Project
         
         public void Update(GameTime gameTime)
         {
+
             if (player.projectile != null)
             {
                 player.projectile.Update(gameTime);
