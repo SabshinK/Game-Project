@@ -88,7 +88,7 @@ namespace Game_Project
             rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
 
             // objects collide:
-            if (rectangleObject1.Intersects(rectangleObject2)) // changed this so that we can make sure it works before changing everything else
+            if (rectangleObject1.Intersects(rectangleObject2))
             {
                 // TO DO : make third rectangle using intersect method, compare width and height to determine what kind of collision (vert or horizontal)
 
