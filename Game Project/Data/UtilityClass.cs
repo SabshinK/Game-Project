@@ -23,7 +23,7 @@ namespace Game_Project
         {
             magicNums = new int[7];
             
-            string filePath = @"C:\MyFile.txt"; // need to edit file path
+            string filePath = @"Game Project/Data/MagicNumbers.txt"; // need to edit file path
 
             string[] values = System.IO.File.ReadAllLines(filePath);
 
