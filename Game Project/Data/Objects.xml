@@ -3,22 +3,217 @@
 <Asset Type="ObjectData">
 	<Item>
 		<ObjectType>Player</ObjectType>
-		<X>0</X>
-		<Y>0</Y>
+		<X>100</X>
+		<Y>200</Y>
 	</Item>
+	<!--Enemies-->
 	<Item>
 		<ObjectType>BatEnemy</ObjectType>
-		<X>200</X>
-		<Y>0</Y>
+		<X>128</X>
+		<Y>128</Y>
 	</Item>
+	<Item>
+		<ObjectType>GoriyaEnemy</ObjectType>
+		<X>192</X>
+		<Y>128</Y>
+	</Item>
+	<Item>
+		<ObjectType>DragonEnemy</ObjectType>
+		<X>320</X>
+		<Y>192</Y>
+	</Item>
+	<!--Projectiles/Items-->
 	<Item>
 		<ObjectType>Arrow</ObjectType>
 		<X>0</X>
 		<Y>200</Y>
+		<FacingRight index="1">true</FacingRight>
+	</Item>
+	<!--Tiles-->
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>0</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
 	</Item>
 	<Item>
 		<ObjectType>Tile</ObjectType>
-		<X>200</X>
-		<Y>200</Y>
+		<X>64</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>128</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>192</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>256</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>320</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>384</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>448</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>512</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>576</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>640</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>704</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>768</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>832</X>
+		<Y>416</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>0</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>64</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>128</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>192</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>256</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>320</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>384</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>448</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>512</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>576</X>
+		<Y>352</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>640</X>
+		<Y>352</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>704</X>
+		<Y>352</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>768</X>
+		<Y>352</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>832</X>
+		<Y>352</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>640</X>
+		<Y>288</Y>
+		<Animation index="2">lightGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>704</X>
+		<Y>288</Y>
+		<Animation index="2">darkGrottoGround</Animation>
+	</Item>
+	<Item>
+		<ObjectType>Tile</ObjectType>
+		<X>704</X>
+		<Y>224</Y>
+		<Animation index="2">lightGrottoGround</Animation>
 	</Item>
 </Asset>

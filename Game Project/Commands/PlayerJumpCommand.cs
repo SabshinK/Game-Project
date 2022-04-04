@@ -7,24 +7,19 @@ namespace Game_Project
     class PlayerJumpCommand : ICommand
     {
         private Player player;
-        private bool falling;
 
-        public PlayerJumpCommand(Player manager, bool Falling)
+        public PlayerJumpCommand(Player manager)
         {
             player = manager;
-            falling = Falling;
         }
 
         public void Execute()
         {
-            if (falling)
-            {
-                player.Fall(player.FaceRight);
-            }
-            else
+            if (player.physics.verticalVelocity < 0) //make sure the player still falls if falling and the jump button is pressed
             {
                 player.Jump(player.FaceRight);
             }
+            
         }
     }
 }

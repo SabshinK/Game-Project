@@ -13,8 +13,9 @@ namespace Game_Project
         // Interfaces to use
         public IController keyboard;
         public IController mouse;
-        private GameObjectManager objectManager;
+        private CollisionDetection collisionDetection;
         private CollisionResolution collisionResolution;
+        private Camera camera;
         //public Player player;
         //public TileManager tiles;
         //public EnemyManager enemies;
@@ -35,24 +36,16 @@ namespace Game_Project
         /// </summary>
         protected override void Initialize()
         {
-            //GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-            
-            Texture2DStorage.LoadContent(Content);
-            //SpriteFactory.Instance.LoadDictionary();
-            LevelLoader.Instance.LoadLevel();
-            
             keyboard = new KeyboardController();
-            objectManager = new GameObjectManager();
 
             //This is here to be able to load the collision dictionary
-            collisionResolution = new CollisionResolution(null, null, CollisionResolution.collideDirection.Left);
 
-            //player = new Player();
-            //tiles = new TileManager();
-            //enemies = new EnemyManager();
-            //items = new ItemManager();
+            collisionResolution = new CollisionResolution();
+            collisionDetection = new CollisionDetection();
 
-            collisionResolution.LoadCollisionDictionary();
+            //collisionResolution.LoadCollisionDictionary();
+
+            camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
             base.Initialize();
         }
@@ -64,7 +57,12 @@ namespace Game_Project
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //keyboard.LoadContent(this, player, tiles, enemies, items);
+            Texture2DStorage.LoadContent(Content);
+            SpriteFactory.Instance.LoadDictionary();
+
+            LevelLoader.Instance.LoadLevel();
+
+            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
 
         /// <summary>
@@ -77,9 +75,12 @@ namespace Game_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //player.state.Update(gameTime);
-            //enemies.Update(gameTime);
-            //keyboard.Update(gameTime);
+            keyboard.Update(gameTime);
+
+            GameObjectManager.Instance.Update(gameTime);
+            collisionDetection.Update(gameTime);
+            camera.Update((Player)GameObjectManager.Instance.player);
+
 
             base.Update(gameTime);
         }
@@ -91,13 +92,19 @@ namespace Game_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
-            //player.Draw(spriteBatch);
-            //tiles.Draw(spriteBatch);
-            //enemies.Draw(spriteBatch);
-            //items.Draw(spriteBatch);
+            GameObjectManager.Instance.Draw(spriteBatch);
 
             base.Draw(gameTime);
+
+            spriteBatch.End();
+        }
+
+        public void Reset()
+        {
+            LevelLoader.Instance.LoadLevel();
+            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
     }
 }

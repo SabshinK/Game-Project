@@ -10,6 +10,7 @@ namespace Game_Project
     {
         private Texture2D spriteSheet;
         private Rectangle[] frames;
+        public Vector2 size;
 
         private int currentFrame;
         private int animationSpeed;
@@ -20,9 +21,11 @@ namespace Game_Project
         {
             this.spriteSheet = spriteData.Item1;
             this.frames = spriteData.Item2;
-            this.scale = spriteData.Item3;
-            this.animationSpeed = spriteData.Item4;
+            this.animationSpeed = spriteData.Item3;
+            this.scale = spriteData.Item4;
             currentFrame = 0;
+
+            size = new Vector2(frames[0].Width, frames[0].Height);
         }
 
         // Count frames
@@ -42,9 +45,9 @@ namespace Game_Project
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, frames[currentFrame].Width * scale, 
                 frames[currentFrame].Height * scale);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            //spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             spriteBatch.Draw(spriteSheet, destinationRectangle, frames[currentFrame], Color.White);
-            spriteBatch.End();
+            //spriteBatch.End();
         }
     }
 }

@@ -5,6 +5,6 @@ namespace Game_Project
 {
     public interface IPlayer : IUpdateable, IDrawable, ICollideable
     {
-        //  something something here
+        public Vector2 Position { get; }
     }
 }

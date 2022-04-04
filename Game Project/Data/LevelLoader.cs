@@ -17,6 +17,10 @@ namespace Game_Project
         private Dictionary<string, string> fileNames;
         private Dictionary<string, Type> types;
 
+        // This constant corresponds to the number of parameters that need to be passed to the UniversalParameterObject
+        // If more parameters are added then this number will change
+        private const int UPO_PARAMETER_COUNT = 3;
+
         public LevelLoader()
         {
             fileNames = new Dictionary<string, string>();
@@ -28,11 +32,14 @@ namespace Game_Project
 
         public void LoadLevel()
         {
+            // Guarantee new instances of the dictionaries and lists of data
+            GameObjectManager.Instance.Reset();
+
             foreach (KeyValuePair<string, string> element in fileNames)
             {
                 XmlParser parser = new XmlParser(Path.GetFullPath(element.Value));
 
-                Tuple<string, List<List<object>>> result = parser.ParseAsset();
+                Tuple<string, List<List<Tuple<int, object>>>> result = parser.ParseAsset();
 
                 // This should probably be replaced with some sort of dictionary access at some point
                 switch (result.Item1)
@@ -40,24 +47,18 @@ namespace Game_Project
                     case "ObjectData":
                         LoadObjectData(result.Item2);
                         break;
-                    case "KeyboardMappings":
-                        //LoadKeyboardMappings(result.Item2);
-                        break;
-                    case "AnimationData":
-                        LoadAnimationData(result.Item2);
-                        break;
                     default:
                         break;
                 }
             }
         }
 
-        private void LoadObjectData(List<List<object>> data)
+        private void LoadObjectData(List<List<Tuple<int, object>>> data)
         {
-            foreach (List<object> dataList in data)
+            foreach (List<Tuple<int, object>> itemList in data)
             {
                 // Store object type
-                string type = dataList[0].ToString();
+                string type = itemList[0].Item2.ToString();
 
                 // Verify that the type given is a type that can be instantiated
                 if (types.ContainsKey(type))
@@ -66,49 +67,26 @@ namespace Game_Project
 
                     if (constructorInfo != null)
                     {
-                        // need to load in the data correctly
-                        object[] parameters = new object[]
+                        object[] parameters = new object[UPO_PARAMETER_COUNT];
+                        // The first parameter is always a location vector
+                        parameters[0] = new Vector2(Convert.ToInt32(itemList[1].Item2), Convert.ToInt32(itemList[2].Item2));
+                        // Go through any other parameters
+                        for (int i = 3; i < itemList.Count; i++)
                         {
-                            new UniversalParameterObject(new object[1]) 
-                        };
-                        GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameters));
+                            // The parameter at the specified index should be set to the item at index i within in the loop
+                            parameters[itemList[i].Item1] = itemList[i].Item2;
+                        }
+
+                        // create object with given parameter object
+                        object[] parameterObject = new object[] { new UniversalParameterObject(parameters) };
+                        GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameterObject));
                     }
                 }
-                
-            }
-        }
-
-        private void LoadKeyboardMappings(List<List<string>> data)
-        {
-            foreach (List<string> dataList in data)
-            {
-                var type = Type.GetType(dataList[1]);
-            }
-        }
-
-        private void LoadAnimationData(List<List<object>> data)
-        {
-            foreach (List<object> dataList in data)
-            {
-                Rectangle[] frames = new Rectangle[dataList.Count - 4];
-
-                // Convert all frames in the XML to rectangle objects
-                for (int i = 4; i < dataList.Count; i++)
-                {
-                    // Rectangle parameters with be in form '%i %i %i %i', so the strings must be split and converted
-                    string[] numbers = dataList[i].ToString().Split(' ', 4);
-                    frames[i - 4] = new Rectangle(Convert.ToInt32(numbers[0]), Convert.ToInt32(numbers[1]),
-                        Convert.ToInt32(numbers[2]), Convert.ToInt32(numbers[3]));
-                }
-
-                SpriteFactory.Instance.RegisterAnimation(dataList[0].ToString(), 
-                    new Tuple<string, Rectangle[], int, int>(dataList[1].ToString(), frames, Convert.ToInt32(dataList[2]), Convert.ToInt32(dataList[3])));
             }
         }
 
         private void LoadDictionary()
         {
-            fileNames.Add("sprites", @"..\..\..\..\Game Project\Data\Animation.xml");
             fileNames.Add("forest", @"..\..\..\..\Game Project\Data\Objects.xml");            
         }
 

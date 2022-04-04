@@ -2,6 +2,6 @@
 {
     public interface IController : IUpdateable
     {
-        void LoadContent(Game1 game, Player player, TileManager tiles, EnemyManager enemies, ItemManager items);
+        void LoadContent(Game1 game, Player player);
     }
 }

@@ -31,11 +31,20 @@ namespace Game_Project
             {
                 health = health - 5;
             }
+            else
+            {
+                goriyaAction = actions.dead;
+            }
         }
 
         public void Attack()
         {
             goriyaAction = actions.attacking;
+        }
+
+        public void Fall()
+        {
+            goriyaAction = actions.falling;
         }
 
         public Tuple<actions, direction> getState()
