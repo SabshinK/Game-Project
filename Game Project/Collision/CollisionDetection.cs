@@ -83,18 +83,14 @@ namespace Game_Project
                 secondObject_left = secondObjectLocation.X;
                 secondObject_right = secondObjectLocation.X + movingObjectSize;
             }
-            
-            //calculate rectangles
-            //are we sure this is how to make rectangles bc idk where to find the right info but everything i'm finding is making me think it should include width/height
+
             rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
             rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
 
             // objects collide:
-            //if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
             if (rectangleObject1.Intersects(rectangleObject2)) // changed this so that we can make sure it works before changing everything else
             {
-                // TO DO : make third rectangle using intersect method, compare width and height to determine what kind of collision (vert or horizontal),
-                // not sure how to know what specific direction collision is without getting rid of the code we already have
+                // TO DO : make third rectangle using intersect method, compare width and height to determine what kind of collision (vert or horizontal)
 
                 if (firstObject_right >= secondObject_left)
                 {
