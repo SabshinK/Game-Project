@@ -12,14 +12,6 @@ namespace Game_Project
 
         private IPlayer player;
 
-        private float firstObject_top;
-        private float firstObject_bottom;
-        private float firstObject_left;
-        private float firstObject_right;
-        private float secondObject_top;
-        private float secondObject_bottom;
-        private float secondObject_left;
-        private float secondObject_right;
         private float side_overlap;
         private float updown_overlap;
         private Vector2 firstObjectLocation;
@@ -62,53 +54,31 @@ namespace Game_Project
 
         public void CheckCollision()
         {
-            //check locations
-            firstObject_top = firstObjectLocation.Y;
-            firstObject_bottom = firstObjectLocation.Y + movingObjectSize;
-            firstObject_left = firstObjectLocation.X;
-            firstObject_right = firstObjectLocation.X + movingObjectSize;
-
             // change this part so that we don't use constants for sizing and instead access something like secondObject.size?
-            if (secondObject.GetType() == typeof(Tile))
-            {
-                secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + tileSize;
-                secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + tileSize;
-            }
-            else
-            {
-                secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + movingObjectSize;
-                secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + movingObjectSize;
-            }
-
-            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
-            rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
+            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, movingObjectSize, movingObjectSize);
+            if (secondObject.GetType() == typeof(Tile)) rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, tileSize, tileSize);
+            else rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, movingObjectSize, movingObjectSize);
 
             // objects collide:
             if (rectangleObject1.Intersects(rectangleObject2))
             {
-                // TO DO : make third rectangle using intersect method, compare width and height to determine what kind of collision (vert or horizontal)
-
-                if (firstObject_right >= secondObject_left)
+                if (rectangleObject1.Right >= rectangleObject2.Left)
                 {
                     // left overlap (right side of player):
-                    side_overlap = firstObject_right - secondObject_left;
+                    side_overlap = rectangleObject1.Right - rectangleObject2.Left;
                     direction = CollideDirection.Left;
                 }
                 else
                 {
                     // right overlap (left side of player):
-                    side_overlap = secondObject_right - firstObject_left;
+                    side_overlap = rectangleObject2.Right - rectangleObject1.Left;
                     direction = CollideDirection.Right;
                 }
 
-                if (firstObject_top <= secondObject_bottom)
+                if (rectangleObject1.Top <= rectangleObject2.Bottom)
                 {
                     // bottom overlap (top side of player):
-                    updown_overlap = secondObject_bottom - firstObject_top;
+                    updown_overlap = rectangleObject2.Bottom - rectangleObject1.Top;
                     if (updown_overlap > side_overlap)
                     {
                         direction = CollideDirection.Bottom;
@@ -117,7 +87,7 @@ namespace Game_Project
                 else
                 {
                     // top overlap (bottom side of player):
-                    updown_overlap = firstObject_bottom - secondObject_top;
+                    updown_overlap = rectangleObject1.Bottom - rectangleObject2.Top;
                     if (updown_overlap > side_overlap)
                     {
                         direction = CollideDirection.Bottom;
