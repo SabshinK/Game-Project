@@ -42,8 +42,6 @@ namespace Game_Project
         List<IItem> items;
         List<ITile> tiles;
 
-        //////////////////// i thought we were gonna make enemies different sizes? also that seems kinda large for the 
-        //////////////////// items and projectiles to be twice as big as tiles and the same size as the player/enemies
         private const int movingObjectSize = 128;
         private const int tileSize = 64;
 
@@ -52,17 +50,17 @@ namespace Game_Project
             player = GameObjectManager.Instance.player;
 
             //Ask Object Manager for the lists
-            // do i have to use strings or something or is it okay to pass interfaces as types as params
+            listArray = GameObjectManager.Instance.GetObjectLists();
 
-            enemies = GameObjectManager.Instance.GetObjectList("enemy");
-            projectiles = GameObjectManager.Instance.GetObjectList("projectile");
-            items = GameObjectManager.Instance.GetObjectList("item");
-            tiles = GameObjectManager.Instance.GetObjectList("tile");
+            enemies = (List<IEnemy>)listArray[0];
+            projectiles = (List<IProjectile>)listArray[1];
+            items = (List<IItem>)listArray[2];
+            tiles = (List<ITile>)listArray[3];
 
             collisionResolution = new CollisionResolution();
         }
 
-        public void CheckCollision() ///////////////////////////// im thinking this function is too big maybe,, if yall agree i volunteer to split it up
+        public void CheckCollision()
         {
             //check locations
             firstObject_top = firstObjectLocation.Y;
@@ -70,7 +68,7 @@ namespace Game_Project
             firstObject_left = firstObjectLocation.X;
             firstObject_right = firstObjectLocation.X + movingObjectSize;
 
-            //////////////////////////////////////// change this part so that we don't use constants for sizing and instead access something like secondObject.size?
+            // change this part so that we don't use constants for sizing and instead access something like secondObject.size?
             if (secondObject.GetType() == typeof(Tile))
             {
                 secondObject_top = secondObjectLocation.Y;

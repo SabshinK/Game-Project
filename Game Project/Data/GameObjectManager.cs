@@ -15,12 +15,13 @@ namespace Game_Project
         private static GameObjectManager instance = new GameObjectManager();
         public static GameObjectManager Instance => instance;
 
-        //I don't know if separating these is worth it, we don't quite have enough classes to make it worth it to hold a list of lists
         private List<IEnemy> enemyList;
         private List<IProjectile> projectileList;
         private List<IItem> itemList;
         private List<ITile> tileList;
         public IPlayer player;
+
+        private object[] listArray;
 
         private object[] playerAttributes;
         private Vector2 location;
@@ -30,31 +31,35 @@ namespace Game_Project
 
         public GameObjectManager()
         {
+            listArray = new object[4];
             enemyList = new List<IEnemy>();
             projectileList = new List<IProjectile>();
             itemList = new List<IItem>();
             tileList = new List<ITile>();
 
+            location = new Vector2();
+            playerAttributes = new object[3];
+
             playerAttributes[0] = location;
             playerAttributes[1] = direction;
             playerAttributes[2] = animationName;
-            player = new Player(new UniversalParameterObject(playerAttributes)); // ?????? what should the player be set to
+            player = new Player(new UniversalParameterObject(playerAttributes));
         }
 
-        // right now this is just so collision detection can have access to the lists
-        public List<ICollideable> GetObjectList(String listType)
+        // collision detection needs the lists
+        public object[] GetObjectLists()
         {
-            if (listType.Equals("enemy")) return enemyList;
-            else if (listType.Equals("projectile")) return projectileList;
-            else if (listType.Equals("item")) return itemList;
-            else if (listType.Equals("tile")) return tileList;
+            listArray[0] = enemyList;
+            listArray[1] = projectileList;
+            listArray[2] = itemList;
+            listArray[3] = tileList;
 
-            return null; // this shouldn't ever happen but i'm not sure what to do if it does?
+            return listArray;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            player.Draw(spriteBatch); // not sure what the "?" was for
+            player.Draw(spriteBatch);
             foreach (ITile tile in tileList)
             {
                 tile.Draw(spriteBatch);
@@ -86,8 +91,6 @@ namespace Game_Project
             }
         }
 
-
-        //Very rough draft of this methodd
         public void RegisterObject(Object T)
         {
             if (T is IEnemy) enemyList.Add((IEnemy)T);
@@ -103,7 +106,6 @@ namespace Game_Project
             if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
             else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
             else if (dead is IItem) itemList.Remove((IItem)dead);
-            //else if (T is IPlayer) ??? how to remove dead player ?? do we not even need to do this, since the game over screen will play ?
         }
 
         public void Reset()
