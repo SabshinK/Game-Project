@@ -10,13 +10,15 @@ namespace Game_Project
         private Player player;
         private double drag;
         private double time;
+        private bool falling;
         public PlayerJumpState(Player manager)
         {
             player = manager;
             drag = 0;
-            player.verticalAcceleration = 0;
+            falling = false;
+
             player.physics.verticalVelocity = -5;
-            player.physics.verticalDistance = 0;
+            player.physics.verticalDisplacement = 0;
 
             if (player.FaceRight)
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
@@ -38,11 +40,6 @@ namespace Game_Project
             // Already in the jump state
         }
 
-        public void Fall()
-        {
-            player.SetState(new PlayerFallState(player));
-        }
-
         public void TakeDamage()
         {
             player.SetState(new DamageState(player));
@@ -61,45 +58,21 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             time += gameTime.ElapsedGameTime.TotalSeconds;
-            player.physics.VerticalChange(false, gameTime, player.verticalAcceleration, drag);
+            int displacement = (int)player.physics.VerticalChange(falling, gameTime, player.verticalAcceleration, drag);
 
-            //I left the FaceRight condition because ideally, jumps will also move horizontally.
-            //Right now, the if and else conditions have the same block of code.
-            if (!player.FaceRight)
+            if (player.location.Y > 0)
             {
-                if (player.location.Y > 0)
-                {
-                    player.location.Y += (int)player.physics.verticalDistance;
-
-                    if (player.physics.verticalVelocity == 0)
-                    {
-                        Fall();
-                    }
-
-                } else
-                {
-                    Fall();
-                }
+                player.location.Y += displacement;
             }
             else
             {
-                if (player.location.Y > 0)
-                {
-                    player.location.Y += (int)player.physics.verticalDistance;
-
-                    if (player.physics.verticalVelocity == 0)
-                    {
-                        Fall();
-                    }
-
-                }
-                else
-                {
-                    Fall();
-                }
+                drag = Math.Abs(player.verticalAcceleration + player.verticalAcceleration);
+                player.physics.verticalVelocity = 0;
+                player.physics.verticalDisplacement = 0;
+                falling = true;
             }
 
-            if (drag < (player.verticalAcceleration * -2) && (time / 0.5) >= 1)
+            if (drag < Math.Abs(player.verticalAcceleration + player.verticalAcceleration) && (time / 0.5) >= 1)
             {
                 drag++;
                 time = 0;
@@ -107,7 +80,7 @@ namespace Game_Project
 
             if (player.physics.verticalVelocity >= 0)
             {
-                Fall();
+                falling = true;
             }
 
             if (player.projectile != null)

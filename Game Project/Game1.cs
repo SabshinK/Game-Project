@@ -43,9 +43,6 @@ namespace Game_Project
         {
             keyboard = new KeyboardController(this);
 
-            //This is here to be able to load the collision dictionary
-
-            collisionResolution = new CollisionResolution();
             collisionDetection = new CollisionDetection();
             scroller = new ItemScroller();
            
@@ -70,6 +67,8 @@ namespace Game_Project
             LevelLoader.Instance.LoadLevel();
 
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
+
+            collisionDetection.GetCollisionLists();
         }
 
         /// <summary>
