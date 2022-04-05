@@ -28,7 +28,7 @@ namespace Game_Project
         // Constructor
         public Player(UniversalParameterObject parameters)
         {
-            state = new PlayerFallState(this);
+            state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
 
@@ -37,7 +37,7 @@ namespace Game_Project
             health = 3;
 
             horizontalAcceleration = 2;
-            verticalAcceleration = 0;
+            verticalAcceleration = -2;
 
             FaceRight = true;
 
@@ -76,19 +76,6 @@ namespace Game_Project
             state.Jump();
         }
 
-        public void Fall(bool faceRight)
-        {
-            if (FaceRight != faceRight)
-            {
-                FaceRight = faceRight;
-                if (FaceRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
-            }
-            state.Fall();
-        }
-
         public void DamageTaken()
         {
             health--;
@@ -121,7 +108,7 @@ namespace Game_Project
         public IProjectile CreateProjectile(int code)
         {
             object[] parameters = new object[3];
-            parameters[0] = new Vector2((int)physics.horizontalDistance, (int)physics.horizontalVelocity);
+            parameters[0] = new Vector2((int)physics.horizontalDisplacement, (int)physics.horizontalVelocity);
             parameters[1] = FaceRight;
 
             switch(code)
