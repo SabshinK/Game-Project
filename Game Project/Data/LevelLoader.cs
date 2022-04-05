@@ -15,8 +15,8 @@ namespace Game_Project
         private static LevelLoader instance = new LevelLoader();
         public static LevelLoader Instance => instance;
 
+        
         private Dictionary<string, string> fileNames;
-        private Dictionary<string, Type> types;
 
         // This constant corresponds to the number of parameters that need to be passed to the UniversalParameterObject
         // If more parameters are added then this number will change
@@ -25,10 +25,13 @@ namespace Game_Project
         public LevelLoader()
         {
             fileNames = new Dictionary<string, string>();
-            types = new Dictionary<string, Type>();
 
             LoadDictionary();
-            LoadTypes();
+        }
+
+        public void InitializeGameData()
+        {
+
         }
 
         public void LoadLevel()
@@ -82,27 +85,23 @@ namespace Game_Project
                 // Store object type
                 string type = itemList[0].Item2.ToString();
 
-                // Verify that the type given is a type that can be instantiated
-                if (types.ContainsKey(type))
+                var constructorInfo = Type.GetType("Game_Project." + type).GetConstructor(new[] { typeof(UniversalParameterObject) });
+
+                if (constructorInfo != null)
                 {
-                    var constructorInfo = types[type].GetConstructor(new[] { typeof(UniversalParameterObject) });
-
-                    if (constructorInfo != null)
+                    object[] parameters = new object[UPO_PARAMETER_COUNT];
+                    // The first parameter is always a location vector
+                    parameters[0] = new Vector2(Convert.ToInt32(itemList[1].Item2), Convert.ToInt32(itemList[2].Item2));
+                    // Go through any other parameters
+                    for (int i = 3; i < itemList.Count; i++)
                     {
-                        object[] parameters = new object[UPO_PARAMETER_COUNT];
-                        // The first parameter is always a location vector
-                        parameters[0] = new Vector2(Convert.ToInt32(itemList[1].Item2), Convert.ToInt32(itemList[2].Item2));
-                        // Go through any other parameters
-                        for (int i = 3; i < itemList.Count; i++)
-                        {
-                            // The parameter at the specified index should be set to the item at index i within in the loop
-                            parameters[itemList[i].Item1] = itemList[i].Item2;
-                        }
-
-                        // create object with given parameter object
-                        object[] parameterObject = new object[] { new UniversalParameterObject(parameters) };
-                        GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameterObject));
+                        // The parameter at the specified index should be set to the item at index i within in the loop
+                        parameters[itemList[i].Item1] = itemList[i].Item2;
                     }
+
+                    // create object with given parameter object
+                    object[] parameterObject = new object[] { new UniversalParameterObject(parameters) };
+                    GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameterObject));
                 }
             }
         }
@@ -113,21 +112,21 @@ namespace Game_Project
             fileNames.Add("forest", @"..\..\..\..\Game Project\Data\Objects.xml");          
         }
 
-        private void LoadTypes()
-        {
-            types.Add("Player", typeof(Player));
-            types.Add("BatEnemy", typeof(BatEnemy));
-            types.Add("DragonEnemy", typeof(DragonEnemy));
-            types.Add("GelEnemy", typeof(GelEnemy));
-            types.Add("GoriyaEnemy", typeof(GoriyaEnemy));
-            types.Add("StalfosEnemy", typeof(StalfosEnemy));
-            types.Add("ZohEnemy", typeof(ZohEnemy));
-            types.Add("Tile", typeof(Tile));
-            types.Add("Arrow", typeof(Arrow));
-            types.Add("Bomb", typeof(Bomb));
-            types.Add("Boomerang", typeof(Boomerang));
-            types.Add("Candle", typeof(Candle));
-            types.Add("SwordBeam", typeof(SwordBeam));
-        }
+        //private void LoadTypes()
+        //{
+        //    types.Add("Player", typeof(Player));
+        //    types.Add("BatEnemy", typeof(BatEnemy));
+        //    types.Add("DragonEnemy", typeof(DragonEnemy));
+        //    types.Add("GelEnemy", typeof(GelEnemy));
+        //    types.Add("GoriyaEnemy", typeof(GoriyaEnemy));
+        //    types.Add("StalfosEnemy", typeof(StalfosEnemy));
+        //    types.Add("ZohEnemy", typeof(ZohEnemy));
+        //    types.Add("Tile", typeof(Tile));
+        //    types.Add("Arrow", typeof(Arrow));
+        //    types.Add("Bomb", typeof(Bomb));
+        //    types.Add("Boomerang", typeof(Boomerang));
+        //    types.Add("Candle", typeof(Candle));
+        //    types.Add("SwordBeam", typeof(SwordBeam));
+        //}
     }
 }
