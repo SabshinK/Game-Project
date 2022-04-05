@@ -37,7 +37,7 @@ namespace Game_Project
 
         }
 
-        //physics velocity variable is 5
+        //physics velocity variable is 10
         public static int physVelocity
         {
             get { magicNums = setMagicNums();  return magicNums[0]; }
@@ -71,20 +71,20 @@ namespace Game_Project
             get { magicNums = setMagicNums(); return magicNums[4]; }
             set { magicNums[4] = value; }
         }
-
-        // collisionDetection moving object size.
-        public static int moveObjectSize
+        
+        public static int gravityConst
         {
-            get { magicNums = setMagicNums(); return magicNums[5]; }
+            get { magicNums = setMagicNums();  return magicNums[5]; }
             set { magicNums[5] = value; }
         }
-
-        // collisionDetection tile size length
-        public static int tileSize
+        
+        public static int horizontalVel
         {
-            get { magicNums = setMagicNums(); return magicNums[6]; }
+            get { magicNums = setMagicNums();  return magicNums[6]; }
             set { magicNums[6] = value; }
         }
+
+        
 
 
 
