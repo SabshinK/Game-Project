@@ -21,14 +21,9 @@ namespace Game_Project
 
 		public void RegisterCommand(Keys key, ICommand command)
 		{
-			if (!game.paused)
-			{
+		
 				controllerMappings.Add(key, command);
-            }
-            else
-            {
-				pausedControllerMappings.Add(key, command);
-            }
+            
 		}
 
 		public void Update(GameTime gameTime)
@@ -37,10 +32,20 @@ namespace Game_Project
 
 			foreach (Keys key in pressedKeys)
 			{
-				// Need to check if the key is valid first
-				if (controllerMappings.ContainsKey(key) /*&& key != Keys.A && key != Keys.D*/)
+				if (game.paused)
 				{
-					controllerMappings[key].Execute();
+					if (pausedControllerMappings.ContainsKey(key) /*&& key != Keys.A && key != Keys.D*/)
+					{
+						pausedControllerMappings[key].Execute();
+					}
+				}
+				else
+				{
+					// Need to check if the key is valid first
+					if (controllerMappings.ContainsKey(key) /*&& key != Keys.A && key != Keys.D*/)
+					{
+						controllerMappings[key].Execute();
+					}
 				}
 				
 			}
@@ -58,8 +63,7 @@ namespace Game_Project
 		{
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			pausedControllerMappings = new Dictionary<Keys, ICommand>();
-			if (!game.paused)
-			{
+			
 				RegisterCommand(Keys.None, new IdleCommand(player));
 				RegisterCommand(Keys.Q, new QuitCommand(game));
 				RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
@@ -75,17 +79,15 @@ namespace Game_Project
 				RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
 				RegisterCommand(Keys.E, new TakeDamageCommand(player));
 				RegisterCommand(Keys.R, new ResetCommand(game));
-				RegisterCommand(Keys.P, new PauseCommand(game));//need to add sprite font
-            }
-            else
-            {
-				RegisterCommand(Keys.Q, new QuitCommand(game));
-				RegisterCommand(Keys.R, new ResetCommand(game));
-				RegisterCommand(Keys.P, new PauseCommand(game));//need to add sprite font
-				RegisterCommand(Keys.I, new InventoryCommand(game));
-				RegisterCommand(Keys.A, new ItemScrollLeftCommand());
-				RegisterCommand(Keys.D, new ItemScrollRightCommand());
-			}
+				RegisterCommand(Keys.P, new PauseCommand(game));
+            
+				pausedControllerMappings.Add(Keys.Q, new QuitCommand(game));
+				pausedControllerMappings.Add(Keys.R, new ResetCommand(game));
+				pausedControllerMappings.Add(Keys.P, new PauseCommand(game));
+				pausedControllerMappings.Add(Keys.I, new InventoryCommand(game));
+				pausedControllerMappings.Add(Keys.A, new ItemScrollLeftCommand());
+				pausedControllerMappings.Add(Keys.D, new ItemScrollRightCommand());
+			
 		}
 	}
 }
