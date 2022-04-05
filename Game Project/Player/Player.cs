@@ -28,7 +28,7 @@ namespace Game_Project
         // Constructor
         public Player(UniversalParameterObject parameters)
         {
-            state = new PlayerFallState(this);
+            state = new IdleState(this);
             animationToCreate = "idleRight";
             sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
 
