@@ -12,14 +12,6 @@ namespace Game_Project
 
         private IPlayer player;
 
-        private float firstObject_top;
-        private float firstObject_bottom;
-        private float firstObject_left;
-        private float firstObject_right;
-        private float secondObject_top;
-        private float secondObject_bottom;
-        private float secondObject_left;
-        private float secondObject_right;
         private float side_overlap;
         private float updown_overlap;
         private Vector2 firstObjectLocation;
@@ -35,83 +27,62 @@ namespace Game_Project
 
         GameTime gameTime;
 
+        private object[] listArray;
+
         List<IEnemy> enemies;
         List<IProjectile> projectiles;
         List<IItem> items;
         List<ITile> tiles;
 
-        //////////////////// i thought we were gonna make enemies different sizes? also that seems kinda large for the 
-        //////////////////// items and projectiles to be twice as big as tiles and the same size as the player/enemies
         private const int movingObjectSize = 128;
         private const int tileSize = 64;
 
         public CollisionDetection()
         {
-            player = GameObjectManager.Instance.player;
-
-            //Ask Object Manager for the lists
-            // do i have to use strings or something or is it okay to pass interfaces as types as params
-            enemies = GetObjectList("enemy");
-            projectiles = GetObjectList("projectile");
-            items = GetObjectList("item");
-            tiles = GetObjectList("tile");
-
             collisionResolution = new CollisionResolution();
         }
 
-        public void CheckCollision() ///////////////////////////// im thinking this function is too big maybe,, if yall agree i volunteer to split it up
+        public void GetCollisionLists()
         {
-            //check locations
-            firstObject_top = firstObjectLocation.Y;
-            firstObject_bottom = firstObjectLocation.Y + movingObjectSize;
-            firstObject_left = firstObjectLocation.X;
-            firstObject_right = firstObjectLocation.X + movingObjectSize;
+            player = GameObjectManager.Instance.player;
 
-            //////////////////////////////////////// change this part so that we don't use constants for sizing and instead access something like secondObject.size?
-            if (secondObject.GetType() == typeof(Tile))
-            {
-                secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + tileSize;
-                secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + tileSize;
-            }
-            else
-            {
-                secondObject_top = secondObjectLocation.Y;
-                secondObject_bottom = secondObjectLocation.Y + movingObjectSize;
-                secondObject_left = secondObjectLocation.X;
-                secondObject_right = secondObjectLocation.X + movingObjectSize;
-            }
-            
-            //calculate rectangles
-            //are we sure this is how to make rectangles bc idk where to find the right info but everything i'm finding is making me think it should include width/height
-            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, (int)firstObject_bottom, (int)firstObject_right);
-            rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, (int)secondObject_bottom, (int)secondObject_right);
+            //Ask Object Manager for the lists
+            listArray = GameObjectManager.Instance.GetObjectLists();
+
+            enemies = (List<IEnemy>)listArray[0];
+            projectiles = (List<IProjectile>)listArray[1];
+            items = (List<IItem>)listArray[2];
+            tiles = (List<ITile>)listArray[3];
+
+        }
+
+        public void CheckCollision()
+        {
+            // change this part so that we don't use constants for sizing and instead access something like secondObject.size?
+            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, movingObjectSize, movingObjectSize);
+            if (secondObject.GetType() == typeof(Tile)) rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, tileSize, tileSize);
+            else rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, movingObjectSize, movingObjectSize);
 
             // objects collide:
-            //if (!(firstObject_right < secondObject_left || secondObject_right < firstObject_left || firstObject_bottom < secondObject_top || secondObject_bottom < firstObject_top))
-            if (rectangleObject1.Intersects(rectangleObject2)) // changed this so that we can make sure it works before changing everything else
+            if (rectangleObject1.Intersects(rectangleObject2))
             {
-                // TO DO : make third rectangle using intersect method, compare width and height to determine what kind of collision (vert or horizontal),
-                // not sure how to know what specific direction collision is without getting rid of the code we already have
-
-                if (firstObject_right >= secondObject_left)
+                if (rectangleObject1.Right >= rectangleObject2.Left)
                 {
                     // left overlap (right side of player):
-                    side_overlap = firstObject_right - secondObject_left;
+                    side_overlap = rectangleObject1.Right - rectangleObject2.Left;
                     direction = CollideDirection.Left;
                 }
                 else
                 {
                     // right overlap (left side of player):
-                    side_overlap = secondObject_right - firstObject_left;
+                    side_overlap = rectangleObject2.Right - rectangleObject1.Left;
                     direction = CollideDirection.Right;
                 }
 
-                if (firstObject_top <= secondObject_bottom)
+                if (rectangleObject1.Top <= rectangleObject2.Bottom)
                 {
                     // bottom overlap (top side of player):
-                    updown_overlap = secondObject_bottom - firstObject_top;
+                    updown_overlap = rectangleObject2.Bottom - rectangleObject1.Top;
                     if (updown_overlap > side_overlap)
                     {
                         direction = CollideDirection.Bottom;
@@ -120,7 +91,7 @@ namespace Game_Project
                 else
                 {
                     // top overlap (bottom side of player):
-                    updown_overlap = firstObject_bottom - secondObject_top;
+                    updown_overlap = rectangleObject1.Bottom - rectangleObject2.Top;
                     if (updown_overlap > side_overlap)
                     {
                         direction = CollideDirection.Bottom;
