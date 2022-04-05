@@ -55,7 +55,6 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
-            SpriteFactory.Instance.LoadDictionary();
 
             LevelLoader.Instance.LoadLevel();
 
@@ -102,6 +101,8 @@ namespace Game_Project
 
         public void Reset()
         {
+            SpriteFactory.Instance.Reset();
+            GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadLevel();
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
