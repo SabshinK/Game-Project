@@ -15,6 +15,15 @@ namespace Game_Project
         public IController mouse;
         private CollisionDetection collisionDetection;
         private Camera camera;
+        public bool paused = false;
+        public bool displayInventory = false;
+        private ItemScroller scroller;
+        private PauseMenu pauseMenu;
+        private SpriteFont font;
+        //public Player player;
+        //public TileManager tiles;
+        //public EnemyManager enemies;
+        //public ItemManager items;
 
         public Game1()
         {
@@ -31,9 +40,12 @@ namespace Game_Project
         /// </summary>
         protected override void Initialize()
         {
-            keyboard = new KeyboardController();
+            keyboard = new KeyboardController(this);
 
             collisionDetection = new CollisionDetection();
+            scroller = new ItemScroller();
+           
+            //collisionResolution.LoadCollisionDictionary();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
@@ -48,9 +60,12 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
-
-            LevelLoader.Instance.LoadFile("sprites");
-            LevelLoader.Instance.LoadFile("forest");
+            
+            SpriteFactory.Instance.LoadDictionary();
+            font = Content.Load<SpriteFont>("Text");
+            pauseMenu = new PauseMenu(font);
+            
+            LevelLoader.Instance.LoadLevel();
 
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
 
@@ -68,11 +83,12 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
-
-            GameObjectManager.Instance.Update(gameTime);
-            collisionDetection.Update(gameTime);
-            camera.Update((Player)GameObjectManager.Instance.player);
-
+            if (!paused)
+            {
+                GameObjectManager.Instance.Update(gameTime);
+                collisionDetection.Update(gameTime);
+                camera.Update((Player)GameObjectManager.Instance.player);
+            }
 
             base.Update(gameTime);
         }
@@ -87,6 +103,14 @@ namespace Game_Project
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
             GameObjectManager.Instance.Draw(spriteBatch);
+            if (displayInventory)
+            {
+                scroller.Draw(spriteBatch);
+            }
+            if (paused)
+            {
+                pauseMenu.Draw(spriteBatch);
+            }
 
             base.Draw(gameTime);
 
