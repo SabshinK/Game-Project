@@ -37,10 +37,6 @@ namespace Game_Project
         {
             player.SetState(new PlayerJumpState(player));
         }
-        public void Fall()
-        {
-            player.SetState(new PlayerFallState(player));
-        }
 
         public void TakeDamage()
         {
@@ -65,7 +61,7 @@ namespace Game_Project
             }
             else
             {
-                player.SetState(new PlayerFallState(player));
+                player.SetState(new IdleState(player));
             }
 
             if (player.projectile != null)

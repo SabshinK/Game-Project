@@ -42,10 +42,6 @@ namespace Game_Project
         {
             // Can't jump while being damaged
         }
-        public void Fall()
-        {
-            // Can't fall while being damaged
-        }
 
         public void Attack()
         {
@@ -64,7 +60,7 @@ namespace Game_Project
                 timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             } else
             {
-                player.SetState(new PlayerFallState(player));
+                player.SetState(new IdleState(player));
             }
 
             if (player.projectile != null)
