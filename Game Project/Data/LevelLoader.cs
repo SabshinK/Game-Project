@@ -15,12 +15,7 @@ namespace Game_Project
         private static LevelLoader instance = new LevelLoader();
         public static LevelLoader Instance => instance;
 
-        
         private Dictionary<string, string> fileNames;
-
-        // This constant corresponds to the number of parameters that need to be passed to the UniversalParameterObject
-        // If more parameters are added then this number will change
-        private const int UPO_PARAMETER_COUNT = 3;
 
         public LevelLoader()
         {
@@ -29,37 +24,32 @@ namespace Game_Project
             LoadDictionary();
         }
 
-        public void InitializeGameData()
+        public void LoadFile(string file)
         {
+            XmlParser parser = new XmlParser(Path.GetFullPath(fileNames[file]));
 
-        }
+            Tuple<string, List<List<Tuple<string, object>>>> result = parser.ParseAsset();
 
-        public void LoadLevel()
-        {
-            foreach (KeyValuePair<string, string> element in fileNames)
+            // This should probably be replaced with some sort of dictionary access at some point
+            switch (result.Item1)
             {
-                XmlParser parser = new XmlParser(Path.GetFullPath(element.Value));
-
-                Tuple<string, List<List<Tuple<int, object>>>> result = parser.ParseAsset();
-
-                // This should probably be replaced with some sort of dictionary access at some point
-                switch (result.Item1)
-                {
-                    case "ObjectData":
-                        LoadObjectData(result.Item2);
-                        break;
-                    case "AnimationData":
-                        LoadAnimationData(result.Item2);
-                        break;
-                    default:
-                        break;
-                }
+                case "ObjectData":
+                    LoadObjectData(result.Item2);
+                    break;
+                case "AnimationData":
+                    LoadAnimationData(result.Item2);
+                    break;
+                case "CollisionData":
+                    LoadCollisionData(result.Item2);
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void LoadAnimationData(List<List<Tuple<int, object>>> data)
+        private void LoadAnimationData(List<List<Tuple<string, object>>> data)
         {
-            foreach (List<Tuple<int, object>> itemList in data)
+            foreach (List<Tuple<string, object>> itemList in data)
             {
                 Rectangle[] frames = new Rectangle[itemList.Count - 4];
 
@@ -78,25 +68,27 @@ namespace Game_Project
             }
         }
 
-        private void LoadObjectData(List<List<Tuple<int, object>>> data)
+        private void LoadCollisionData(List<List<Tuple<string, object>>> data)
         {
-            foreach (List<Tuple<int, object>> itemList in data)
-            {
-                // Store object type
-                string type = itemList[0].Item2.ToString();
 
-                var constructorInfo = Type.GetType("Game_Project." + type).GetConstructor(new[] { typeof(UniversalParameterObject) });
+        }
+
+        private void LoadObjectData(List<List<Tuple<string, object>>> data)
+        {
+            foreach (List<Tuple<string, object>> itemList in data)
+            {
+                string type = itemList[0].Item2.ToString();
+                ConstructorInfo constructorInfo = Type.GetType("Game_Project." + type).GetConstructor(new[] { typeof(UniversalParameterObject) });
 
                 if (constructorInfo != null)
                 {
-                    object[] parameters = new object[UPO_PARAMETER_COUNT];
-                    // The first parameter is always a location vector
-                    parameters[0] = new Vector2(Convert.ToInt32(itemList[1].Item2), Convert.ToInt32(itemList[2].Item2));
+                    Dictionary<string, object> parameters = new Dictionary<string, object>();
+
+                    parameters.Add("Position", new Vector2(Convert.ToInt32(itemList[1].Item2), Convert.ToInt32(itemList[2].Item2)));
                     // Go through any other parameters
                     for (int i = 3; i < itemList.Count; i++)
                     {
-                        // The parameter at the specified index should be set to the item at index i within in the loop
-                        parameters[itemList[i].Item1] = itemList[i].Item2;
+                        parameters.Add(itemList[i].Item1, itemList[i].Item2);
                     }
 
                     // create object with given parameter object
@@ -109,24 +101,8 @@ namespace Game_Project
         private void LoadDictionary()
         {
             fileNames.Add("sprites", @"..\..\..\..\Game Project\Data\Animation.xml");
-            fileNames.Add("forest", @"..\..\..\..\Game Project\Data\Objects.xml");          
+            fileNames.Add("collision", @"..\..\..\..\Game Project\Data\Collision.xml");
+            fileNames.Add("forest", @"..\..\..\..\Game Project\Data\Objects.xml");
         }
-
-        //private void LoadTypes()
-        //{
-        //    types.Add("Player", typeof(Player));
-        //    types.Add("BatEnemy", typeof(BatEnemy));
-        //    types.Add("DragonEnemy", typeof(DragonEnemy));
-        //    types.Add("GelEnemy", typeof(GelEnemy));
-        //    types.Add("GoriyaEnemy", typeof(GoriyaEnemy));
-        //    types.Add("StalfosEnemy", typeof(StalfosEnemy));
-        //    types.Add("ZohEnemy", typeof(ZohEnemy));
-        //    types.Add("Tile", typeof(Tile));
-        //    types.Add("Arrow", typeof(Arrow));
-        //    types.Add("Bomb", typeof(Bomb));
-        //    types.Add("Boomerang", typeof(Boomerang));
-        //    types.Add("Candle", typeof(Candle));
-        //    types.Add("SwordBeam", typeof(SwordBeam));
-        //}
     }
 }

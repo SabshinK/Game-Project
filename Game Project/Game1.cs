@@ -14,12 +14,7 @@ namespace Game_Project
         public IController keyboard;
         public IController mouse;
         private CollisionDetection collisionDetection;
-        private CollisionResolution collisionResolution;
         private Camera camera;
-        //public Player player;
-        //public TileManager tiles;
-        //public EnemyManager enemies;
-        //public ItemManager items;
 
         public Game1()
         {
@@ -40,8 +35,6 @@ namespace Game_Project
 
             collisionDetection = new CollisionDetection();
 
-            //collisionResolution.LoadCollisionDictionary();
-
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
             base.Initialize();
@@ -56,7 +49,8 @@ namespace Game_Project
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
 
-            LevelLoader.Instance.LoadLevel();
+            LevelLoader.Instance.LoadFile("sprites");
+            LevelLoader.Instance.LoadFile("forest");
 
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
 
@@ -101,9 +95,7 @@ namespace Game_Project
 
         public void Reset()
         {
-            SpriteFactory.Instance.Reset();
-            GameObjectManager.Instance.Reset();
-            LevelLoader.Instance.LoadLevel();
+            LevelLoader.Instance.LoadFile("forest");
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
     }

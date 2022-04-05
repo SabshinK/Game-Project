@@ -98,13 +98,19 @@ namespace Game_Project
             else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0){
                 if (stateTuple.Item1.Equals(direction.right))
                 {
+                    Dictionary<string, object> parameters = new Dictionary<string, object>();
+                    parameters.Add("Position", locationVector);
+                    parameters.Add("FacingRight", true);
                     currentGoriyaSprite = goriyaSpriteRight;
-                    weapon = new Boomerang(new UniversalParameterObject(new object[] { locationVector, true, null }));
+                    weapon = new Boomerang(new UniversalParameterObject(parameters));
                 }
                 else
                 {
+                    Dictionary<string, object> parameters = new Dictionary<string, object>();
+                    parameters.Add("Position", locationVector);
+                    parameters.Add("FacingRight", false);
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    weapon = new Boomerang(new UniversalParameterObject(new object[] { locationVector, false, null }));
+                    weapon = new Boomerang(new UniversalParameterObject(parameters));
                 }
                 
             }

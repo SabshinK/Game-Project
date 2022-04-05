@@ -107,22 +107,22 @@ namespace Game_Project
 
         public IProjectile CreateProjectile(int code)
         {
-            object[] parameters = new object[3];
-            parameters[0] = new Vector2((int)physics.horizontalDisplacement, (int)physics.horizontalVelocity);
-            parameters[1] = FaceRight;
+            //object[] parameters = new object[3];
+            //parameters[0] = new Vector2((int)physics.horizontalDisplacement, (int)physics.horizontalVelocity);
+            //parameters[1] = FaceRight;
 
             switch(code)
             {
-                case 1:
-                    return new Arrow(new UniversalParameterObject(parameters));
-                case 2:
-                    return new Bomb(new UniversalParameterObject(parameters));
-                case 3:
-                    return new Boomerang(new UniversalParameterObject(parameters));
-                case 4:
-                    return new Candle(new UniversalParameterObject(parameters));
-                case 5 :
-                    return new SwordBeam(new UniversalParameterObject(parameters));
+            //    case 1:
+            //        return new Arrow(new UniversalParameterObject(parameters));
+            //    case 2:
+            //        return new Bomb(new UniversalParameterObject(parameters));
+            //    case 3:
+            //        return new Boomerang(new UniversalParameterObject(parameters));
+            //    case 4:
+            //        return new Candle(new UniversalParameterObject(parameters));
+            //    case 5 :
+            //        return new SwordBeam(new UniversalParameterObject(parameters));
                 default:
                     return null;
             }
