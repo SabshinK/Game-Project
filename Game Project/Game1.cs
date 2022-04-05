@@ -61,9 +61,11 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
+            
             SpriteFactory.Instance.LoadDictionary();
             font = Content.Load<SpriteFont>("Text");
             pauseMenu = new PauseMenu(font);
+            
             LevelLoader.Instance.LoadLevel();
 
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
@@ -118,6 +120,8 @@ namespace Game_Project
 
         public void Reset()
         {
+            SpriteFactory.Instance.Reset();
+            GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadLevel();
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
