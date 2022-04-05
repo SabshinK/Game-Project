@@ -43,7 +43,7 @@ namespace Game_Project
             playerAttributes[0] = location;
             playerAttributes[1] = direction;
             playerAttributes[2] = animationName;
-            player = new Player(new UniversalParameterObject(playerAttributes));
+            //player = new Player(new UniversalParameterObject(playerAttributes));
         }
 
         // collision detection needs the lists

@@ -28,10 +28,10 @@ namespace Game_Project
             LoadDictionary();
         }
 
-        public Tuple<string, List<List<Tuple<int, object>>>> ParseAsset()
+        public Tuple<string, List<List<Tuple<string, object>>>> ParseAsset()
         {
             // Declare data storage variables
-            List<List<Tuple<int, object>>> data = new List<List<Tuple<int, object>>>();
+            List<List<Tuple<string, object>>> data = new List<List<Tuple<string, object>>>();
             string type;
 
             // Jump to asset, store type for LevelLoader
@@ -57,13 +57,13 @@ namespace Game_Project
                 }
             }
 
-            return new Tuple<string, List<List<Tuple<int, object>>>>(type, data);
+            return new Tuple<string, List<List<Tuple<string, object>>>>(type, data);
         }
 
-        private List<Tuple<int, object>> ParseItem()
+        private List<Tuple<string, object>> ParseItem()
         {
             // Initialize list of string data
-            List<Tuple<int, object>> data = new List<Tuple<int, object>>();
+            List<Tuple<string, object>> data = new List<Tuple<string, object>>();
 
             while (reader.Read())
             {
@@ -72,10 +72,10 @@ namespace Game_Project
                     if (readTypes.ContainsKey(reader.Name))
                     {
                         // if the item has an attribute, it is the index for the parameter object and should be returned
-                        int parameterIndex = -1;
-                        if (reader.HasAttributes)
-                            parameterIndex = Convert.ToInt32(reader[0]);
-                        data.Add(new Tuple<int, object>(parameterIndex, readTypes[reader.Name].Invoke()));
+                        //int parameterIndex = -1;
+                        //if (reader.HasAttributes)
+                        //    parameterIndex = Convert.ToInt32(reader[0]);
+                        data.Add(new Tuple<string, object>(reader.Name, readTypes[reader.Name].Invoke()));
                     }
                 }
             }
@@ -102,7 +102,8 @@ namespace Game_Project
             readTypes.Add("Y", () => reader.ReadElementContentAsInt());
             readTypes.Add("FacingRight", () => reader.ReadElementContentAsBoolean());
             readTypes.Add("Animation", () => reader.ReadElementContentAsString());
-            readTypes.Add("Key", () => reader.ReadElementContentAsString());
+            readTypes.Add("CollisionObjectType", () => reader.ReadElementContentAsString());
+            readTypes.Add("Direction", () => reader.ReadElementContentAsInt());
             readTypes.Add("Command", () => reader.ReadElementContentAsString());
             readTypes.Add("AnimationName", () => reader.ReadElementContentAsString());
             readTypes.Add("Texture", () => reader.ReadElementContentAsString());

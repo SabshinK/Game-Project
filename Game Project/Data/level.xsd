@@ -9,7 +9,7 @@
 						<xs:complexType>
 							<xs:choice>
 								<xs:group ref="ObjectData"/>
-								<xs:group ref="KeyboardMappings"/>
+								<xs:group ref="CollisionData"/>
 								<xs:group ref="AnimationData"/>
 							</xs:choice>
 						</xs:complexType>
@@ -45,10 +45,11 @@
 		</xs:sequence>
 	</xs:group>
 
-	<xs:group name="KeyboardMappings">
+	<xs:group name="CollisionData">
 		<xs:sequence>
-			<xs:element name="Key" type="xs:string"/>
-			<xs:element name="Command" type="xs:string"/>			
+			<xs:element name="CollisionObjectType" type="xs:string" minOccurs="2" maxOccurs="2"/>
+			<xs:element name="Direction" type="xs:integer"/>
+			<xs:element name="Command" type="xs:string" minOccurs="2" maxOccurs="2"/>
 		</xs:sequence>
 	</xs:group>
 
