@@ -10,8 +10,8 @@ namespace Game_Project
         public double horizontalVelocity;
         public double verticalVelocity;
 
-        public double horizontalDistance;
-        public double verticalDistance;
+        public double horizontalDisplacement;
+        public double verticalDisplacement;
 
         private double timePassed;
 
@@ -20,40 +20,41 @@ namespace Game_Project
             horizontalVelocity = 0;
             verticalVelocity = -5;
 
-            horizontalDistance = 5;
-            verticalDistance = 0;
+            horizontalDisplacement = 5;
+            verticalDisplacement = 0;
 
             timePassed = 0;
         }
 
-        public void HorizontalChange(GameTime gameTime, double acceleration, double drag)
+        public double HorizontalChange(GameTime gameTime, double acceleration, double drag)
         {
             timePassed = gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (acceleration != drag)
+            if (acceleration > drag)
             {
-                horizontalDistance = horizontalDistance + (horizontalVelocity * timePassed) + ((acceleration - drag) * (timePassed * timePassed) * 0.5);
+                horizontalDisplacement = horizontalDisplacement + (horizontalVelocity * timePassed) + ((acceleration - drag) * (timePassed * timePassed) * 0.5);
                 horizontalVelocity = horizontalVelocity + ((acceleration - drag) * timePassed);
             }
+
+            return horizontalDisplacement;
         }
 
-        public void VerticalChange(bool Falling, GameTime gameTime, double acceleration, double drag)
+        public double VerticalChange(bool Falling, GameTime gameTime, double acceleration, double drag)
         {
             timePassed += gameTime.ElapsedGameTime.TotalSeconds;
 
             if (!Falling)
             {
-                verticalDistance = verticalDistance + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                verticalDisplacement = verticalDisplacement + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
                 verticalVelocity = verticalVelocity + ((acceleration + drag) * timePassed);
             }
             else
             {
-                if (acceleration != drag)
-                {
-                    verticalDistance = verticalDistance + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
-                    verticalVelocity = verticalVelocity - ((acceleration + drag) * timePassed);
-                }
+                verticalDisplacement = verticalDisplacement + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
+                verticalVelocity = verticalVelocity - ((acceleration + drag) * timePassed);
             }
+
+            return verticalDisplacement;
 
         }
     }

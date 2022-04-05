@@ -42,7 +42,8 @@ namespace Game_Project
                     object[] parameters1 = { object1 };
 
                     ConstructorInfo constructor1 = commandType1.GetConstructor(types1);
-                    constructor1.Invoke(parameters1);
+                    ICommand command = constructor1.Invoke(parameters1) as ICommand;
+                    command.Execute();
                 }
                 if (commandObject2 != null)
                 {
@@ -51,7 +52,8 @@ namespace Game_Project
                     object[] parameters2 = { object2 };
 
                     ConstructorInfo constructor2 = commandType2.GetConstructor(types2);
-                    constructor2.Invoke(parameters2);
+                    ICommand command = constructor2.Invoke(parameters2) as ICommand;
+                    command.Execute();
                 }
             }              
         }

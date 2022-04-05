@@ -19,7 +19,7 @@ namespace Game_Project
 
             player.horizontalAcceleration = 2;
             player.physics.horizontalVelocity = 0;
-            player.physics.horizontalDistance = 5;
+            player.physics.horizontalDisplacement = 5;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FaceRight)
@@ -42,11 +42,6 @@ namespace Game_Project
             player.SetState(new PlayerJumpState(player));
         }
 
-        public void Fall()
-        {
-            player.SetState(new PlayerFallState(player));
-        }
-
         public void TakeDamage()
         {
             player.SetState(new DamageState(player));
@@ -66,15 +61,15 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             time += gameTime.ElapsedGameTime.TotalSeconds;
-            player.physics.HorizontalChange(gameTime, player.horizontalAcceleration, drag);
+            int displacement = (int)player.physics.HorizontalChange(gameTime, player.horizontalAcceleration, drag);
 
             if (!player.FaceRight)
             {
-                player.location.X -= (int)player.physics.horizontalDistance;
+                player.location.X -= displacement;
             } 
             else
             {
-                player.location.X += (int)player.physics.horizontalDistance;
+                player.location.X += displacement;
             }  
 
             if (player.horizontalAcceleration < 5 && (time/0.5) >= 1)
