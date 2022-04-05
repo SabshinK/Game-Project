@@ -12,11 +12,6 @@ namespace Game_Project
         private Dictionary<Tuple<Type, Type, CollideDirection>, Tuple<string, string>> directionalCollisions = new Dictionary<Tuple<Type, Type, CollideDirection>, Tuple<string, string>>();
         private Dictionary<Tuple<Type, Type>, Tuple<string, string>> directionlessCollisions = new Dictionary<Tuple<Type, Type>, Tuple<string, string>>();
 
-        public CollisionResolution()
-        {
-            // constructor
-        }
-
         public void ResolveCollision(ICollideable object1, ICollideable object2, CollideDirection direction, Rectangle firstRectangle, Rectangle secondRectangle)
         {
             string commandObject1 = null;
