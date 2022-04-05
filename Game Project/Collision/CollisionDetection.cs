@@ -39,6 +39,11 @@ namespace Game_Project
 
         public CollisionDetection()
         {
+            collisionResolution = new CollisionResolution();
+        }
+
+        public void GetCollisionLists()
+        {
             player = GameObjectManager.Instance.player;
 
             //Ask Object Manager for the lists
@@ -49,7 +54,6 @@ namespace Game_Project
             items = (List<IItem>)listArray[2];
             tiles = (List<ITile>)listArray[3];
 
-            collisionResolution = new CollisionResolution();
         }
 
         public void CheckCollision()

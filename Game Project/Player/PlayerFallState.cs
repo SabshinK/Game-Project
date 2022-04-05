@@ -67,11 +67,11 @@ namespace Game_Project
             //Right now, the if and else conditions have the same block of code.
             if (!player.FaceRight)
             {
-                player.location.Y -= (int)player.physics.verticalDistance;
+                player.location.Y -= (int)player.physics.verticalDisplacement;
             }
             else
             {
-                player.location.Y -= (int)player.physics.verticalDistance;
+                player.location.Y -= (int)player.physics.verticalDisplacement;
             }
 
             if (drag != player.verticalAcceleration && (time / 0.5) >= 1)
