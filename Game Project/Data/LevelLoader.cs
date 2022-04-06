@@ -71,18 +71,24 @@ namespace Game_Project
             foreach (List<Tuple<string, object>> itemList in data)
             {
                 int direction = (int)itemList[2].Item2;
+                string command1 = null;
+                string command2 = null;
+                if (!itemList[3].Item2.ToString().Equals("null"))
+                    command1 = itemList[3].Item2.ToString();
+                if (!itemList[4].Item2.ToString().Equals("null"))
+                    command2 = itemList[4].Item2.ToString();
 
                 if (direction >= 0)
                 {
                     CollisionResolution.Instance.RegisterDirectionalCollision(new Tuple<Type, Type, CollideDirection>(
                         Type.GetType("Game_Project." + itemList[0].Item2), Type.GetType("Game_Project." + itemList[1].Item2), 
-                        (CollideDirection)direction), new Tuple<string, string>(itemList[3].Item2.ToString(), itemList[4].Item2.ToString()));
+                        (CollideDirection)direction), new Tuple<string, string>(command1, command2));
                 }
                 else
                 {
                     CollisionResolution.Instance.RegisterDirectionlessCollision(new Tuple<Type, Type>(
                         Type.GetType("Game_Project." + itemList[0].Item2), Type.GetType("Game_Project." + itemList[1].Item2)), 
-                        new Tuple<string, string>(itemList[3].Item2.ToString(), itemList[4].Item2.ToString()));
+                        new Tuple<string, string>(command1, command2));
                 }
             }
         }

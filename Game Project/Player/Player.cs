@@ -135,6 +135,11 @@ namespace Game_Project
             //collisions affecting the player based on the size of the rectangle          
         }
 
+        public void Bump(Rectangle collision, int direction)
+        {
+            
+        }
+
         public void Update(GameTime gameTime)
         {
             state.Update(gameTime);
