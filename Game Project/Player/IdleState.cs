@@ -28,11 +28,7 @@ namespace Game_Project
 
         public void Move()
         {
-            player.SetState(new PlayerMoveState(player));
-        }
-        public void Jump()
-        {
-            player.SetState(new PlayerJumpState(player));
+            player.SetState(new PlayerMovementState(player, player.physics.appliedForce.X, player.physics.appliedForce.Y));
         }
 
         public void TakeDamage()
