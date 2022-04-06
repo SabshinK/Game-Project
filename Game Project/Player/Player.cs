@@ -12,9 +12,8 @@ namespace Game_Project
         public IProjectile projectile;
         public ISprite sprite;
 
+        //Physics related variables
         public Physics physics;
-        public double horizontalAcceleration;
-        public double verticalAcceleration;
 
         private int health;
 
@@ -36,9 +35,6 @@ namespace Game_Project
         
             health = 3;
 
-            horizontalAcceleration = 2;
-            verticalAcceleration = -2;
-
             FaceRight = true;
 
             physics = new Physics();
@@ -50,7 +46,7 @@ namespace Game_Project
             state.BackToIdle();
         }
         
-        public void Move(bool faceRight)
+        public void StartMoving(bool faceRight)
         {
             if (FaceRight != faceRight)
             {
@@ -61,19 +57,6 @@ namespace Game_Project
                     sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
             }
             state.Move();
-        }
-
-        public void Jump(bool faceRight)
-        {
-            if (FaceRight != faceRight)
-            {
-                FaceRight = faceRight;
-                if (FaceRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
-            }
-            state.Jump();
         }
 
         public void DamageTaken()
@@ -108,7 +91,7 @@ namespace Game_Project
         public IProjectile CreateProjectile(int code)
         {
             object[] parameters = new object[3];
-            parameters[0] = new Vector2((int)physics.horizontalDisplacement, (int)physics.horizontalVelocity);
+            parameters[0] = new Vector2((int)physics.displacement.X, (int)physics.velocity.X);
             parameters[1] = FaceRight;
 
             switch(code)
@@ -133,6 +116,27 @@ namespace Game_Project
         public void Collide()
         {
             //collisions affecting the player based on the size of the rectangle          
+        }
+
+        public void Bump(Rectangle collision, int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    location.Y += collision.Height;
+                    break;
+                case 1:
+                    location.Y -= collision.Height;
+                    break;
+                case 2:
+                    location.X -= collision.Width;
+                    break;
+                case 3:
+                    location.X += collision.Width;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Update(GameTime gameTime)

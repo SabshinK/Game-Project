@@ -33,10 +33,6 @@ namespace Game_Project
         {
             // Can't move until attack is over
         }
-        public void Jump()
-        {
-            player.SetState(new PlayerJumpState(player));
-        }
 
         public void TakeDamage()
         {
