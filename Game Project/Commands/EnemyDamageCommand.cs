@@ -6,14 +6,12 @@ namespace Game_Project
 {
     class EnemyDamageCommand : ICommand
     {
-
         private IEnemy enemy;
 
         public EnemyDamageCommand(IEnemy Enemy)
         {
             enemy = Enemy;
         }
-
 
         public void Execute()
         {

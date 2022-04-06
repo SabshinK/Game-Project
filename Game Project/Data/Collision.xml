@@ -148,125 +148,125 @@
 		<CollisionObjectType>Arrow</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>DragonEnemy</CollisionObjectType>
 		<CollisionObjectType>Arrow</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>GelEnemy</CollisionObjectType>
 		<CollisionObjectType>Arrow</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>GoriyaEnemy</CollisionObjectType>
 		<CollisionObjectType>Arrow</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>StalfosEnemy</CollisionObjectType>
 		<CollisionObjectType>Arrow</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>ZohEnemy</CollisionObjectType>
 		<CollisionObjectType>Arrow</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>BatEnemy</CollisionObjectType>
 		<CollisionObjectType>SwordBeam</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>DragonEnemy</CollisionObjectType>
 		<CollisionObjectType>SwordBeam</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>GelEnemy</CollisionObjectType>
 		<CollisionObjectType>SwordBeam</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>GoriyaEnemy</CollisionObjectType>
 		<CollisionObjectType>SwordBeam</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>StalfosEnemy</CollisionObjectType>
 		<CollisionObjectType>SwordBeam</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>ZohEnemy</CollisionObjectType>
 		<CollisionObjectType>SwordBeam</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>RemoveProjectileCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>BatEnemy</CollisionObjectType>
 		<CollisionObjectType>Boomerang</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>BoomerangChangeDirectionCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>DragonEnemy</CollisionObjectType>
 		<CollisionObjectType>Boomerang</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>BoomerangChangeDirectionCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>GelEnemy</CollisionObjectType>
 		<CollisionObjectType>Boomerang</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>BoomerangChangeDirectionCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>GoriyaEnemy</CollisionObjectType>
 		<CollisionObjectType>Boomerang</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>BoomerangChangeDirectionCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>StalfosEnemy</CollisionObjectType>
 		<CollisionObjectType>Boomerang</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>BoomerangChangeDirectionCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>ZohEnemy</CollisionObjectType>
 		<CollisionObjectType>Boomerang</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyDamageCommand</Command>
-		<Command>RemoveArrowCommand</Command>
+		<Command>BoomerangChangeDirectionCommand</Command>
 	</Item>
 </Asset>
