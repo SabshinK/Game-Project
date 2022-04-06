@@ -19,13 +19,8 @@ namespace Game_Project
         private Rectangle rectangleObject1;
         private Rectangle rectangleObject2;
 
-        private CollisionResolution collisionResolution;
         public enum CollideDirection { Top, Bottom, Left, Right };
         public CollideDirection direction;
-
-        GameObjectManager gameObjectManager;
-
-        GameTime gameTime;
 
         private object[] listArray;
 
@@ -39,7 +34,7 @@ namespace Game_Project
 
         public CollisionDetection()
         {
-            collisionResolution = new CollisionResolution();
+            
         }
 
         public void GetCollisionLists()
@@ -98,7 +93,7 @@ namespace Game_Project
                     }
                 }
 
-                collisionResolution.ResolveCollision(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
+                CollisionResolution.Instance.ResolveCollision(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
             }
         }
 
