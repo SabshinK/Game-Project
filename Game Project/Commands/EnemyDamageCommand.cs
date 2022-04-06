@@ -4,18 +4,18 @@ using System.Text;
 
 namespace Game_Project
 {
-    class RemoveArrowCommand : ICommand
+    class EnemyDamageCommand : ICommand
     {
-        Arrow arrow;
+        private IEnemy enemy;
 
-        public RemoveArrowCommand(Arrow arrow)
+        public EnemyDamageCommand(IEnemy Enemy)
         {
-            this.arrow = arrow;
+            enemy = Enemy;
         }
 
         public void Execute()
         {
-            arrow.Collide();
+            enemy.TakeDamage();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Game_Project
             initialPosition = position;
             boomerangLimit = 160;
             moveFactor = 8;
-            userDirection = parameters.Direction;
+            userDirection = parameters.FacingRight;
             movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
             finished = false;

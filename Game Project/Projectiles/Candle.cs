@@ -31,7 +31,7 @@ namespace Game_Project
             finalPositionLeft.X -= 80;
             timer = 0f;
             lifeSpan = 1f;
-            userDirection = parameters.Direction;
+            userDirection = parameters.FacingRight;
             stopFire = false;
             fireSprite = SpriteFactory.Instance.CreateSprite("candleFireGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
