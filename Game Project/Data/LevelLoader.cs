@@ -1,12 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
-using System.Xml;
+using static Game_Project.CollisionDetection;
 
 namespace Game_Project
 {
@@ -63,14 +61,30 @@ namespace Game_Project
                 }
 
                 SpriteFactory.Instance.RegisterAnimation(itemList[0].Item2.ToString(),
-                    new Tuple<Texture2D, Rectangle[], int, int>(Texture2DStorage.GetTexture(itemList[1].Item2.ToString()), frames, Convert.ToInt32(itemList[2].Item2),
-                    Convert.ToInt32(itemList[3].Item2)));
+                    new Tuple<Texture2D, Rectangle[], int, int>(Texture2DStorage.GetTexture(itemList[1].Item2.ToString()), frames, 
+                    Convert.ToInt32(itemList[2].Item2), Convert.ToInt32(itemList[3].Item2)));
             }
         }
 
         private void LoadCollisionData(List<List<Tuple<string, object>>> data)
         {
+            foreach (List<Tuple<string, object>> itemList in data)
+            {
+                int direction = (int)itemList[2].Item2;
 
+                if (direction >= 0)
+                {
+                    CollisionResolution.Instance.RegisterDirectionalCollision(new Tuple<Type, Type, CollideDirection>(
+                        Type.GetType("Game_Project." + itemList[0].Item2), Type.GetType("Game_Project." + itemList[1].Item2), 
+                        (CollideDirection)direction), new Tuple<string, string>(itemList[3].Item2.ToString(), itemList[4].Item2.ToString()));
+                }
+                else
+                {
+                    CollisionResolution.Instance.RegisterDirectionlessCollision(new Tuple<Type, Type>(
+                        Type.GetType("Game_Project." + itemList[0].Item2), Type.GetType("Game_Project." + itemList[1].Item2)), 
+                        new Tuple<string, string>(itemList[3].Item2.ToString(), itemList[4].Item2.ToString()));
+                }
+            }
         }
 
         private void LoadObjectData(List<List<Tuple<string, object>>> data)

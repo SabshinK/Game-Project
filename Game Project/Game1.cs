@@ -114,6 +114,7 @@ namespace Game_Project
 
         public void Reset()
         {
+            GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
             keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
         }
