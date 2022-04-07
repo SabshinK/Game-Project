@@ -10,12 +10,19 @@ namespace Game_Project
     public class DragonEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
+        // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
+        // the state machine and then this bool just gets the value from the state machine
+        public bool FacingRight { get; private set; }
+
         DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
+
         Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 Size => dragonSprite.Size;
+
         int lengthOfAction;
-        Candle weapon;
+        IProjectile weapon;
         Physics physics;
 
         public DragonEnemy(UniversalParameterObject parameters)

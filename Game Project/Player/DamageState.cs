@@ -15,7 +15,7 @@ namespace Game_Project
             player = manager;
             timeElapsed = 0;
 
-            if (player.FaceRight)
+            if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("damagedRight");
             }

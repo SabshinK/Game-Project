@@ -113,7 +113,7 @@ namespace Game_Project
 
                     // create object with given parameter object
                     object[] parameterObject = new object[] { new UniversalParameterObject(parameters) };
-                    GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameterObject));
+                    GameObjectManager.Instance.RegisterObject(constructorInfo.Invoke(parameterObject) as IGameObject);
                 }
             }
         }
