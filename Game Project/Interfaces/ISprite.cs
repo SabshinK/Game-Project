@@ -5,7 +5,8 @@ namespace Game_Project
 {
     public interface ISprite
     {
-        // This function probably doesn't need to be here but I wanted it defined somewhere
+        public Vector2 Size { get; }
+
         void Update();
         
         void Draw(SpriteBatch spriteBatch, Vector2 location);

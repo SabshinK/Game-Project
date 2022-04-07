@@ -14,7 +14,7 @@ namespace Game_Project
         {
             this.player = player;
 
-            if (player.FaceRight)
+            if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("attackRight");
             }
