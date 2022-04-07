@@ -14,7 +14,7 @@ namespace Game_Project
 
         public Physics physics;
 
-        private int health;
+        public int Health { get; private set; }
 
         public Vector2 location;
         public Vector2 Position => location;
@@ -30,7 +30,7 @@ namespace Game_Project
 
             location = parameters.Position;
         
-            health = 3;
+            Health = 3;
 
             FacingRight = true;
 
@@ -58,7 +58,7 @@ namespace Game_Project
 
         public void DamageTaken()
         {
-            health--;
+            Health--;
             state.TakeDamage();
         } 
         public void Attack()
