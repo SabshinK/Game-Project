@@ -8,8 +8,6 @@ namespace Game_Project
         
         public void Move();
 
-        public void Jump();
-
         public void TakeDamage();
 
         public void Attack();
