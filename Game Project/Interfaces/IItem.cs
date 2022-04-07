@@ -3,9 +3,8 @@ using Microsoft.Xna.Framework;
 
 namespace Game_Project
 {
-    public interface IItem : IDrawable, ICollideable
+    public interface IItem : IGameObject, IDrawable, ICollideable
     {
         //  no item specific methods rn
-        public Vector2 Position { get; }
     }
 }

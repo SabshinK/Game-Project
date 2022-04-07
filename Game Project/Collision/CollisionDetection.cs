@@ -29,6 +29,8 @@ namespace Game_Project
         List<IItem> items;
         List<ITile> tiles;
 
+        private List<List<IGameObject>> gameObjects;
+
         private const int movingObjectSize = 128;
         private const int tileSize = 64;
 
@@ -39,16 +41,7 @@ namespace Game_Project
 
         public void GetCollisionLists()
         {
-            player = GameObjectManager.Instance.player;
-
-            //Ask Object Manager for the lists
-            listArray = GameObjectManager.Instance.GetObjectLists();
-
-            enemies = (List<IEnemy>)listArray[0];
-            projectiles = (List<IProjectile>)listArray[1];
-            items = (List<IItem>)listArray[2];
-            tiles = (List<ITile>)listArray[3];
-
+            
         }
 
         public void CheckCollision()
@@ -93,7 +86,7 @@ namespace Game_Project
                     }
                 }
 
-                CollisionResolution.Instance.ResolveCollision(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
+                CollisionResolution.Instance.ResolveCollision(firstObject, secondObject, direction, rectangleObject1);
             }
         }
 
