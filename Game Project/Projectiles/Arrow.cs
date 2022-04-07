@@ -22,7 +22,7 @@ namespace Game_Project
             timer = 0f;
             lifeSpan = 300f;
             moveFactor = 8;
-            userDirection = parameters.Direction;
+            userDirection = parameters.FacingRight;
         }
 
         public void Collide()

@@ -62,7 +62,10 @@ namespace Game_Project
             {
                 if (weapon == null)
                 {
-                    weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
+                    Dictionary<string, object> parameters = new Dictionary<string, object>();
+                    parameters.Add("Position", locationVector);
+                    parameters.Add("FacingRight", false);
+                    weapon = new Candle(new UniversalParameterObject(parameters));
                     GameObjectManager.Instance.RegisterObject(weapon);
                 }
                 weapon.Draw(spriteBatch);
@@ -129,7 +132,7 @@ namespace Game_Project
                     break;
                 case actions.falling:
                     locationVector.Y++;
-                    physics.VerticalChange(true, gameTime, -5, 2);
+                    physics.VerticalChange(gameTime, 2);
                     dragonSprite.Update();
                     break;
                 case actions.attacking:

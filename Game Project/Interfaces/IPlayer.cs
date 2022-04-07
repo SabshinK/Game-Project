@@ -6,5 +6,7 @@ namespace Game_Project
     public interface IPlayer : IUpdateable, IDrawable, ICollideable
     {
         public Vector2 Position { get; }
+
+        public void Bump(Rectangle collision, int direction);
     }
 }

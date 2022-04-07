@@ -20,7 +20,7 @@ namespace Game_Project
         {
             position = parameters.Position;
             moveFactor = 16;
-            userDirection = parameters.Direction;
+            userDirection = parameters.FacingRight;
 
         }
 
