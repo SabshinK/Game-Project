@@ -10,6 +10,8 @@ namespace Game_Project
     {
         public Vector2 position;
         public Vector2 Position => position;
+        public Vector2 Size => sprite.Size;
+
         public ISprite sprite, despawnSprite;
         public bool finished;
 

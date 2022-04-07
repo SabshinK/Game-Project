@@ -62,7 +62,7 @@ namespace Game_Project
             LevelLoader.Instance.LoadFile("sprites");
             LevelLoader.Instance.LoadFile("forest");
 
-            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
+            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
 
             collisionDetection.GetCollisionLists();
         }
@@ -82,7 +82,7 @@ namespace Game_Project
             {
                 GameObjectManager.Instance.Update(gameTime);
                 collisionDetection.Update(gameTime);
-                camera.Update((Player)GameObjectManager.Instance.player);
+                camera.Update(GameObjectManager.Instance.GetPlayer());
             }
 
             base.Update(gameTime);
@@ -116,7 +116,7 @@ namespace Game_Project
         {
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
-            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
+            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
         }
     }
 }

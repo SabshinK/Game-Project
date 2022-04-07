@@ -22,8 +22,6 @@ namespace Game_Project
         public enum CollideDirection { Top, Bottom, Left, Right };
         public CollideDirection direction;
 
-        private object[] listArray;
-
         List<IEnemy> enemies;
         List<IProjectile> projectiles;
         List<IItem> items;
@@ -41,11 +39,16 @@ namespace Game_Project
 
         public void GetCollisionLists()
         {
-            
+            gameObjects = GameObjectManager.Instance.GameObjects;
         }
 
         public void CheckCollision()
         {
+            // Position and size can be obtained from the objects, each object has references to these things and can be gotten 
+            // like: object1.Size or object1.Position. These variables are Vector2's. Currently Position is an IGameObject property
+            // and Size is an ICollideable property, so there is kind of an issue with what type the object would be declared as,
+            // I will have to find a solution to this
+
             // change this part so that we don't use constants for sizing and instead access something like secondObject.size?
             rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, movingObjectSize, movingObjectSize);
             if (secondObject.GetType() == typeof(Tile)) rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, tileSize, tileSize);
@@ -92,6 +95,10 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            // This all becomes checking the object in the first list in the list of lists against every next object and the objects in the
+            // second list, all of the things needed for collision calculations like position and size can be taken from the object, the only
+            // parameters needed for check collision are the two objects to compare
+
             foreach (IEnemy enemy in enemies)
             {
                 // player and enemies
@@ -144,6 +151,5 @@ namespace Game_Project
                         CheckCollision();
             }
         }
-
     }
 }

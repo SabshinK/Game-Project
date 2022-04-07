@@ -8,13 +8,17 @@ namespace Game_Project
 {
     class Arrow : IProjectile
     {
-        public Vector2 position;
+        private Vector2 position;
+        public Vector2 Position => position;
+        public Vector2 Size => sprite.Size;
+
         private float timer;
         private float lifeSpan;
         private int moveFactor;
+
         private ISprite sprite;
-        private bool userDirection;
-        public Vector2 Position => position;
+        public bool FacingRight { get; private set; }
+
         //constructor
         public Arrow(UniversalParameterObject parameters)
         {
@@ -22,7 +26,7 @@ namespace Game_Project
             timer = 0f;
             lifeSpan = 300f;
             moveFactor = 8;
-            userDirection = parameters.FacingRight;
+            FacingRight = parameters.FacingRight;
         }
 
         public void Collide()
@@ -42,7 +46,7 @@ namespace Game_Project
             }
 
             //if player looking right
-            if (userDirection)
+            if (FacingRight)
             {
                 sprite = SpriteFactory.Instance.CreateSprite("rightArrow");
                 position.X += moveFactor;

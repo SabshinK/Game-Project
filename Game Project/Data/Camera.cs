@@ -20,10 +20,10 @@ namespace Game_Project
             cameraView = gameCamera;
         }
 
-        public void Update(Player gamePlayer)
+        public void Update(IPlayer gamePlayer)
         {
-            float cameraX = gamePlayer.location.X + 64 - (cameraView.Width / 2);
-            float cameraY = gamePlayer.location.Y + 64 - (cameraView.Height / 2);
+            float cameraX = gamePlayer.Position.X + 64 - (cameraView.Width / 2);
+            float cameraY = gamePlayer.Position.Y + 64 - (cameraView.Height / 2);
 
             cameraPos = new Vector2(cameraX, cameraY);
 
