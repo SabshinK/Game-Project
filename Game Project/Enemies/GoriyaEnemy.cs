@@ -24,8 +24,7 @@ namespace Game_Project
         int lengthOfAction = 0;
         Boomerang weapon;
         Physics physics;
-        double acceleration = 1;
-        double drag = 0.5;
+        float acceleration = 1;
         
         public GoriyaEnemy(UniversalParameterObject parameters)
         {
@@ -38,7 +37,6 @@ namespace Game_Project
         }
         public void ChangeDirection()
         {
-            physics.horizontalVelocity = 0;
             goriya.ChangeDirection();
         }
 
@@ -99,7 +97,7 @@ namespace Game_Project
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
             if(stateTuple.Item1.Equals(actions.moving)){
 
-                int displacement = (int)physics.HorizontalChange(gameTime, acceleration, drag);
+                int displacement = (int)physics.HorizontalChange(gameTime, acceleration);
 
                 if (stateTuple.Item2.Equals(direction.right)){
                     currentGoriyaSprite = goriyaSpriteRight;

@@ -23,9 +23,7 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
-        double gelAccel = 1;
-        int gelMaxZoom = 5;
-        int gelDrag = 0; //the gelatinous skin of the gel leads to almost no drag!
+        float gelAccel = 1;
 
         public GelEnemy(UniversalParameterObject parameters)
         {
@@ -83,7 +81,7 @@ namespace Game_Project
                     break;
                 case actions.moving:
 
-                    int displacement = (int)physics.HorizontalChange(gameTime, gelAccel, gelDrag);
+                    int displacement = (int)physics.HorizontalChange(gameTime, gelAccel);
                     if (stateTuple.Item2.Equals(direction.left))
                     {
                         locationVector.X -= displacement;
