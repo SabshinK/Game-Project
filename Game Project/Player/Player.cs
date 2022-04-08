@@ -13,33 +13,26 @@ namespace Game_Project
         public ISprite sprite;
 
         public Physics physics;
-        public double horizontalAcceleration;
-        public double verticalAcceleration;
 
-        private int health;
+        public int Health { get; private set; }
 
-        private Rectangle collideRectangle;
-
-        private string animationToCreate;
         public Vector2 location;
         public Vector2 Position => location;
-        public bool FaceRight { get; private set; }
+        public Vector2 Size => sprite.Size;
+
+        public bool FacingRight { get; private set; }
 
         // Constructor
         public Player(UniversalParameterObject parameters)
         {
-            state = new PlayerFallState(this);
-            animationToCreate = "idleRight";
-            sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
+            state = new IdleState(this);
+            sprite = SpriteFactory.Instance.CreateSprite("idleRight");
 
             location = parameters.Position;
         
-            health = 3;
+            Health = 3;
 
-            horizontalAcceleration = 2;
-            verticalAcceleration = 0;
-
-            FaceRight = true;
+            FacingRight = true;
 
             physics = new Physics();
         }
@@ -50,12 +43,12 @@ namespace Game_Project
             state.BackToIdle();
         }
         
-        public void Move(bool faceRight)
+        public void StartMoving(bool faceRight)
         {
-            if (FaceRight != faceRight)
+            if (FacingRight != faceRight)
             {
-                FaceRight = faceRight;
-                if (FaceRight)
+                FacingRight = faceRight;
+                if (FacingRight)
                     sprite = SpriteFactory.Instance.CreateSprite("movingRight");
                 else
                     sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
@@ -63,35 +56,9 @@ namespace Game_Project
             state.Move();
         }
 
-        public void Jump(bool faceRight)
-        {
-            if (FaceRight != faceRight)
-            {
-                FaceRight = faceRight;
-                if (FaceRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
-            }
-            state.Jump();
-        }
-
-        public void Fall(bool faceRight)
-        {
-            if (FaceRight != faceRight)
-            {
-                FaceRight = faceRight;
-                if (FaceRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
-            }
-            state.Fall();
-        }
-
         public void DamageTaken()
         {
-            health--;
+            Health--;
             state.TakeDamage();
         } 
         public void Attack()
@@ -121,21 +88,21 @@ namespace Game_Project
         public IProjectile CreateProjectile(int code)
         {
             object[] parameters = new object[3];
-            parameters[0] = new Vector2((int)physics.horizontalDistance, (int)physics.horizontalVelocity);
-            parameters[1] = FaceRight;
+            parameters[0] = new Vector2((int)physics.displacement.X, (int)physics.velocity.X);
+            parameters[1] = FacingRight;
 
             switch(code)
             {
-                case 1:
-                    return new Arrow(new UniversalParameterObject(parameters));
-                case 2:
-                    return new Bomb(new UniversalParameterObject(parameters));
-                case 3:
-                    return new Boomerang(new UniversalParameterObject(parameters));
-                case 4:
-                    return new Candle(new UniversalParameterObject(parameters));
-                case 5 :
-                    return new SwordBeam(new UniversalParameterObject(parameters));
+            //    case 1:
+            //        return new Arrow(new UniversalParameterObject(parameters));
+            //    case 2:
+            //        return new Bomb(new UniversalParameterObject(parameters));
+            //    case 3:
+            //        return new Boomerang(new UniversalParameterObject(parameters));
+            //    case 4:
+            //        return new Candle(new UniversalParameterObject(parameters));
+            //    case 5 :
+            //        return new SwordBeam(new UniversalParameterObject(parameters));
                 default:
                     return null;
             }
@@ -146,6 +113,27 @@ namespace Game_Project
         public void Collide()
         {
             //collisions affecting the player based on the size of the rectangle          
+        }
+
+        public void Bump(Rectangle collision, int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    location.Y += collision.Height;
+                    break;
+                case 1:
+                    location.Y -= collision.Height;
+                    break;
+                case 2:
+                    location.X -= collision.Width;
+                    break;
+                case 3:
+                    location.X += collision.Width;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Update(GameTime gameTime)

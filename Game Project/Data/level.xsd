@@ -9,7 +9,7 @@
 						<xs:complexType>
 							<xs:choice>
 								<xs:group ref="ObjectData"/>
-								<xs:group ref="KeyboardMappings"/>
+								<xs:group ref="CollisionData"/>
 								<xs:group ref="AnimationData"/>
 							</xs:choice>
 						</xs:complexType>
@@ -24,31 +24,16 @@
 			<xs:element name="ObjectType" type="xs:string"/>
 			<xs:element name="X" type="xs:integer"/>
 			<xs:element name="Y" type="xs:integer"/>
-			<xs:element name="FacingRight" minOccurs="0" maxOccurs="1">
-				<xs:complexType>
-					<xs:simpleContent>
-						<xs:extension base="xs:boolean">
-							<xs:attribute name="index" type="xs:integer"/>
-						</xs:extension>
-					</xs:simpleContent>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Animation" minOccurs="0" maxOccurs="1">
-				<xs:complexType>
-					<xs:simpleContent>
-						<xs:extension base="xs:string">
-							<xs:attribute name="index" type="xs:integer"/>
-						</xs:extension>
-					</xs:simpleContent>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="FacingRight" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Animation" type="xs:string" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:group>
 
-	<xs:group name="KeyboardMappings">
+	<xs:group name="CollisionData">
 		<xs:sequence>
-			<xs:element name="Key" type="xs:string"/>
-			<xs:element name="Command" type="xs:string"/>			
+			<xs:element name="CollisionObjectType" type="xs:string" minOccurs="2" maxOccurs="2"/>
+			<xs:element name="Direction" type="xs:integer"/>
+			<xs:element name="Command" type="xs:string" minOccurs="2" maxOccurs="2"/>
 		</xs:sequence>
 	</xs:group>
 

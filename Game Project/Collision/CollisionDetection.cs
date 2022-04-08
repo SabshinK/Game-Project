@@ -7,57 +7,58 @@ namespace Game_Project
 {
     public class CollisionDetection : IUpdateable
     {
-        private ICollideable firstObject;
-        private ICollideable secondObject;
-
         private IPlayer player;
 
         private float side_overlap;
         private float updown_overlap;
-        private Vector2 firstObjectLocation;
-        private Vector2 secondObjectLocation;
+        private ICollideable firstCollideable;
+        private ICollideable secondCollideable;
+        private Vector2 location1;
+        private Vector2 location2;
+        private Vector2 size1;
+        private Vector2 size2;
         private Rectangle rectangleObject1;
         private Rectangle rectangleObject2;
 
-        private CollisionResolution collisionResolution;
         public enum CollideDirection { Top, Bottom, Left, Right };
         public CollideDirection direction;
-
-        GameObjectManager gameObjectManager;
-
-        GameTime gameTime;
-
-        private object[] listArray;
 
         List<IEnemy> enemies;
         List<IProjectile> projectiles;
         List<IItem> items;
         List<ITile> tiles;
 
+        private List<List<IGameObject>> gameObjects;
+
         private const int movingObjectSize = 128;
         private const int tileSize = 64;
 
         public CollisionDetection()
         {
-            player = GameObjectManager.Instance.player;
-
-            //Ask Object Manager for the lists
-            listArray = GameObjectManager.Instance.GetObjectLists();
-
-            enemies = (List<IEnemy>)listArray[0];
-            projectiles = (List<IProjectile>)listArray[1];
-            items = (List<IItem>)listArray[2];
-            tiles = (List<ITile>)listArray[3];
-
-            collisionResolution = new CollisionResolution();
+            
         }
 
-        public void CheckCollision()
+        public void GetCollisionLists()
         {
-            // change this part so that we don't use constants for sizing and instead access something like secondObject.size?
-            rectangleObject1 = new Rectangle((int)firstObjectLocation.X, (int)firstObjectLocation.Y, movingObjectSize, movingObjectSize);
-            if (secondObject.GetType() == typeof(Tile)) rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, tileSize, tileSize);
-            else rectangleObject2 = new Rectangle((int)secondObjectLocation.X, (int)secondObjectLocation.Y, movingObjectSize, movingObjectSize);
+            gameObjects = GameObjectManager.Instance.GameObjects;
+        }
+
+        public void CheckCollision(IGameObject firstObject, IGameObject secondObject)
+        {
+            // Position and size can be obtained from the objects, each object has references to these things and can be gotten 
+            // like: object1.Size or object1.Position. These variables are Vector2's. Currently Position is an IGameObject property
+            // and Size is an ICollideable property, so there is kind of an issue with what type the object would be declared as,
+            // I will have to find a solution to this
+
+            firstCollideable = firstObject as ICollideable;
+            secondCollideable = secondObject as ICollideable;
+            location1 = firstObject.Position;
+            location2 = secondObject.Position;
+            size1 = firstCollideable.Size;
+            size2 = secondCollideable.Size;
+
+            rectangleObject1 = new Rectangle((int)location1.X, (int)location1.Y, (int)size1.X, (int)size1.Y);
+            rectangleObject1 = new Rectangle((int)location2.X, (int)location2.Y, (int)size2.X, (int)size2.Y);
 
             // objects collide:
             if (rectangleObject1.Intersects(rectangleObject2))
@@ -94,64 +95,27 @@ namespace Game_Project
                     }
                 }
 
-                collisionResolution.ResolveCollision(firstObject, secondObject, direction, rectangleObject1, rectangleObject2);
+                CollisionResolution.Instance.ResolveCollision(firstObject, secondObject, direction, rectangleObject1);
             }
         }
 
         public void Update(GameTime gameTime)
         {
-            foreach (IEnemy enemy in enemies)
+            // This all becomes checking the object in the first list in the list of lists against every next object and the objects in the
+            // second list, all of the things needed for collision calculations like position and size can be taken from the object, the only
+            // parameters needed for check collision are the two objects to compare
+
+            foreach (IGameObject firstObject in gameObjects[0])
             {
-                // player and enemies
-                firstObjectLocation = player.Position;
-                firstObject = player;
-
-                secondObjectLocation = enemy.Position;
-                secondObject = enemy;
-                
-                CheckCollision();
-
-                firstObjectLocation = enemy.Position;
-                firstObject = enemy;
-
-                foreach (ITile tile in tiles)
+                foreach (IGameObject moveableObject in gameObjects[0])
                 {
-                    // enemies and tiles
-                        secondObjectLocation = tile.Position;
-                        secondObject = tile;
-
-                        CheckCollision();
+                    if !(firstObject is moveableObject) CheckCollision(firstObject, moveableObject);
                 }
-                foreach (IProjectile projectile in projectiles)
+                foreach (IGameObject nonMoveableObject in gameObjects[1])
                 {
-                    // enemies and projectiles
-                        secondObjectLocation = projectile.Position;
-                        secondObject = projectile;
-
-                        CheckCollision();
+                    CheckCollision(firstObject, nonMoveableObject);
                 }
-            }
-
-            firstObjectLocation = player.Position;
-            firstObject = player;
-
-            foreach (ITile tile in tiles)
-            {
-                // player and tiles
-                        secondObjectLocation = tile.Position;
-                        secondObject = tile;
-
-                        CheckCollision();
-            }
-            foreach (IItem item in items) 
-            {
-                    // player and items
-                        secondObjectLocation = item.Position;
-                        secondObject = item;
-
-                        CheckCollision();
             }
         }
-
     }
 }
