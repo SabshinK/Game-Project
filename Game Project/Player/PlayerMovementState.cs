@@ -28,7 +28,7 @@ namespace Game_Project
             player.physics.appliedForce.Y = forceY;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
-            if (player.FaceRight)
+            if (player.FacingRight)
                 player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
             else
                 player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
@@ -67,7 +67,7 @@ namespace Game_Project
 
             int displacement = (int)player.physics.HorizontalChange(gameTime, player.physics.acceleration.X);
 
-            if (!player.FaceRight)
+            if (!player.FacingRight)
             {
                 player.location.X -= displacement;
             } 
