@@ -109,7 +109,7 @@ namespace Game_Project
             {
                 foreach (IGameObject moveableObject in gameObjects[0])
                 {
-                    if !(firstObject is moveableObject) CheckCollision(firstObject, moveableObject);
+                    if (!(firstObject is moveableObject)) CheckCollision(firstObject, moveableObject);
                 }
                 foreach (IGameObject nonMoveableObject in gameObjects[1])
                 {
