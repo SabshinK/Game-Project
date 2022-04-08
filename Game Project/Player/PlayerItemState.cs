@@ -13,7 +13,7 @@ namespace Game_Project
         public PlayerItemState(Player player)
         {
             this.player = player;
-            if (player.FaceRight)
+            if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("useItemRight");
             } else

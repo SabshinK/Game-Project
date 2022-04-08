@@ -10,110 +10,79 @@ namespace Game_Project
 {
     class GameObjectManager
     {
-
-        //declared as a singleton
         private static GameObjectManager instance = new GameObjectManager();
         public static GameObjectManager Instance => instance;
 
-        private List<IEnemy> enemyList;
-        private List<IProjectile> projectileList;
-        private List<IItem> itemList;
-        private List<ITile> tileList;
-        public IPlayer player;
-
-        private object[] listArray;
-
-        private object[] playerAttributes;
-        private Vector2 location;
-        private bool direction;
-        private String animationName;
-
+        // List of lists containing the game objects, there should be two lists, one for moving objects and one for non moving
+        public List<List<IGameObject>> GameObjects { get; private set; }
 
         public GameObjectManager()
         {
-            listArray = new object[4];
-            enemyList = new List<IEnemy>();
-            projectileList = new List<IProjectile>();
-            itemList = new List<IItem>();
-            tileList = new List<ITile>();
-
-            location = new Vector2();
-            playerAttributes = new object[3];
-
-            playerAttributes[0] = location;
-            playerAttributes[1] = direction;
-            playerAttributes[2] = animationName;
-            //player = new Player(new UniversalParameterObject(playerAttributes));
-        }
-
-        // collision detection needs the lists
-        public object[] GetObjectLists()
-        {
-            listArray[0] = enemyList;
-            listArray[1] = projectileList;
-            listArray[2] = itemList;
-            listArray[3] = tileList;
-
-            return listArray;
+            Reset();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            player.Draw(spriteBatch);
-            foreach (ITile tile in tileList)
+            foreach (List<IGameObject> objectList in GameObjects)
             {
-                tile.Draw(spriteBatch);
+                foreach (IDrawable gameObject in objectList)
+                {
+                    gameObject.Draw(spriteBatch);
+                }
             }
-            foreach (IItem item in itemList)
-            {
-                item.Draw(spriteBatch);
-            }
-            foreach (IEnemy enemy in enemyList)
-            {
-                enemy.Draw(spriteBatch);
-            }
-            foreach (IProjectile projectile in projectileList)
-            {
-                projectile.Draw(spriteBatch);
-            }  
         }
 
         public void Update(GameTime gameTime)
         {
-            player.Update(gameTime);
-            foreach (IEnemy enemy in enemyList)
+            foreach (List<IGameObject> objectList in GameObjects)
             {
-                enemy.Update(gameTime);
-            }
-            foreach (IProjectile projectile in projectileList)
-            {
-                projectile.Update(gameTime);
+                foreach (IUpdateable gameObject in objectList)
+                {
+                    gameObject.Update(gameTime);
+                }
             }
         }
 
-        public void RegisterObject(Object T)
+        // Player should always be the first object of the second list but I don't want to make this assumption
+        public Player GetPlayer()
         {
-            if (T is IEnemy) enemyList.Add((IEnemy)T);
-            else if (T is IProjectile) projectileList.Add((IProjectile)T);
-            else if (T is IItem) itemList.Add((IItem)T);
-            else if (T is ITile) tileList.Add((ITile)T);
-            else if (T is IPlayer) player = T as IPlayer;
+            for (int i = 0; i < GameObjects[0].Count; i++)
+            {
+                if (GameObjects[0][i] is IPlayer)
+                    return (Player)GameObjects[0][i];
+            }
+            // Couldn't find it
+            return null;
         }
 
-        public void RemoveObject(IDrawable dead)
+        public void RegisterObject(IGameObject newObject)
+        {
+            //if (T is IEnemy) enemyList.Add((IEnemy)T);
+            //else if (T is IProjectile) projectileList.Add((IProjectile)T);
+            //else if (T is IItem) itemList.Add((IItem)T);
+            //else if (T is ITile) tileList.Add((ITile)T);
+            //else if (T is IPlayer) player = T as IPlayer;
+
+            // instead of this logic above, first check if the passed object is moveable, if so add it to the first list, if not add
+            // it to the second. There will always be two lists in the list of lists
+        }
+
+        public void RemoveObject(IGameObject deadObject)
         {
             // added casts to "dead" for each of these remove calls.
-            if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
-            else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
-            else if (dead is IItem) itemList.Remove((IItem)dead);
+            //if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
+            //else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
+            //else if (dead is IItem) itemList.Remove((IItem)dead);
+
+            // instead of this logic above, first check if the passed object is moveable, if so iterate through the first list, if
+            // not iterate through the second. There will always be two lists in the list of lists
         }
 
         public void Reset()
         {
-            enemyList = new List<IEnemy>();
-            projectileList = new List<IProjectile>();
-            itemList = new List<IItem>();
-            tileList = new List<ITile>();
+            GameObjects = new List<List<IGameObject>>();
+            GameObjects.Add(new List<IGameObject>()); // Moveable list
+            GameObjects.Add(new List<IGameObject>()); // Non-Moveable list
         }
     }
 }

@@ -12,30 +12,27 @@ namespace Game_Project
         public IProjectile projectile;
         public ISprite sprite;
 
-        //Physics related variables
         public Physics physics;
 
-        private int health;
+        public int Health { get; private set; }
 
-        private Rectangle collideRectangle;
-
-        private string animationToCreate;
         public Vector2 location;
         public Vector2 Position => location;
-        public bool FaceRight { get; private set; }
+        public Vector2 Size => sprite.Size;
+
+        public bool FacingRight { get; private set; }
 
         // Constructor
         public Player(UniversalParameterObject parameters)
         {
             state = new IdleState(this);
-            animationToCreate = "idleRight";
-            sprite = SpriteFactory.Instance.CreateSprite(animationToCreate);
+            sprite = SpriteFactory.Instance.CreateSprite("idleRight");
 
             location = parameters.Position;
         
-            health = 3;
+            Health = 3;
 
-            FaceRight = true;
+            FacingRight = true;
 
             physics = new Physics();
         }
@@ -48,10 +45,10 @@ namespace Game_Project
         
         public void StartMoving(bool faceRight)
         {
-            if (FaceRight != faceRight)
+            if (FacingRight != faceRight)
             {
-                FaceRight = faceRight;
-                if (FaceRight)
+                FacingRight = faceRight;
+                if (FacingRight)
                     sprite = SpriteFactory.Instance.CreateSprite("movingRight");
                 else
                     sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
@@ -61,7 +58,7 @@ namespace Game_Project
 
         public void DamageTaken()
         {
-            health--;
+            Health--;
             state.TakeDamage();
         } 
         public void Attack()
@@ -92,7 +89,7 @@ namespace Game_Project
         {
             object[] parameters = new object[3];
             parameters[0] = new Vector2((int)physics.displacement.X, (int)physics.velocity.X);
-            parameters[1] = FaceRight;
+            parameters[1] = FacingRight;
 
             switch(code)
             {

@@ -12,7 +12,7 @@ namespace Game_Project
         public IdleState(Player manager)
         {
             player = manager;
-            if (player.FaceRight)
+            if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             } else

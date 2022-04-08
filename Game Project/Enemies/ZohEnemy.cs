@@ -10,10 +10,16 @@ namespace Game_Project
     public class ZohEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
+        // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
+        // the state machine and then this bool just gets the value from the state machine
+        public bool FacingRight { get; private set; }
+
         ZohStateMachine zoh;
         ISprite zohSprite;
+
         public Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 Size => zohSprite.Size;
 
         int lengthOfAction = 0;
         Physics physics;
