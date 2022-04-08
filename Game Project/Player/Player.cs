@@ -141,6 +141,9 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            //the player is always falling
+            location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
+
             state.Update(gameTime);
         }
     }

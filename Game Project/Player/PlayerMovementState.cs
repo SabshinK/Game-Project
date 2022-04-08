@@ -84,9 +84,10 @@ namespace Game_Project
                 player.physics.drag = player.physics.appliedForce.X;
             }
 
+            //still need to implement slowing down and stopping
             if (player.physics.velocity.X == 0)
             {
-                BackToIdle();
+                //BackToIdle();
             }
 
             //vertical movement
@@ -101,11 +102,7 @@ namespace Game_Project
                     player.physics.falling = true;
                     player.physics.appliedForce.Y = 0;
                 }
-            } else //the player is always falling
-            {
-                player.physics.acceleration.Y = player.physics.gravity;
-                player.location.Y += (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
-            }
+            } 
 
             //projectiles
             if (player.projectile != null)
