@@ -37,54 +37,54 @@ namespace Game_Project
 
         }
 
-        //physics velocity variable is 5
-        public static int physVelocity
+        //physics velocity variable is 10
+        public static int PhysVelocity
         {
             get { magicNums = setMagicNums();  return magicNums[0]; }
             set { magicNums[0] = value; }
         }
 
         // Health always seems to deteriorate for enemies by 5.
-        public static int healthDamage
+        public static int HealthDamage
         {
             get { magicNums = setMagicNums(); return magicNums[1]; }
             set { magicNums[1] = value; }
         }
 
         // This is for time elapsed in the damageState Variable
-        public static int damageState
+        public static int DamageState
         {
             get { magicNums = setMagicNums(); return magicNums[2]; }
             set { magicNums[2] = value; }
         }
 
         // holds the time for attacking. About 0.15
-        public static int attackTime
+        public static int AttackTime
         {
             get { magicNums = setMagicNums(); return magicNums[3]; }
             set { magicNums[3] = value; }
         }
 
         // holds the jump time for player which is about 0.5
-        public static int playerTime
+        public static int PlayerTime
         {
             get { magicNums = setMagicNums(); return magicNums[4]; }
             set { magicNums[4] = value; }
         }
-
-        // collisionDetection moving object size.
-        public static int moveObjectSize
+        
+        public static int GravityConst
         {
-            get { magicNums = setMagicNums(); return magicNums[5]; }
+            get { magicNums = setMagicNums();  return magicNums[5]; }
             set { magicNums[5] = value; }
         }
-
-        // collisionDetection tile size length
-        public static int tileSize
+        
+        public static int HorizontalVel
         {
-            get { magicNums = setMagicNums(); return magicNums[6]; }
+            get { magicNums = setMagicNums();  return magicNums[6]; }
             set { magicNums[6] = value; }
         }
+
+        
 
 
 

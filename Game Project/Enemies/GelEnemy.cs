@@ -10,10 +10,17 @@ namespace Game_Project
     public class GelEnemy : IEnemy
     {
         Tuple<actions, direction> stateTuple;
+        // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
+        // the state machine and then this bool just gets the value from the state machine
+        public bool FacingRight { get; private set; }
+
         GelStateMachine gel;
         ISprite gelSprite;
+
         public Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 Size => gelSprite.Size;
+
         int lengthOfAction = 0;
         Physics physics;
         double gelAccel = 1;
@@ -71,7 +78,7 @@ namespace Game_Project
                     break;
                 case actions.falling:
                     locationVector.Y++;
-                    physics.VerticalChange(true, gameTime, -5, 2);
+                    physics.VerticalChange(gameTime, 2);
                     gelSprite.Update();
                     break;
                 case actions.moving:

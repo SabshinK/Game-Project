@@ -15,7 +15,8 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.Move(true);
+            player.physics.appliedForce.X = 2;
+            player.StartMoving(true);
         }
     }
 }

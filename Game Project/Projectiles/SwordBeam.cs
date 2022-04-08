@@ -9,18 +9,20 @@ namespace Game_Project
     class SwordBeam : IProjectile
     {
         private Vector2 position;
-        private SpriteBatch spriteBatch;
+        public Vector2 Position => position;
+        public Vector2 Size => sprite.Size;
+
         private ISprite sprite;
         private int moveFactor;
-        public bool userDirection;
-        public Vector2 Position => position;
+
+        public bool FacingRight { get; private set; }
 
         //constructor
         public SwordBeam(UniversalParameterObject parameters)
         {
             position = parameters.Position;
             moveFactor = 16;
-            userDirection = parameters.Direction;
+            FacingRight = parameters.FacingRight;
 
         }
 
@@ -33,7 +35,7 @@ namespace Game_Project
         {
             
            //if player is facing right
-            if (userDirection)
+            if (FacingRight)
             {
                 //get the sprite for sword beam
                 sprite = SpriteFactory.Instance.CreateSprite("swordBeamRight");

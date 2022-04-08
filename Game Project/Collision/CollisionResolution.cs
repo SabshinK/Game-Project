@@ -2,17 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Microsoft.Xna.Framework;
 using static Game_Project.CollisionDetection;
 
 namespace Game_Project
 {
     public class CollisionResolution
     {
+        private static CollisionResolution instance = new CollisionResolution();
+        public static CollisionResolution Instance => instance;
+
         private Dictionary<Tuple<Type, Type, CollideDirection>, Tuple<string, string>> directionalCollisions = new Dictionary<Tuple<Type, Type, CollideDirection>, Tuple<string, string>>();
         private Dictionary<Tuple<Type, Type>, Tuple<string, string>> directionlessCollisions = new Dictionary<Tuple<Type, Type>, Tuple<string, string>>();
 
-        public void ResolveCollision(ICollideable object1, ICollideable object2, CollideDirection direction, Rectangle firstRectangle, Rectangle secondRectangle)
+        public void ResolveCollision(IGameObject object1, IGameObject object2, CollideDirection direction, Rectangle collision)
         {
             string commandObject1 = null;
             string commandObject2 = null;
@@ -34,23 +36,45 @@ namespace Game_Project
                 {
                     Type commandType1 = Type.GetType("Game_Project." + commandObject1);
                     Type[] types1 = { object1.GetType() };
-                    object[] parameters1 = { object1 };
-
                     ConstructorInfo constructor1 = commandType1.GetConstructor(types1);
-                    ICommand command = constructor1.Invoke(parameters1) as ICommand;
+
+                    ParameterInfo[] paramInfos = constructor1.GetParameters();
+                    object[] parameters;
+                    if (paramInfos.Length > 1)
+                        parameters = new object[3] { object1, collision, (int)direction };
+                    else
+                        parameters = new object[1] { object1 };
+
+                    ICommand command = constructor1.Invoke(parameters) as ICommand;
                     command.Execute();
                 }
                 if (commandObject2 != null)
                 {
                     Type commandType2 = Type.GetType("Game_Project." + commandObject2);
                     Type[] types2 = { object2.GetType() };
-                    object[] parameters2 = { object2 };
-
                     ConstructorInfo constructor2 = commandType2.GetConstructor(types2);
-                    ICommand command = constructor2.Invoke(parameters2) as ICommand;
+
+                    ParameterInfo[] paramInfos = constructor2.GetParameters();
+                    object[] parameters;
+                    if (paramInfos.Length > 1)
+                        parameters = new object[3] { object2, collision, (int)direction };
+                    else
+                        parameters = new object[1] { object2 };
+
+                    ICommand command = constructor2.Invoke(parameters) as ICommand;
                     command.Execute();
                 }
             }              
+        }
+
+        public void RegisterDirectionalCollision(Tuple<Type, Type, CollideDirection> key, Tuple<string, string> value)
+        {
+            directionalCollisions.Add(key, value);
+        }
+
+        public void RegisterDirectionlessCollision(Tuple<Type, Type> key, Tuple<string, string> value)
+        {
+            directionlessCollisions.Add(key, value);
         }
 
         public void LoadCollisionDictionary()
@@ -60,7 +84,7 @@ namespace Game_Project
              * The player would fall back in the opposite direction thaat they were facing. 
              * For animators: For FallBackLeft, the player would be facing right, but be falling back left.
              */
-
+          
             // player colliding with the enemies
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(BatEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyChangeDirectionCommand"));
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(BatEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "EnemyDamageCommand"));
@@ -116,6 +140,7 @@ namespace Game_Project
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GoriyaEnemy), typeof(Boomerang)), new Tuple<string, string>("EnemyDamageCommand", "BoomerangChangeDirectionCommand"));
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(StalfosEnemy), typeof(Boomerang)), new Tuple<string, string>("EnemyDamageCommand", "BoomerangChangeDirectionCommand"));
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(ZohEnemy), typeof(Boomerang)), new Tuple<string, string>("EnemyDamageCommand", "BoomerangChangeDirectionCommand"));
+
         }
     }
 }
