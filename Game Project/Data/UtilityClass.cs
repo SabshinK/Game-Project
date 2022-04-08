@@ -21,7 +21,7 @@ namespace Game_Project
         //loop through the file to populate magicNums to get all magic numbers in the code
         public static int[] setMagicNums()
         {
-            magicNums = new int[7];
+            magicNums = new int[11];
             
             string filePath = @"Game Project/Data/MagicNumbers.txt"; // need to edit file path
 
@@ -110,6 +110,13 @@ namespace Game_Project
         {
             get { magicNums = setMagicNums();  return magicNums[9]; }
             set { magicNums[9] = value; }
+        }
+        
+        //holds the numItems for item scroller
+        public static int NumItems
+        {
+            get { magicNums = setMagicNums();  return magicNums[10]; }
+            set { magicNums[10] = value; }
         }
 
         
