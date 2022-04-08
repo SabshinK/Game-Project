@@ -1,3 +1,27 @@
+---- SPRINT FOUR ----
+
+READABILTY REVIEW:
+
+Author of the code review: Aadya Jain
+Date of the code review: 04/08/22
+Sprint number: 4
+Name of the .cs file being reviewed: Bomb.cs
+Author of the .cs file being reviewed: Sebastian King
+Number of minutes taken to complete the review: 20
+The code is very easy to read with consistent variable and function names. While there is a magic number for the bomb's lifespan, it can be fixed with the UtilityClass. The code also has many comments which makes it easy to understand the code. 
+MAINTAINABILITY:
+
+Author of the code review: Aadya Jain
+Date of the code review: 04/08/22
+Sprint number: 4
+Name of the .cs file being reviewed: ItemScroller.cs
+Author of the .cs file being reviewed: Anooj Deshpande
+Number of minutes taken to complete Review: 30
+Specific comments on code quality
+One change I would make: 
+The author of the code makes good design choices for maintainability. Once change that I would make would be to create a "FeedItemList" that is called by the public constructor to populate the item list with the items. Currently, the code adds the items in the public constructor, but if we add more items, then it would be a little hard to manage. If there is a function that adds all the items for us, it wouldn't matter how many items we had, it would be be better for the public constructor to do one job and modularize.
+
+
 ---- SPRINT THREE ----
 
 READABILTY REVIEW:
