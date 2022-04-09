@@ -23,6 +23,7 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
+        float accel = 1;
         
         public ZohEnemy(UniversalParameterObject parameters)
         {
@@ -46,13 +47,14 @@ namespace Game_Project
             zoh.TakeDamage();
         }
 
-        public void Fall()
-        {
-            zoh.Fall();
-        }
         public void Collide()
         {
             //TODO
+        }
+
+        public void Collide(Rectangle collision, int direction)
+        {
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -61,13 +63,16 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            locationVector.Y += verticalDis;
 
             stateTuple = zoh.getState();
 
             switch (stateTuple.Item1)
             {
                 case actions.dead:
-                    //GameObjectManager.remove(this);
+                    GameObjectManager.Instance.RemoveObject(this);
                     zohSprite = null;
                     break;
                 case actions.falling:
@@ -76,13 +81,16 @@ namespace Game_Project
                     zohSprite.Update();
                     break;
                 case actions.moving:
+
+                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
+
                     if (stateTuple.Item2.Equals(direction.left))
                     {
-                        locationVector.X--;
+                        locationVector.X -= displacement;
                     }
                     else
                     {
-                        locationVector.X++;
+                        locationVector.X += displacement;
                     }
                     zohSprite.Update();
 

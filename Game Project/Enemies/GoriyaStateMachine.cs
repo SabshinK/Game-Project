@@ -42,11 +42,6 @@ namespace Game_Project
             goriyaAction = actions.attacking;
         }
 
-        public void Fall()
-        {
-            goriyaAction = actions.falling;
-        }
-
         public Tuple<actions, direction> getState()
         {
 

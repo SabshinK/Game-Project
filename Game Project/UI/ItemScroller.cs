@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,18 +12,20 @@ namespace Game_Project
         private int numItems = 6;
         private int itemId;
         private string currItem;
+        private ISprite sprite;
+        public Vector2 Position { get; set; }
         public ItemScroller()
         {
             itemId = 0;
             items = new List<string>(numItems);
-            items.Add("Guitar");
-            items.Add("Accordian");
-            items.Add("Flute");
-            items.Add("Drum");
-            items.Add("Harp");
-            items.Add("Triangle");
+            items.Add("guitarGeneric");
+            items.Add("accordianGeneric");
+            items.Add("fluteGeneric");
+            items.Add("drumGeneric");
+            items.Add("harpGeneric");
+            items.Add("triangleGeneric");
             currItem = items[itemId];
-
+            sprite = SpriteFactory.Instance.CreateSprite(currItem);
         }
 
         public void scrollRight()
@@ -30,6 +33,8 @@ namespace Game_Project
            
             itemId = (items.IndexOf(currItem) + 1)%numItems;
             currItem = items[itemId];
+            sprite = SpriteFactory.Instance.CreateSprite(currItem);
+
         }
 
         public void scrollLeft()
@@ -43,10 +48,12 @@ namespace Game_Project
                 itemId = items.IndexOf(currItem) - 1;
             }
             currItem = items[itemId];
+            sprite = SpriteFactory.Instance.CreateSprite(currItem);
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            //draw images of the items
+            sprite.Draw(spriteBatch, new Vector2(Position.X + 100, Position.Y));
         }
     }
 }

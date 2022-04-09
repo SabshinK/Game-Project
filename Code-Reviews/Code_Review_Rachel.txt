@@ -1,3 +1,40 @@
+SPRINT 4
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    4/9/2022
+Sprint Number:    4
+Name of File:     GameObjectManager.cs
+Author of File:    Sebastian King
+
+Code Quality Comments:
+- Variable names are clear. It makes it easier to understand what the code is doing and debug.
+- There are some comments that are potentially outdated. Be sure to delete resolved comments and comments that are no longer relevant.
+- Each function appears to be performing the appropriate tasks for it. No one method has too much responsibility and there are no unnecessary methods in my opinion.
+- It makes sense to me, so that’s good.
+- This class uses interfaces like IGameObject and IMoveable to sort the lists and manipulate them. This will help extend the code’s lifespan because it is able to encapsulate all the objects with these interfaces in useful and efficient ways.
+- The class has “safety measures” in place. It is obvious that some defensive programming took place as there are conditions which manipulate the code in ways that prevent bugs. In Update(), a queue is used to add or remove objects that were not able to be manipulated within the lists because an iteration was taking place.
+- The code is pretty clean. The spacing makes it easier to read and there aren’t large blocks of code to sort through. 
+
+Hypothetical Change(s) to to the Game that Are/Are Not Supported by This Code:
+	The team is considering splitting the level up into columns, and each object would belong to a specific column. This will change the format and structure of the object lists. This will help us build levels and assess collisions, but it would require a lot of refactoring of the GameObjectManager as well as other objects. In the future, the lists may have to be changed as well as the logic for registering and removing objects, taking into account that they are in a specific column.
+
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    4/9/2022
+Sprint Number:    4
+Name of File:     CollisionDetection.cs
+Author of File:    Maria Stein
+Minutes It Took To Complete Review:     25 
+
+Comments On Readability: 
+- Variable names often start with the same sequence of letters. For example, there are two variables that are “rectangleObject1” and “rectangleObject2”. This makes it hard to distinguish between these variables at a glance, making it take longer to understand the code. 
+- Maybe try something like “firstRectangle” and “secondRectangle” or another appropriate choice for this code.
+The variables are well sectioned when declared. I understand which variables serve similar purposes, and which ones are needed for certain functionalities.
+- I understand the reason, but it may be unclear to the reader as to why the CollisionDetection constructor is empty. Maybe adding a comment inside that method would help alleviate some confusion?
+- The comment just inside CheckCollision is a bit wordy and hard to understand. It’s also a block of text, which is difficult to read. Try spacing it out and simplifying it down to what you need to say.
+- The comments after the first one inside CheckCollision are all really good and help the reader to understand what’s going on. (Describing what each collision looks like to the player is something I found helpful.
+
+Overall, I found this code approachable. There were some readability issues with variable names, and structure, but I was able to interpret what was going on here decently fast. The comments in CheckCollision helped a lot, and the spacing out of the variables by functionality made interpreting them much easier.
+
+
 SPRINT 3
 
 Author of Code Review:    Rachel Watters

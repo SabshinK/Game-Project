@@ -24,6 +24,7 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
+        float accel = 1;
         
         public StalfosEnemy(UniversalParameterObject parameters)
         {
@@ -31,7 +32,6 @@ namespace Game_Project
             locationVector = parameters.Position; //game will state where it wants the enemy when it is created
             stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
             physics = new Physics();
-            //GameObjectManager.add(this);
         }
         public void ChangeDirection()
         {
@@ -53,44 +53,60 @@ namespace Game_Project
             stalfosSprite.Draw(spriteBatch, locationVector);
         }
 
-        public void Fall()
-        {
-            stalfos.Fall();
-            //physics.VerticalChange(true);
-        }
-
         public void Collide()
         {
             // TODO
         }
 
+        public void Collide(Rectangle collision, int direction)
+        {
+
+        }
+
         public void Update(GameTime gameTime)
         {
 
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            locationVector.Y += verticalDis;
+
             stateTuple = stalfos.getState();
 
-            if (stateTuple.Item1.Equals(actions.dead))
+            switch (stateTuple.Item1)
             {
-                //GameObjectManager.remove(this);
+                case actions.dead:
+                    GameObjectManager.Instance.RemoveObject(this);
+                    stalfosSprite = null;
+                    break;
+                case actions.falling:
+                    locationVector.Y++;
+                    physics.VerticalChange(gameTime, 2);
+                    stalfosSprite.Update();
+                    break;
+                case actions.moving:
+
+                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
+                    if (stateTuple.Item2.Equals(direction.left))
+                    {
+                        locationVector.X -= displacement;
+                    }
+                    else
+                    {
+                        locationVector.X += displacement;
+                    }
+                    stalfosSprite.Update();
+
+                    if (lengthOfAction > new Random().Next(100))
+                    {
+                        ChangeDirection();
+                        lengthOfAction = 0;
+                    }
+                    break;
+
+                default:
+                    break;
             }
-            else { 
-
-                if (lengthOfAction > new Random().Next(50))
-                {
-                    ChangeDirection();
-                    lengthOfAction = 0;
-                }
-
-                //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-                if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.left)){
-                    locationVector.X--;
-                }else if(stateTuple.Item1.Equals(actions.moving) && stateTuple.Item2.Equals(direction.right)){
-                    locationVector.X++;
-                }
-
-                stalfosSprite.Update();
-                lengthOfAction++;
-               }
+            lengthOfAction++;
         }
 
 
