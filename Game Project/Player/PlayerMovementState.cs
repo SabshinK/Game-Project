@@ -60,9 +60,8 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //horizontal movement
-                player.physics.acceleration.X = player.physics.appliedForce.X - player.physics.drag;
 
-                int displacement = (int)player.physics.HorizontalChange(gameTime, player.physics.acceleration.X);
+                int displacement = (int)player.physics.HorizontalChange(gameTime);
 
                 if (!player.FacingRight)
                 {
@@ -97,14 +96,7 @@ namespace Game_Project
 
                 player.physics.acceleration.Y = player.physics.appliedForce.Y - player.physics.gravity;
 
-                if (!player.physics.falling)
-                {
-                    player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
-                } 
-                else
-                {
-                    player.location.Y += (int)player.physics.VerticalChange(gameTime, player.physics.gravity);
-                }
+                player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
 
                 if (player.physics.velocity.Y >= 0)
                 {
