@@ -54,3 +54,28 @@ Minutes Taken: 10
 Code Readability Comments:
 	The thing I notice immediately is the lack of full uppercase names for the constant variables. I also see magic numbers, yet the comments associated with the lines explain them. Other than that, the variable names are incredibly
 	straightforward and make reading the vast amount of physics formulas rather intuitive. More comments on the VerticalChange() method may also shed some light on what all the formulas practically mean. 
+
+
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    4/9/2022
+Sprint Number:    4
+Name of File:     ItemScroller.cs
+Author of File:    Anooj Deshpande
+
+Code Quality Comments: 
+	This seems to be a pretty run-of-the-mill class that allows the player to select their items, drawing the currently selected item within the UI. My only criticism is the magic number within the draw command, which tells the
+	game where to draw the object within the UI. Figured out by testing that this is where it is meant to go, but tripped me up a bit when I first saw it. Other than that, the other "magic numbers" on screen are only to grab the correct spot within 
+	the list of items. On the other hand, I can't tell if this allows for a player to pick up an item and add it to the list, it looks like currently that is not the case. The scroller has all items right from the get go, and cannot help in the case
+	of a player not having all items.
+
+
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    4/9/2022
+Sprint Number:    4
+Name of File:     UtilityClass.cs
+Author of File:    Aadya Jain
+Minutes Taken: 10
+
+Code Readability Comments:
+	This might be one of the most readable pieces of code I've ever seen. In terms of explaining the magic numbers that are being added, this class does it right. Even the conversion to an integer is explained within the comments, and it feels like I can
+	follow it line for line with what it is doing. One thing that might be nice is an explanation at the top that explains what the utility class does. We have that info on our end, but readers of the code do not know Very short review, but it's also quite a short class.
