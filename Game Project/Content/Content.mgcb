@@ -16,7 +16,7 @@
 #begin ClarySage.png
 /importer:TextureImporter
 /processor:TextureProcessor
-/processorParam:ColorKeyColor=255,255,255,255
+/processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
@@ -25,7 +25,7 @@
 /processorParam:TextureFormat=Color
 /build:ClarySage.png
 
-#begin HyperLightWalkingRight.png
+#begin Items.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +35,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:HyperLightWalkingRight.png
+/build:Items.png
 
 #begin TempBosses.png
 /importer:TextureImporter

@@ -50,11 +50,6 @@ namespace Game_Project
             goriya.TakeDamage();
         }
 
-        public void Fall()
-        {
-            // TODO 
-        }
-
         public void Collide()
         {
             //will not be used, definitely a dead code code smell, but need to talk to team members about if deleting this is okay
@@ -73,7 +68,11 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            if(weapon != null && !weapon.finished)
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            locationVector.Y += verticalDis;
+
+            if (weapon != null && !weapon.finished)
             {
                 weapon.Update(gameTime);
             }
@@ -95,20 +94,20 @@ namespace Game_Project
             stateTuple = goriya.getState();
 
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            if(stateTuple.Item1.Equals(actions.moving)){
+            if (stateTuple.Item1.Equals(actions.moving)) {
 
                 int displacement = (int)physics.HorizontalChange(gameTime, acceleration);
 
-                if (stateTuple.Item2.Equals(direction.right)){
+                if (stateTuple.Item2.Equals(direction.right)) {
                     currentGoriyaSprite = goriyaSpriteRight;
                     locationVector.X += displacement;
                 }
-                else{
+                else {
                     currentGoriyaSprite = goriyaSpriteLeft;
                     locationVector.X -= displacement;
                 }
             }
-            else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0){
+            else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0) {
                 if (stateTuple.Item1.Equals(direction.right))
                 {
                     Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -125,7 +124,13 @@ namespace Game_Project
                     currentGoriyaSprite = goriyaSpriteLeft;
                     weapon = new Boomerang(new UniversalParameterObject(parameters));
                 }
-                
+
+            }
+            else if (stateTuple.Item1.Equals(actions.dead))
+            {
+                GameObjectManager.Instance.RemoveObject(this);
+                goriyaSpriteLeft = null;
+                goriyaSpriteRight = null;
             }
             currentGoriyaSprite.Update();
             lengthOfAction++;

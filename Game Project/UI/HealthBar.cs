@@ -10,6 +10,7 @@ namespace Game_Project
     {
         public Vector2 Position { get; set; }
 
+        // Not sure if I like the coupling here
         private IPlayer player;
         private int Health => player.Health;
 
@@ -17,9 +18,9 @@ namespace Game_Project
         // If the ISprite is already a full heart it doesn't need to be set to a new one, so this has to be checked
         private List<Tuple<string, ISprite>> hearts;
 
-        public HealthBar(IPlayer player)
+        public HealthBar()
         {
-            this.player = player;
+            this.player = GameObjectManager.Instance.GetPlayer();
 
             for (int i = 0; i < Health / 2; i++) // Each heart is two health
             {

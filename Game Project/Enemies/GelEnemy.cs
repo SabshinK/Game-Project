@@ -55,23 +55,22 @@ namespace Game_Project
 
         public void Collide()
         {
-            //TODO
-        }
-
-        public void Fall()
-        {
-            gel.Fall();
+            //Used to keep track of this object as a collideable object
         }
 
         public void Update(GameTime gameTime)
         {
+
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            locationVector.Y += verticalDis;
 
             stateTuple = gel.getState();
 
             switch (stateTuple.Item1)
             {
                 case actions.dead:
-                    //GameObjectManager.remove(this);
+                    GameObjectManager.Instance.RemoveObject(this);
                     gelSprite = null;
                     break;
                 case actions.falling:

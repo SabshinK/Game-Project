@@ -1,4 +1,36 @@
 Author of Code Review:	Maria Stein
+Date of Code Review: 4/8/2022
+Sprint Number:			4
+Name of File:			GelEnemy.cs
+Author of File:			AJ Waizmann
+
+Comments On Code Quality:
+*Note: this file was created for Sprint2, but significant changes were made since.
+I personally would declare all variables in constructor. I also would make sure to include “public” or “private” for each of
+them. I don’t want to make a statement about whether or not it’s good or bad but I’m uncertain about the way that Update manages
+the different types of enemy movement, it seems like since it’s the same as the way that the other enemies move it probably 
+make sense to instead call a more general function that could work for all of them instead of using duplicated code.
+In general comments would be helpful for readability, but I think the code overall is fairly well organized and easy to read.
+
+
+Author of Code Review:	Maria Stein
+Date of Code Review: 4/8/2022
+Sprint Number:			4
+Name of File:			CollisionResolution.cs
+Author of File: Rachel Watters
+Minutes It Took To Complete Review:  25
+
+Comments on Code Readability:
+*Note: this file was created for Sprint3, but significant changes were made since.
+I would move strings to be declared inside constructor (not sure if this is a real thing or a rule I just made up for myself?)
+I think the CollisionDictionary is good because it helps the code be much shorter and more concise than it could be and I like
+the comments that were added, I think they’re appropriate and helpful.
+I think ResolveCollision might benefit from some comments. I might be misunderstanding the logic here but I’m not sure I
+understand why there needs to be duplicated code in ResolveCollision. Also I think ResolveCollision is kind of long and
+could be split into a few smaller functions.
+
+
+Author of Code Review:	Maria Stein
 Date of Code Review:	3/11/2022
 Sprint Number:			3
 Name of File:			PlayerMoveState.cs
