@@ -57,37 +57,31 @@ namespace Game_Project
 
         public void RegisterObject(IGameObject newObject)
         {
-            //if (T is IEnemy) enemyList.Add((IEnemy)T);
-            //else if (T is IProjectile) projectileList.Add((IProjectile)T);
-            //else if (T is IItem) itemList.Add((IItem)T);
-            //else if (T is ITile) tileList.Add((ITile)T);
-            //else if (T is IPlayer) player = T as IPlayer;
-
             // instead of this logic above, first check if the passed object is moveable, if so add it to the first list, if not add
             // it to the second. There will always be two lists in the list of lists
             
-            if (newObject is IPlayer || newObject is IEnemy || newObject is IProjectile) {
+            if (newObject is IPlayer || newObject is IEnemy || newObject is IProjectile) 
+            {
                 GameObjects[0].Add(newObject); //This will add to the first list which has the moveable items. 
-            } else {
+            } 
+            else 
+            {
                 GameObjects[1].Add(newObject); //This will add the non-moveable items such as tile and item to the second list.
             }
         }
 
         public void RemoveObject(IGameObject deadObject)
         {
-            // added casts to "dead" for each of these remove calls.
-            //if (dead is IEnemy) enemyList.Remove((IEnemy)dead);
-            //else if (dead is IProjectile) projectileList.Remove((IProjectile)dead);
-            //else if (dead is IItem) itemList.Remove((IItem)dead);
-
             // instead of this logic above, first check if the passed object is moveable, if so iterate through the first list, if
             // not iterate through the second. There will always be two lists in the list of lists
-            if (deadObject is IPlayer || deadObject is IEnemy || deadObject is IProjectile) {
+            if (deadObject is IPlayer || deadObject is IEnemy || deadObject is IProjectile) 
+            {
                 GameObjects[0].Remove(deadObject); //This will remove from the first list which has the moveable items. 
-            } else {
+            } 
+            else 
+            {
                 GameObjects[1].Remove(deadObject); //This will remove the non-moveable item such as tile and item to the second list.
-            }
-            
+            }  
         }
 
         public void Reset()
