@@ -103,13 +103,12 @@ namespace Game_Project
                 } 
                 else
                 {
-                    player.location.Y += (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+                    player.location.Y += (int)player.physics.VerticalChange(gameTime, player.physics.gravity);
                 }
 
                 if (player.physics.velocity.Y >= 0)
                 {
                     player.physics.falling = true;
-                    player.physics.appliedForce.Y = 0;
                 }
             }
 
