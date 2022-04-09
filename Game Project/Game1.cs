@@ -61,10 +61,9 @@ namespace Game_Project
 
             LevelLoader.Instance.LoadFile("sprites");
             LevelLoader.Instance.LoadFile("forest");
+            LevelLoader.Instance.LoadFile("collision");
 
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
-
-            collisionDetection.GetCollisionLists();
         }
 
         /// <summary>

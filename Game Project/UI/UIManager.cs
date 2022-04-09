@@ -16,6 +16,11 @@ namespace Game_Project
         private ItemScroller itemScroller;
         private PauseMenu menu;
 
+        public UIManager(Camera camera)
+        {
+            this.camera = camera;
+        }
+
         public void Update(GameTime gameTime)
         {
             // change this to a list of UI objects, maybe make an interface?
