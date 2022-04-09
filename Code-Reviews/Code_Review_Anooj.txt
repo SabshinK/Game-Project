@@ -1,3 +1,28 @@
+SPRINT 4:
+
+Readability-
+Author of the code review: Anooj Deshpande
+Date of the code review: 9 April 2022
+Sprint number: Sprint 4
+Name of the .cs file being reviewed: HealthBar.cs
+Author of the .cs file being reviewed: Sebastian King
+Number of minutes taken to complete the review: 15 minutes
+Specific comments on what is readable and what is not:
+- There is a decent amount of code, but it is quite readable.
+- There are some comments on the functionality of some of the bits of code.
+- The function of a variable or method is easy to understand from their names.
+
+Code Quality-
+Author of the code review: Anooj Deshpande
+Date of the code review: 9 April 2022
+Sprint number: Sprint 4
+Name of the .cs file being reviewed: UtilityClass.cs
+Author of the .cs file being reviewed: Aadya Jain
+Specific comments on code quality:
+- Each function is concise and has only about 2 lines of code.
+- The magic numbers are being read from a txt file, which and converted to int, which helps to store the numbers better
+- Seems to be the one of the simplest methods to do the job.
+
 SPRINT 3:
 
 Readability-
