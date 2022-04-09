@@ -35,6 +35,9 @@ namespace Game_Project
             FacingRight = true;
 
             physics = new Physics();
+
+            physics.appliedForce.X = 0;
+            physics.appliedForce.Y = 0;
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
@@ -138,6 +141,9 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            //the player is always falling
+            location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
+
             state.Update(gameTime);
         }
     }

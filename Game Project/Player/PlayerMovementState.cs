@@ -9,7 +9,7 @@ namespace Game_Project
     {
         private Player player;
 
-        public PlayerMovementState(Player manager, float forceX, float forceY)
+        public PlayerMovementState(Player manager)
         {
             player = manager;
 
@@ -23,9 +23,6 @@ namespace Game_Project
             player.physics.acceleration.Y = 0;
             player.physics.velocity.Y = 0;
             player.physics.displacement.Y = 5;
-
-            player.physics.appliedForce.X = forceX;
-            player.physics.appliedForce.Y = forceY;
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FacingRight)
@@ -63,48 +60,53 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //horizontal movement
-            player.physics.acceleration.X = player.physics.appliedForce.X = player.physics.drag;
+                player.physics.acceleration.X = player.physics.appliedForce.X = player.physics.drag;
 
-            int displacement = (int)player.physics.HorizontalChange(gameTime, player.physics.acceleration.X);
+                int displacement = (int)player.physics.HorizontalChange(gameTime, player.physics.acceleration.X);
 
-            if (!player.FacingRight)
-            {
-                player.location.X -= displacement;
-            } 
-            else
-            {
-                player.location.X += displacement;
-            }
+                if (!player.FacingRight)
+                {
+                    player.location.X -= displacement;
+                }
+                else
+                {
+                    player.location.X += displacement;
+                }
 
-            if (player.physics.drag < player.physics.appliedForce.X)
-            {
-                player.physics.drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            } else
-            {
-                player.physics.drag = player.physics.appliedForce.X;
-            }
-
-            if (player.physics.velocity.X == 0)
-            {
-                BackToIdle();
-            }
+                if (player.physics.drag < player.physics.appliedForce.X)
+                {
+                    player.physics.drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    player.physics.drag = player.physics.appliedForce.X;
+                }
 
             //vertical movement
             if (player.physics.appliedForce.Y > 0)
             {
+                player.physics.falling = false;
                 player.physics.acceleration.Y = player.physics.appliedForce.Y - player.physics.gravity;
 
-                player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+                if (!player.physics.falling)
+                {
+                    player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+                } else
+                {
+                    player.location.Y += (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+                }
 
                 if (player.physics.velocity.Y >= 0)
                 {
                     player.physics.falling = true;
                     player.physics.appliedForce.Y = 0;
                 }
-            } else //the player is always falling
+            }
+
+            //go back to the idle state when movement is complete
+            if (player.physics.velocity.X <= 0 || (player.physics.falling && player.physics.velocity.Y <= 0))
             {
-                player.physics.acceleration.Y = player.physics.gravity;
-                player.location.Y += (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+                BackToIdle();
             }
 
             //projectiles
