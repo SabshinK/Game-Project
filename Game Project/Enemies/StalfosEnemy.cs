@@ -58,6 +58,11 @@ namespace Game_Project
             // TODO
         }
 
+        public void Collide(Rectangle collision, int direction)
+        {
+
+        }
+
         public void Update(GameTime gameTime)
         {
 
