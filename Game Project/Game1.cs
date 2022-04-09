@@ -21,6 +21,9 @@ namespace Game_Project
         public bool displayInventory = false;
         private ItemScroller scroller;
         private PauseMenu pauseMenu;
+        private GameWin gameWin;
+        private GameOver gameOver;
+        private HealthBar healthBar;
 
         private SpriteFont font;
         private Song song;
@@ -43,7 +46,7 @@ namespace Game_Project
             keyboard = new KeyboardController(this);
 
             collisionDetection = new CollisionDetection();
-            scroller = new ItemScroller();
+          //  healthBar = new HealthBar();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
@@ -61,11 +64,14 @@ namespace Game_Project
             
             font = Content.Load<SpriteFont>("Text");
             pauseMenu = new PauseMenu(font);
+            gameOver = new GameOver(font);
+            gameWin = new GameWin(font);
 
             LevelLoader.Instance.LoadFile("sprites");
             LevelLoader.Instance.LoadFile("forest");
             LevelLoader.Instance.LoadFile("collision");
 
+            scroller = new ItemScroller();
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
 
             song = Content.Load<Song>("01 - At Dooms Gate");
@@ -84,6 +90,12 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
+           // healthBar.Position = camera.Position;
+            pauseMenu.Position = camera.Position;
+            gameWin.Position = camera.Position;
+            gameOver.Position = camera.Position;
+            scroller.Position = camera.Position;
+            //healthBar.Update(gameTime);
             if (!paused)
             {
                 GameObjectManager.Instance.Update(gameTime);
