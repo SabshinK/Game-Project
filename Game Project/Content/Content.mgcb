@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 01 - At Dooms Gate.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:01 - At Dooms Gate.mp3
+
 #begin ClarySage.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -43,7 +43,7 @@ namespace Game_Project
             size2 = secondCollideable.Size;
 
             rectangleObject1 = new Rectangle((int)location1.X, (int)location1.Y, (int)size1.X, (int)size1.Y);
-            rectangleObject1 = new Rectangle((int)location2.X, (int)location2.Y, (int)size2.X, (int)size2.Y);
+            rectangleObject2 = new Rectangle((int)location2.X, (int)location2.Y, (int)size2.X, (int)size2.Y);
 
             // objects collide:
             if (rectangleObject1.Intersects(rectangleObject2))
