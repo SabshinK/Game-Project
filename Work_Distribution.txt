@@ -24,8 +24,8 @@ Sprint 4 planning documentation: Entire team
 Backlog: Aadya Jain
 Trello Management: Aadya Jain
 README Updates: Anooj Deshpande
-Sprint 4 Reflection: 
-  (The sprint4 reflection was written by  and is a compilation of all the thoughts the team had when working on the sprint and finishing it).
+Sprint 4 Reflection: Aadya Jain
+  (The sprint4 reflection was written by Aadya Jain and is a compilation of all the thoughts the team had when working on the sprint and finishing it).
 Code Reviews: Entire team
 
 

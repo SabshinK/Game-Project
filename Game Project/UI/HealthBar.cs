@@ -20,7 +20,8 @@ namespace Game_Project
 
         public HealthBar()
         {
-            this.player = GameObjectManager.Instance.GetPlayer();
+            player = GameObjectManager.Instance.GetPlayer();
+            hearts = new List<Tuple<string, ISprite>>();
 
             for (int i = 0; i < Health / 2; i++) // Each heart is two health
             {
