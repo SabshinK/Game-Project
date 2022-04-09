@@ -25,6 +25,8 @@ namespace Game_Project
         IProjectile weapon;
         Physics physics;
 
+        float accel = 1;
+
         public DragonEnemy(UniversalParameterObject parameters)
         {
             dragon = new DragonStateMachine();
@@ -51,14 +53,9 @@ namespace Game_Project
             dragon.TakeDamage();
         }
 
-        public void Fall()
-        {
-            dragon.Fall();
-        }
-
         public void Collide()
         {
-            // TODO
+            //Used to keep track of this as a collideable object
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -84,57 +81,16 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            //if (lengthOfAction > new Random().Next(500) && !stateTuple.Item1.Equals(actions.attacking))
-            //{
-            //    Attack();
-            //    lengthOfAction = 0;
-            //}
-
-            //stateTuple = dragon.getState();
-
-            ////This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
-            //if (stateTuple.Item1.Equals(actions.moving))
-            //{
-            //    if (stateTuple.Item2.Equals(direction.right))
-            //    {
-            //        locationVector.X++;
-            //    }
-            //    else
-            //    {
-            //        locationVector.X--;
-            //    }
-            //}
-            //else if (stateTuple.Item1.Equals(actions.attacking))
-            //{
-            //    dragonSprite = attackSprite;
-
-            //    if (lengthOfAction == 0)
-            //    {
-            //        weapon = new Candle(new UniversalParameterObject(new object[] { locationVector, false, null }));
-            //        GameObjectManager.Instance.RegisterObject(weapon);
-            //    }
-            //    else if (lengthOfAction < 50)
-            //    {
-            //    }
-            //    else
-            //    {
-            //        ChangeDirection();
-            //    }
-            //}
-
-            //dragonSprite.Update();
-            //lengthOfAction++;
-
-
-
-            //Will refactor this method to the comments below in a later sprint
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            locationVector.Y += verticalDis;
 
             stateTuple = dragon.getState();
 
             switch (stateTuple.Item1)
             {
                 case actions.dead:
-                    //GameObjectManager.remove(this);
+                    GameObjectManager.Instance.RemoveObject(this);
                     dragonSprite = null;
                     break;
                 case actions.falling:
@@ -166,6 +122,7 @@ namespace Game_Project
                     }
                     break;
                 case actions.moving:
+                    int displacement = (int)physics.HorizontalChange(gameTime, accel);
                     if (stateTuple.Item2.Equals(direction.left))
                     {
                         locationVector.X--;

@@ -46,11 +46,6 @@ namespace Game_Project
             zohAction = actions.attacking;
         }
 
-        public void Fall()
-        {
-            zohAction = actions.falling;
-        }
-
         public Tuple<actions, direction> getState()
         {
 

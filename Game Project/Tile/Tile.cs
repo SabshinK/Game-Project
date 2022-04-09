@@ -25,6 +25,11 @@ namespace Game_Project
             //tile doesn't move
         }
 
+        public void Update(GameTime gameTime)
+        {
+            sprite.Update();
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             //draw tile if not drawn

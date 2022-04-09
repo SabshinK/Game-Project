@@ -15,8 +15,6 @@ namespace Game_Project
 
         public void Attack();
 
-        public void Fall();
-
         public Tuple<actions, direction> getState();
     }
 }
