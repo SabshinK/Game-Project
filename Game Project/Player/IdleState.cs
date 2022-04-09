@@ -28,7 +28,7 @@ namespace Game_Project
 
         public void Move()
         {
-            player.SetState(new PlayerMovementState(player, player.physics.appliedForce.X, player.physics.appliedForce.Y));
+            player.SetState(new PlayerMovementState(player));
         }
 
         public void TakeDamage()
@@ -49,7 +49,6 @@ namespace Game_Project
         
         public void Update(GameTime gameTime)
         {
-
             if (player.projectile != null)
             {
                 player.projectile.Update(gameTime);

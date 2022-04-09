@@ -23,6 +23,7 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
+        float gelAccel = 1;
 
         public GelEnemy(UniversalParameterObject parameters)
         {
@@ -54,23 +55,22 @@ namespace Game_Project
 
         public void Collide()
         {
-            //TODO
-        }
-
-        public void Fall()
-        {
-            gel.Fall();
+            //Used to keep track of this object as a collideable object
         }
 
         public void Update(GameTime gameTime)
         {
+
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            locationVector.Y += verticalDis;
 
             stateTuple = gel.getState();
 
             switch (stateTuple.Item1)
             {
                 case actions.dead:
-                    //GameObjectManager.remove(this);
+                    GameObjectManager.Instance.RemoveObject(this);
                     gelSprite = null;
                     break;
                 case actions.falling:
@@ -79,13 +79,15 @@ namespace Game_Project
                     gelSprite.Update();
                     break;
                 case actions.moving:
+
+                    int displacement = (int)physics.HorizontalChange(gameTime, gelAccel);
                     if (stateTuple.Item2.Equals(direction.left))
                     {
-                        locationVector.X--;
+                        locationVector.X -= displacement;
                     }
                     else
                     {
-                        locationVector.X++;
+                        locationVector.X += displacement;
                     }
                     gelSprite.Update();
 
