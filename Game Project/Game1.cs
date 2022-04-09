@@ -70,12 +70,14 @@ namespace Game_Project
             LevelLoader.Instance.LoadFile("sprites");
             LevelLoader.Instance.LoadFile("forest");
             LevelLoader.Instance.LoadFile("collision");
+            
+            //healthBar = new HealthBar();
 
             scroller = new ItemScroller();
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
 
             song = Content.Load<Song>("01 - At Dooms Gate");
-            //MediaPlayer.Play(song);
+            MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
         }
 
@@ -90,7 +92,7 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
-           // healthBar.Position = camera.Position;
+            healthBar.Position = camera.Position;
             pauseMenu.Position = camera.Position;
             gameWin.Position = camera.Position;
             gameOver.Position = camera.Position;
@@ -125,6 +127,8 @@ namespace Game_Project
                 pauseMenu.Draw(spriteBatch);
             }
 
+            //healthBar.Draw(spriteBatch);
+
             base.Draw(gameTime);
 
             spriteBatch.End();
@@ -132,6 +136,7 @@ namespace Game_Project
 
         public void Reset()
         {
+            paused = false;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
