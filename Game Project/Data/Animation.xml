@@ -110,18 +110,11 @@
 
 	<!--Projectile animations-->
 	<Item>
-		<AnimationName>boomerangGeneric</AnimationName>
-		<Texture>TempProjectiles</Texture>
+		<AnimationName>accordianGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 1 16 16</Rectangle>
-		<Rectangle>18 1 16 16</Rectangle>
-		<Rectangle>35 1 16 16</Rectangle>
-		<Rectangle>52 1 16 16</Rectangle>
-		<Rectangle>69 1 16 16</Rectangle>
-		<Rectangle>86 1 16 16</Rectangle>
-		<Rectangle>103 1 16 16</Rectangle>
-		<Rectangle>120 1 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>64 64 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>leftArrow</AnimationName>
@@ -153,11 +146,11 @@
 		<Rectangle>69 18 16 16</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>bombWaiting</AnimationName>
-		<Texture>TempProjectiles</Texture>
+		<AnimationName>drumGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 35 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>194 0 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>bombExplosion</AnimationName>
@@ -198,7 +191,7 @@
 		<Texture>ClarySage</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
-		<Rectangle>129 0 128 128</Rectangle>
+		<Rectangle>128 0 128 128</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>movingRight</AnimationName>
@@ -237,38 +230,70 @@
 		<Rectangle>1408 256 128 128</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>useItemRight</AnimationName>
-		<Texture>TempPlayer</Texture>
+		<AnimationName>jumpingRight</AnimationName>
+		<Texture>ClarySage</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 1 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 384 128 128</Rectangle>
+		<Rectangle>128 384 128 128</Rectangle>
+		<Rectangle>256 384 128 128</Rectangle>
+		<Rectangle>384 384 128 128</Rectangle>
+		<Rectangle>512 384 128 128</Rectangle>
+		<Rectangle>640 384 128 128</Rectangle>
+		<Rectangle>768 384 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>jumpingLeft</AnimationName>
+		<Texture>ClarySage</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 512 128 128</Rectangle>
+		<Rectangle>128 512 128 128</Rectangle>
+		<Rectangle>256 512 128 128</Rectangle>
+		<Rectangle>384 512 128 128</Rectangle>
+		<Rectangle>512 512 128 128</Rectangle>
+		<Rectangle>640 512 128 128</Rectangle>
+		<Rectangle>768 512 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>useItemRight</AnimationName>
+		<Texture>ClarySage</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 640 128 128</Rectangle>
+		<Rectangle>128 640 128 128</Rectangle>
+		<Rectangle>256 640 128 128</Rectangle>
+		<Rectangle>384 640 128 128</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>useItemLeft</AnimationName>
-		<Texture>TempPlayer</Texture>
+		<Texture>ClarySage</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>18 1 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 768 128 128</Rectangle>
+		<Rectangle>128 768 128 128</Rectangle>
+		<Rectangle>256 768 128 128</Rectangle>
+		<Rectangle>384 768 128 128</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>attackRight</AnimationName>
-		<Texture>TempPlayer</Texture>
+		<Texture>ClarySage</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 18 16 16</Rectangle>
-		<Rectangle>18 18 27 16</Rectangle>
-		<Rectangle>46 18 23 16</Rectangle>
-		<Rectangle>70 18 19 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 896 128 128</Rectangle>
+		<Rectangle>128 896 128 128</Rectangle>
+		<Rectangle>256 896 128 128</Rectangle>
+		<Rectangle>384 896 128 128</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>attackLeft</AnimationName>
-		<Texture>TempPlayer</Texture>
+		<Texture>ClarySage</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>73 35 16 16</Rectangle>
-		<Rectangle>45 35 27 16</Rectangle>
-		<Rectangle>21 35 23 16</Rectangle>
-		<Rectangle>1 35 19 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 1024 128 128</Rectangle>
+		<Rectangle>128 1024 128 128</Rectangle>
+		<Rectangle>256 1024 128 128</Rectangle>
+		<Rectangle>384 1024 128 128</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>damagedRight</AnimationName>
@@ -363,11 +388,11 @@
 		<Rectangle>80 0 8 16</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>bluePotion</AnimationName>
-		<Texture>TempItemsAndCollectibles</Texture>
+		<AnimationName>triangleGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>80 16 8 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>64 0 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>dungeonMap</AnimationName>
@@ -385,11 +410,11 @@
 		<Rectangle>96 0 8 16</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>bowAndArrow</AnimationName>
-		<Texture>TempItemsAndCollectibles</Texture>
+		<AnimationName>harpGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>144 0 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>128 0 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>smallKey</AnimationName>
@@ -412,5 +437,26 @@
 		<Scale>2</Scale>
 		<Rectangle>272 0 16 16</Rectangle>
 		<Rectangle>272 16 16 16</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>fluteGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>194 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>speakerGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>128 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>guitarGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 0 64 64</Rectangle>
 	</Item>
 </Asset>

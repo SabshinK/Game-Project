@@ -10,6 +10,8 @@ namespace Game_Project
     {
         public Vector2 position;
         public Vector2 Position => position;
+        public Vector2 Size => sprite.Size;
+
         public ISprite sprite;
 
         public Tile(UniversalParameterObject parameters)
@@ -21,6 +23,11 @@ namespace Game_Project
         public void Collide()
         {
             //tile doesn't move
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            sprite.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)

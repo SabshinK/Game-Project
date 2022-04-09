@@ -15,13 +15,13 @@ namespace Game_Project
             player = manager;
             timeElapsed = 0;
 
-            if (player.FaceRight)
+            if (player.FacingRight)
             {
-                player.sprite = SpriteFactory.Instance.CreateSprite("damagedRight");
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             }
             else
             {
-                player.sprite = SpriteFactory.Instance.CreateSprite("damagedLeft");
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
             }
         }
         public void BackToIdle()
@@ -37,14 +37,6 @@ namespace Game_Project
         public void Move()
         {
             // Can't move while being damaged
-        }
-        public void Jump()
-        {
-            // Can't jump while being damaged
-        }
-        public void Fall()
-        {
-            // Can't fall while being damaged
         }
 
         public void Attack()

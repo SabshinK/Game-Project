@@ -9,10 +9,15 @@ namespace Game_Project
     class Bomb : IProjectile
     {
         private Vector2 position;
+        public Vector2 Position => position;
+        public Vector2 Size => sprite.Size;
+
         private ISprite sprite;
         private float timer;
         private float lifeSpan;
-        public Vector2 Position => position;
+
+        // This bool doesn't do anything rn, it's just here to satisfy IMoveable
+        public bool FacingRight { get; private set; }
 
         //constructor
         public Bomb(UniversalParameterObject parameters)
@@ -20,7 +25,7 @@ namespace Game_Project
             position = parameters.Position;
             timer = 0f;
             lifeSpan = 2f;
-            sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
+            sprite = SpriteFactory.Instance.CreateSprite("drumGeneric");
         }
 
         public void Collide()

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Game_Project
 {
@@ -14,11 +15,18 @@ namespace Game_Project
         public IController keyboard;
         public IController mouse;
         private CollisionDetection collisionDetection;
-        private CollisionResolution collisionResolution;
-        //public Player player;
-        //public TileManager tiles;
-        //public EnemyManager enemies;
-        //public ItemManager items;
+        private Camera camera;
+
+        public bool paused = false;
+        public bool displayInventory = false;
+        private ItemScroller scroller;
+        private PauseMenu pauseMenu;
+        private GameWin gameWin;
+        private GameOver gameOver;
+        private HealthBar healthBar;
+
+        private SpriteFont font;
+        private Song song;
 
         public Game1()
         {
@@ -35,13 +43,12 @@ namespace Game_Project
         /// </summary>
         protected override void Initialize()
         {
-            keyboard = new KeyboardController();
+            keyboard = new KeyboardController(this);
 
-            //This is here to be able to load the collision dictionary
-            collisionResolution = new CollisionResolution(null, null, CollisionResolution.collideDirection.Left);
             collisionDetection = new CollisionDetection();
+          //  healthBar = new HealthBar();
 
-            collisionResolution.LoadCollisionDictionary();
+            camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
             base.Initialize();
         }
@@ -54,11 +61,24 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
-            SpriteFactory.Instance.LoadDictionary();
+            
+            font = Content.Load<SpriteFont>("Text");
+            pauseMenu = new PauseMenu(font);
+            gameOver = new GameOver(font);
+            gameWin = new GameWin(font);
 
-            LevelLoader.Instance.LoadLevel();
+            LevelLoader.Instance.LoadFile("sprites");
+            LevelLoader.Instance.LoadFile("forest");
+            LevelLoader.Instance.LoadFile("collision");
+            
+            //healthBar = new HealthBar();
 
-            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
+            scroller = new ItemScroller();
+            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+
+            song = Content.Load<Song>("01 - At Dooms Gate");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -72,9 +92,18 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
-
-            GameObjectManager.Instance.Update(gameTime);
-            collisionDetection.Update(gameTime);
+            healthBar.Position = camera.Position;
+            pauseMenu.Position = camera.Position;
+            gameWin.Position = camera.Position;
+            gameOver.Position = camera.Position;
+            scroller.Position = camera.Position;
+            //healthBar.Update(gameTime);
+            if (!paused)
+            {
+                GameObjectManager.Instance.Update(gameTime);
+                collisionDetection.Update(gameTime);
+                camera.Update(GameObjectManager.Instance.GetPlayer());
+            }
 
             base.Update(gameTime);
         }
@@ -86,16 +115,31 @@ namespace Game_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
             GameObjectManager.Instance.Draw(spriteBatch);
+            if (displayInventory)
+            {
+                scroller.Draw(spriteBatch);
+            }
+            if (paused)
+            {
+                pauseMenu.Draw(spriteBatch);
+            }
+
+            //healthBar.Draw(spriteBatch);
 
             base.Draw(gameTime);
+
+            spriteBatch.End();
         }
 
         public void Reset()
         {
-            LevelLoader.Instance.LoadLevel();
-            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
+            paused = false;
+            GameObjectManager.Instance.Reset();
+            LevelLoader.Instance.LoadFile("forest");
+            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
         }
     }
 }

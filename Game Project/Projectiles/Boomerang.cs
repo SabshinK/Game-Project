@@ -10,12 +10,16 @@ namespace Game_Project
     {
         public Vector2 position;
         public Vector2 initialPosition;
+        public Vector2 Position => position;
+        public Vector2 Size => sprite.Size;
+
         private int boomerangLimit;
         private int moveFactor;
         public ISprite sprite, movingSprite, despawnSprite;
-        private bool userDirection;
+
+        public bool FacingRight { get; private set; }
         public bool finished;
-        public Vector2 Position => position;
+        
 
         //constructor
         public Boomerang(UniversalParameterObject parameters)
@@ -24,8 +28,8 @@ namespace Game_Project
             initialPosition = position;
             boomerangLimit = 160;
             moveFactor = 8;
-            userDirection = parameters.Direction;
-            movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
+            FacingRight = parameters.FacingRight;
+            movingSprite = SpriteFactory.Instance.CreateSprite("accordianGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
             finished = false;
         }
@@ -42,7 +46,7 @@ namespace Game_Project
                 //get sprite for boomerang
                 sprite = movingSprite;
                 //player is looking right
-                if (userDirection)
+                if (FacingRight)
                 {
                     //change position
                     position.X += moveFactor;

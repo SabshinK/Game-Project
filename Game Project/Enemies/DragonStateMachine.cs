@@ -47,11 +47,6 @@ namespace Game_Project
             dragonAction = actions.attacking;
         }
 
-        public void Fall()
-        {
-            dragonAction = actions.falling;
-        }
-
         public Tuple<actions, direction> getState()
         {
 

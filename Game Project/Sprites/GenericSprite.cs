@@ -9,13 +9,14 @@ namespace Game_Project
     class GenericSprite : ISprite
     {
         private Texture2D spriteSheet;
-        private Rectangle[] frames;
-        public Vector2 size;
+        private Rectangle[] frames;        
 
         private int currentFrame;
         private int animationSpeed;
         private int frameCount;
         private int scale;
+        
+        public Vector2 Size => new Vector2(frames[currentFrame].Width, frames[currentFrame].Height);
 
         public GenericSprite(Tuple<Texture2D, Rectangle[], int, int> spriteData)
         {
@@ -24,8 +25,6 @@ namespace Game_Project
             this.animationSpeed = spriteData.Item3;
             this.scale = spriteData.Item4;
             currentFrame = 0;
-
-            size = new Vector2(frames[0].Width, frames[0].Height);
         }
 
         // Count frames
@@ -45,9 +44,9 @@ namespace Game_Project
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, frames[currentFrame].Width * scale, 
                 frames[currentFrame].Height * scale);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            //spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             spriteBatch.Draw(spriteSheet, destinationRectangle, frames[currentFrame], Color.White);
-            spriteBatch.End();
+            //spriteBatch.End();
         }
     }
 }

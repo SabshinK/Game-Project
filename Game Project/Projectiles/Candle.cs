@@ -8,17 +8,22 @@ namespace Game_Project
 {
     class Candle : IProjectile
     {
-        public Vector2 position;
-        private ISprite sprite, fireSprite, despawnSprite;
-        private int moveFactor;
-        private bool userDirection;
-        private float lifeSpan;
-        private float timer;
+        public Vector2 position; 
+        public Vector2 Position => position;
         private Vector2 finalPositionRight;
         private Vector2 finalPositionLeft;
+        public Vector2 Size => sprite.Size;
+
+        private ISprite sprite, fireSprite, despawnSprite;
+        private int moveFactor;
+        private float lifeSpan;
+        private float timer;
+
+        public bool FacingRight { get; private set; }
+
         private bool stopFire;
         private bool finished;
-        public Vector2 Position => position;
+       
         
         //constructor
         public Candle(UniversalParameterObject parameters)
@@ -31,10 +36,11 @@ namespace Game_Project
             finalPositionLeft.X -= 80;
             timer = 0f;
             lifeSpan = 1f;
-            userDirection = parameters.Direction;
+            FacingRight = parameters.FacingRight;
             stopFire = false;
             fireSprite = SpriteFactory.Instance.CreateSprite("candleFireGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+            sprite = fireSprite;
             finished = false;
 
         }
@@ -52,7 +58,7 @@ namespace Game_Project
                 sprite = fireSprite;
 
                 //if user is facing right
-                if (userDirection)
+                if (FacingRight)
                 {
                     //if position is less than the final position
                     if (position.X < finalPositionRight.X)

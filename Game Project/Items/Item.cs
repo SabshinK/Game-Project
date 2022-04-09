@@ -10,6 +10,8 @@ namespace Game_Project
     {
         public Vector2 position;
         public Vector2 Position => position;
+        public Vector2 Size => sprite.Size;
+
         public ISprite sprite, despawnSprite;
         public bool finished;
 
@@ -24,6 +26,11 @@ namespace Game_Project
         {
             //remove item from screen
             GameObjectManager.Instance.RemoveObject(this);
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            sprite.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)

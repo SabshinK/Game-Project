@@ -12,7 +12,7 @@ namespace Game_Project
         public IdleState(Player manager)
         {
             player = manager;
-            if (player.FaceRight)
+            if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             } else
@@ -28,15 +28,7 @@ namespace Game_Project
 
         public void Move()
         {
-            player.SetState(new PlayerMoveState(player));
-        }
-        public void Jump()
-        {
-            player.SetState(new PlayerJumpState(player));
-        }
-        public void Fall()
-        {
-            player.SetState(new PlayerFallState(player));
+            player.SetState(new PlayerMovementState(player));
         }
 
         public void TakeDamage()
