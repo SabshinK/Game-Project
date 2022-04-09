@@ -15,6 +15,7 @@ namespace Game_Project
 
             //reset the movement variables
             player.physics.drag = 0;
+            player.physics.gravity = 2f;
 
             player.physics.acceleration.X = 0;
             player.physics.velocity.X = 0;
@@ -61,25 +62,25 @@ namespace Game_Project
         {
             //horizontal movement
 
-                int displacement = (int)player.physics.HorizontalChange(gameTime);
+            int displacement = (int)player.physics.HorizontalChange(gameTime);
 
-                if (!player.FacingRight)
-                {
-                    player.location.X -= displacement;
-                }
-                else
-                {
-                    player.location.X += displacement;
-                }
+            if (!player.FacingRight)
+            {
+            player.location.X -= displacement;
+            }
+            else
+            {
+                player.location.X += displacement;
+            }
 
-                if (player.physics.drag < player.physics.appliedForce.X)
-                {
-                    player.physics.drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    player.physics.drag = player.physics.appliedForce.X;
-                }
+            if (player.physics.drag < player.physics.appliedForce.X)
+            {
+                player.physics.drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                player.physics.drag = player.physics.appliedForce.X;
+            }
 
             //vertical movement
             if (player.physics.appliedForce.Y > 0)
@@ -98,6 +99,9 @@ namespace Game_Project
 
                 player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
 
+                //slow down in the jump
+                player.physics.gravity += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
                 if (player.physics.velocity.Y >= 0)
                 {
                     player.physics.falling = true;
@@ -107,6 +111,7 @@ namespace Game_Project
             //go back to the idle state when movement is complete
             if (player.physics.velocity.X <= 0 || (player.physics.falling && player.physics.velocity.Y <= 0))
             {
+                player.physics.gravity = 2f;
                 BackToIdle();
             }
 

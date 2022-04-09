@@ -43,16 +43,16 @@ namespace Game_Project
         public float HorizontalChange(GameTime gameTime)
         {
             acceleration.X = appliedForce.X - drag;
-            displacement.X += (velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration.X * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
             velocity.X += (acceleration.X * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            displacement.X += (velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration.X * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
 
             return displacement.X;
         }
 
         public float VerticalChange(GameTime gameTime, float acceleration)
         {
-            displacement.Y += (velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
             velocity.Y += acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            displacement.Y += (velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
 
             return displacement.Y;
 
