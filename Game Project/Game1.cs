@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Game_Project
 {
@@ -20,7 +21,9 @@ namespace Game_Project
         public bool displayInventory = false;
         private ItemScroller scroller;
         private PauseMenu pauseMenu;
+
         private SpriteFont font;
+        private Song song;
 
         public Game1()
         {
@@ -64,6 +67,10 @@ namespace Game_Project
             LevelLoader.Instance.LoadFile("collision");
 
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+
+            song = Content.Load<Song>("01 - At Dooms Gate");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
