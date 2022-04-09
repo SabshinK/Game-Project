@@ -25,6 +25,7 @@ namespace Game_Project
         Boomerang weapon;
         Physics physics;
         float acceleration = 1;
+        bool falling = false;
         
         public GoriyaEnemy(UniversalParameterObject parameters)
         {
@@ -52,7 +53,32 @@ namespace Game_Project
 
         public void Collide()
         {
-            //will not be used, definitely a dead code code smell, but need to talk to team members about if deleting this is okay
+            falling = false;
+        }
+
+        public void Collide(Rectangle collision, int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -69,8 +95,11 @@ namespace Game_Project
         {
 
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            locationVector.Y += verticalDis;
+            if (falling)
+            {
+                int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+                locationVector.Y += verticalDis;
+            }
 
             if (weapon != null && !weapon.finished)
             {
@@ -93,7 +122,7 @@ namespace Game_Project
 
             stateTuple = goriya.getState();
 
-            //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
+            //An attempt to refactor this to something better led to a plethora of bugs 
             if (stateTuple.Item1.Equals(actions.moving)) {
 
                 int displacement = 2; // (int)physics.HorizontalChange(gameTime, acceleration);
@@ -132,6 +161,8 @@ namespace Game_Project
                 goriyaSpriteLeft = null;
                 goriyaSpriteRight = null;
             }
+
+            falling = true;
             currentGoriyaSprite.Update();
             lengthOfAction++;
         }

@@ -53,6 +53,11 @@ namespace Game_Project
             //Will not function, kept to keep track of enemies as a collideable object
         }
 
+        public void Collide(Rectangle collision, int direction)
+        {
+
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             batSprite.Draw(spriteBatch, locationVector);

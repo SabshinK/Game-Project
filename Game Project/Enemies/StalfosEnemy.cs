@@ -58,6 +58,31 @@ namespace Game_Project
             // TODO
         }
 
+        public void Collide(Rectangle collision, int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
 
