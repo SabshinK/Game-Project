@@ -65,6 +65,12 @@ namespace Game_Project
 
             // instead of this logic above, first check if the passed object is moveable, if so add it to the first list, if not add
             // it to the second. There will always be two lists in the list of lists
+            
+            if (newObject is IPlayer || newObject is IEnemy || newObject is IProjectile) {
+                GameObjects[0].Add(newObject); //This will add to the first list which has the moveable items. 
+            } else {
+                GameObjects[1].Add(newObject); //This will add the non-moveable items such as tile and item to the second list.
+            }
         }
 
         public void RemoveObject(IGameObject deadObject)
@@ -76,6 +82,12 @@ namespace Game_Project
 
             // instead of this logic above, first check if the passed object is moveable, if so iterate through the first list, if
             // not iterate through the second. There will always be two lists in the list of lists
+            if (deadObject is IPlayer || deadObject is IEnemy || deadObject is IProjectile) {
+                GameObjects[0].Remove(deadObject); //This will remove from the first list which has the moveable items. 
+            } else {
+                GameObjects[1].Remove(deadObject); //This will remove the non-moveable item such as tile and item to the second list.
+            }
+            
         }
 
         public void Reset()

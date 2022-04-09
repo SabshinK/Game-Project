@@ -23,6 +23,7 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
+        float gelAccel = 1;
 
         public GelEnemy(UniversalParameterObject parameters)
         {
@@ -79,13 +80,15 @@ namespace Game_Project
                     gelSprite.Update();
                     break;
                 case actions.moving:
+
+                    int displacement = (int)physics.HorizontalChange(gameTime, gelAccel);
                     if (stateTuple.Item2.Equals(direction.left))
                     {
-                        locationVector.X--;
+                        locationVector.X -= displacement;
                     }
                     else
                     {
-                        locationVector.X++;
+                        locationVector.X += displacement;
                     }
                     gelSprite.Update();
 

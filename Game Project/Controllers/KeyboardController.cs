@@ -50,12 +50,6 @@ namespace Game_Project
 				
 			}
 
-			// This statement translates to NOT XOR because we want either both keys or none
-			if (!(Keyboard.GetState().IsKeyDown(Keys.A) ^ Keyboard.GetState().IsKeyDown(Keys.D)))
-            {
-                controllerMappings[Keys.None].Execute();
-            }
-
             
         }
 
@@ -64,7 +58,6 @@ namespace Game_Project
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			pausedControllerMappings = new Dictionary<Keys, ICommand>();
 			
-			RegisterCommand(Keys.None, new IdleCommand(player));
 			RegisterCommand(Keys.Q, new QuitCommand(game));
 			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
 			RegisterCommand(Keys.W, new PlayerJumpCommand(player));

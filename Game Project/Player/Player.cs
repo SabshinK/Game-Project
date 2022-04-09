@@ -14,7 +14,7 @@ namespace Game_Project
 
         public Physics physics;
 
-        private int health;
+        public int Health { get; private set; }
 
         public Vector2 location;
         public Vector2 Position => location;
@@ -30,11 +30,14 @@ namespace Game_Project
 
             location = parameters.Position;
         
-            health = 3;
+            Health = 3;
 
             FacingRight = true;
 
             physics = new Physics();
+
+            physics.appliedForce.X = 0;
+            physics.appliedForce.Y = 0;
         }
 
         // BackToIdle will create an idle animation after a move, attack, or damage animation, depending on which direction the sprite was facing.
@@ -58,7 +61,7 @@ namespace Game_Project
 
         public void DamageTaken()
         {
-            health--;
+            Health--;
             state.TakeDamage();
         } 
         public void Attack()
@@ -138,6 +141,9 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
+            //the player is always falling
+            location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
+
             state.Update(gameTime);
         }
     }
