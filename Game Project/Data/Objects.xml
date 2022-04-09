@@ -23,12 +23,6 @@
 		<Y>192</Y>
 	</Item>
 	<!--Items-->
-	<Item>
-		<ObjectType>Arrow</ObjectType>
-		<X>0</X>
-		<Y>200</Y>
-		<FacingRight>true</FacingRight>
-	</Item>
 	<!--Tiles-->
 	<Item>
 		<ObjectType>Tile</ObjectType>

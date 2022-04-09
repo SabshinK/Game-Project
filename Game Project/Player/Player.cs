@@ -120,19 +120,24 @@ namespace Game_Project
 
         public void Bump(Rectangle collision, int direction)
         {
+
             switch (direction)
             {
                 case 0:
                     location.Y += collision.Height;
+                    physics.velocity.Y = 0;
                     break;
                 case 1:
                     location.Y -= collision.Height;
+                    physics.velocity.Y = 0;
                     break;
                 case 2:
                     location.X -= collision.Width;
+                    physics.velocity.X = 0;
                     break;
                 case 3:
                     location.X += collision.Width;
+                    physics.velocity.X = 0;
                     break;
                 default:
                     break;
@@ -142,7 +147,14 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
-            sprite = SpriteFactory.Instance.CreateSprite("idleRight");
+            if (FacingRight)
+            {
+                sprite = SpriteFactory.Instance.CreateSprite("idleRight");
+            }
+            else
+            {
+                sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
+            }
             location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
 
             state.Update(gameTime);
