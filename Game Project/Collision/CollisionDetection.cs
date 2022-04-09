@@ -7,8 +7,6 @@ namespace Game_Project
 {
     public class CollisionDetection : IUpdateable
     {
-        private IPlayer player;
-
         private float side_overlap;
         private float updown_overlap;
         private ICollideable firstCollideable;
@@ -23,24 +21,11 @@ namespace Game_Project
         public enum CollideDirection { Top, Bottom, Left, Right };
         public CollideDirection direction;
 
-        List<IEnemy> enemies;
-        List<IProjectile> projectiles;
-        List<IItem> items;
-        List<ITile> tiles;
-
         private List<List<IGameObject>> gameObjects;
-
-        private const int movingObjectSize = 128;
-        private const int tileSize = 64;
 
         public CollisionDetection()
         {
             
-        }
-
-        public void GetCollisionLists()
-        {
-            gameObjects = GameObjectManager.Instance.GameObjects;
         }
 
         public void CheckCollision(IGameObject firstObject, IGameObject secondObject)
@@ -101,19 +86,19 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            // This all becomes checking the object in the first list in the list of lists against every next object and the objects in the
-            // second list, all of the things needed for collision calculations like position and size can be taken from the object, the only
-            // parameters needed for check collision are the two objects to compare
+            gameObjects = GameObjectManager.Instance.GameObjects;
 
-            foreach (IGameObject firstObject in gameObjects[0])
+            for (int i = 0; i < gameObjects[0].Count; i++)
             {
-                foreach (IGameObject moveableObject in gameObjects[0])
+                for (int j = i + 1; j < gameObjects[0].Count; j++)
                 {
-                    if (!(firstObject is IMoveable)) CheckCollision(firstObject, moveableObject);
+                    // Check each moveable object with each next moveable object and onward
+                    CheckCollision(gameObjects[0][i], gameObjects[0][j]);
                 }
                 foreach (IGameObject nonMoveableObject in gameObjects[1])
                 {
-                    CheckCollision(firstObject, nonMoveableObject);
+                    // Check moveable against the non-moveables
+                    CheckCollision(gameObjects[0][i], nonMoveableObject);
                 }
             }
         }

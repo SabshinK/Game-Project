@@ -8,7 +8,7 @@ using Vector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace Game_Project
 {
-    class Camera
+    public class Camera
     {
         public Matrix zoomMatrix;
         private Viewport cameraView;

@@ -91,7 +91,7 @@
 		<CollisionObjectType>Player</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
-		<Command>IdleCommand</Command>
+		<Command>PlayerBumpCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<!--Player colliding with Items-->
