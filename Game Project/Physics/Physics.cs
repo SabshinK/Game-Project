@@ -26,11 +26,11 @@ namespace Game_Project
 
             velocity = new Vector2();
             velocity.X = 0;
-            velocity.Y = 5;
+            velocity.Y = 0;
 
             displacement = new Vector2();
             displacement.X = 5;
-            displacement.Y = 0;
+            displacement.Y = 5;
 
             appliedForce = new Vector2();
             appliedForce.X = 0;
