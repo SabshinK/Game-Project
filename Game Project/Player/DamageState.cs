@@ -56,7 +56,7 @@ namespace Game_Project
                 timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             } else
             {
-                BackToIdle();
+                player.SetState(new IdleState(player));
             }
 
             if (player.projectile != null)
