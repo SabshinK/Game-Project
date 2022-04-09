@@ -109,12 +109,12 @@ namespace Game_Project
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(Tile), CollideDirection.Bottom), new Tuple<string, string>("PlayerFallCommand", null));
 
             //enemies colliding with the tiles
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(BatEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(DragonEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GelEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GoriyaEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(StalfosEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(ZohEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(BatEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(DragonEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GelEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GoriyaEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(StalfosEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(ZohEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
 
             // player colliding with items
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(Item)), new Tuple<string, string>(null, "RemoveItemCommand"));
