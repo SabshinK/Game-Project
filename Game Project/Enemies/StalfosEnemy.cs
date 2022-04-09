@@ -80,7 +80,7 @@ namespace Game_Project
                     break;
                 case actions.moving:
 
-                    int displacement = (int)physics.HorizontalChange(gameTime, accel);
+                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
                     if (stateTuple.Item2.Equals(direction.left))
                     {
                         locationVector.X -= displacement;

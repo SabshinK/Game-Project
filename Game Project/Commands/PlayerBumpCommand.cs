@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game_Project.Commands
+namespace Game_Project
 {
-    class PlayerBumpCommand : ICommand
+    public class PlayerBumpCommand : ICommand
     {
         private IPlayer player;
         private Rectangle collision;

@@ -28,6 +28,11 @@ namespace Game_Project
             GameObjectManager.Instance.RemoveObject(this);
         }
 
+        public void Update(GameTime gameTime)
+        {
+            sprite.Update();
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             //draw item if not drawn

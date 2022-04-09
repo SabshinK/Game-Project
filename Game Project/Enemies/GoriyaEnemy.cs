@@ -96,7 +96,7 @@ namespace Game_Project
             //This is a way less than stellar solution to this problem. I think refactoring for a later sprint is going to be neccessary 
             if (stateTuple.Item1.Equals(actions.moving)) {
 
-                int displacement = (int)physics.HorizontalChange(gameTime, acceleration);
+                int displacement = 2; // (int)physics.HorizontalChange(gameTime, acceleration);
 
                 if (stateTuple.Item2.Equals(direction.right)) {
                     currentGoriyaSprite = goriyaSpriteRight;

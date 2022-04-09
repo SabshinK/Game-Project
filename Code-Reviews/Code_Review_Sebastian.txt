@@ -39,3 +39,28 @@ they should. The update logic is fine for the most part but could be cleaner, an
 be moved into the GameObjectManager. As an aside, many of the values that are instantiated in the constructor could have values that are loaded in 
 from the data file, that's more of a note to myself for what to move over into LevelLoader
 Review time: 20 minutes
+
+04-09-22
+Sprint 4
+
+Readability:
+Reviewing Camera.cs by AJ Waizmann
+This is a very simple piece of code but it is very readable and clean; things are named cohesively, in both the sense that the names are short but
+sweet and get the point across and also adhere to naming conventions. Spacing is good and it is clear to see what is happening. Very minimal comments
+are used which is good, except to explain how zoom works. All in all this is fairly good in terms of readability and I was able to understand pretty 
+quickly
+Review time: 10 minutes
+
+Maintainability:
+Reviewing Physics.cs by Rachel Watters
+Global variables seem to be good and are all purposeful (There have been issues with making variables that should be parameters into global variables, 
+not with Rachel in specific but it is something I'm looking out for more, but this class seems to have avoided that). The initial values of gravity, 
+drag, and some of the other magic numbers should most likely be taken from the Utility Class. both Vertical and Horizontal change is very simple and 
+clean, using the established physics equations well for updating the position displacement and the change in velocity which is good. There is a lack 
+of logic for updating accelerations and things however, I believe this logic is in the PlayerMovementState.cs class, but I do think some of this logic 
+for keeping track of acceleration and drag should be inside Physics.cs itself, especially since if another class needs to use Physics.cs since that 
+logic would most likely have to be repeated for them as well. Overall fairly clean and well done but could use a little reorganizing. We may want to 
+consider either making properties for the vectors, either ones that get private vectors inside Physics.cs or replace the variables themselves with 
+properties that have a public getter but a private setter, this is for ease of access though and so that there are fewer bugs when manipulating the 
+values of the vectors
+Review time: 15 minutes

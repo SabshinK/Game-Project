@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 01 - At Dooms Gate.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:01 - At Dooms Gate.mp3
+
 #begin ClarySage.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -25,7 +31,7 @@
 /processorParam:TextureFormat=Color
 /build:ClarySage.png
 
-#begin HyperLightWalkingRight.png
+#begin Items.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +41,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:HyperLightWalkingRight.png
+/build:Items.png
 
 #begin TempBosses.png
 /importer:TextureImporter

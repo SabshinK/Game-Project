@@ -25,7 +25,7 @@ namespace Game_Project
             position = parameters.Position;
             timer = 0f;
             lifeSpan = 2f;
-            sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
+            sprite = SpriteFactory.Instance.CreateSprite("drumGeneric");
         }
 
         public void Collide()

@@ -26,11 +26,11 @@ namespace Game_Project
 
             velocity = new Vector2();
             velocity.X = 0;
-            velocity.Y = 5;
+            velocity.Y = 0;
 
             displacement = new Vector2();
             displacement.X = 5;
-            displacement.Y = 0;
+            displacement.Y = 5;
 
             appliedForce = new Vector2();
             appliedForce.X = 0;
@@ -40,18 +40,17 @@ namespace Game_Project
             gravity = 2f;
         }
 
-        public float HorizontalChange(GameTime gameTime, float acceleration)
+        public float HorizontalChange(GameTime gameTime)
         {
-
-            displacement.X += (velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
-            velocity.X += (acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            acceleration.X = appliedForce.X - drag;
+            displacement.X += (velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration.X * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
+            velocity.X += (acceleration.X * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
             return displacement.X;
         }
 
         public float VerticalChange(GameTime gameTime, float acceleration)
         {
-
             displacement.Y += (velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
             velocity.Y += acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
