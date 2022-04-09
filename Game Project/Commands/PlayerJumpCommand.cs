@@ -15,11 +15,8 @@ namespace Game_Project
 
         public void Execute()
         {
-            if (player.physics.verticalVelocity < 0) //make sure the player still falls if falling and the jump button is pressed
-            {
-                player.Jump(player.FaceRight);
-            }
-            
+            player.physics.appliedForce.Y = 4;
+            player.StartMoving(player.FacingRight);
         }
     }
 }

@@ -6,14 +6,16 @@ namespace Game_Project
 {
     class RemoveItemCommand
     {
-        private Item item;
-        public RemoveItemCommand(Item Item)
+        private IItem item;
+
+        public RemoveItemCommand(IItem Item)
         {
             item = Item;
         }
+
         public void Execute()
         {
-            GameObjectManager.Instance.RemoveObject((IDrawable)item);
+            GameObjectManager.Instance.RemoveObject(item);
         }
     }
 }

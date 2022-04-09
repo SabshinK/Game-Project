@@ -50,12 +50,6 @@ namespace Game_Project
 				
 			}
 
-			// This statement translates to NOT XOR because we want either both keys or none
-			if (!(Keyboard.GetState().IsKeyDown(Keys.A) ^ Keyboard.GetState().IsKeyDown(Keys.D)))
-            {
-                controllerMappings[Keys.None].Execute();
-            }
-
             
         }
 
@@ -64,30 +58,29 @@ namespace Game_Project
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			pausedControllerMappings = new Dictionary<Keys, ICommand>();
 			
-				RegisterCommand(Keys.None, new IdleCommand(player));
-				RegisterCommand(Keys.Q, new QuitCommand(game));
-				RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
-				RegisterCommand(Keys.W, new PlayerJumpCommand(player));
-				RegisterCommand(Keys.D, new PlayerMoveRightCommand(player));
-				RegisterCommand(Keys.Left, new PlayerMoveLeftCommand(player));
-				RegisterCommand(Keys.Up, new PlayerJumpCommand(player));
-				RegisterCommand(Keys.Right, new PlayerMoveRightCommand(player));
-				RegisterCommand(Keys.N, new AttackCommand(player));
-				RegisterCommand(Keys.D1, new UseItemCommand(player, 1));
-				RegisterCommand(Keys.D2, new UseItemCommand(player, 2));
-				RegisterCommand(Keys.D3, new UseItemCommand(player, 3));
-				RegisterCommand(Keys.D4, new UseItemCommand(player, 4));
-				RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
-				RegisterCommand(Keys.E, new TakeDamageCommand(player));
-				RegisterCommand(Keys.R, new ResetCommand(game));
-				RegisterCommand(Keys.P, new PauseCommand(game));
+			RegisterCommand(Keys.Q, new QuitCommand(game));
+			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
+			RegisterCommand(Keys.W, new PlayerJumpCommand(player));
+			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player));
+			RegisterCommand(Keys.Left, new PlayerMoveLeftCommand(player));
+			RegisterCommand(Keys.Up, new PlayerJumpCommand(player));
+			RegisterCommand(Keys.Right, new PlayerMoveRightCommand(player));
+			RegisterCommand(Keys.N, new AttackCommand(player));
+			RegisterCommand(Keys.D1, new UseItemCommand(player, 1));
+			RegisterCommand(Keys.D2, new UseItemCommand(player, 2));
+			RegisterCommand(Keys.D3, new UseItemCommand(player, 3));
+			RegisterCommand(Keys.D4, new UseItemCommand(player, 4));
+			RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
+			RegisterCommand(Keys.E, new TakeDamageCommand(player));
+			RegisterCommand(Keys.R, new ResetCommand(game));
+			RegisterCommand(Keys.P, new PauseCommand(game));
             
-				pausedControllerMappings.Add(Keys.Q, new QuitCommand(game));
-				pausedControllerMappings.Add(Keys.R, new ResetCommand(game));
-				pausedControllerMappings.Add(Keys.P, new PauseCommand(game));
-				pausedControllerMappings.Add(Keys.I, new InventoryCommand(game));
-				pausedControllerMappings.Add(Keys.A, new ItemScrollLeftCommand());
-				pausedControllerMappings.Add(Keys.D, new ItemScrollRightCommand());
+			pausedControllerMappings.Add(Keys.Q, new QuitCommand(game));
+			pausedControllerMappings.Add(Keys.R, new ResetCommand(game));
+			pausedControllerMappings.Add(Keys.P, new PauseCommand(game));
+			pausedControllerMappings.Add(Keys.I, new InventoryCommand(game));
+			pausedControllerMappings.Add(Keys.A, new ItemScrollLeftCommand());
+			pausedControllerMappings.Add(Keys.D, new ItemScrollRightCommand());
 			
 		}
 	}

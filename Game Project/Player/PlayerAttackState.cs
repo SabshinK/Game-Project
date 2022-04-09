@@ -14,7 +14,7 @@ namespace Game_Project
         {
             this.player = player;
 
-            if (player.FaceRight)
+            if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("attackRight");
             }
@@ -33,14 +33,10 @@ namespace Game_Project
         {
             // Can't move until attack is over
         }
-        public void Jump()
-        {
-            player.SetState(new PlayerJumpState(player));
-        }
 
         public void TakeDamage()
         {
-            player.SetState(new DamageState(player));
+            player.SetState(new DamageState(player)); 
         }
 
         public void Attack()
@@ -61,7 +57,7 @@ namespace Game_Project
             }
             else
             {
-                player.SetState(new IdleState(player));
+                BackToIdle();
             }
 
             if (player.projectile != null)

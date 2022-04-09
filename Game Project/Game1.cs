@@ -14,17 +14,13 @@ namespace Game_Project
         public IController keyboard;
         public IController mouse;
         private CollisionDetection collisionDetection;
-        private CollisionResolution collisionResolution;
         private Camera camera;
+
         public bool paused = false;
         public bool displayInventory = false;
         private ItemScroller scroller;
         private PauseMenu pauseMenu;
         private SpriteFont font;
-        //public Player player;
-        //public TileManager tiles;
-        //public EnemyManager enemies;
-        //public ItemManager items;
 
         public Game1()
         {
@@ -45,8 +41,6 @@ namespace Game_Project
 
             collisionDetection = new CollisionDetection();
             scroller = new ItemScroller();
-           
-            //collisionResolution.LoadCollisionDictionary();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
@@ -61,12 +55,14 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
-            SpriteFactory.Instance.LoadDictionary();
+            
             font = Content.Load<SpriteFont>("Text");
             pauseMenu = new PauseMenu(font);
-            LevelLoader.Instance.LoadLevel();
 
-            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
+            LevelLoader.Instance.LoadFile("sprites");
+            LevelLoader.Instance.LoadFile("forest");
+
+            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
 
             collisionDetection.GetCollisionLists();
         }
@@ -86,7 +82,7 @@ namespace Game_Project
             {
                 GameObjectManager.Instance.Update(gameTime);
                 collisionDetection.Update(gameTime);
-                camera.Update((Player)GameObjectManager.Instance.player);
+                camera.Update(GameObjectManager.Instance.GetPlayer());
             }
 
             base.Update(gameTime);
@@ -118,8 +114,9 @@ namespace Game_Project
 
         public void Reset()
         {
-            LevelLoader.Instance.LoadLevel();
-            keyboard.LoadContent(this, (Player)GameObjectManager.Instance.player);
+            GameObjectManager.Instance.Reset();
+            LevelLoader.Instance.LoadFile("forest");
+            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
         }
     }
 }

@@ -7,54 +7,55 @@ namespace Game_Project
 {
     public class Physics
     {
-        public double horizontalVelocity;
-        public double verticalVelocity;
+        public Vector2 velocity;
+        public Vector2 displacement;
 
-        public double horizontalDisplacement;
-        public double verticalDisplacement;
-
-        private double timePassed;
+        public Vector2 acceleration;
+        public float drag;
+        public float gravity;
+        public Vector2 appliedForce;
+        public bool falling;
 
         public Physics()
         {
-            horizontalVelocity = 0;
-            verticalVelocity = -5;
+            falling = true;
 
-            horizontalDisplacement = 5;
-            verticalDisplacement = 0;
+            acceleration = new Vector2();
+            acceleration.X = 0;
+            acceleration.Y = 0;
 
-            timePassed = 0;
+            velocity = new Vector2();
+            velocity.X = 0;
+            velocity.Y = 5;
+
+            displacement = new Vector2();
+            displacement.X = 5;
+            displacement.Y = 0;
+
+            appliedForce = new Vector2();
+            appliedForce.X = 0;
+            appliedForce.Y = 0;
+
+            drag = 0;
+            gravity = 2f;
         }
 
-        public double HorizontalChange(GameTime gameTime, double acceleration, double drag)
+        public float HorizontalChange(GameTime gameTime, float acceleration)
         {
-            timePassed = gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (acceleration > drag)
-            {
-                horizontalDisplacement = horizontalDisplacement + (horizontalVelocity * timePassed) + ((acceleration - drag) * (timePassed * timePassed) * 0.5);
-                horizontalVelocity = horizontalVelocity + ((acceleration - drag) * timePassed);
-            }
+            displacement.X += (velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
+            velocity.X += (acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            return horizontalDisplacement;
+            return displacement.X;
         }
 
-        public double VerticalChange(bool Falling, GameTime gameTime, double acceleration, double drag)
+        public float VerticalChange(GameTime gameTime, float acceleration)
         {
-            timePassed += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (!Falling)
-            {
-                verticalDisplacement = verticalDisplacement + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
-                verticalVelocity = verticalVelocity + ((acceleration + drag) * timePassed);
-            }
-            else
-            {
-                verticalDisplacement = verticalDisplacement + (verticalVelocity * timePassed) + ((acceleration + drag) * (timePassed * timePassed) * 0.5);
-                verticalVelocity = verticalVelocity - ((acceleration + drag) * timePassed);
-            }
+            displacement.Y += (velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
+            velocity.Y += acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            return verticalDisplacement;
+            return displacement.Y;
 
         }
     }
