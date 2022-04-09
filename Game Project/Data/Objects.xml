@@ -22,7 +22,7 @@
 		<X>320</X>
 		<Y>192</Y>
 	</Item>
-	<!--Projectiles/Items-->
+	<!--Items-->
 	<Item>
 		<ObjectType>Arrow</ObjectType>
 		<X>0</X>
