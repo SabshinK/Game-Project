@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game_Project.Commands
+namespace Game_Project
 {
-    class EnemyCollideCommand
+    class EnemyCollideCommand : ICommand
     {
         private IEnemy enemy;
         private Rectangle rectangle;
