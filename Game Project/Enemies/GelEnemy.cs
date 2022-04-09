@@ -58,6 +58,11 @@ namespace Game_Project
             //Used to keep track of this object as a collideable object
         }
 
+        public void Collide(Rectangle collision, int direction)
+        {
+
+        }
+
         public void Update(GameTime gameTime)
         {
 
