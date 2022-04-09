@@ -13,6 +13,11 @@ namespace Game_Project
         private static GameObjectManager instance = new GameObjectManager();
         public static GameObjectManager Instance => instance;
 
+        public bool iterating = false;
+
+        private Queue<IGameObject> toAdd = new Queue<IGameObject>();
+        private Queue<IGameObject> toRemove = new Queue<IGameObject>();
+
         // List of lists containing the game objects, there should be two lists, one for moving objects and one for non moving
         public List<List<IGameObject>> GameObjects { get; private set; }
 
@@ -23,6 +28,8 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            iterating = true;
+
             foreach (List<IGameObject> objectList in GameObjects)
             {
                 foreach (IDrawable gameObject in objectList)
@@ -30,15 +37,37 @@ namespace Game_Project
                     gameObject.Draw(spriteBatch);
                 }
             }
+
+            iterating = false;
         }
 
         public void Update(GameTime gameTime)
         {
+            iterating = true;
+
             foreach (List<IGameObject> objectList in GameObjects)
             {
                 foreach (IUpdateable gameObject in objectList)
                 {
                     gameObject.Update(gameTime);
+                }
+            }
+
+            iterating = false;
+
+            if (toAdd.Count > 0) { 
+
+                foreach (IGameObject gameObject in toAdd)
+                {
+                    RegisterObject(gameObject);
+                }
+            }
+
+            if (toRemove.Count > 0)
+            {
+                foreach (IGameObject gameObject in toRemove)
+                {
+                    RemoveObject(gameObject);
                 }
             }
         }
@@ -62,7 +91,14 @@ namespace Game_Project
             
             if (newObject is IPlayer || newObject is IEnemy || newObject is IProjectile) 
             {
-                GameObjects[0].Add(newObject); //This will add to the first list which has the moveable items. 
+                if (!iterating)
+                {
+                    GameObjects[0].Add(newObject); //This will add to the first list which has the moveable items. 
+
+                } else
+                {
+                    toAdd.Enqueue(newObject);
+                }
             } 
             else 
             {
@@ -76,7 +112,14 @@ namespace Game_Project
             // not iterate through the second. There will always be two lists in the list of lists
             if (deadObject is IPlayer || deadObject is IEnemy || deadObject is IProjectile) 
             {
-                GameObjects[0].Remove(deadObject); //This will remove from the first list which has the moveable items. 
+                if (!iterating)
+                {
+                    GameObjects[0].Remove(deadObject); //This will remove from the first list which has the moveable items. 
+                }
+                else
+                {
+                    toRemove.Enqueue(deadObject);
+                }
             } 
             else 
             {

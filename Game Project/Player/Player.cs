@@ -115,7 +115,7 @@ namespace Game_Project
 
         public void Collide()
         {
-            //collisions affecting the player based on the size of the rectangle          
+            //collisions affecting the player based on the size of the rectangle
         }
 
         public void Bump(Rectangle collision, int direction)
@@ -142,6 +142,7 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
+            sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
 
             state.Update(gameTime);
