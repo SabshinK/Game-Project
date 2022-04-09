@@ -40,6 +40,7 @@ namespace Game_Project
             stopFire = false;
             fireSprite = SpriteFactory.Instance.CreateSprite("candleFireGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
+            sprite = fireSprite;
             finished = false;
 
         }
