@@ -24,8 +24,7 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             // change this to a list of UI objects, maybe make an interface?
-            healthBar.Position = camera.Position;
-            healthBar.Update(gameTime);
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

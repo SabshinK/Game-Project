@@ -110,18 +110,11 @@
 
 	<!--Projectile animations-->
 	<Item>
-		<AnimationName>boomerangGeneric</AnimationName>
-		<Texture>TempProjectiles</Texture>
+		<AnimationName>accordianGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 1 16 16</Rectangle>
-		<Rectangle>18 1 16 16</Rectangle>
-		<Rectangle>35 1 16 16</Rectangle>
-		<Rectangle>52 1 16 16</Rectangle>
-		<Rectangle>69 1 16 16</Rectangle>
-		<Rectangle>86 1 16 16</Rectangle>
-		<Rectangle>103 1 16 16</Rectangle>
-		<Rectangle>120 1 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>64 64 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>leftArrow</AnimationName>
@@ -153,11 +146,11 @@
 		<Rectangle>69 18 16 16</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>bombWaiting</AnimationName>
-		<Texture>TempProjectiles</Texture>
+		<AnimationName>drumGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 35 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>194 0 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>bombExplosion</AnimationName>
@@ -395,11 +388,11 @@
 		<Rectangle>80 0 8 16</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>bluePotion</AnimationName>
-		<Texture>TempItemsAndCollectibles</Texture>
+		<AnimationName>triangleGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>80 16 8 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>64 0 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>dungeonMap</AnimationName>
@@ -417,11 +410,11 @@
 		<Rectangle>96 0 8 16</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>bowAndArrow</AnimationName>
-		<Texture>TempItemsAndCollectibles</Texture>
+		<AnimationName>harpGeneric</AnimationName>
+		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>144 0 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>128 0 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>smallKey</AnimationName>
@@ -444,5 +437,26 @@
 		<Scale>2</Scale>
 		<Rectangle>272 0 16 16</Rectangle>
 		<Rectangle>272 16 16 16</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>fluteGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>194 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>speakerGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>128 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>guitarGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 0 64 64</Rectangle>
 	</Item>
 </Asset>

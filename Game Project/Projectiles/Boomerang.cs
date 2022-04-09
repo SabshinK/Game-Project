@@ -29,7 +29,7 @@ namespace Game_Project
             boomerangLimit = 160;
             moveFactor = 8;
             FacingRight = parameters.FacingRight;
-            movingSprite = SpriteFactory.Instance.CreateSprite("boomerangGeneric");
+            movingSprite = SpriteFactory.Instance.CreateSprite("accordianGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
             finished = false;
         }
