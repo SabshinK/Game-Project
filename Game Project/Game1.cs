@@ -92,7 +92,7 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
-            healthBar.Position = camera.Position;
+            //healthBar.Position = camera.Position;
             pauseMenu.Position = camera.Position;
             gameWin.Position = camera.Position;
             gameOver.Position = camera.Position;
