@@ -7,6 +7,7 @@ namespace Game_Project
 {
     public interface IGameObject
     {
+        public Vector2 GridPosition { get; }
         public Vector2 Position { get; }
     }
 }

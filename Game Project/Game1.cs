@@ -46,7 +46,6 @@ namespace Game_Project
             keyboard = new KeyboardController(this);
 
             collisionDetection = new CollisionDetection();
-          //  healthBar = new HealthBar();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
@@ -71,7 +70,7 @@ namespace Game_Project
             LevelLoader.Instance.LoadFile("forest");
             LevelLoader.Instance.LoadFile("collision");
             
-            //healthBar = new HealthBar();
+            healthBar = new HealthBar();
 
             scroller = new ItemScroller();
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
@@ -92,12 +91,13 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
-            //healthBar.Position = camera.Position;
+
+            healthBar.Position = camera.Position;
             pauseMenu.Position = camera.Position;
             gameWin.Position = camera.Position;
             gameOver.Position = camera.Position;
             scroller.Position = camera.Position;
-            //healthBar.Update(gameTime);
+            healthBar.Update(gameTime);
             if (!paused)
             {
                 GameObjectManager.Instance.Update(gameTime);
