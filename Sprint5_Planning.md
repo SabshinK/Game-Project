@@ -18,22 +18,22 @@ Member Assignments:
 
 **Rachel**
 - Physics debugging **4/16**
-- Collision debugging **4/23**
-- Work on AI sidekick attacks **4/23**
+- Collision debugging **4/18**
+- Work on AI sidekick attacks **4/20**
 - Changing music code
-- Music **4/20**
+- Music **4/18**
 - Art:
   - Item animations
   - Anything else we need
 
 **Aadya**
 - Removing magic numbers and put them in a utility class **4/17** (after physics is complete its magic numbers will be solidified)
-- Work on AI sidekick following **4/23**
+- Work on AI sidekick following **4/20**
 - Level building?
 
 **Maria**
 - Level design eeee
-- Bombs code **4/23**
+- Bombs code **4/20**
 - Changing backgrounds code
 - Art:
   - Enough musician sprites for first level (2-6)
@@ -44,11 +44,11 @@ Member Assignments:
 - UI debugging **4/16**
 - Game State class
 - UI manager 
-- Help with bombs code? **4/23**
+- Help with bombs code? **4/20**
 
 **AJ**
-- Enemy bug fixes and additions **4/20**
-- AI states and general AI code/debugging **4/23**
-- Music? **4/20**
+- Enemy bug fixes and additions **4/18**
+- AI states and general AI code/debugging **4/20**
+- Music? **4/18**
 
 
