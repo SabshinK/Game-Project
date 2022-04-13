@@ -4,8 +4,8 @@ Trello Link: https://trello.com/invite/b/3KLeSRbA/4688010b6834bdf969c2c47588ad53
 
 ### Coding Things for Sprint 5:
 
-***Due dates are mainly for when you should have drafts of those classes or functionalities ready to be reviewed.**
-DO NOT START WORKING UNTIL THE SPRINT4 BRANCH HAS BEEN MADE AND THE MEMBER BRANCHES HAVE BEEN REMADE!!!
+**Due dates are mainly for when you should have drafts of those classes or functionalities ready to be reviewed.**
+DO NOT START WORKING UNTIL THE SPRINT5 BRANCH HAS BEEN MADE AND THE MEMBER BRANCHES HAVE BEEN REMADE!!!
 
 
 Member Assignments:
