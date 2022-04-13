@@ -147,7 +147,8 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
-            if (!(physics.appliedForce.X > 0) && !(physics.appliedForce.Y > 0)) {
+            if (!(physics.appliedForce.X > 0) && !(physics.appliedForce.Y > 0))
+            {
                 if (FacingRight)
                 {
                     sprite = SpriteFactory.Instance.CreateSprite("idleRight");
@@ -157,7 +158,7 @@ namespace Game_Project
                     sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
                 }
             }
-            location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
+            //location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
 
             state.Update(gameTime);
         }

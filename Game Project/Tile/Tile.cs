@@ -8,15 +8,16 @@ namespace Game_Project
 {
     public class Tile : ITile
     {
-        public Vector2 position;
+        private Vector2 position;
         public Vector2 Position => position;
+        public Vector2 GridPosition => new Vector2(position.X / 64, position.Y / 64);
         public Vector2 Size => sprite.Size;
 
         public ISprite sprite;
 
         public Tile(UniversalParameterObject parameters)
         {
-            position = parameters.Position;
+            position = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             sprite = SpriteFactory.Instance.CreateSprite(parameters.AnimationName);
         }
 
