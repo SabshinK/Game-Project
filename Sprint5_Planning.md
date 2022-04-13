@@ -11,44 +11,44 @@ DO NOT START WORKING UNTIL THE SPRINT5 BRANCH HAS BEEN MADE AND THE MEMBER BRANC
 Member Assignments:
 
 **Sebastian**
-Physics debugging **4/16**
-Row/Column system for level design and collision checking
-Level design 
-Adding any additional sprites
+- Physics debugging **4/16**
+- Row/Column system for level design and collision checking
+- Level design 
+- Adding any additional sprites
 
 **Rachel**
-Physics debugging **4/16**
-Collision debugging **4/23**
-Work on AI sidekick attacks **4/23**
-Changing music code
-Music **4/20**
-Art:
-- Item animations
-- Anything else we need
+- Physics debugging **4/16**
+- Collision debugging **4/23**
+- Work on AI sidekick attacks **4/23**
+- Changing music code
+- Music **4/20**
+- Art:
+  - Item animations
+  - Anything else we need
 
 **Aadya**
-Removing magic numbers and put them in a utility class **4/17** (after physics is complete its magic numbers will be solidified)
-Work on AI sidekick following **4/23**
-Level building?
+- Removing magic numbers and put them in a utility class **4/17** (after physics is complete its magic numbers will be solidified)
+- Work on AI sidekick following **4/23**
+- Level building?
 
 **Maria**
-Level design eeee
-Bombs code **4/23**
-Changing backgrounds code
-Art:
-- Enough musician sprites for first level (2-6)
-- Tree/portals
-- Background art for the portal rooms?
+- Level design eeee
+- Bombs code **4/23**
+- Changing backgrounds code
+- Art:
+  - Enough musician sprites for first level (2-6)
+  - Tree/portals
+  - Background art for the portal rooms?
 
 **Anooj**
-UI debugging **4/16**
-Game State class
-UI manager 
-Help with bombs code? **4/23**
+- UI debugging **4/16**
+- Game State class
+- UI manager 
+- Help with bombs code? **4/23**
 
 **AJ**
-Enemy bug fixes and additions **4/20**
-AI states and general AI code/debugging **4/23**
-Music? **4/20**
+- Enemy bug fixes and additions **4/20**
+- AI states and general AI code/debugging **4/23**
+- Music? **4/20**
 
 
