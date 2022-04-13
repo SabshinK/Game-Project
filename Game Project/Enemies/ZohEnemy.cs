@@ -17,8 +17,9 @@ namespace Game_Project
         ZohStateMachine zoh;
         ISprite zohSprite;
 
-        public Vector2 locationVector;
+        private Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => zohSprite.Size;
 
         int lengthOfAction = 0;
@@ -28,7 +29,7 @@ namespace Game_Project
         public ZohEnemy(UniversalParameterObject parameters)
         {
             zoh = new ZohStateMachine();
-            locationVector = parameters.Position; //game will state where it wants the enemy when it is created
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y); //game will state where it wants the enemy when it is created
             zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
             physics = new Physics();
         }
