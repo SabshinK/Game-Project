@@ -28,15 +28,13 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            sprite.Update();
+            sprite?.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //draw tile if not drawn
-            if(sprite != null) { 
-                sprite.Draw(spriteBatch, position);
-            }
+            //draw tile if not drawn 
+            sprite?.Draw(spriteBatch, position);
         }
 
     }
