@@ -17,8 +17,9 @@ namespace Game_Project
         DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
 
-        Vector2 locationVector;
+        private Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => dragonSprite.Size;
 
         int lengthOfAction;
@@ -33,7 +34,7 @@ namespace Game_Project
         public DragonEnemy(UniversalParameterObject parameters)
         {
             dragon = new DragonStateMachine();
-            locationVector = parameters.Position;
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;

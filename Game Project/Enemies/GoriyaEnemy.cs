@@ -19,6 +19,7 @@ namespace Game_Project
 
         public Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => currentGoriyaSprite.Size;
 
         int lengthOfAction = 0;
@@ -30,7 +31,7 @@ namespace Game_Project
         public GoriyaEnemy(UniversalParameterObject parameters)
         {
             goriya = new GoriyaStateMachine();
-            locationVector = parameters.Position;
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
             currentGoriyaSprite = goriyaSpriteRight;
@@ -58,7 +59,27 @@ namespace Game_Project
 
         public void Collide(Rectangle collision, int direction)
         {
-
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

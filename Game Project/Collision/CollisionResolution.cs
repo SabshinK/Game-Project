@@ -35,7 +35,6 @@ namespace Game_Project
                 if (commandObject1 != null)
                 {
                     Type commandType1 = Type.GetType("Game_Project." + commandObject1);
-                    Type[] types1 = { object1.GetType() };
                     ConstructorInfo[] constructor1 = commandType1.GetConstructors();
 
                     ParameterInfo[] paramInfos = constructor1[0].GetParameters();
@@ -51,7 +50,6 @@ namespace Game_Project
                 if (commandObject2 != null)
                 {
                     Type commandType2 = Type.GetType("Game_Project." + commandObject2);
-                    Type[] types2 = { object2.GetType() };
                     ConstructorInfo[] constructor2 = commandType2.GetConstructors();
 
                     ParameterInfo[] paramInfos = constructor2[0].GetParameters();

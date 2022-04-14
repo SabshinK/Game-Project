@@ -10,6 +10,7 @@ namespace Game_Project
     {
         private Vector2 position;
         public Vector2 Position => position;
+        public Vector2 GridPosition => new Vector2(position.X / 64, position.Y / 64);
         public Vector2 Size => sprite.Size;
 
         private float timer;
@@ -22,7 +23,7 @@ namespace Game_Project
         //constructor
         public Arrow(UniversalParameterObject parameters)
         {
-            position = parameters.Position;
+            position = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             timer = 0f;
             lifeSpan = 300f;
             moveFactor = 8;
