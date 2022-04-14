@@ -7,21 +7,6 @@
 		<Y>200</Y>
 	</Item>
 	<!--Enemies-->
-	<Item>
-		<ObjectType>BatEnemy</ObjectType>
-		<X>128</X>
-		<Y>128</Y>
-	</Item>
-	<Item>
-		<ObjectType>GoriyaEnemy</ObjectType>
-		<X>192</X>
-		<Y>128</Y>
-	</Item>
-	<Item>
-		<ObjectType>DragonEnemy</ObjectType>
-		<X>320</X>
-		<Y>192</Y>
-	</Item>
 	<!--Items-->
 	<!--Tiles-->
 	<Item>
