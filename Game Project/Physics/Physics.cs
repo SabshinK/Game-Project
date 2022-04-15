@@ -14,7 +14,7 @@ namespace Game_Project
         public Vector2 appliedForce;
 
         private const float DRAG = 2.0f;
-        private const float GRAVITY = 2.0f;
+        public const float GRAVITY = 2.0f;
         private const float TERMINAL_X = 5.0f;
         private const float TERMINAL_Y = 32.0f;
         
