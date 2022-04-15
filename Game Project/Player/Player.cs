@@ -18,6 +18,7 @@ namespace Game_Project
 
         public Vector2 location;
         public Vector2 Position => location;
+        public Vector2 GridPosition => new Vector2(location.X / 64, location.Y / 64);
         public Vector2 Size => sprite.Size;
 
         public bool FacingRight { get; private set; }
@@ -28,8 +29,8 @@ namespace Game_Project
             state = new IdleState(this);
             sprite = SpriteFactory.Instance.CreateSprite("idleRight");
 
-            location = parameters.Position;
-        
+            location = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
+
             Health = 3;
 
             FacingRight = true;
