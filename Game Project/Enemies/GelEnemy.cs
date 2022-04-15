@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,13 +10,14 @@ namespace Game_Project
 {
     public class GelEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
 
-        GelStateMachine gel;
+        EnemyStateMachine gel;
         ISprite gelSprite;
+        private int health = 10;
 
         private Vector2 locationVector;
         public Vector2 Position => locationVector;
@@ -30,7 +32,7 @@ namespace Game_Project
         {
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             lengthOfAction = 0;
-            gel = new GelStateMachine();
+            gel = new EnemyStateMachine(health);
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
             physics = new Physics();
         }
@@ -88,8 +90,8 @@ namespace Game_Project
         {
 
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            locationVector.Y += verticalDis;
+            //int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            //locationVector.Y += verticalDis;
 
             stateTuple = gel.getState();
 
@@ -106,14 +108,13 @@ namespace Game_Project
                     break;
                 case actions.moving:
 
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, gelAccel);
-                    if (stateTuple.Item2.Equals(direction.left))
+                    if (stateTuple.Item2)
                     {
-                        locationVector.X -= displacement;
+                        locationVector.X++;
                     }
                     else
                     {
-                        locationVector.X += displacement;
+                        locationVector.X--;
                     }
                     gelSprite.Update();
 
