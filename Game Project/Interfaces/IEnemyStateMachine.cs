@@ -6,7 +6,6 @@ namespace Game_Project
     {
 
         public enum actions {jumping, moving, attacking, falling, dead};
-        public enum direction {up, down, left, right };
 
         //This method is left in here in case we need it later. If it is not needed, take that boi out
         public void ChangeDirection();
@@ -15,6 +14,6 @@ namespace Game_Project
 
         public void Attack();
 
-        public Tuple<actions, direction> getState();
+        public Tuple<actions, bool> getState();
     }
 }

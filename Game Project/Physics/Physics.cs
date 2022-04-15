@@ -14,7 +14,7 @@ namespace Game_Project
         public Vector2 appliedForce;
 
         private const float DRAG = 2.0f;
-        private const float GRAVITY = 2.0f;
+        public const float GRAVITY = 2.0f;
         private const float TERMINAL_X = 5.0f;
         private const float TERMINAL_Y = 32.0f;
         
@@ -43,18 +43,24 @@ namespace Game_Project
             if (velocity.X < TERMINAL_X)
                 velocity.X += acceleration.X * time;
             
-            //if (drag < appliedForce.X)
-            //    drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //else
-            //    drag = appliedForce.X;
-            
             return displacement.X;
         }
 
-        public float VerticalChange(GameTime gameTime, float acceleration)
+        public float VerticalChange(GameTime gameTime)
         {
-            velocity.Y += acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            displacement.Y += (velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds) + (acceleration * (float)Math.Pow(gameTime.ElapsedGameTime.TotalSeconds, 2) * 0.5f);
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            acceleration.Y = appliedForce.Y - GRAVITY;
+            displacement.Y += (velocity.Y * time) + (acceleration.Y * (float)Math.Pow(time, 2) * 0.5f);
+
+            // Update variables for next call, like the new initial velocity and the acceleration if need be
+            if (velocity.Y > 0 && !falling)
+                velocity.Y += acceleration.Y * time;
+            else
+                appliedForce.Y = 0;
+
+            if (velocity.Y < TERMINAL_Y && falling)
+                velocity.Y += acceleration.Y * time;
 
             return displacement.Y;
         }
