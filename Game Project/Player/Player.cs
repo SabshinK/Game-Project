@@ -152,11 +152,11 @@ namespace Game_Project
             {
                 if (FacingRight)
                 {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
                 }
                 else
                 {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
+                    sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
                 }
             }
             //location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
