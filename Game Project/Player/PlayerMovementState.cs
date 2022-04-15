@@ -13,16 +13,10 @@ namespace Game_Project
         {
             player = manager;
 
-            //reset the movement variables
-            player.physics.drag = 0;
-
-            player.physics.acceleration.X = 0;
-            player.physics.velocity.X = 0;
-            player.physics.displacement.X = 5;
-
-            player.physics.acceleration.Y = 0;
-            player.physics.velocity.Y = 0;
-            player.physics.displacement.Y = 5;
+            // Reset physics stuff
+            player.physics.displacement = new Vector2(0.0f, 0.0f);
+            player.physics.velocity = new Vector2(0.0f, 0.0f);
+            player.physics.acceleration = new Vector2(0.0f, 0.0f);            
 
             // This snippet might be able to be put in a method or something it's used a few times I think
             if (player.FacingRight)
@@ -60,63 +54,49 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //horizontal movement
-
-                int displacement = (int)player.physics.HorizontalChange(gameTime);
-
-                if (!player.FacingRight)
-                {
-                    player.location.X -= displacement;
-                }
-                else
-                {
-                    player.location.X += displacement;
-                }
-
-                if (player.physics.drag < player.physics.appliedForce.X)
-                {
-                    player.physics.drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    player.physics.drag = player.physics.appliedForce.X;
-                }
-
-            //vertical movement
-            if (player.physics.appliedForce.Y > 0)
+            if (player.FacingRight)
             {
-                player.physics.falling = false;
-                if (player.FacingRight)
-                {
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-                }
-                else
-                {
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-                }
-
-                player.physics.acceleration.Y = player.physics.appliedForce.Y - player.physics.gravity;
-
-                player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
-
-                if (player.physics.velocity.Y >= 0)
-                {
-                    player.physics.falling = true;
-                }
+                player.location.X += player.physics.HorizontalChange(gameTime);
+            }
+            else
+            {
+                player.location.X -= player.physics.HorizontalChange(gameTime);
             }
 
+            //vertical movement
+            //if (player.physics.appliedForce.Y > 0)
+            //{
+            //    player.physics.falling = false;
+            //    if (player.FacingRight)
+            //    {
+            //        player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+            //    }
+            //    else
+            //    {
+            //        player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            //    }
+
+            //    player.physics.acceleration.Y = player.physics.appliedForce.Y - player.physics.gravity;
+
+            //    player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+
+            //    //slow down in the jump
+            //    player.physics.gravity += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            //    if (player.physics.velocity.Y >= 0)
+            //    {
+            //        player.physics.falling = true;
+            //    }
+            //}
+
             //go back to the idle state when movement is complete
-            if (player.physics.velocity.X <= 0 || (player.physics.falling && player.physics.velocity.Y <= 0))
+            if (player.physics.velocity.X <= 0 && (player.physics.falling && player.physics.velocity.Y <= 0))
             {
+                //player.physics.gravity = 2f;
                 BackToIdle();
             }
 
-            //projectiles
-            if (player.projectile != null)
-            {
-                player.projectile.Update(gameTime);
-            }
-
-            player.sprite.Update();
-        }
+            player.physics.Update(gameTime);
+        }   
     }
 }

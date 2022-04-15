@@ -14,9 +14,11 @@ namespace Game_Project
         public bool FacingRight => (bool)parameters["FacingRight"];
         public string AnimationName => parameters["Animation"].ToString();
 
+        // Change this to having multiple constructors, each one for a different type of object
         public UniversalParameterObject(Dictionary<string, object> parameters)
         {
             this.parameters = parameters;
         }
+
     }
 }
