@@ -18,8 +18,9 @@ namespace Game_Project
         StalfosStateMachine stalfos;
         ISprite stalfosSprite;
 
-        public Vector2 locationVector;
+        private Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => stalfosSprite.Size;
 
         int lengthOfAction = 0;
@@ -29,7 +30,7 @@ namespace Game_Project
         public StalfosEnemy(UniversalParameterObject parameters)
         {
             stalfos = new StalfosStateMachine();
-            locationVector = parameters.Position; //game will state where it wants the enemy when it is created
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y); //game will state where it wants the enemy when it is created
             stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
             physics = new Physics();
         }
@@ -56,6 +57,31 @@ namespace Game_Project
         public void Collide()
         {
             // TODO
+        }
+
+        public void Collide(Rectangle collision, int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Update(GameTime gameTime)

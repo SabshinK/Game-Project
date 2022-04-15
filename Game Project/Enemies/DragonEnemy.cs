@@ -17,20 +17,24 @@ namespace Game_Project
         DragonStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
 
-        Vector2 locationVector;
+        private Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => dragonSprite.Size;
 
         int lengthOfAction;
         IProjectile weapon;
         Physics physics;
-
+        bool falling = false;
         float accel = 1;
+
+        //test 
+        GameTime oldTime;
 
         public DragonEnemy(UniversalParameterObject parameters)
         {
             dragon = new DragonStateMachine();
-            locationVector = parameters.Position;
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;
@@ -55,7 +59,32 @@ namespace Game_Project
 
         public void Collide()
         {
-            //Used to keep track of this as a collideable object
+
+        }
+
+        public void Collide(Rectangle collision, int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -77,13 +106,15 @@ namespace Game_Project
 
         }
 
-        //The current AI for the dragon is a bit unnatural, and will be refactored. See commented code for the start.
+        //AI for dragon is super predictable.
         public void Update(GameTime gameTime)
         {
-
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            locationVector.Y += verticalDis;
+            if (falling)
+            {
+                int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+                locationVector.Y += verticalDis;
+            }
 
             stateTuple = dragon.getState();
 
@@ -122,7 +153,6 @@ namespace Game_Project
                     }
                     break;
                 case actions.moving:
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
                     if (stateTuple.Item2.Equals(direction.left))
                     {
                         locationVector.X--;
@@ -143,6 +173,9 @@ namespace Game_Project
                 default:
                     break;
             }
+
+            oldTime = gameTime;
+            falling = true;
             lengthOfAction++;
 
         }

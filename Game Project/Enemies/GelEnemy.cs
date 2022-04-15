@@ -17,8 +17,9 @@ namespace Game_Project
         GelStateMachine gel;
         ISprite gelSprite;
 
-        public Vector2 locationVector;
+        private Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => gelSprite.Size;
 
         int lengthOfAction = 0;
@@ -27,7 +28,7 @@ namespace Game_Project
 
         public GelEnemy(UniversalParameterObject parameters)
         {
-            locationVector = parameters.Position;
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             lengthOfAction = 0;
             gel = new GelStateMachine();
             gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
@@ -56,6 +57,31 @@ namespace Game_Project
         public void Collide()
         {
             //Used to keep track of this object as a collideable object
+        }
+
+        public void Collide(Rectangle collision, int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Update(GameTime gameTime)

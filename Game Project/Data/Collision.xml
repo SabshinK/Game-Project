@@ -119,10 +119,24 @@
 		<Command>null</Command>
 	</Item>
 	<Item>
+		<CollisionObjectType>DragonEnemy</CollisionObjectType>
+		<CollisionObjectType>Tile</CollisionObjectType>
+		<Direction>1</Direction>
+		<Command>EnemyCollideCommand</Command>
+		<Command>null</Command>
+	</Item>
+	<Item>
 		<CollisionObjectType>GelEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>null</Command>
+	</Item>
+	<Item>
+		<CollisionObjectType>GelEnemy</CollisionObjectType>
+		<CollisionObjectType>Tile</CollisionObjectType>
+		<Direction>1</Direction>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<Item>
@@ -133,7 +147,28 @@
 		<Command>null</Command>
 	</Item>
 	<Item>
+		<CollisionObjectType>GoriyaEnemy</CollisionObjectType>
+		<CollisionObjectType>Tile</CollisionObjectType>
+		<Direction>1</Direction>
+		<Command>EnemyCollideCommand</Command>
+		<Command>null</Command>
+	</Item>
+	<Item>
 		<CollisionObjectType>StalfosEnemy</CollisionObjectType>
+		<CollisionObjectType>Tile</CollisionObjectType>
+		<Direction>-1</Direction>
+		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>null</Command>
+	</Item>
+	<Item>
+		<CollisionObjectType>StalfosEnemy</CollisionObjectType>
+		<CollisionObjectType>Tile</CollisionObjectType>
+		<Direction>1</Direction>
+		<Command>EnemyCollideCommand</Command>
+		<Command>null</Command>
+	</Item>
+	<Item>
+		<CollisionObjectType>ZohEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>EnemyChangeDirectionCommand</Command>
@@ -142,8 +177,8 @@
 	<Item>
 		<CollisionObjectType>ZohEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
-		<Direction>-1</Direction>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Direction>1</Direction>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<!--Enemies colliding with Projectiles-->

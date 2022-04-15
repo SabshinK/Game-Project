@@ -39,4 +39,4 @@ Assets that have yet to be created have been replaced by assets from The Legend 
 
 ##THE FUTURE
 While many bugs and design considerations have been fixed and taken into account for this sprint, there are still some issues that need to be ironed out. 
-Smooth and efficient level loading is something we are still working on and will be implented next sprint. We will be working tirelessly to make the perfect game that every member of is envisioning.
+Smooth and efficient level loading is something we are still working on and will be implented next sprint. We will be working tirelessly to make the perfect game that every member of our team is envisioning.
