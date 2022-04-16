@@ -13,6 +13,6 @@ namespace Game_Project
 
         public void Attack();
 
-        public Tuple<bool, bool> getState(); // It's stay/follow, left/right
+        public Tuple<bool, bool, bool> getState(); // It's stay/follow, left/right
     }
 }
