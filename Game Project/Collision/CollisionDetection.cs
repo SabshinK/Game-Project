@@ -7,40 +7,17 @@ namespace Game_Project
 {
     public class CollisionDetection : IUpdateable
     {
-        private IPlayer player;
-
         private float side_overlap;
         private float updown_overlap;
-        private ICollideable firstCollideable;
-        private ICollideable secondCollideable;
-        private Vector2 location1;
-        private Vector2 location2;
-        private Vector2 size1;
-        private Vector2 size2;
-        private Rectangle rectangleObject1;
-        private Rectangle rectangleObject2;
 
         public enum CollideDirection { Top, Bottom, Left, Right };
         public CollideDirection direction;
 
-        List<IEnemy> enemies;
-        List<IProjectile> projectiles;
-        List<IItem> items;
-        List<ITile> tiles;
-
         private List<List<IGameObject>> gameObjects;
-
-        private const int movingObjectSize = 128;
-        private const int tileSize = 64;
 
         public CollisionDetection()
         {
             
-        }
-
-        public void GetCollisionLists()
-        {
-            gameObjects = GameObjectManager.Instance.GameObjects;
         }
 
         public void CheckCollision(IGameObject firstObject, IGameObject secondObject)
@@ -50,70 +27,73 @@ namespace Game_Project
             // and Size is an ICollideable property, so there is kind of an issue with what type the object would be declared as,
             // I will have to find a solution to this
 
-            firstCollideable = firstObject as ICollideable;
-            secondCollideable = secondObject as ICollideable;
-            location1 = firstObject.Position;
-            location2 = secondObject.Position;
-            size1 = firstCollideable.Size;
-            size2 = secondCollideable.Size;
+            ICollideable firstCollideable = firstObject as ICollideable;
+            ICollideable secondCollideable = secondObject as ICollideable;
 
-            rectangleObject1 = new Rectangle((int)location1.X, (int)location1.Y, (int)size1.X, (int)size1.Y);
-            rectangleObject1 = new Rectangle((int)location2.X, (int)location2.Y, (int)size2.X, (int)size2.Y);
-
-            // objects collide:
-            if (rectangleObject1.Intersects(rectangleObject2))
+            if (firstCollideable.Size != null && secondCollideable.Size != null)
             {
-                if (rectangleObject1.Right >= rectangleObject2.Left)
-                {
-                    // left overlap (right side of player):
-                    side_overlap = rectangleObject1.Right - rectangleObject2.Left;
-                    direction = CollideDirection.Left;
-                }
-                else
-                {
-                    // right overlap (left side of player):
-                    side_overlap = rectangleObject2.Right - rectangleObject1.Left;
-                    direction = CollideDirection.Right;
-                }
+                Rectangle rectangleObject1 = new Rectangle((int)firstObject.Position.X, (int)firstObject.Position.Y, (int)firstCollideable.Size.X, (int)firstCollideable.Size.Y);
+                Rectangle rectangleObject2 = new Rectangle((int)secondObject.Position.X, (int)secondObject.Position.Y, (int)secondCollideable.Size.X, (int)secondCollideable.Size.Y);
 
-                if (rectangleObject1.Top <= rectangleObject2.Bottom)
+                // objects collide:
+                if (rectangleObject1.Intersects(rectangleObject2))
                 {
-                    // bottom overlap (top side of player):
-                    updown_overlap = rectangleObject2.Bottom - rectangleObject1.Top;
-                    if (updown_overlap > side_overlap)
-                    {
-                        direction = CollideDirection.Bottom;
-                    }
-                }
-                else
-                {
-                    // top overlap (bottom side of player):
-                    updown_overlap = rectangleObject1.Bottom - rectangleObject2.Top;
-                    if (updown_overlap > side_overlap)
-                    {
-                        direction = CollideDirection.Bottom;
-                    }
-                }
+                    Rectangle collision = Rectangle.Intersect(rectangleObject1, rectangleObject2);
 
-                CollisionResolution.Instance.ResolveCollision(firstObject, secondObject, direction, rectangleObject1);
+                    if (rectangleObject1.Right >= rectangleObject2.Left)
+                    {
+                        // left overlap (right side of player):
+                        side_overlap = rectangleObject1.Right - rectangleObject2.Left;
+                        direction = CollideDirection.Left;
+                    }
+                    else
+                    {
+                        // right overlap (left side of player):
+                        side_overlap = rectangleObject2.Right - rectangleObject1.Left;
+                        direction = CollideDirection.Right;
+                    }
+
+                    if (rectangleObject1.Top <= rectangleObject2.Bottom)
+                    {
+                        // bottom overlap (top side of player):
+                        updown_overlap = rectangleObject2.Bottom - rectangleObject1.Top;
+                        if (updown_overlap > side_overlap)
+                        {
+                            direction = CollideDirection.Bottom;
+                        }
+                    }
+                    else
+                    {
+                        // top overlap (bottom side of player):
+                        updown_overlap = rectangleObject1.Bottom - rectangleObject2.Top;
+                        if (updown_overlap > side_overlap)
+                        {
+                            direction = CollideDirection.Bottom;
+                        }
+                    }
+
+                    CollisionResolution.Instance.ResolveCollision(firstObject, secondObject, direction, collision);
+                }
             }
+
+
         }
 
         public void Update(GameTime gameTime)
         {
-            // This all becomes checking the object in the first list in the list of lists against every next object and the objects in the
-            // second list, all of the things needed for collision calculations like position and size can be taken from the object, the only
-            // parameters needed for check collision are the two objects to compare
+            gameObjects = GameObjectManager.Instance.GameObjects;
 
-            foreach (IGameObject firstObject in gameObjects[0])
+            for (int i = 0; i < gameObjects[0].Count; i++)
             {
-                foreach (IGameObject moveableObject in gameObjects[0])
+                for (int j = i + 1; j < gameObjects[0].Count; j++)
                 {
-                    if (!(firstObject is IMoveable)) CheckCollision(firstObject, moveableObject);
+                    // Check each moveable object with each next moveable object and onward
+                    CheckCollision(gameObjects[0][i], gameObjects[0][j]);
                 }
                 foreach (IGameObject nonMoveableObject in gameObjects[1])
                 {
-                    CheckCollision(firstObject, nonMoveableObject);
+                    // Check moveable against the non-moveables
+                    CheckCollision(gameObjects[0][i], nonMoveableObject);
                 }
             }
         }

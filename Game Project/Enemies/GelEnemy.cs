@@ -55,23 +55,47 @@ namespace Game_Project
 
         public void Collide()
         {
-            //TODO
+            //Used to keep track of this object as a collideable object
         }
 
-        public void Fall()
+        public void Collide(Rectangle collision, int direction)
         {
-            gel.Fall();
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Update(GameTime gameTime)
         {
+
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            locationVector.Y += verticalDis;
 
             stateTuple = gel.getState();
 
             switch (stateTuple.Item1)
             {
                 case actions.dead:
-                    //GameObjectManager.remove(this);
+                    GameObjectManager.Instance.RemoveObject(this);
                     gelSprite = null;
                     break;
                 case actions.falling:
@@ -81,7 +105,7 @@ namespace Game_Project
                     break;
                 case actions.moving:
 
-                    int displacement = (int)physics.HorizontalChange(gameTime, gelAccel);
+                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, gelAccel);
                     if (stateTuple.Item2.Equals(direction.left))
                     {
                         locationVector.X -= displacement;

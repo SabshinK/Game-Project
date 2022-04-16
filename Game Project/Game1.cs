@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Game_Project
 {
@@ -20,7 +21,12 @@ namespace Game_Project
         public bool displayInventory = false;
         private ItemScroller scroller;
         private PauseMenu pauseMenu;
+        private GameWin gameWin;
+        private GameOver gameOver;
+        private HealthBar healthBar;
+
         private SpriteFont font;
+        private Song song;
 
         public Game1()
         {
@@ -40,7 +46,7 @@ namespace Game_Project
             keyboard = new KeyboardController(this);
 
             collisionDetection = new CollisionDetection();
-            scroller = new ItemScroller();
+          //  healthBar = new HealthBar();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
@@ -58,13 +64,21 @@ namespace Game_Project
             
             font = Content.Load<SpriteFont>("Text");
             pauseMenu = new PauseMenu(font);
+            gameOver = new GameOver(font);
+            gameWin = new GameWin(font);
 
             LevelLoader.Instance.LoadFile("sprites");
             LevelLoader.Instance.LoadFile("forest");
+            LevelLoader.Instance.LoadFile("collision");
+            
+            //healthBar = new HealthBar();
 
+            scroller = new ItemScroller();
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
 
-            collisionDetection.GetCollisionLists();
+            song = Content.Load<Song>("01 - At Dooms Gate");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -78,6 +92,12 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
+            healthBar.Position = camera.Position;
+            pauseMenu.Position = camera.Position;
+            gameWin.Position = camera.Position;
+            gameOver.Position = camera.Position;
+            scroller.Position = camera.Position;
+            //healthBar.Update(gameTime);
             if (!paused)
             {
                 GameObjectManager.Instance.Update(gameTime);
@@ -107,6 +127,8 @@ namespace Game_Project
                 pauseMenu.Draw(spriteBatch);
             }
 
+            //healthBar.Draw(spriteBatch);
+
             base.Draw(gameTime);
 
             spriteBatch.End();
@@ -114,6 +136,7 @@ namespace Game_Project
 
         public void Reset()
         {
+            paused = false;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());

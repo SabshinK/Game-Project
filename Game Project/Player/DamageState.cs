@@ -17,11 +17,11 @@ namespace Game_Project
 
             if (player.FacingRight)
             {
-                player.sprite = SpriteFactory.Instance.CreateSprite("damagedRight");
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
             }
             else
             {
-                player.sprite = SpriteFactory.Instance.CreateSprite("damagedLeft");
+                player.sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
             }
         }
         public void BackToIdle()
@@ -56,7 +56,7 @@ namespace Game_Project
                 timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             } else
             {
-                BackToIdle();
+                player.SetState(new IdleState(player));
             }
 
             if (player.projectile != null)

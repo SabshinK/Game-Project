@@ -15,6 +15,7 @@ namespace Game_Project
 
             //reset the movement variables
             player.physics.drag = 0;
+            player.physics.gravity = 2f;
 
             player.physics.acceleration.X = 0;
             player.physics.velocity.X = 0;
@@ -60,52 +61,57 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //horizontal movement
-                player.physics.acceleration.X = player.physics.appliedForce.X = player.physics.drag;
 
-                int displacement = (int)player.physics.HorizontalChange(gameTime, player.physics.acceleration.X);
+            int displacement = (int)player.physics.HorizontalChange(gameTime);
 
-                if (!player.FacingRight)
-                {
-                    player.location.X -= displacement;
-                }
-                else
-                {
-                    player.location.X += displacement;
-                }
+            if (!player.FacingRight)
+            {
+            player.location.X -= displacement;
+            }
+            else
+            {
+                player.location.X += displacement;
+            }
 
-                if (player.physics.drag < player.physics.appliedForce.X)
-                {
-                    player.physics.drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    player.physics.drag = player.physics.appliedForce.X;
-                }
+            if (player.physics.drag < player.physics.appliedForce.X)
+            {
+                player.physics.drag += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                player.physics.drag = player.physics.appliedForce.X;
+            }
 
             //vertical movement
             if (player.physics.appliedForce.Y > 0)
             {
                 player.physics.falling = false;
+                if (player.FacingRight)
+                {
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                }
+                else
+                {
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+                }
+
                 player.physics.acceleration.Y = player.physics.appliedForce.Y - player.physics.gravity;
 
-                if (!player.physics.falling)
-                {
-                    player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
-                } else
-                {
-                    player.location.Y += (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
-                }
+                player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+
+                //slow down in the jump
+                player.physics.gravity += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 if (player.physics.velocity.Y >= 0)
                 {
                     player.physics.falling = true;
-                    player.physics.appliedForce.Y = 0;
                 }
             }
 
             //go back to the idle state when movement is complete
             if (player.physics.velocity.X <= 0 || (player.physics.falling && player.physics.velocity.Y <= 0))
             {
+                player.physics.gravity = 2f;
                 BackToIdle();
             }
 

@@ -35,33 +35,31 @@ namespace Game_Project
                 if (commandObject1 != null)
                 {
                     Type commandType1 = Type.GetType("Game_Project." + commandObject1);
-                    Type[] types1 = { object1.GetType() };
-                    ConstructorInfo constructor1 = commandType1.GetConstructor(types1);
+                    ConstructorInfo[] constructor1 = commandType1.GetConstructors();
 
-                    ParameterInfo[] paramInfos = constructor1.GetParameters();
+                    ParameterInfo[] paramInfos = constructor1[0].GetParameters();
                     object[] parameters;
                     if (paramInfos.Length > 1)
                         parameters = new object[3] { object1, collision, (int)direction };
                     else
                         parameters = new object[1] { object1 };
 
-                    ICommand command = constructor1.Invoke(parameters) as ICommand;
+                    ICommand command = constructor1[0].Invoke(parameters) as ICommand;
                     command.Execute();
                 }
                 if (commandObject2 != null)
                 {
                     Type commandType2 = Type.GetType("Game_Project." + commandObject2);
-                    Type[] types2 = { object2.GetType() };
-                    ConstructorInfo constructor2 = commandType2.GetConstructor(types2);
+                    ConstructorInfo[] constructor2 = commandType2.GetConstructors();
 
-                    ParameterInfo[] paramInfos = constructor2.GetParameters();
+                    ParameterInfo[] paramInfos = constructor2[0].GetParameters();
                     object[] parameters;
                     if (paramInfos.Length > 1)
                         parameters = new object[3] { object2, collision, (int)direction };
                     else
                         parameters = new object[1] { object2 };
 
-                    ICommand command = constructor2.Invoke(parameters) as ICommand;
+                    ICommand command = constructor2[0].Invoke(parameters) as ICommand;
                     command.Execute();
                 }
             }              
@@ -109,12 +107,12 @@ namespace Game_Project
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(Tile), CollideDirection.Bottom), new Tuple<string, string>("PlayerFallCommand", null));
 
             //enemies colliding with the tiles
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(BatEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(DragonEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GelEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GoriyaEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(StalfosEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(ZohEnemy), typeof(Tile)), new Tuple<string, string>("EnemyChangeDirectionCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(BatEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(DragonEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GelEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(GoriyaEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(StalfosEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(ZohEnemy), typeof(Tile)), new Tuple<string, string>("EnemyCollideCommand", null));
 
             // player colliding with items
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(Item)), new Tuple<string, string>(null, "RemoveItemCommand"));

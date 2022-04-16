@@ -11,6 +11,6 @@ namespace Game_Project
 
         public void TakeDamage();
 
-        public void Fall();
+        public void Collide(Rectangle collision, int direction);
     }
 }
