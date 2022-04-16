@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Game_Project.ISidekickStateMachine;
 
-namespace Game_Project.Sidekick
+namespace Game_Project
 {
-    class SidekickStateMachine :ISidekickStateMachine
+    public class SidekickStateMachine :ISidekickStateMachine
     {
 
         private Tuple<bool, bool> sidekickState;
@@ -26,7 +25,7 @@ namespace Game_Project.Sidekick
         public void Follow()
         {
             Following = true;
-            FacingRight = player.FaceRight;
+            FacingRight = player.FacingRight;
 
         }
 
@@ -39,7 +38,7 @@ namespace Game_Project.Sidekick
         public void Stay()
         {
             Following = false;
-            FacingRight = player.FaceRight;
+            FacingRight = player.FacingRight;
         }
     }
 }

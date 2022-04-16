@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static Game_Project.ISidekickStateMachine;
 
-namespace Game_Project.AISidekick
+namespace Game_Project
 {
     class Sidekick : ISidekick
     {
-        Tuple<bool, bool> stateTuple;
-        private enum { up, down, left, right};
+        public Tuple<bool, bool> stateTuple; //Item1 is stay and Item2 is attacking
+        private enum direction {up, down, left, right};
         public bool Following;
-        private int distance;
+        private const int DISTANCE = 10;
+
         private Player player;
         Physics physics;
+
         ISidekickStateMachine sidekick;
         ISprite sidekickSprite;
         // SpriteBatch spriteBatch;
@@ -26,13 +27,22 @@ namespace Game_Project.AISidekick
         public Vector2 GridPosition => new Vector2(location.X / 64, location.Y / 64);
         public Vector2 Size => sidekickSprite.Size;
 
+        public bool facingRight;
+        public bool FacingRight => facingRight;
 
-        public Sidekick(bool follow)
+
+        public Sidekick(Player manager, bool follow)
         {
+            player = manager;
             Following = follow;
-            location = new Vector2(player.location.X - distance, player.location.Y);
+            location = new Vector2(player.location.X - DISTANCE, player.location.Y);
+            facingRight = player.FacingRight;
+
             sidekick = new SidekickStateMachine();
-            sidekickSprite = SpriteFactory.Instance.CreateSprite("sidekickSprite");
+            if (facingRight)
+                sidekickSprite = SpriteFactory.Instance.CreateSprite("rightSidekickSprite");
+            else
+                sidekickSprite = SpriteFactory.Instance.CreateSprite("leftSidekickSprite");
         }
         
 
@@ -59,18 +69,18 @@ namespace Game_Project.AISidekick
         }
 
         //returns true if there are no objects overlapping at this position.
-        public bool AccessiblePath(Vector2 spot)
+        public bool AccessiblePath(Vector2 playerLocation)
         {
             bool check = true;
             gameObjects = GameObjectManager.Instance.GameObjects;
 
-            foreach (List<IGameObjects> lists in gameObjects)
+            foreach (List<IGameObject> lists in gameObjects)
             {
-                foreach (List<GameObject> objects in lists)
+                foreach (IGameObject objects in lists)
                 {
-                    Rectangle sidekickRectangle = new Rectangle((int)location.X, (int)location.Y, (int)sidekickSprite.Size.X, (int)sidekickSprite.Size.Y);
+                    Rectangle newSidekickRectangle = new Rectangle((int)playerLocation.X, (int)playerLocation.Y, (int)sidekickSprite.Size.X, (int)sidekickSprite.Size.Y);
                     Rectangle collideRectangle = new Rectangle((int) objects.Position.X, (int)objects.Position.Y, (int)sidekickSprite.Size.X, (int)sidekickSprite.Size.Y);
-                    if (sidekickRectangle.Intersects(collideRectangle))
+                    if (newSidekickRectangle.Intersects(collideRectangle))
                     {
                         check = false;
                     }
@@ -88,26 +98,27 @@ namespace Game_Project.AISidekick
             if (stateTuple.Item1 == false)
             {
                 sidekick.Stay();
+
             } else
             {
-                if (stateTuple.Item2 == false) // facing left
+                if (!facingRight) // facing left
                 {
-                    if (!AccessiblePath(new Vector2((int)player.location.X + distance, (int)location.Y)))
+                    if (!AccessiblePath(new Vector2((int)player.location.X + DISTANCE, (int)location.Y)))
                     {
-                        location = new Vector2((int)player.location.X - distance, (int) player.location.Y);
+                        location = new Vector2((int)player.location.X - DISTANCE, (int) player.location.Y);
                     } else
                     {
-                        location = new Vector2((int)player.location.X + distance, (int) player.location.Y);
+                        location = new Vector2((int)player.location.X + DISTANCE, (int) player.location.Y);
                     }
-                } else
+                } else // facing right
                 {
-                    if (!AccessiblePath(new Vector2((int)player.location.X - distance, (int)location.Y)))
+                    if (!AccessiblePath(new Vector2((int)player.location.X - DISTANCE, (int)location.Y)))
                     {
-                        location = new Vector2((int)player.location.X + distance, (int)player.location.Y);
+                        location = new Vector2((int)player.location.X + DISTANCE, (int)player.location.Y);
                     }
                     else
                     {
-                        location = new Vector2((int)player.location.X - distance, (int)player.location.Y);
+                        location = new Vector2((int)player.location.X - DISTANCE, (int)player.location.Y);
                     }
                 }
             }

@@ -80,11 +80,7 @@ namespace Game_Project
             else
                 player.location.Y -= (int)player.physics.VerticalChange(gameTime);
 
-            // We shouldn't need to go back to the idle state because they will go back once they hit a tile. 
-            //if (player.physics.velocity.X <= 0 && (player.physics.falling && player.physics.velocity.Y >= player.physics.TERMINAL_Y))
-            //{
-            //    BackToIdle();
-            //}
+            // No code for going back to the idle state because they will go back once they collide with a tile. 
 
             player.physics.Update(gameTime);
         }   
