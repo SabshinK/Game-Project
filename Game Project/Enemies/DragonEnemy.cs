@@ -112,7 +112,7 @@ namespace Game_Project
             //always falling
             if (falling)
             {
-                int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+                int verticalDis = (int)physics.VerticalChange(gameTime);
                 locationVector.Y += verticalDis;
             }
 
@@ -126,7 +126,7 @@ namespace Game_Project
                     break;
                 case actions.falling:
                     locationVector.Y++;
-                    physics.VerticalChange(gameTime, 2);
+                    physics.VerticalChange(gameTime);
                     dragonSprite.Update();
                     break;
                 case actions.attacking:

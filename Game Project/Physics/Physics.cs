@@ -17,6 +17,7 @@ namespace Game_Project
         private const float GRAVITY = 2.0f;
         private const float TERMINAL_X = 5.0f;
         private const float TERMINAL_Y = 32.0f;
+        private const float TERMINAL_Y_HOLD = 40.0f;
         
         public bool falling;
 

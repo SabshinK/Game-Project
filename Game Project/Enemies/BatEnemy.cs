@@ -76,12 +76,12 @@ namespace Game_Project
                         break;
                     case actions.falling:
                         locationVector.Y++;
-                        physics.VerticalChange(gameTime, 2);
+                        physics.VerticalChange(gameTime);
                         batSprite.Update();
                         break;
                     case actions.moving:
 
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
+                    int displacement = 2;
                         if (stateTuple.Item2.Equals(direction.left))
                         {
                             locationVector.X -= displacement;

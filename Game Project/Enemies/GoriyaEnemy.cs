@@ -98,7 +98,7 @@ namespace Game_Project
             //always falling
             if (falling)
             {
-                int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+                int verticalDis = (int)physics.VerticalChange(gameTime);
                 locationVector.Y += verticalDis;
             }
 

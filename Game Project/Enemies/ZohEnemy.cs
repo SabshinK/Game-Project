@@ -85,7 +85,7 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            int verticalDis = (int)physics.VerticalChange(gameTime);
             locationVector.Y += verticalDis;
 
             stateTuple = zoh.getState();
@@ -98,7 +98,7 @@ namespace Game_Project
                     break;
                 case actions.falling:
                     locationVector.Y++;
-                    physics.VerticalChange(gameTime, 2);
+                    physics.VerticalChange(gameTime);
                     zohSprite.Update();
                     break;
                 case actions.moving:
