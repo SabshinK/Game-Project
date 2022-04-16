@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class SidekickStateMachine :ISidekickStateMachine
+    public class SidekickStateMachine : ISidekickStateMachine
     {
 
-        private Tuple<bool, bool> sidekickState;
+        private Tuple<bool, bool, bool> sidekickState;
         private bool FacingRight;
         public bool Following;
+        public bool Attacking;
         private Player player;
 
         public SidekickStateMachine()
@@ -18,8 +19,7 @@ namespace Game_Project
 
         public void Attack()
         {
-            //Attack is random
-
+            Attacking = true;
         }
 
         public void Follow()
@@ -29,9 +29,9 @@ namespace Game_Project
 
         }
 
-        public Tuple<bool, bool> getState()
+        public Tuple<bool, bool, bool> getState()
         {
-            sidekickState = new Tuple<bool, bool>(Following, FacingRight);
+            sidekickState = new Tuple<bool, bool, bool>(Following, Attacking, FacingRight);
             return sidekickState;
         }
 
