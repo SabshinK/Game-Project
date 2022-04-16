@@ -5,17 +5,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.Physics;
 using static Game_Project.IEnemyStateMachine;
+using Game_Project.Enemies;
 
 namespace Game_Project
 {
     public class StalfosEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
 
-        StalfosStateMachine stalfos;
+        EnemyStateMachine stalfos;
         ISprite stalfosSprite;
 
         private Vector2 locationVector;
@@ -23,13 +24,15 @@ namespace Game_Project
         public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => stalfosSprite.Size;
 
+        private int health = 30;
+
         int lengthOfAction = 0;
         Physics physics;
         float accel = 1;
         
         public StalfosEnemy(UniversalParameterObject parameters)
         {
-            stalfos = new StalfosStateMachine();
+            stalfos = new EnemyStateMachine(health);
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y); //game will state where it wants the enemy when it is created
             stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
             physics = new Physics();
@@ -87,9 +90,9 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime);
-            locationVector.Y += verticalDis;
+            ////always falling
+            //int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            //locationVector.Y += verticalDis;
 
             stateTuple = stalfos.getState();
 
@@ -105,15 +108,13 @@ namespace Game_Project
                     stalfosSprite.Update();
                     break;
                 case actions.moving:
-
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
-                    if (stateTuple.Item2.Equals(direction.left))
+                    if (stateTuple.Item2)
                     {
-                        locationVector.X -= displacement;
+                        locationVector.X++;
                     }
                     else
                     {
-                        locationVector.X += displacement;
+                        locationVector.X--;
                     }
                     stalfosSprite.Update();
 

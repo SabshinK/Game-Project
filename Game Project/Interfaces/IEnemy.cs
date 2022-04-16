@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Game_Project
 {
-    public interface IEnemy : IGameObject, IMoveable, IUpdateable, IDrawable, ICollideable
+    public interface IEnemy : IGameObject, IMoveable, ICollideable
     {
         public void ChangeDirection();
 

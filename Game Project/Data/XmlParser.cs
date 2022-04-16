@@ -71,10 +71,6 @@ namespace Game_Project
                 {
                     if (readTypes.ContainsKey(reader.Name))
                     {
-                        // if the item has an attribute, it is the index for the parameter object and should be returned
-                        //int parameterIndex = -1;
-                        //if (reader.HasAttributes)
-                        //    parameterIndex = Convert.ToInt32(reader[0]);
                         data.Add(new Tuple<string, object>(reader.Name, readTypes[reader.Name].Invoke()));
                     }
                 }

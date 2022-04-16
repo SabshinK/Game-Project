@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,12 +10,13 @@ namespace Game_Project
 {
     public class BatEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
-        BatStateMachine bat;
+        EnemyStateMachine bat;
         ISprite batSprite;
+        private int health = 20;
 
         private Vector2 locationVector;
         public Vector2 Position => locationVector;
@@ -22,17 +24,13 @@ namespace Game_Project
         public Vector2 Size => batSprite.Size;
 
         int lengthOfAction;
-
-        Physics physics;
-        float accel = 1;
         
         public BatEnemy(UniversalParameterObject parameters)
         {
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             lengthOfAction = 0;
-            bat = new BatStateMachine();
+            bat = new EnemyStateMachine(health);
             batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
-            physics = new Physics();
         }
         public void ChangeDirection()
         {
@@ -41,7 +39,7 @@ namespace Game_Project
 
         public void Attack()
         {
-            bat.Attack();
+            //Not needed, only damage dealt is from contact.
         }
 
         public void TakeDamage()
@@ -75,20 +73,15 @@ namespace Game_Project
                     batSprite = null;
                         break;
                     case actions.falling:
-                        locationVector.Y++;
-                        physics.VerticalChange(gameTime);
-                        batSprite.Update();
                         break;
                     case actions.moving:
-
-                    int displacement = 2;
-                        if (stateTuple.Item2.Equals(direction.left))
+                        if (stateTuple.Item2)
                         {
-                            locationVector.X -= displacement;
+                            locationVector.X++;
                         }
                         else
                         {
-                            locationVector.X += displacement;
+                            locationVector.X--;
                         }
                         batSprite.Update();
 
