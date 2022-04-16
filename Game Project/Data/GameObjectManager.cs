@@ -72,13 +72,24 @@ namespace Game_Project
             }
         }
 
-        // Player should always be the first object of the second list but I don't want to make this assumption
+        // Player should always be the first object of the second list but we don't want to make this assumption
         public Player GetPlayer()
         {
             for (int i = 0; i < GameObjects[0].Count; i++)
             {
                 if (GameObjects[0][i] is IPlayer)
                     return (Player)GameObjects[0][i];
+            }
+            // Couldn't find it
+            return null;
+        }
+
+        public Sidekick GetSidekick()
+        {
+            for (int i = 0; i < GameObjects[0].Count; i++)
+            {
+                if (GameObjects[0][i] is ISidekick)
+                    return (Sidekick)GameObjects[0][i];
             }
             // Couldn't find it
             return null;
