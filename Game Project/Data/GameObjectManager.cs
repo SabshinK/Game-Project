@@ -13,8 +13,9 @@ namespace Game_Project
         private static GameObjectManager instance = new GameObjectManager();
         public static GameObjectManager Instance => instance;
 
+        // To prevent errors with updating the game object lists while iterating, we will keep track of when we are iterating and have queues
+        // for the items that need to be added or removed
         public bool iterating = false;
-
         private Queue<IGameObject> toAdd = new Queue<IGameObject>();
         private Queue<IGameObject> toRemove = new Queue<IGameObject>();
 
@@ -55,20 +56,14 @@ namespace Game_Project
 
             iterating = false;
 
-            if (toAdd.Count > 0) { 
-
-                foreach (IGameObject gameObject in toAdd)
-                {
-                    RegisterObject(gameObject);
-                }
+            while (toAdd.Count > 0)
+            {
+                RegisterObject(toAdd.Dequeue());
             }
 
-            if (toRemove.Count > 0)
+            while (toRemove.Count > 0)
             {
-                foreach (IGameObject gameObject in toRemove)
-                {
-                    RemoveObject(gameObject);
-                }
+                RemoveObject(toRemove.Dequeue());
             }
         }
 
@@ -97,45 +92,40 @@ namespace Game_Project
 
         public void RegisterObject(IGameObject newObject)
         {
-            // instead of this logic above, first check if the passed object is moveable, if so add it to the first list, if not add
-            // it to the second. There will always be two lists in the list of lists
-            
-            if (newObject is IPlayer || newObject is IEnemy || newObject is IProjectile) 
+            if (!iterating)
             {
-                if (!iterating)
+                if (newObject is IMoveable)
                 {
                     GameObjects[0].Add(newObject); //This will add to the first list which has the moveable items. 
-
-                } else
-                {
-                    toAdd.Enqueue(newObject);
                 }
-            } 
-            else 
+                else
+                {
+                    GameObjects[1].Add(newObject); //This will add the non-moveable items such as tile and item to the second list.
+                }
+            }
+            else
             {
-                GameObjects[1].Add(newObject); //This will add the non-moveable items such as tile and item to the second list.
+                toAdd.Enqueue(newObject);
             }
         }
 
         public void RemoveObject(IGameObject deadObject)
         {
-            // instead of this logic above, first check if the passed object is moveable, if so iterate through the first list, if
-            // not iterate through the second. There will always be two lists in the list of lists
-            if (deadObject is IPlayer || deadObject is IEnemy || deadObject is IProjectile) 
+            if (!iterating)
             {
-                if (!iterating)
+                if (deadObject is IMoveable)
                 {
-                    GameObjects[0].Remove(deadObject); //This will remove from the first list which has the moveable items. 
+                    GameObjects[0].Remove(deadObject); //This will remove from the first list which has the moveable items.                         
                 }
                 else
                 {
-                    toRemove.Enqueue(deadObject);
+                    GameObjects[1].Remove(deadObject); //This will remove the non-moveable item such as tile and item to the second list.
                 }
-            } 
-            else 
+            }
+            else
             {
-                GameObjects[1].Remove(deadObject); //This will remove the non-moveable item such as tile and item to the second list.
-            }  
+                toRemove.Enqueue(deadObject);
+            }
         }
 
         public void Reset()
