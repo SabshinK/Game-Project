@@ -89,8 +89,7 @@ namespace Game_Project
 			RegisterCommand(false, Keys.P, false, new PauseCommand(game));
 
 			// AI Commands
-			RegisterCommand(false, Keys.Space, false, new SidekickAttackCommand(sidekick));
-			RegisterCommand(false, Keys.R, false, new SidekickStayOrFollowCommand(sidekick));
+			RegisterCommand(false, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
             
 			RegisterCommand(true, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(true, Keys.R, false, new ResetCommand(game));
