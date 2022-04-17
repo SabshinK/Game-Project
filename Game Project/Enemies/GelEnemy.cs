@@ -90,8 +90,8 @@ namespace Game_Project
         {
 
             //always falling
-            //int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            //locationVector.Y += verticalDis;
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y += verticalDis;
 
             stateTuple = gel.getState();
 
@@ -100,11 +100,6 @@ namespace Game_Project
                 case actions.dead:
                     GameObjectManager.Instance.RemoveObject(this);
                     gelSprite = null;
-                    break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime);
-                    gelSprite.Update();
                     break;
                 case actions.moving:
 

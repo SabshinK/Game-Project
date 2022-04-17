@@ -73,15 +73,15 @@ namespace Game_Project
                     batSprite = null;
                         break;
                     case actions.falling:
-                        break;
+                        break; //Bat cannot fall
                     case actions.moving:
-                        if (stateTuple.Item2)
+                        if (stateTuple.Item2) //Treats right as going up, the bat only moves up and down
                         {
-                            locationVector.X++;
+                            locationVector.Y--;
                         }
                         else
                         {
-                            locationVector.X--;
+                            locationVector.Y++;
                         }
                         batSprite.Update();
 
