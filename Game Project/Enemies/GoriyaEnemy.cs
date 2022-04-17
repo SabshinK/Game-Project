@@ -57,7 +57,7 @@ namespace Game_Project
 
         public void Collide()
         {
-            falling = false;
+
         }
 
         public void Collide(Rectangle collision, int direction)
@@ -98,12 +98,9 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            //always falling
-            //if (falling)
-            //{
-            //    int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            //    locationVector.Y += verticalDis;
-            //}
+            //always falling           
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y += verticalDis;
 
             if (weapon != null && !weapon.finished)
             {
@@ -157,8 +154,6 @@ namespace Game_Project
                 goriyaSpriteLeft = null;
                 goriyaSpriteRight = null;
             }
-
-            falling = true;
             currentGoriyaSprite.Update();
             lengthOfAction++;
         }
