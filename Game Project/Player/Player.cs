@@ -159,7 +159,7 @@ namespace Game_Project
                     sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
                 }
             }
-            //location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
+            location.Y += (int)physics.VerticalChange(gameTime);
 
             state.Update(gameTime);
         }
