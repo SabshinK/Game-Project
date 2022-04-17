@@ -19,7 +19,7 @@ namespace Game_Project
         public Vector2 location;
         public Vector2 Position => location;
         public Vector2 GridPosition => new Vector2(location.X / 64, location.Y / 64);
-        public Vector2 Size => sprite.Size;
+        public Vector2 Size => new Vector2(sprite.Size.X / 2, sprite.Size.Y);
 
         public bool FacingRight { get; private set; }
 
