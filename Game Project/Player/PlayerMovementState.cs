@@ -64,37 +64,23 @@ namespace Game_Project
             }
 
             //vertical movement
-            //if (player.physics.appliedForce.Y > 0)
-            //{
-            //    player.physics.falling = false;
-            //    if (player.FacingRight)
-            //    {
-            //        player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-            //    }
-            //    else
-            //    {
-            //        player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-            //    }
+            if (player.physics.appliedForce.Y > 0)
+                player.physics.falling = false;
+            else
+                player.physics.falling = true;
 
-            //    player.physics.acceleration.Y = player.physics.appliedForce.Y - player.physics.gravity;
+            if (player.FacingRight)
+                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+            else
+                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
 
-            //    player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
+            //change position
+            if (player.physics.falling)
+                player.location.Y += (int)player.physics.VerticalChange(gameTime);
+            else
+                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
 
-            //    //slow down in the jump
-            //    player.physics.gravity += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            //    if (player.physics.velocity.Y >= 0)
-            //    {
-            //        player.physics.falling = true;
-            //    }
-            //}
-
-            //go back to the idle state when movement is complete
-            if (player.physics.velocity.X <= 0 && (player.physics.falling && player.physics.velocity.Y <= 0))
-            {
-                //player.physics.gravity = 2f;
-                BackToIdle();
-            }
+            // No code for going back to the idle state because they will go back once they collide with a tile. 
 
             player.physics.Update(gameTime);
         }   

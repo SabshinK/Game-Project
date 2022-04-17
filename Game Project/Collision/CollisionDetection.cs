@@ -22,11 +22,6 @@ namespace Game_Project
 
         public void CheckCollision(IGameObject firstObject, IGameObject secondObject)
         {
-            // Position and size can be obtained from the objects, each object has references to these things and can be gotten 
-            // like: object1.Size or object1.Position. These variables are Vector2's. Currently Position is an IGameObject property
-            // and Size is an ICollideable property, so there is kind of an issue with what type the object would be declared as,
-            // I will have to find a solution to this
-
             ICollideable firstCollideable = firstObject as ICollideable;
             ICollideable secondCollideable = secondObject as ICollideable;
 

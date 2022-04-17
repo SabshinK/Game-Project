@@ -100,7 +100,7 @@ namespace Game_Project
                     break;
                 case actions.falling:
                     locationVector.Y++;
-                    physics.VerticalChange(gameTime, 2);
+                    physics.VerticalChange(gameTime);
                     zohSprite.Update();
                     break;
                 case actions.moving:
