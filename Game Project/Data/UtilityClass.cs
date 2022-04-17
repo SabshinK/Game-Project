@@ -42,7 +42,7 @@ namespace Game_Project
         public static int ArrayNewObject
         {
             get { magicNums = setMagicNums(); return (int) magicNums[0]; }
-            set { (magicNums[0] = (int) value); }
+            set { magicNums[0] = (int) value; }
         }
 
         public static int AppliedForceY
