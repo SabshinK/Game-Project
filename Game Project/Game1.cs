@@ -139,7 +139,7 @@ namespace Game_Project
             paused = false;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
         }
     }
 }
