@@ -32,6 +32,7 @@ namespace Game_Project
             for (int i = 0; i < values.Length; i++)
             {
                 magicNums[i] = Convert.ToDouble(values[i]); // need to convert to int because of readFile
+
             }
 
             return magicNums;
@@ -298,14 +299,13 @@ namespace Game_Project
         {
             get { magicNums = setMagicNums(); return (int) magicNums[43]; }
             set { magicNums[43] = (int) value; }
-        }
-
+        }          
         public static int GoriyaHealth
         {
             get { magicNums = setMagicNums(); return (int) magicNums[44]; }
             set { magicNums[44] = (int) value; }
         }
-
+        
         public static int StalfosHealth
         {
             get { magicNums = setMagicNums(); return (int)magicNums[45]; }
@@ -314,7 +314,7 @@ namespace Game_Project
         public static int ZohHealth
         {
             get { magicNums = setMagicNums(); return (int) magicNums[46]; }
-            set { magicNums[46] = (int)value; }
+            set { magicNums[46] = (int) value; }
         }
 
     }
