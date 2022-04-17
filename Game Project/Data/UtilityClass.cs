@@ -293,6 +293,23 @@ namespace Game_Project
             get { magicNums = setMagicNums(); return (int) magicNums[42]; }
             set { magicNums[42] = (int) value; }
         }
+                   
+        public static int GoriyaHealth
+        {
+            get { magicNums = setMagicNums(); return (int) magicNums[43]; }
+            set { magicNums[43] = (int) value; }
+        }
+
+        public static int StalfosHealth
+        {
+            get { magicNums = setMagicNums(); return (int) magicNums[44]; }
+            set { magicNums[44] = (int) value; }
+        }
+        public static int ZohHealth
+        {
+            get { magicNums = setMagicNums(); return (int) magicNums[45]; }
+            set { magicNums[45] = (int) value; }
+        }
 
     }
 }
