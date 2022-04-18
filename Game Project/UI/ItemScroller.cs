@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class ItemScroller : IDrawable
+    class ItemScroller : IDrawable, IUI
     {
         private List<String> items;
         private int numItems = 6;

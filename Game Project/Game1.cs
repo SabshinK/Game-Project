@@ -86,7 +86,7 @@ namespace Game_Project
 
             
             
-            if (!gameStateMachine.paused)
+            if (!gameStateMachine.paused || !gameStateMachine.over || !gameStateMachine.win)
             {
                 GameObjectManager.Instance.Update(gameTime);
                 collisionDetection.Update(gameTime);

@@ -50,7 +50,7 @@ namespace Game_Project
         public void Draw(SpriteBatch spriteBatch)
         {
             // Same as update, change this
-            healthBar.Draw(spriteBatch);
+           // healthBar.Draw(spriteBatch);
         }
     }
 }
