@@ -73,7 +73,7 @@ namespace Game_Project
             healthBar = new HealthBar();
 
             scroller = new ItemScroller();
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
 
             song = Content.Load<Song>("01 - At Dooms Gate");
             MediaPlayer.Play(song);
@@ -139,7 +139,7 @@ namespace Game_Project
             paused = false;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
         }
     }
 }

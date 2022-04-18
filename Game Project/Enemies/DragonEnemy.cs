@@ -105,13 +105,9 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            //WILL NEED TO BE UPDATED IF WE WANT THIS KEPT
             //always falling
-            //if (falling)
-            //{
-            //    int verticalDis = (int)physics.VerticalChange(gameTime, physics.GRAVITY);
-            //    locationVector.Y += verticalDis;
-            //}
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y += verticalDis;
 
             stateTuple = dragon.getState();
 
@@ -120,11 +116,6 @@ namespace Game_Project
                 case actions.dead:
                     GameObjectManager.Instance.RemoveObject(this);
                     dragonSprite = null;
-                    break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime);
-                    dragonSprite.Update();
                     break;
                 case actions.attacking:
                     if (lengthOfAction <= 1)
