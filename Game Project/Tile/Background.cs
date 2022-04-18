@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class Background : IGameObject
+    public class Background : IGameObject 
     {
         private Vector2 position;
         public Vector2 Position => position;
@@ -22,12 +22,12 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-
+            sprite.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            sprite.Draw(spriteBatch, position);
         }
     }
 }

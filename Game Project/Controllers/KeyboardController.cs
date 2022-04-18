@@ -65,7 +65,7 @@ namespace Game_Project
 			}
         }
 
-		public void LoadContent(Player player)
+		public void LoadContent(Player player, Sidekick sidekick)
 		{
 			stateMappings = new Dictionary<bool, Dictionary<Keys, Tuple<bool, ICommand>>>();
 			stateMappings.Add(false, new Dictionary<Keys, Tuple<bool, ICommand>>());
@@ -87,6 +87,9 @@ namespace Game_Project
 			RegisterCommand(false, Keys.E, false, new TakeDamageCommand(player));
 			RegisterCommand(false, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(false, Keys.P, false, new PauseCommand(game));
+
+			// AI Commands
+			RegisterCommand(false, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
             
 			RegisterCommand(true, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(true, Keys.R, false, new ResetCommand(game));

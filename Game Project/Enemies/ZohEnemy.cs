@@ -52,7 +52,7 @@ namespace Game_Project
 
         public void Collide()
         {
-            //TODO
+            
         }
 
         public void Collide(Rectangle collision, int direction)
@@ -87,8 +87,8 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //always falling
-            //int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            //locationVector.Y += verticalDis;
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y += verticalDis;
 
             stateTuple = zoh.getState();
 
@@ -97,11 +97,6 @@ namespace Game_Project
                 case actions.dead:
                     GameObjectManager.Instance.RemoveObject(this);
                     zohSprite = null;
-                    break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime);
-                    zohSprite.Update();
                     break;
                 case actions.moving:
 
@@ -121,7 +116,6 @@ namespace Game_Project
                         lengthOfAction = 0;
                     }
                     break;
-
                 default:
                     break;
             }

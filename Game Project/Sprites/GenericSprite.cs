@@ -44,9 +44,7 @@ namespace Game_Project
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, frames[currentFrame].Width * scale, 
                 frames[currentFrame].Height * scale);
 
-            //spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             spriteBatch.Draw(spriteSheet, destinationRectangle, frames[currentFrame], Color.White);
-            //spriteBatch.End();
         }
     }
 }

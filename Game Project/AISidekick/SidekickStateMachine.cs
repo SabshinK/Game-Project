@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Game_Project.ISidekickStateMachine;
 
-namespace Game_Project.Sidekick
+namespace Game_Project
 {
-    class SidekickStateMachine :ISidekickStateMachine
+    public class SidekickStateMachine : ISidekickStateMachine
     {
 
-        private Tuple<bool, bool> sidekickState;
+        private Tuple<bool, bool, bool> sidekickState;
         private bool FacingRight;
         public bool Following;
+        public bool Attacking;
         private Player player;
 
         public SidekickStateMachine()
@@ -19,27 +19,26 @@ namespace Game_Project.Sidekick
 
         public void Attack()
         {
-            //Attack is random
-
+            Attacking = true;
         }
 
         public void Follow()
         {
             Following = true;
-            FacingRight = player.FaceRight;
+            FacingRight = player.FacingRight;
 
         }
 
-        public Tuple<bool, bool> getState()
+        public Tuple<bool, bool, bool> getState()
         {
-            sidekickState = new Tuple<bool, bool>(Following, FacingRight);
+            sidekickState = new Tuple<bool, bool, bool>(Following, Attacking, FacingRight);
             return sidekickState;
         }
 
         public void Stay()
         {
             Following = false;
-            FacingRight = player.FaceRight;
+            FacingRight = player.FacingRight;
         }
     }
 }
