@@ -72,7 +72,7 @@ namespace Game_Project
                     GameObjectManager.Instance.RemoveObject(this);
                     batSprite = null;
                         break;
-                    case actions.falling:
+                case actions.falling:
                         break; //Bat cannot fall
                     case actions.moving:
                         if (stateTuple.Item2) //Treats right as going up, the bat only moves up and down

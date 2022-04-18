@@ -16,14 +16,14 @@ namespace Game_Project
         public UniversalParameterObject(Dictionary<string, object> parameters)
         {
             object value;
-            parameters.TryGetValue("Position", out value);
-            Position = (Vector2)value;
+            if (parameters.TryGetValue("Position", out value))
+                Position = (Vector2)value;
 
-            parameters.TryGetValue("FacingRight", out value);
-            FacingRight = (bool)value;
+            if (parameters.TryGetValue("FacingRight", out value))
+                FacingRight = (bool)value;
 
-            parameters.TryGetValue("Animation", out value);
-            AnimationName = (string)value;
+            if (parameters.TryGetValue("Animation", out value))
+                AnimationName = (string)value;
         }
 
         // Enemy constructor
