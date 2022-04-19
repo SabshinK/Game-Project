@@ -54,10 +54,6 @@ namespace Game_Project
             if (FacingRight != faceRight)
             {
                 FacingRight = faceRight;
-                if (FacingRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
             }
             state.Move();
         }
@@ -150,18 +146,19 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
-            if (!moving)
-            {
-                if (FacingRight)
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
-                }
-                else
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
-                }
-                location.Y -= (int)physics.VerticalChange(gameTime);
-            }
+            //if (!moving)
+            //{
+            //    if (FacingRight)
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+            //    }
+            //    else
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            //    }
+            //}
+            physics.Update(gameTime);
+            location.Y -= (int)physics.VerticalChange(gameTime);
 
             state.Update(gameTime);
         }
