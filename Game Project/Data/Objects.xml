@@ -3,8 +3,8 @@
 <Asset Type="ObjectData">
 	<Item>
 		<ObjectType>Player</ObjectType>
-		<X>100</X>
-		<Y>200</Y>
+		<X>2</X>
+		<Y>8</Y>
 	</Item>
 	<!--Enemies-->
 	<!--Items-->

@@ -76,9 +76,9 @@ namespace Game_Project
 
             //change position
             if (player.physics.falling)
-                player.location.Y += (int)player.physics.VerticalChange(gameTime);
-            else
                 player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+            else
+                player.location.Y += (int)player.physics.VerticalChange(gameTime);
 
             // No code for going back to the idle state because they will go back once they collide with a tile. 
 
