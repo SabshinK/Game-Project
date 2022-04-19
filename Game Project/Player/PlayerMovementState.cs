@@ -54,13 +54,21 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //horizontal movement
-            if (player.FacingRight)
+            player.moving = true;
+            if (player.physics.velocity.X > 0 || player.physics.appliedForce.X > 0)
             {
-                player.location.X += player.physics.HorizontalChange(gameTime);
+                if (player.FacingRight)
+                {
+                    player.location.X += player.physics.HorizontalChange(gameTime);
+                }
+                else
+                {
+                    player.location.X -= player.physics.HorizontalChange(gameTime);
+                }
             }
             else
             {
-                player.location.X -= player.physics.HorizontalChange(gameTime);
+                BackToIdle();
             }
 
             //vertical movement
@@ -69,16 +77,23 @@ namespace Game_Project
             else
                 player.physics.falling = true;
 
-            if (player.FacingRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-            else
-                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            if (player.physics.velocity.Y > 0 || player.physics.appliedForce.Y > 0)
+            {
+                if (player.FacingRight)
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                else
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
 
-            //change position
-            if (player.physics.falling)
-                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+                //change position
+                if (player.physics.falling)
+                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+                else
+                    player.location.Y += (int)player.physics.VerticalChange(gameTime);
+            }
             else
-                player.location.Y += (int)player.physics.VerticalChange(gameTime);
+            {
+                BackToIdle();
+            }
 
             // No code for going back to the idle state because they will go back once they collide with a tile. 
 
