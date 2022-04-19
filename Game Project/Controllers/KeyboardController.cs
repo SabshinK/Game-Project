@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Game_Project
@@ -15,6 +16,8 @@ namespace Game_Project
 		// Some keys should only fire off commands the moment they are pressed, so these keys will be stored and if they are being held then
 		// a new command won't fire until the player stops pressing the key and presses it again
 		private List<Keys> keysDown;
+
+		private bool iterating;
 
 		public Game1 game;
 
@@ -31,12 +34,19 @@ namespace Game_Project
 
 		private void CheckKeysDown(KeyboardState state)
         {
+			// Since we can't iterate through a list and remove things from it at the same time, we will keep track of the
+			// keys that need to be removed and modify keysDown after iterating
+			List<Keys> keysUp = new List<Keys>();
+
 			foreach (Keys key in keysDown)
-            {
+			{
 				if (state.IsKeyUp(key))
-                {
-					keysDown.Remove(key);
-                }
+					keysUp.Add(key);
+			}
+
+			foreach (Keys key in keysUp)
+            {
+				keysDown.Remove(key);
             }
         }
 
@@ -45,14 +55,12 @@ namespace Game_Project
 			KeyboardState state = Keyboard.GetState();
 			Keys[] pressedKeys = state.GetPressedKeys();
 			Dictionary<Keys, Tuple<bool, ICommand>> mappings = stateMappings[game.paused];
-			
-			// Clear out keys that aren't being pressed
-			CheckKeysDown(state);
 
+			// Clear out keys that aren't being pressed
 			foreach (Keys key in pressedKeys)
 			{
 				if (mappings.ContainsKey(key))
-                {
+				{
 					if (!keysDown.Contains(key) || mappings[key].Item1) // If the key we want isn't being pressed and held or if it should be held
 					{
 						mappings[key].Item2.Execute();
@@ -61,8 +69,10 @@ namespace Game_Project
 						if (!mappings[key].Item1)
 							keysDown.Add(key);
 					}
-                }
+				}
 			}
+			
+			CheckKeysDown(state);
         }
 
 		public void LoadContent(Player player, Sidekick sidekick)
