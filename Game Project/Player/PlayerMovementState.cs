@@ -18,11 +18,6 @@ namespace Game_Project
             player.physics.velocity = new Vector2(0.0f, 0.0f);
             player.physics.acceleration = new Vector2(0.0f, 0.0f);            
 
-            // This snippet might be able to be put in a method or something it's used a few times I think
-            if (player.FacingRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-            else
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
         }
 
         public void BackToIdle() 
@@ -55,18 +50,18 @@ namespace Game_Project
         {
             //horizontal movement
             player.moving = true;
-            if (player.physics.velocity.X > 0 || player.physics.appliedForce.X > 0)
+            if (player.FacingRight)
             {
-                if (player.FacingRight)
-                {
-                    player.location.X += player.physics.HorizontalChange(gameTime);
-                }
-                else
-                {
-                    player.location.X -= player.physics.HorizontalChange(gameTime);
-                }
+                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+                player.location.X += player.physics.HorizontalChange(gameTime);
             }
             else
+            {
+                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+                player.location.X -= player.physics.HorizontalChange(gameTime);
+            }
+
+            if (!(player.physics.velocity.X > 0))
             {
                 BackToIdle();
             }
@@ -77,20 +72,18 @@ namespace Game_Project
             else
                 player.physics.falling = true;
 
-            if (player.physics.velocity.Y > 0 || player.physics.appliedForce.Y > 0)
-            {
-                if (player.FacingRight)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-                else
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-
-                //change position
-                if (player.physics.falling)
-                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
-                else
-                    player.location.Y += (int)player.physics.VerticalChange(gameTime);
-            }
+            if (player.FacingRight)
+                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
             else
+                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+
+            //change position
+            if (player.physics.falling)
+                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+            else
+                player.location.Y += (int)player.physics.VerticalChange(gameTime);
+
+            if (player.physics.velocity.Y > 0)
             {
                 BackToIdle();
             }
