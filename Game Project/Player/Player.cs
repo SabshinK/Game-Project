@@ -22,6 +22,7 @@ namespace Game_Project
         public Vector2 Size => new Vector2(sprite.Size.X / 2, sprite.Size.Y);
 
         public bool FacingRight { get; private set; }
+        public bool moving;
 
         // Constructor
         public Player(UniversalParameterObject parameters)
@@ -34,6 +35,7 @@ namespace Game_Project
             Health = 3;
 
             FacingRight = true;
+            moving = false;
 
             physics = new Physics();
 
@@ -52,10 +54,6 @@ namespace Game_Project
             if (FacingRight != faceRight)
             {
                 FacingRight = faceRight;
-                if (FacingRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
             }
             state.Move();
         }
@@ -148,18 +146,19 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
-            if (!(physics.appliedForce.X > 0) && !(physics.appliedForce.Y > 0))
-            {
-                if (FacingRight)
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-                }
-                else
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-                }
-            }
-            location.Y += (int)physics.VerticalChange(gameTime);
+            //if (!moving)
+            //{
+            //    if (FacingRight)
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+            //    }
+            //    else
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            //    }
+            //}
+            physics.Update(gameTime);
+            location.Y -= (int)physics.VerticalChange(gameTime);
 
             state.Update(gameTime);
         }

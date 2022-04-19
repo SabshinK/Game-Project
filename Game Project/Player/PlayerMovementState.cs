@@ -18,11 +18,6 @@ namespace Game_Project
             player.physics.velocity = new Vector2(0.0f, 0.0f);
             player.physics.acceleration = new Vector2(0.0f, 0.0f);            
 
-            // This snippet might be able to be put in a method or something it's used a few times I think
-            if (player.FacingRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-            else
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
         }
 
         public void BackToIdle() 
@@ -54,17 +49,20 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //horizontal movement
+            player.moving = true;
             if (player.FacingRight)
             {
+                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
                 player.location.X += player.physics.HorizontalChange(gameTime);
             }
             else
             {
+                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
                 player.location.X -= player.physics.HorizontalChange(gameTime);
             }
 
             //vertical movement
-            if (player.physics.appliedForce.Y > 0)
+            if (player.physics.appliedForce.Y > 1)
                 player.physics.falling = false;
             else
                 player.physics.falling = true;
@@ -76,9 +74,15 @@ namespace Game_Project
 
             //change position
             if (player.physics.falling)
-                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
-            else
                 player.location.Y += (int)player.physics.VerticalChange(gameTime);
+            else
+                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+
+            // stop once you've slowed down completely
+            if (!(player.physics.velocity.Y > 0) && !(player.physics.velocity.Y > 0))
+            {
+                BackToIdle();
+            }
 
             // No code for going back to the idle state because they will go back once they collide with a tile. 
 

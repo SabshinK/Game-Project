@@ -12,6 +12,7 @@ namespace Game_Project
 
         public PlayerItemState(Player player)
         {
+            player.moving = false;
             this.player = player;
             if (player.FacingRight)
             {
