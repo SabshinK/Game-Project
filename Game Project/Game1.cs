@@ -75,9 +75,9 @@ namespace Game_Project
             scroller = new ItemScroller();
             keyboard.LoadContent(GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
 
-            song = Content.Load<Song>("01 - At Dooms Gate");
-            MediaPlayer.Play(song);
-            MediaPlayer.IsRepeating = true;
+            //song = Content.Load<Song>("01 - At Dooms Gate");
+            //MediaPlayer.Play(song);
+            //MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
