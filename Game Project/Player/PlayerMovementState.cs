@@ -61,13 +61,8 @@ namespace Game_Project
                 player.location.X -= player.physics.HorizontalChange(gameTime);
             }
 
-            if (!(player.physics.velocity.X > 0))
-            {
-                BackToIdle();
-            }
-
             //vertical movement
-            if (player.physics.appliedForce.Y > 0)
+            if (player.physics.appliedForce.Y > 1)
                 player.physics.falling = false;
             else
                 player.physics.falling = true;
@@ -79,11 +74,12 @@ namespace Game_Project
 
             //change position
             if (player.physics.falling)
-                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
-            else
                 player.location.Y += (int)player.physics.VerticalChange(gameTime);
+            else
+                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
 
-            if (player.physics.velocity.Y > 0)
+            // stop once you've slowed down completely
+            if (!(player.physics.velocity.Y > 0) && !(player.physics.velocity.Y > 0))
             {
                 BackToIdle();
             }

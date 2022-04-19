@@ -54,10 +54,6 @@ namespace Game_Project
             if (FacingRight != faceRight)
             {
                 FacingRight = faceRight;
-                if (FacingRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
             }
             state.Move();
         }
