@@ -55,7 +55,7 @@ namespace Game_Project
         {
             //horizontal movement
             player.moving = true;
-            if (player.physics.velocity.X > 0)
+            if (player.physics.velocity.X > 0 || player.physics.appliedForce.X > 0)
             {
                 if (player.FacingRight)
                 {
@@ -77,7 +77,7 @@ namespace Game_Project
             else
                 player.physics.falling = true;
 
-            if (player.physics.velocity.Y > 0)
+            if (player.physics.velocity.Y > 0 || player.physics.appliedForce.Y > 0)
             {
                 if (player.FacingRight)
                     player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
