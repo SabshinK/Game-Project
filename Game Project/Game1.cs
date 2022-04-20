@@ -46,7 +46,6 @@ namespace Game_Project
             keyboard = new KeyboardController(this);
 
             collisionDetection = new CollisionDetection();
-          //  healthBar = new HealthBar();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
 
@@ -71,14 +70,14 @@ namespace Game_Project
             LevelLoader.Instance.LoadFile("forest");
             LevelLoader.Instance.LoadFile("collision");
             
-            //healthBar = new HealthBar();
+            healthBar = new HealthBar();
 
             scroller = new ItemScroller();
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
 
-            song = Content.Load<Song>("01 - At Dooms Gate");
-            MediaPlayer.Play(song);
-            MediaPlayer.IsRepeating = true;
+            //song = Content.Load<Song>("01 - At Dooms Gate");
+            //MediaPlayer.Play(song);
+            //MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -92,12 +91,13 @@ namespace Game_Project
                 Exit();
 
             keyboard.Update(gameTime);
+
             healthBar.Position = camera.Position;
             pauseMenu.Position = camera.Position;
             gameWin.Position = camera.Position;
             gameOver.Position = camera.Position;
             scroller.Position = camera.Position;
-            //healthBar.Update(gameTime);
+            healthBar.Update(gameTime);
             if (!paused)
             {
                 GameObjectManager.Instance.Update(gameTime);
@@ -139,7 +139,7 @@ namespace Game_Project
             paused = false;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,17 +10,20 @@ namespace Game_Project
 {
     public class GoriyaEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
 
-        GoriyaStateMachine goriya;
+        EnemyStateMachine goriya;
         ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
 
         public Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => currentGoriyaSprite.Size;
+
+        private int health = 30;
 
         int lengthOfAction = 0;
         Boomerang weapon;
@@ -29,8 +33,8 @@ namespace Game_Project
         
         public GoriyaEnemy(UniversalParameterObject parameters)
         {
-            goriya = new GoriyaStateMachine();
-            locationVector = parameters.Position;
+            goriya = new EnemyStateMachine(health);
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
             goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
             currentGoriyaSprite = goriyaSpriteRight;
@@ -53,7 +57,7 @@ namespace Game_Project
 
         public void Collide()
         {
-            falling = false;
+
         }
 
         public void Collide(Rectangle collision, int direction)
@@ -94,12 +98,9 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            //always falling
-            if (falling)
-            {
-                int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-                locationVector.Y += verticalDis;
-            }
+            //always falling           
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y += verticalDis;
 
             if (weapon != null && !weapon.finished)
             {
@@ -125,33 +126,25 @@ namespace Game_Project
             //An attempt to refactor this to something better led to a plethora of bugs 
             if (stateTuple.Item1.Equals(actions.moving)) {
 
-                int displacement = 2; // (int)physics.HorizontalChange(gameTime, acceleration);
-
-                if (stateTuple.Item2.Equals(direction.right)) {
+                if (stateTuple.Item2) {
                     currentGoriyaSprite = goriyaSpriteRight;
-                    locationVector.X += displacement;
+                    locationVector.X++;
                 }
                 else {
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    locationVector.X -= displacement;
+                    locationVector.X--;
                 }
             }
             else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0) {
-                if (stateTuple.Item1.Equals(direction.right))
+                if (stateTuple.Item2)
                 {
-                    Dictionary<string, object> parameters = new Dictionary<string, object>();
-                    parameters.Add("Position", locationVector);
-                    parameters.Add("FacingRight", true);
                     currentGoriyaSprite = goriyaSpriteRight;
-                    weapon = new Boomerang(new UniversalParameterObject(parameters));
+                    weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
                 }
                 else
                 {
-                    Dictionary<string, object> parameters = new Dictionary<string, object>();
-                    parameters.Add("Position", locationVector);
-                    parameters.Add("FacingRight", false);
                     currentGoriyaSprite = goriyaSpriteLeft;
-                    weapon = new Boomerang(new UniversalParameterObject(parameters));
+                    weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
                 }
 
             }
@@ -161,8 +154,6 @@ namespace Game_Project
                 goriyaSpriteLeft = null;
                 goriyaSpriteRight = null;
             }
-
-            falling = true;
             currentGoriyaSprite.Update();
             lengthOfAction++;
         }

@@ -17,10 +17,14 @@ namespace Game_Project
         public int Health { get; private set; }
 
         public Vector2 location;
-        public Vector2 Position => location;
-        public Vector2 Size => sprite.Size;
+        // The location needed for moving the sprite is based on the sprite size but the Position to be accessed by other classes
+        // and for use in collision is smaller than the sprite size
+        public Vector2 Position => new Vector2(location.X + 32, location.Y);
+        public Vector2 GridPosition => new Vector2(Position.X / 64, Position.Y / 64);
+        public Vector2 Size => new Vector2(sprite.Size.X / 2, sprite.Size.Y);
 
         public bool FacingRight { get; private set; }
+        public bool moving;
 
         // Constructor
         public Player(UniversalParameterObject parameters)
@@ -28,11 +32,12 @@ namespace Game_Project
             state = new IdleState(this);
             sprite = SpriteFactory.Instance.CreateSprite("idleRight");
 
-            location = parameters.Position;
-        
+            location = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
+
             Health = 3;
 
             FacingRight = true;
+            moving = false;
 
             physics = new Physics();
 
@@ -51,10 +56,6 @@ namespace Game_Project
             if (FacingRight != faceRight)
             {
                 FacingRight = faceRight;
-                if (FacingRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
             }
             state.Move();
         }
@@ -147,17 +148,19 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
-            if (!(physics.appliedForce.X > 0) && !(physics.appliedForce.Y > 0)) {
-                if (FacingRight)
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
-                }
-                else
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
-                }
-            }
-            location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
+            //if (!moving)
+            //{
+            //    if (FacingRight)
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+            //    }
+            //    else
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            //    }
+            //}
+            physics.Update(gameTime);
+            location.Y -= (int)physics.VerticalChange(gameTime);
 
             state.Update(gameTime);
         }

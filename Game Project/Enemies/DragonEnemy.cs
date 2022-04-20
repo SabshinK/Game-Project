@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,35 +10,33 @@ namespace Game_Project
 {
     public class DragonEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
 
-        DragonStateMachine dragon;
+        EnemyStateMachine dragon;
         ISprite dragonSprite, waitingSprite, attackSprite;
+        private int health = 70;
 
-        Vector2 locationVector;
+        private Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => dragonSprite.Size;
 
         int lengthOfAction;
         IProjectile weapon;
         Physics physics;
-        bool falling = false;
-        float accel = 1;
-
-        //test 
-        GameTime oldTime;
 
         public DragonEnemy(UniversalParameterObject parameters)
         {
-            dragon = new DragonStateMachine();
-            locationVector = parameters.Position;
+            dragon = new EnemyStateMachine(health);
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
             attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
             dragonSprite = waitingSprite;
             physics = new Physics();
+            lengthOfAction = 0;
 
         }
 
@@ -94,10 +93,7 @@ namespace Game_Project
             {
                 if (weapon == null)
                 {
-                    Dictionary<string, object> parameters = new Dictionary<string, object>();
-                    parameters.Add("Position", locationVector);
-                    parameters.Add("FacingRight", false);
-                    weapon = new Candle(new UniversalParameterObject(parameters));
+                    weapon = new Candle(new UniversalParameterObject(locationVector, FacingRight));
                     GameObjectManager.Instance.RegisterObject(weapon);
                 }
                 weapon.Draw(spriteBatch);
@@ -108,12 +104,10 @@ namespace Game_Project
         //AI for dragon is super predictable.
         public void Update(GameTime gameTime)
         {
+
             //always falling
-            if (falling)
-            {
-                int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-                locationVector.Y += verticalDis;
-            }
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y += verticalDis;
 
             stateTuple = dragon.getState();
 
@@ -123,11 +117,6 @@ namespace Game_Project
                     GameObjectManager.Instance.RemoveObject(this);
                     dragonSprite = null;
                     break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime, 2);
-                    dragonSprite.Update();
-                    break;
                 case actions.attacking:
                     if (lengthOfAction <= 1)
                     {
@@ -135,7 +124,7 @@ namespace Game_Project
                     }
                     else
                     {
-                        if (lengthOfAction < 50)
+                        if (lengthOfAction < 50) //Length of weapon animation
                         {
                             if (weapon != null)
                             {
@@ -152,17 +141,17 @@ namespace Game_Project
                     }
                     break;
                 case actions.moving:
-                    if (stateTuple.Item2.Equals(direction.left))
-                    {
-                        locationVector.X--;
-                    }
-                    else
+                    if (stateTuple.Item2)
                     {
                         locationVector.X++;
                     }
+                    else
+                    {
+                        locationVector.X--;
+                    }
                     dragonSprite.Update();
 
-                    if (lengthOfAction > 300)
+                    if (lengthOfAction > 300) //Provides constant behavior of going back and forth and shooting
                     {
                         Attack();
                         lengthOfAction = 0;
@@ -172,9 +161,6 @@ namespace Game_Project
                 default:
                     break;
             }
-
-            oldTime = gameTime;
-            falling = true;
             lengthOfAction++;
 
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,26 +10,28 @@ namespace Game_Project
 {
     public class ZohEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
 
-        ZohStateMachine zoh;
+        EnemyStateMachine zoh;
         ISprite zohSprite;
 
-        public Vector2 locationVector;
+        private Vector2 locationVector;
         public Vector2 Position => locationVector;
+        public Vector2 GridPosition => new Vector2(locationVector.X / 64, locationVector.Y / 64);
         public Vector2 Size => zohSprite.Size;
 
         int lengthOfAction = 0;
         Physics physics;
         float accel = 1;
+        private int health = 20;
         
         public ZohEnemy(UniversalParameterObject parameters)
         {
-            zoh = new ZohStateMachine();
-            locationVector = parameters.Position; //game will state where it wants the enemy when it is created
+            zoh = new EnemyStateMachine(health);
+            locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y); //game will state where it wants the enemy when it is created
             zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
             physics = new Physics();
         }
@@ -49,7 +52,7 @@ namespace Game_Project
 
         public void Collide()
         {
-            //TODO
+            
         }
 
         public void Collide(Rectangle collision, int direction)
@@ -84,7 +87,7 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
+            int verticalDis = (int)physics.VerticalChange(gameTime);
             locationVector.Y += verticalDis;
 
             stateTuple = zoh.getState();
@@ -95,22 +98,15 @@ namespace Game_Project
                     GameObjectManager.Instance.RemoveObject(this);
                     zohSprite = null;
                     break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime, 2);
-                    zohSprite.Update();
-                    break;
                 case actions.moving:
 
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
-
-                    if (stateTuple.Item2.Equals(direction.left))
+                    if (stateTuple.Item2)
                     {
-                        locationVector.X -= displacement;
+                        locationVector.X++;
                     }
                     else
                     {
-                        locationVector.X += displacement;
+                        locationVector.X--;
                     }
                     zohSprite.Update();
 
@@ -120,7 +116,6 @@ namespace Game_Project
                         lengthOfAction = 0;
                     }
                     break;
-
                 default:
                     break;
             }

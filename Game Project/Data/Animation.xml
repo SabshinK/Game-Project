@@ -3,69 +3,316 @@
 <Asset Type="AnimationData">
 	<!--Enemies and Boss animation-->
 	<Item>
-		<AnimationName>gelGeneric</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>skeletonIdleRight</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 1 8 16</Rectangle>
-		<Rectangle>10 1 8 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 64 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>keeseGeneric</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>skeletonIdleLeft</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>53 1 16 16</Rectangle>
-		<Rectangle>70 1 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 128 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>zohGeneric</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>skeletonMovingRight</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>19 1 16 16</Rectangle>
-		<Rectangle>36 1 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 64 64 64</Rectangle>
+		<Rectangle>64 64 64 64</Rectangle>
+		<Rectangle>128 64 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>stalfosGeneric</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>skeletonMovingLeft</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>69 18 16 16</Rectangle>
-		<Rectangle>69 35 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 128 64 64</Rectangle>
+		<Rectangle>64 128 64 64</Rectangle>
+		<Rectangle>128 128 64 64</Rectangle>
+	</Item>	
+	<Item>
+		<AnimationName>skeletonDamagedRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 64 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>goriyaDown</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>skeletonDamagedLeft</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 18 16 16</Rectangle>
-		<Rectangle>18 18 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>192 128 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>goriyaUp</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>skeletonDeadRight</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>35 18 16 16</Rectangle>
-		<Rectangle>52 18 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>256 64 64 64</Rectangle>
+		<Rectangle>320 64 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>goriyaRight</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>skeletonDeadLeft</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 35 16 16</Rectangle>
-		<Rectangle>18 35 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>256 128 64 64</Rectangle>
+		<Rectangle>320 128 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>goriyaLeft</AnimationName>
-		<Texture>TempDungeonEnemies</Texture>
+		<AnimationName>beeIdleRight</AnimationName>
+		<Texture>Enemies</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>35 35 16 16</Rectangle>
-		<Rectangle>52 35 8 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 192 64 64</Rectangle>
 	</Item>
+	<Item>
+		<AnimationName>beeIdleLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 256 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>beeMovingRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 192 64 64</Rectangle>
+		<Rectangle>64 192 64 64</Rectangle>
+		<Rectangle>128 192 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>beeMovingLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 256 64 64</Rectangle>
+		<Rectangle>64 256 64 64</Rectangle>
+		<Rectangle>128 256 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>beeDamagedRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 193 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>beeDamagedLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 256 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>beeDeadRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 192 64 64</Rectangle>
+		<Rectangle>320 192 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>beeDeadLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 256 64 64</Rectangle>
+		<Rectangle>320 256 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingIdleRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 320 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingIdleLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 384 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingMovingRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 320 64 64</Rectangle>
+		<Rectangle>64 320 64 64</Rectangle>
+		<Rectangle>128 320 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingMovingLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 384 64 64</Rectangle>
+		<Rectangle>64 384 64 64</Rectangle>
+		<Rectangle>128 384 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingDamagedRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 320 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingDamagedLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 384 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingDeadRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 320 64 64</Rectangle>
+		<Rectangle>320 320 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>shroomlingDeadLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 384 64 64</Rectangle>
+		<Rectangle>320 384 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelIdleRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 448 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelIdleLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 512 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelMovingRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 448 64 64</Rectangle>
+		<Rectangle>64 448 64 64</Rectangle>
+		<Rectangle>128 448 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelMovingLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 512 64 64</Rectangle>
+		<Rectangle>64 512 64 64</Rectangle>
+		<Rectangle>128 512 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelDamagedRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 448 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelDamagedLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 512 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelDeadRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 448 64 64</Rectangle>
+		<Rectangle>320 448 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>gelDeadLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 512 64 64</Rectangle>
+		<Rectangle>320 512 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugIdleRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 576 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugIdleLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 640 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugMovingRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 576 64 64</Rectangle>
+		<Rectangle>64 576 64 64</Rectangle>
+		<Rectangle>128 576 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugMovingLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 640 64 64</Rectangle>
+		<Rectangle>64 640 64 64</Rectangle>
+		<Rectangle>128 640 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugDamagedRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 576 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugDamagedLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>192 640 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugDeadRight</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 576 64 64</Rectangle>
+		<Rectangle>320 576 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>slugDeadLeft</AnimationName>
+		<Texture>Enemies</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>256 640 64 64</Rectangle>
+		<Rectangle>320 640 64 64</Rectangle>
+	</Item>
+	
 	<Item>
 		<AnimationName>dragonWaiting</AnimationName>
 		<Texture>TempBosses</Texture>
