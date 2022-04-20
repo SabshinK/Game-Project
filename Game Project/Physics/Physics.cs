@@ -10,6 +10,7 @@ namespace Game_Project
     {        
         public Vector2 displacement;
         public Vector2 velocity;
+        public Vector2 secondaryVelocity;
         public Vector2 acceleration;
         public Vector2 appliedForce;
 
@@ -17,15 +18,12 @@ namespace Game_Project
         public const float GRAVITY = 2.0f;
         private const float TERMINAL_X = 5.0f;
         private const float TERMINAL_Y = 32.0f;
-        
-        public bool falling;
 
         public Physics()
         {
-            falling = true;
-
             displacement = new Vector2(0.0f, 0.0f);
             velocity = new Vector2(0.0f, 0.0f);
+            secondaryVelocity = new Vector2(0.0f, 0.0f);
             acceleration = new Vector2(0.0f, 0.0f);
 
             appliedForce = new Vector2(0.0f, 0.0f);
@@ -38,16 +36,32 @@ namespace Game_Project
             // Update initial variables for use with changing displacement
             acceleration.X = appliedForce.X - DRAG;
 
-            if (acceleration.X >= 0) {
+            if (acceleration.X >= 0)
+            {
                 if (velocity.X < TERMINAL_X)
                     displacement.X += (velocity.X * time) + (acceleration.X * (float)Math.Pow(time, 2) * 0.5f);
             }
             else
+            {
                 displacement.X -= (velocity.X * time) + ((-1 * acceleration.X) * (float)Math.Pow(time, 2) * 0.5f);
+            }
+
 
             // Update variables for next call, like the new initial velocity and the acceleration if need be
             if (velocity.X < TERMINAL_X)
+            { 
                 velocity.X += acceleration.X * time;
+                secondaryVelocity.X = velocity.X;
+            }
+            else 
+            {
+                if (appliedForce.X < 2)
+                    secondaryVelocity.X += acceleration.X * time; //acceleration is negative here
+                else
+                {
+                    velocity.X = secondaryVelocity.X;
+                }
+            }
 
             if (appliedForce.X > 0.0f)
                 appliedForce.X /= 2;
@@ -62,15 +76,24 @@ namespace Game_Project
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             acceleration.Y = appliedForce.Y - GRAVITY;
-            displacement.Y += (velocity.Y * time) + (acceleration.Y * (float)Math.Pow(time, 2) * 0.5f);
+
+            if (acceleration.Y >= 0)
+            {
+                if (velocity.Y < TERMINAL_Y)
+                    displacement.Y += (velocity.Y * time) + (acceleration.Y * (float)Math.Pow(time, 2) * 0.5f);
+            }
+            else
+            {
+                displacement.Y -= (velocity.Y * time) + ((-1 * acceleration.Y) * (float)Math.Pow(time, 2) * 0.5f);
+            }
 
             // Update variables for next call, like the new initial velocity and the acceleration if need be
-            if (velocity.Y > 0 && !falling)
+            if (velocity.Y > 0)
                 velocity.Y += acceleration.Y * time;
             else
                 appliedForce.Y = 0;
 
-            if (velocity.Y < TERMINAL_Y && falling)
+            if (velocity.Y < TERMINAL_Y)
                 velocity.Y += acceleration.Y * time;
 
             if (appliedForce.Y > 0.0f)
