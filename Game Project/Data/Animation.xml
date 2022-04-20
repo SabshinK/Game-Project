@@ -334,25 +334,81 @@
 
 	<!--Tiles-->>
 	<Item>
-		<AnimationName>lightGrottoGround</AnimationName>
+		<AnimationName>forestDirt</AnimationName>
 		<Texture>TileSet</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
 		<Rectangle>0 0 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>darkGrottoGround</AnimationName>
+		<AnimationName>forestGrass</AnimationName>
 		<Texture>TileSet</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
 		<Rectangle>64 0 64 64</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>grottoPlatform</AnimationName>
+		<AnimationName>forestMoss</AnimationName>
 		<Texture>TileSet</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
 		<Rectangle>128 0 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>forestRock</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>forestRockLight</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>64 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>forestBrick</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>128 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>forestTrunkDark</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 128 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>forestTrunk</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>64 128 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>breakableTile</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>128 128 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>forestLeaves</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 128 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>forestLeavesLight</AnimationName>
+		<Texture>TileSet</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>64 128 64 64</Rectangle>
 	</Item>
 
 	<!--Projectile animations-->
