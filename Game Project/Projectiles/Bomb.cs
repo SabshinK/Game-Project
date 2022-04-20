@@ -17,6 +17,8 @@ namespace Game_Project
         private float timer;
         private float lifeSpan;
 
+        private int explosionScale = 10; // magic number rip
+
         // This bool doesn't do anything rn, it's just here to satisfy IMoveable
         public bool FacingRight { get; private set; }
 
@@ -27,6 +29,9 @@ namespace Game_Project
             timer = 0f;
             lifeSpan = 2f;
             sprite = SpriteFactory.Instance.CreateSprite("drumGeneric");
+            explosionTimer = 0f;
+            explosionLifeSpan = 1f;
+            sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
         }
 
         public void Collide()
@@ -40,10 +45,27 @@ namespace Game_Project
             //sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             //if bomb timer exceeds its life span, update sprite, reset timer
+
+            //explosion code needs help
             if (timer >= lifeSpan)
             {
                 sprite = SpriteFactory.Instance.CreateSprite("bombExplosion");
                 timer = 0f;
+
+                Size.x = Size.x * explosionScale;
+                Size.y = Size.y * explosionScale;
+                position.x = position.x - Size.x/2;
+                position.y = position.y - Size.y/2;
+
+                while (explosionTimer < explosionLifeSpan)
+                {
+                    explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                
+                position.x = position.x + Size.x/2;
+                position.y = position.y + Size.y/2;
+                Size.x = Size.x / explosionScale;
+                Size.y = Size.y / explosionScale;
             }
 
 
