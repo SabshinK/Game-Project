@@ -73,6 +73,7 @@ namespace Game_Project
 			}
 			
 			CheckKeysDown(state);
+
         }
 
 		public void LoadContent(Player player, Sidekick sidekick)
@@ -98,7 +99,7 @@ namespace Game_Project
 			RegisterCommand(false, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(false, Keys.P, false, new PauseCommand(game));
 
-			// AI Commands
+			// Sidekick Commands
 			RegisterCommand(false, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
             
 			RegisterCommand(true, Keys.Q, false, new QuitCommand(game));

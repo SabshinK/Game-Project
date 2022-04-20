@@ -103,7 +103,7 @@ namespace Game_Project
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(ZohEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "EnemyDamageCommand"));
 
             // player colliding with the tiles
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(Tile)), new Tuple<string, string>("IdleCommand", null));
+            //directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(Tile)), new Tuple<string, string>("IdleCommand", null));
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(Tile), CollideDirection.Bottom), new Tuple<string, string>("PlayerFallCommand", null));
 
             //enemies colliding with the tiles
