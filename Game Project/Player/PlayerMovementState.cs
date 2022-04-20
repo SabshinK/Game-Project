@@ -102,7 +102,7 @@ namespace Game_Project
 
             Debug.WriteLine(player.physics.displacement.X);
 
-            player.physics.Update(gameTime);
+            //player.physics.Update(gameTime);
         }   
     }
 }

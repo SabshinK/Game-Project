@@ -17,8 +17,10 @@ namespace Game_Project
         public int Health { get; private set; }
 
         public Vector2 location;
-        public Vector2 Position => location;
-        public Vector2 GridPosition => new Vector2(location.X / 64, location.Y / 64);
+        // The location needed for moving the sprite is based on the sprite size but the Position to be accessed by other classes
+        // and for use in collision is smaller than the sprite size
+        public Vector2 Position => new Vector2(location.X + 32, location.Y);
+        public Vector2 GridPosition => new Vector2(Position.X / 64, Position.Y / 64);
         public Vector2 Size => new Vector2(sprite.Size.X / 2, sprite.Size.Y);
 
         public bool FacingRight { get; private set; }
