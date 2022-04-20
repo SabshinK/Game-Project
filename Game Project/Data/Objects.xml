@@ -3623,7 +3623,7 @@
 	</Item>
 	<Item>
 		<ObjectType>Tile</ObjectType>
-		<X>+</X>
+		<X>44</X>
 		<Y>42</Y>
 		<Animation>forestDirt</Animation>
 	</Item>
