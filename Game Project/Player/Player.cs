@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace Game_Project
 {
@@ -128,6 +129,7 @@ namespace Game_Project
         public void Bump(Rectangle collision, int direction)
         {
             isColliding = true;
+            
 
             switch (direction)
             {
@@ -140,12 +142,12 @@ namespace Game_Project
                     physics.velocity.Y = 0;
                     break;
                 case 2:
-                    location.X -= collision.Width;
-                    physics.velocity.X = 0;
+                    location.X += collision.Width;
+                    state.BackToIdle();
                     break;
                 case 3:
-                    location.X += collision.Width;
-                    physics.velocity.X = 0;
+                    location.X -= collision.Width;
+                    state.BackToIdle();
                     break;
                 default:
                     break;

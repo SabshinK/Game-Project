@@ -401,14 +401,14 @@
 		<Texture>TileSet</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
-		<Rectangle>0 128 64 64</Rectangle>
+		<Rectangle>0 192 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>forestLeavesLight</AnimationName>
 		<Texture>TileSet</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
-		<Rectangle>64 128 64 64</Rectangle>
+		<Rectangle>64 192 64 64</Rectangle>
 	</Item>
 
 	<!--Projectile animations-->

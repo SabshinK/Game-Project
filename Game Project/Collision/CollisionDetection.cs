@@ -7,11 +7,7 @@ namespace Game_Project
 {
     public class CollisionDetection : IUpdateable
     {
-        private float side_overlap;
-        private float updown_overlap;
-
         public enum CollideDirection { Top, Bottom, Left, Right };
-        public CollideDirection direction;
 
         private List<List<IGameObject>> gameObjects;
 
@@ -34,44 +30,28 @@ namespace Game_Project
                 if (rectangleObject1.Intersects(rectangleObject2))
                 {
                     Rectangle collision = Rectangle.Intersect(rectangleObject1, rectangleObject2);
+                    CollideDirection direction;
 
-                    if (rectangleObject1.Right >= rectangleObject2.Left)
+                    // Collisions are with respect to the first object, i.e. a left collision is one where object 2 is to the left of
+                    // the first object, etc.
+                    if (collision.Width >= collision.Height)    // Vertical collision
                     {
-                        // left overlap (right side of player):
-                        side_overlap = rectangleObject1.Right - rectangleObject2.Left;
-                        direction = CollideDirection.Left;
-                    }
-                    else
-                    {
-                        // right overlap (left side of player):
-                        side_overlap = rectangleObject2.Right - rectangleObject1.Left;
-                        direction = CollideDirection.Right;
-                    }
-
-                    if (rectangleObject1.Top <= rectangleObject2.Bottom)
-                    {
-                        // bottom overlap (top side of player):
-                        updown_overlap = rectangleObject2.Bottom - rectangleObject1.Top;
-                        if (updown_overlap > side_overlap)
-                        {
+                        if (collision.Y > rectangleObject1.Y)
                             direction = CollideDirection.Bottom;
-                        }
+                        else
+                            direction = CollideDirection.Top;
                     }
-                    else
+                    else    // Horizontal collision
                     {
-                        // top overlap (bottom side of player):
-                        updown_overlap = rectangleObject1.Bottom - rectangleObject2.Top;
-                        if (updown_overlap > side_overlap)
-                        {
-                            direction = CollideDirection.Bottom;
-                        }
+                        if (rectangleObject1.X < collision.X)
+                            direction = CollideDirection.Right;
+                        else
+                            direction = CollideDirection.Left;
                     }
 
                     CollisionResolution.Instance.ResolveCollision(firstObject, secondObject, direction, collision);
                 }
             }
-
-
         }
 
         public void Update(GameTime gameTime)
