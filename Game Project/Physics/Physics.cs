@@ -37,12 +37,23 @@ namespace Game_Project
 
             // Update initial variables for use with changing displacement
             acceleration.X = appliedForce.X - DRAG;
-            displacement.X += (velocity.X * time) + (acceleration.X * (float)Math.Pow(time, 2) * 0.5f);
+
+            if (acceleration.X >= 0) {
+                if (velocity.X < TERMINAL_X)
+                    displacement.X += (velocity.X * time) + (acceleration.X * (float)Math.Pow(time, 2) * 0.5f);
+            }
+            else
+                displacement.X -= (velocity.X * time) + ((-1 * acceleration.X) * (float)Math.Pow(time, 2) * 0.5f);
 
             // Update variables for next call, like the new initial velocity and the acceleration if need be
             if (velocity.X < TERMINAL_X)
                 velocity.X += acceleration.X * time;
-            
+
+            if (appliedForce.X > 0.0f)
+                appliedForce.X /= 2;
+            else
+                appliedForce.X = 0.0f;
+
             return displacement.X;
         }
 
@@ -62,15 +73,20 @@ namespace Game_Project
             if (velocity.Y < TERMINAL_Y && falling)
                 velocity.Y += acceleration.Y * time;
 
+            if (appliedForce.Y > 0.0f)
+                appliedForce.Y /= 2;
+            else
+                appliedForce.Y = 0.0f;
+
             return displacement.Y;
         }
 
         public void Update(GameTime gameTime)
         {
-            if (appliedForce.X > 0.0f)
-                appliedForce.X /= 2;
-            else
-                appliedForce.X = 0.0f;
+            //if (appliedForce.X > 0.0f)
+            //    appliedForce.X /= 2;
+            //else
+            //    appliedForce.X = 0.0f;
         }
     }
 }

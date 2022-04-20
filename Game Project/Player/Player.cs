@@ -22,7 +22,10 @@ namespace Game_Project
         public Vector2 Size => new Vector2(sprite.Size.X / 2, sprite.Size.Y);
 
         public bool FacingRight { get; private set; }
-        public bool moving;
+        public bool isColliding;
+
+        public bool isRunning;
+        public bool isJumping;
 
         // Constructor
         public Player(UniversalParameterObject parameters)
@@ -35,7 +38,10 @@ namespace Game_Project
             Health = 3;
 
             FacingRight = true;
-            moving = false;
+            isColliding = false;
+
+            isRunning = false;
+            isJumping = false;
 
             physics = new Physics();
 
@@ -119,6 +125,7 @@ namespace Game_Project
 
         public void Bump(Rectangle collision, int direction)
         {
+            isColliding = true;
 
             switch (direction)
             {
@@ -146,8 +153,9 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
-            //if (!moving)
+            //if (!isColliding)
             //{
+
             //    if (FacingRight)
             //    {
             //        sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
@@ -157,8 +165,11 @@ namespace Game_Project
             //        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
             //    }
             //}
+
             physics.Update(gameTime);
             location.Y -= (int)physics.VerticalChange(gameTime);
+
+            sprite.Update();
 
             state.Update(gameTime);
         }
