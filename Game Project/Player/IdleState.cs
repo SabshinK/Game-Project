@@ -12,6 +12,9 @@ namespace Game_Project
         public IdleState(Player manager)
         {
             player = manager;
+            player.isJumping = false;
+            player.isRunning = false;
+
             if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");
