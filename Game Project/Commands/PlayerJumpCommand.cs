@@ -15,7 +15,7 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.physics.appliedForce.Y = 4;
+            player.physics.appliedForce.Y = 6;
             player.isJumping = true;
             player.StartMoving(player.FacingRight);
         }

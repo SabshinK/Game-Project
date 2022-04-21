@@ -29,8 +29,8 @@ namespace Game_Project
             timer = 0f;
             lifeSpan = 2f;
             sprite = SpriteFactory.Instance.CreateSprite("drumGeneric");
-            explosionTimer = 0f;
-            explosionLifeSpan = 1f;
+            //explosionTimer = 0f;
+            //explosionLifeSpan = 1f;
             sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
         }
 
@@ -52,20 +52,20 @@ namespace Game_Project
                 sprite = SpriteFactory.Instance.CreateSprite("bombExplosion");
                 timer = 0f;
 
-                Size.x = Size.x * explosionScale;
-                Size.y = Size.y * explosionScale;
-                position.x = position.x - Size.x/2;
-                position.y = position.y - Size.y/2;
+                //Size.x = Size.x * explosionScale;
+                //Size.y = Size.y * explosionScale;
+                //position.x = position.x - Size.x/2;
+                //position.y = position.y - Size.y/2;
 
-                while (explosionTimer < explosionLifeSpan)
-                {
-                    explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
+                //while (explosionTimer < explosionLifeSpan)
+                //{
+                //    explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                //}
                 
-                position.x = position.x + Size.x/2;
-                position.y = position.y + Size.y/2;
-                Size.x = Size.x / explosionScale;
-                Size.y = Size.y / explosionScale;
+                //position.x = position.x + Size.x/2;
+                //position.y = position.y + Size.y/2;
+                //Size.x = Size.x / explosionScale;
+                //Size.y = Size.y / explosionScale;
             }
 
 

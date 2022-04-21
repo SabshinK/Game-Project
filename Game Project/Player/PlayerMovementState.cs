@@ -19,20 +19,8 @@ namespace Game_Project
             player.physics.velocity = new Vector2(0.0f, 0.0f);
             player.physics.acceleration = new Vector2(0.0f, 0.0f);
 
-            if (player.FacingRight) {
-                if (player.isRunning && !player.isJumping)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                if (player.isJumping)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-            }
-            else
-            {
-                if (player.isRunning && !player.isJumping)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
-                if (player.isJumping)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-            }
-                
+            if (player.isJumping)
+                player.physics.startJumping = true;
 
         }
 
@@ -77,7 +65,7 @@ namespace Game_Project
                 {
                     player.location.Y -= (int)player.physics.VerticalChange(gameTime);
 
-                    if (player.physics.displacement.Y >= 0 && !player.isRunning) //jumping has negative displacement
+                    if (player.physics.displacement.Y <= 0 && !player.isRunning) 
                         BackToIdle();
                 }
             }
@@ -94,7 +82,7 @@ namespace Game_Project
                 {
                     player.location.Y -= (int)player.physics.VerticalChange(gameTime);
 
-                    if (player.physics.displacement.Y >= 0 && !player.isRunning) //jumping has negative displacement
+                    if (player.physics.displacement.Y <= 0 && !player.isRunning) 
                         BackToIdle();
                 }
             }
@@ -105,7 +93,7 @@ namespace Game_Project
                     BackToIdle();
             }
 
-            Debug.WriteLine(player.physics.velocity.Y);
+            Debug.WriteLine(player.physics.displacement.Y);
 
             //player.physics.Update(gameTime);
         }   
