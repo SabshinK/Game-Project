@@ -65,8 +65,11 @@ namespace Game_Project
                 {
                     player.location.Y -= (int)player.physics.VerticalChange(gameTime);
 
-                    if (player.physics.displacement.Y <= 0 && !player.isRunning) 
+                    if (player.physics.displacement.Y <= 0 && !player.isRunning)
+                    {
+                        player.physics.falling = true;
                         BackToIdle();
+                    }
                 }
             }
             else
@@ -82,18 +85,24 @@ namespace Game_Project
                 {
                     player.location.Y -= (int)player.physics.VerticalChange(gameTime);
 
-                    if (player.physics.displacement.Y <= 0 && !player.isRunning) 
+                    if (player.physics.displacement.Y <= 0 && !player.isRunning)
+                    {
+                        player.physics.falling = true;
                         BackToIdle();
+                    }
                 }
             }
 
             if (player.isRunning && player.isJumping)
             {
-                if (player.physics.displacement.X <= 0 && player.physics.displacement.Y >= 0)
-                    BackToIdle();
+                if (player.physics.appliedForce.X == 0 && player.physics.appliedForce.Y == 0)
+                {
+                    if (player.physics.displacement.X <= 0 && player.physics.displacement.Y <= 0)
+                        BackToIdle();
+                }
             }
 
-            Debug.WriteLine(player.physics.displacement.Y);
+            Debug.WriteLine(player.isJumping);
 
             //player.physics.Update(gameTime);
         }   

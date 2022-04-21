@@ -171,7 +171,7 @@ namespace Game_Project
         public void Bump(Rectangle collision, int direction)
         {
             isColliding = true;
-            
+            physics.falling = false;
 
             switch (direction)
             {

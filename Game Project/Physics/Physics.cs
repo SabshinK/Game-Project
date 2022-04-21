@@ -16,11 +16,12 @@ namespace Game_Project
         public float totalDistance;
 
         public bool startJumping;
+        public bool falling;
 
         private const float DRAG = 5.0f;
-        public const float GRAVITY = 3.0f;
+        public const float GRAVITY = 6.0f;
         private const float TERMINAL_VELOCITY_X = 32.0f;
-        public const float TERMINAL_VELOCITY_Y = 20.0f;
+        public const float TERMINAL_VELOCITY_Y = 32.0f;
 
         public const float TERMINAL_DISTANCE_Y = 256.0f;
 
@@ -31,6 +32,7 @@ namespace Game_Project
             acceleration = new Vector2(0.0f, 0.0f);
 
             startJumping = false;
+            falling = false;
 
             totalDistance = 0;
 
@@ -66,7 +68,7 @@ namespace Game_Project
 
             if (startJumping)
             {
-                velocity.Y = 5.0f;
+                velocity.Y = TERMINAL_VELOCITY_Y;
                 startJumping = false;
             }
 
@@ -76,10 +78,12 @@ namespace Game_Project
             displacement.Y = (velocity.Y * time) + (acceleration.X * (float)Math.Pow(time, 2) * 0.5f);
 
             // Update variables for next call, like the new initial velocity and the acceleration if need be
-            if (velocity.Y < TERMINAL_VELOCITY_Y || appliedForce.Y == 0f)
+            if (velocity.Y > 0 || appliedForce.Y == 0f)
             {
                 velocity.Y += acceleration.Y * time;
             }
+            if (falling)
+                velocity.Y += acceleration.Y * time;
 
             if (appliedForce.Y > 0.02f)
                 appliedForce.Y /= 2;
