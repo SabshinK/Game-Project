@@ -7,6 +7,43 @@
 		<Y>42</Y>
 	</Item>
 	<!-- ================================================== Enemies ================================================== -->
+	<Item>
+		<ObjectType>BatEnemy</ObjectType>
+		<X>67</X>
+		<Y>43</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>GelEnemy</ObjectType>
+		<X>70</X>
+		<Y>43</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>GoriyaEnemy</ObjectType>
+		<X>73</X>
+		<Y>43</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>StalfosEnemy</ObjectType>
+		<X>76</X>
+		<Y>43</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>ZohEnemy</ObjectType>
+		<X>79</X>
+		<Y>43</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>BatEnemy</ObjectType>
+		<X>84</X>
+		<Y>42</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	
 	<!-- =================================================== Items =================================================== -->
 	<!-- =================================================== Tiles =================================================== -->
 	<!--Y 3-->
@@ -9549,7 +9586,7 @@
 		<Animation>breakableTile</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Tile</ObjectType>
+		<ObjectType>BreakableTile</ObjectType>
 		<X>34</X>
 		<Y>32</Y>
 		<Animation>breakableTile</Animation>
@@ -10357,7 +10394,7 @@
 		<Animation>breakableTile</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Tile</ObjectType>
+		<ObjectType>BreakableTile</ObjectType>
 		<X>34</X>
 		<Y>34</Y>
 		<Animation>breakableTile</Animation>
