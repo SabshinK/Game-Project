@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class HealthBar : IUpdateable, IDrawable
+    public class HealthBar : IUpdateable, IDrawable, IUI
     {
         public Vector2 Position { get; set; }
 
