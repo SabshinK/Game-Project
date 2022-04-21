@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,9 +10,10 @@ namespace Game_Project
     {
         public enum states { playing, paused, win, over};
         public states currState = states.playing;
-        public GameStateMachine()
+        public UIManager uIManager;
+        public GameStateMachine(Camera camera)
         {
-
+            uIManager = new UIManager(camera);
         }
 
         public void Pause()
@@ -32,6 +35,16 @@ namespace Game_Project
         public void GameOver()
         {
             currState = states.over;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            uIManager.Update(gameTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            uIManager.Draw(spriteBatch);
         }
     }
 }

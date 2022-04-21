@@ -43,7 +43,7 @@ namespace Game_Project
             collisionDetection = new CollisionDetection();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
-            uIManager = new UIManager(camera);
+            gameStateMachine = new GameStateMachine(camera);
 
             base.Initialize();
         }
@@ -93,7 +93,7 @@ namespace Game_Project
                 camera.Update(GameObjectManager.Instance.GetPlayer());
             }
 
-            uIManager.Update(gameTime);
+            gameStateMachine.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -108,7 +108,7 @@ namespace Game_Project
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
             GameObjectManager.Instance.Draw(spriteBatch);
-            uIManager.Draw(spriteBatch);
+            gameStateMachine.Draw(spriteBatch);
 
             //healthBar.Draw(spriteBatch);
 
