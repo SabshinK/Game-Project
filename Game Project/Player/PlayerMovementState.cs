@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Game_Project
@@ -16,7 +17,22 @@ namespace Game_Project
             // Reset physics stuff
             player.physics.displacement = new Vector2(0.0f, 0.0f);
             player.physics.velocity = new Vector2(0.0f, 0.0f);
-            player.physics.acceleration = new Vector2(0.0f, 0.0f);            
+            player.physics.acceleration = new Vector2(0.0f, 0.0f);
+
+            if (player.FacingRight) {
+                if (player.isRunning)
+                    player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+                if (player.isJumping)
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+            }
+            else
+            {
+                if (player.isRunning)
+                    player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+                if (player.isJumping)
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            }
+                
 
         }
 
@@ -49,44 +65,44 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //horizontal movement
-            player.moving = true;
             if (player.FacingRight)
             {
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                player.location.X += player.physics.HorizontalChange(gameTime);
+                if (player.isRunning)
+                {
+                    player.location.X += player.physics.HorizontalChange(gameTime);
+
+                    if (player.physics.displacement.X <= 0)
+                        BackToIdle();
+                }
+                if (player.isJumping)
+                {
+                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+
+                    if (player.physics.displacement.Y >= 0) //jumping has negative displacement
+                        BackToIdle();
+                }
             }
             else
             {
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
-                player.location.X -= player.physics.HorizontalChange(gameTime);
+                if (player.isRunning)
+                {
+                    player.location.X -= player.physics.HorizontalChange(gameTime);
+
+                    if (player.physics.displacement.X <= 0)
+                        BackToIdle();
+                }
+                if (player.isJumping)
+                {
+                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+
+                    if (player.physics.displacement.Y >= 0) //jumping has negative displacement
+                        BackToIdle();
+                }
             }
 
-            //vertical movement
-            if (player.physics.appliedForce.Y > 1)
-                player.physics.falling = false;
-            else
-                player.physics.falling = true;
+            Debug.WriteLine(player.physics.displacement.X);
 
-            if (player.FacingRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-            else
-                player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-
-            //change position
-            if (player.physics.falling)
-                player.location.Y += (int)player.physics.VerticalChange(gameTime);
-            else
-                player.location.Y -= (int)player.physics.VerticalChange(gameTime);
-
-            // stop once you've slowed down completely
-            if (!(player.physics.velocity.Y > 0) && !(player.physics.velocity.Y > 0))
-            {
-                BackToIdle();
-            }
-
-            // No code for going back to the idle state because they will go back once they collide with a tile. 
-
-            player.physics.Update(gameTime);
+            //player.physics.Update(gameTime);
         }   
     }
 }
