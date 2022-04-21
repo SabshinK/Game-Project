@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -6,14 +7,20 @@ using System.Text;
 
 namespace Game_Project
 {
-    class GameStateMachine : IGameStateMachine
+    public class GameStateMachine : IGameStateMachine
     {
         public enum states { playing, paused, win, over};
         public states currState = states.playing;
         public UIManager uIManager;
+        
         public GameStateMachine(Camera camera)
         {
-            uIManager = new UIManager(camera);
+            uIManager = new UIManager(this, camera);
+        }
+
+        public void LoadContent(ContentManager content)
+        {
+            uIManager.LoadContent(content);
         }
 
         public void Pause()

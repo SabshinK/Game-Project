@@ -19,7 +19,6 @@ namespace Game_Project
 		private List<Keys> keysDown;
 
 		public Game1 game;
-		public GameStateMachine stateMachine;
 
         public KeyboardController(Game1 game)
 		{
@@ -54,7 +53,7 @@ namespace Game_Project
 		{
 			KeyboardState state = Keyboard.GetState();
 			Keys[] pressedKeys = state.GetPressedKeys();
-			Dictionary<Keys, Tuple<bool, ICommand>> mappings = stateMappings[stateMachine.currState];
+			Dictionary<Keys, Tuple<bool, ICommand>> mappings = stateMappings[game.State];
 
 			// Clear out keys that aren't being pressed
 			foreach (Keys key in pressedKeys)
@@ -75,7 +74,7 @@ namespace Game_Project
 			CheckKeysDown(state);
         }
 
-		public void LoadContent(Player player, Sidekick sidekick)
+		public void LoadContent(GameStateMachine stateMachine, Player player, Sidekick sidekick)
 		{
 			stateMappings = new Dictionary<states, Dictionary<Keys, Tuple<bool, ICommand>>>();
 			stateMappings.Add(states.playing, new Dictionary<Keys, Tuple<bool, ICommand>>());
@@ -98,16 +97,16 @@ namespace Game_Project
 			RegisterCommand(states.playing, Keys.D5, false, new UseItemCommand(player, 5));
 			RegisterCommand(states.playing, Keys.E, false, new TakeDamageCommand(player));
 			RegisterCommand(states.playing, Keys.R, false, new ResetCommand(game));
-			RegisterCommand(states.playing, Keys.P, false, new PauseCommand());
+			RegisterCommand(states.playing, Keys.P, false, new PauseCommand(stateMachine));
 
 			// Sidekick Commands
 			RegisterCommand(states.paused, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
             
 			RegisterCommand(states.paused, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(states.paused, Keys.R, false, new ResetCommand(game));
-			RegisterCommand(states.paused, Keys.P, false, new PauseCommand());
-			RegisterCommand(states.paused, Keys.A, false, new ItemScrollLeftCommand());
-			RegisterCommand(states.paused, Keys.D, false, new ItemScrollRightCommand());
+			RegisterCommand(states.paused, Keys.P, false, new PauseCommand(stateMachine));
+			RegisterCommand(states.paused, Keys.A, false, new ItemScrollLeftCommand(stateMachine.uIManager.itemScroller));
+			RegisterCommand(states.paused, Keys.D, false, new ItemScrollRightCommand(stateMachine.uIManager.itemScroller));
 
 			RegisterCommand(states.win, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(states.win, Keys.R, false, new ResetCommand(game));

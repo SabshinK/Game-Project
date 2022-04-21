@@ -8,9 +8,9 @@ namespace Game_Project
     class PauseCommand : ICommand
     {
         public GameStateMachine stateMachine;
-        public PauseCommand()
+        public PauseCommand(GameStateMachine stateMachine)
         {
-
+            this.stateMachine = stateMachine;
         }
 
         public void Execute()
