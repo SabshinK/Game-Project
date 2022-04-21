@@ -84,9 +84,9 @@ namespace Game_Project
 
             keyboard.Update(gameTime);
 
-            
-            
-            if (!gameStateMachine.paused || !gameStateMachine.over || !gameStateMachine.win)
+
+
+            if (gameStateMachine.currState == GameStateMachine.states.playing)
             {
                 GameObjectManager.Instance.Update(gameTime);
                 collisionDetection.Update(gameTime);
@@ -119,7 +119,7 @@ namespace Game_Project
 
         public void Reset()
         {
-            gameStateMachine.paused = false;
+            gameStateMachine.currState = GameStateMachine.states.playing;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
             keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());

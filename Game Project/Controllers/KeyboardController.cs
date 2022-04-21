@@ -20,6 +20,7 @@ namespace Game_Project
 		private bool iterating;
 
 		public Game1 game;
+		public GameStateMachine stateMachine;
 
         public KeyboardController(Game1 game)
 		{
@@ -54,7 +55,7 @@ namespace Game_Project
 		{
 			KeyboardState state = Keyboard.GetState();
 			Keys[] pressedKeys = state.GetPressedKeys();
-			Dictionary<Keys, Tuple<bool, ICommand>> mappings = stateMappings[game.paused];
+			Dictionary<Keys, Tuple<bool, ICommand>> mappings = stateMappings[stateMachine.paused];
 
 			// Clear out keys that aren't being pressed
 			foreach (Keys key in pressedKeys)
@@ -96,15 +97,14 @@ namespace Game_Project
 			RegisterCommand(false, Keys.D5, false, new UseItemCommand(player, 5));
 			RegisterCommand(false, Keys.E, false, new TakeDamageCommand(player));
 			RegisterCommand(false, Keys.R, false, new ResetCommand(game));
-			RegisterCommand(false, Keys.P, false, new PauseCommand(game));
+			RegisterCommand(false, Keys.P, false, new PauseCommand());
 
 			// AI Commands
 			RegisterCommand(false, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
             
 			RegisterCommand(true, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(true, Keys.R, false, new ResetCommand(game));
-			RegisterCommand(true, Keys.P, false, new PauseCommand(game));
-			RegisterCommand(true, Keys.I, false, new InventoryCommand(game));
+			RegisterCommand(true, Keys.P, false, new PauseCommand());
 			RegisterCommand(true, Keys.A, false, new ItemScrollLeftCommand());
 			RegisterCommand(true, Keys.D, false, new ItemScrollRightCommand());
 		}

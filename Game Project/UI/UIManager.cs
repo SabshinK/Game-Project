@@ -19,10 +19,13 @@ namespace Game_Project
         private ItemScroller itemScroller;
         private PauseMenu menu;
         private SpriteFont font;
+        private GameStateMachine stateMachine;
 
         public UIManager(Camera camera)
         {
             this.camera = camera;
+            itemScroller = new ItemScroller();
+            healthBar = new HealthBar();
         }
 
         public void LoadContent(ContentManager contentManager)
@@ -38,19 +41,34 @@ namespace Game_Project
         {
             healthBar.Update(gameTime);
             // change this to a list of UI objects, maybe make an interface?
-            healthBar.Position = camera.Position;
-            menu.Position = camera.Position;
-            gameWin.Position = camera.Position;
-            gameOver.Position = camera.Position;
-            itemScroller.Position = camera.Position;
+            foreach (IUI uiItem in UIList)
+            {
+                uiItem.Position = camera.Position;
+            }
 
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Same as update, change this
-           // healthBar.Draw(spriteBatch);
+            //subject to change
+            if (stateMachine.currState == GameStateMachine.states.paused)
+            {
+                menu.Draw(spriteBatch);
+                itemScroller.Draw(spriteBatch);
+            }
+            else if (stateMachine.currState == GameStateMachine.states.win)
+            {
+                gameWin.Draw(spriteBatch);
+            }
+            else if (stateMachine.currState == GameStateMachine.states.over)
+            {
+                gameOver.Draw(spriteBatch);
+            }
+            else
+            {
+                healthBar.Draw(spriteBatch);
+            }
         }
     }
 }
