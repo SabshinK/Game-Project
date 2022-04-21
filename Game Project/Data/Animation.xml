@@ -694,7 +694,7 @@
 		<AnimationName>triangleGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>1</Scale>
+		<Scale>2</Scale>
 		<Rectangle>64 0 64 64</Rectangle>
 	</Item>
 	<Item>
@@ -716,7 +716,7 @@
 		<AnimationName>harpGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>1</Scale>
+		<Scale>2</Scale>
 		<Rectangle>128 0 64 64</Rectangle>
 	</Item>
 	<Item>
@@ -745,21 +745,21 @@
 		<AnimationName>fluteGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>1</Scale>
+		<Scale>2</Scale>
 		<Rectangle>194 64 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>speakerGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>1</Scale>
+		<Scale>2</Scale>
 		<Rectangle>128 64 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>guitarGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>1</Scale>
+		<Scale>2</Scale>
 		<Rectangle>0 0 64 64</Rectangle>
 	</Item>
 </Asset>
