@@ -6,9 +6,8 @@ using System.Text;
 
 namespace Game_Project
 {
-    public interface IUI
+    public interface IUI : IDrawable
     {
         public Vector2 Position { get; set;}
-        public void Draw(SpriteBatch spriteBatch);
     }
 }

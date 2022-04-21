@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Game_Project
 {
-    public interface ISidekick : IGameObject, IMoveable, IUpdateable, IDrawable, ICollideable
+    public interface ISidekick : IGameObject, IMoveable, ICollideable
     {
         public void Follow();
 

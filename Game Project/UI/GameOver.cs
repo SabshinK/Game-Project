@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class GameOver : IDrawable, IUI
+    class GameOver : IUI
     {
         private SpriteFont font;
         public Vector2 Position { get; set; }

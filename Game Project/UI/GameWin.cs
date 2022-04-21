@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class GameWin : IDrawable, IUI
+    class GameWin : IUI
     {
         SpriteFont font;
         public Vector2 Position { get; set; }
