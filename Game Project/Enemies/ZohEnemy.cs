@@ -25,7 +25,6 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
-        float accel = 1;
         private int health = 20;
         
         public ZohEnemy(UniversalParameterObject parameters)
