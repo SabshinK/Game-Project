@@ -26,7 +26,6 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
-        float gelAccel = 1;
 
         public GelEnemy(UniversalParameterObject parameters)
         {

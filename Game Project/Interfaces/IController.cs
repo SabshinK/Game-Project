@@ -2,6 +2,6 @@
 {
     public interface IController : IUpdateable
     {
-        void LoadContent(Player player, Sidekick sidekick);
+        void LoadContent(GameStateMachine stateMachine, Player player, Sidekick sidekick);
     }
 }

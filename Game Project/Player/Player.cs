@@ -17,7 +17,7 @@ namespace Game_Project
 
         public int Health { get; private set; }
 
-        private Vector2 location;
+        public Vector2 location;
         // The location needed for moving the sprite is based on the sprite size but the Position to be accessed by other classes
         // and for use in collision is smaller than the sprite size
         public Vector2 Position 

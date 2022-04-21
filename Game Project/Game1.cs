@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using static Game_Project.GameStateMachine;
 
 namespace Game_Project
 {
@@ -17,8 +18,7 @@ namespace Game_Project
         private CollisionDetection collisionDetection;
         private Camera camera;
         private GameStateMachine gameStateMachine;
-        private UIManager uIManager;
-        
+        public states State => gameStateMachine.currState;
 
         private SpriteFont font;
         private Song song;
@@ -43,7 +43,7 @@ namespace Game_Project
             collisionDetection = new CollisionDetection();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
-            gameStateMachine = new GameStateMachine(camera);
+            
 
             base.Initialize();
         }
@@ -58,14 +58,15 @@ namespace Game_Project
             Texture2DStorage.LoadContent(Content);
             
             font = Content.Load<SpriteFont>("Text");
-            
 
             LevelLoader.Instance.LoadFile("sprites");
             LevelLoader.Instance.LoadFile("forest");
             LevelLoader.Instance.LoadFile("collision");
-            uIManager.LoadContent(Content);
+
+            gameStateMachine = new GameStateMachine(camera);
+            gameStateMachine.LoadContent(Content);
            
-            keyboard.LoadContent(GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(gameStateMachine, GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
 
             //song = Content.Load<Song>("01 - At Dooms Gate");
             //MediaPlayer.Play(song);
@@ -122,7 +123,7 @@ namespace Game_Project
             gameStateMachine.currState = GameStateMachine.states.playing;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(gameStateMachine, GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
         }
     }
 }
