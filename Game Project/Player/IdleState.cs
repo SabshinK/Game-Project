@@ -15,6 +15,9 @@ namespace Game_Project
             player.isJumping = false;
             player.isRunning = false;
 
+            player.currentAnimationRun = "";
+            player.currentAnimationJump = "";
+
             if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");

@@ -13,6 +13,8 @@ namespace Game_Project
         public PlayerAttackState(Player player)
         {
             this.player = player;
+            player.isJumping = false;
+            player.isRunning = false;
 
             if (player.FacingRight)
             {

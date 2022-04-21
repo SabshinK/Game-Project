@@ -30,11 +30,17 @@ namespace Game_Project
         public bool isRunning;
         public bool isJumping;
 
+        public string currentAnimationRun;
+        public string currentAnimationJump;
+
         // Constructor
         public Player(UniversalParameterObject parameters)
         {
             state = new IdleState(this);
             sprite = SpriteFactory.Instance.CreateSprite("idleRight");
+
+            currentAnimationRun = "";
+            currentAnimationJump = "";
 
             location = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
 
@@ -64,6 +70,42 @@ namespace Game_Project
             {
                 FacingRight = faceRight;
             }
+
+            if (FacingRight)
+            {
+                if (isRunning && !isJumping)
+                    if (!currentAnimationRun.Equals("movingRight"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+                        currentAnimationRun = "movingRight";
+                    }
+                if (isJumping)
+                {
+                    if (!currentAnimationJump.Equals("jumpingRight"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                        currentAnimationJump = "jumpingRight";
+                    }
+                }
+            }
+            else
+            {
+                if (isRunning && !isJumping)
+                    if (!currentAnimationRun.Equals("movingLeft"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+                        currentAnimationRun = "movingLeft";
+                    }
+                if (isJumping)
+                {
+                    if (!currentAnimationJump.Equals("jumpingLeft"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+                        currentAnimationJump = "jumpingLeft";
+                    }
+                }
+            }
+
             state.Move();
         }
 
@@ -129,13 +171,12 @@ namespace Game_Project
         public void Bump(Rectangle collision, int direction)
         {
             isColliding = true;
-            
+            physics.falling = false;
 
             switch (direction)
             {
                 case 0:
                     location.Y += collision.Height;
-                    physics.velocity.Y = 0;
                     break;
                 case 1:
                     location.Y -= collision.Height;
