@@ -13,6 +13,9 @@ namespace Game_Project
         public PlayerItemState(Player player)
         {
             this.player = player;
+            player.isJumping = false;
+            player.isRunning = false;
+
             if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("useItemRight");
