@@ -17,8 +17,6 @@ namespace Game_Project
 		// a new command won't fire until the player stops pressing the key and presses it again
 		private List<Keys> keysDown;
 
-		private bool iterating;
-
 		public Game1 game;
 
         public KeyboardController(Game1 game)
@@ -98,7 +96,7 @@ namespace Game_Project
 			RegisterCommand(false, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(false, Keys.P, false, new PauseCommand(game));
 
-			// AI Commands
+			// Sidekick Commands
 			RegisterCommand(false, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
             
 			RegisterCommand(true, Keys.Q, false, new QuitCommand(game));
