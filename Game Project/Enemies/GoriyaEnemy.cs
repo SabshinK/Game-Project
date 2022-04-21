@@ -28,8 +28,6 @@ namespace Game_Project
         int lengthOfAction = 0;
         Boomerang weapon;
         Physics physics;
-        float acceleration = 1;
-        bool falling = false;
         
         public GoriyaEnemy(UniversalParameterObject parameters)
         {

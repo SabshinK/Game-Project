@@ -28,7 +28,6 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
-        float accel = 1;
         
         public StalfosEnemy(UniversalParameterObject parameters)
         {
