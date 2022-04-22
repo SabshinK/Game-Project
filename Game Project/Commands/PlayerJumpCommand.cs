@@ -18,6 +18,11 @@ namespace Game_Project
             if (!player.physics.falling)
             {
                 player.physics.appliedForce.Y = 6;
+                if (!player.physics.startJumping)
+                {
+                    player.physics.startJumping = true;
+                    player.physics.velocity.Y = 20f;
+                }
                 player.physics.isJumping = true;
                 player.StartMoving(player.FacingRight);
             }
