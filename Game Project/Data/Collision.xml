@@ -94,6 +94,13 @@
 		<Command>PlayerBumpCommand</Command>
 		<Command>null</Command>
 	</Item>
+	<Item>
+		<CollisionObjectType>Player</CollisionObjectType>
+		<CollisionObjectType>BreakableTile</CollisionObjectType>
+		<Direction>-1</Direction>
+		<Command>PlayerBumpCommand</Command>
+		<Command>null</Command>
+	</Item>
 	<!--Player colliding with Items-->
 	<Item>
 		<CollisionObjectType>Player</CollisionObjectType>
