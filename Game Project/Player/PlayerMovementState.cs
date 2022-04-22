@@ -16,23 +16,11 @@ namespace Game_Project
 
             // Reset physics stuff
             player.physics.displacement = new Vector2(0.0f, 0.0f);
-            player.physics.velocity = new Vector2(0.0f, 0.0f);
+            player.physics.velocity.X = 0f;
             player.physics.acceleration = new Vector2(0.0f, 0.0f);
 
-            if (player.FacingRight) {
-                if (player.isRunning)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                if (player.isJumping)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-            }
-            else
-            {
-                if (player.isRunning)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
-                if (player.isJumping)
-                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-            }
-                
+            //if (player.physics.isJumping)
+            //    player.physics.startJumping = true;
 
         }
 
@@ -64,45 +52,59 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            //horizontal movement
             if (player.FacingRight)
             {
-                if (player.isRunning)
-                {
-                    player.location.X += player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.X <= 0)
-                        BackToIdle();
-                }
-                if (player.isJumping)
-                {
-                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+                player.location.X += player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.Y >= 0) //jumping has negative displacement
-                        BackToIdle();
+                if (player.physics.displacement.X <= 0f)
+                    player.physics.isRunning = false;
+
+
+                player.location.Y -= player.physics.VerticalChange(gameTime);
+
+                if (player.physics.displacement.Y <= 0f)
+                {
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
+                    player.physics.startJumping = false;
                 }
+
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                {
+
+                    BackToIdle();
+                }
+
             }
             else
             {
-                if (player.isRunning)
-                {
-                    player.location.X -= player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.X <= 0)
-                        BackToIdle();
-                }
-                if (player.isJumping)
-                {
-                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+                player.location.X -= player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.Y >= 0) //jumping has negative displacement
-                        BackToIdle();
+                if (player.physics.displacement.X <= 0f)
+                    player.physics.isRunning = false;
+
+                player.location.Y -= player.physics.VerticalChange(gameTime);
+
+                if (player.physics.displacement.Y <= 0f)
+                {
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
+                    player.physics.startJumping = false;
                 }
+
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                {
+                    BackToIdle();
+                }
+
+
             }
 
-            Debug.WriteLine(player.physics.displacement.X);
+            Debug.WriteLine(player.physics.acceleration.X);
 
-            //player.physics.Update(gameTime);
+            player.physics.Update(gameTime);
         }   
     }
 }

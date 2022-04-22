@@ -7,16 +7,14 @@ namespace Game_Project
     class ItemScrollLeftCommand : ICommand
     {
         public ItemScroller scroller;
-        public ItemScrollLeftCommand()
+        public ItemScrollLeftCommand(ItemScroller items)
         {
-            scroller = new ItemScroller();
+            scroller = items;
         }
 
         public void Execute()
         {
             scroller.scrollLeft();
         }
-
-
     }
 }

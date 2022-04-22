@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Game_Project
 {
-    class ItemScroller : IDrawable
+    public class ItemScroller : IUI
     {
-        private List<String> items;
+        public List<String> items;
         private int numItems = 6;
         private int itemId;
-        private string currItem;
+        public string currItem;
         private ISprite sprite;
         public Vector2 Position { get; set; }
         public ItemScroller()
@@ -53,7 +53,7 @@ namespace Game_Project
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, new Vector2(Position.X + 100, Position.Y));
+            sprite.Draw(spriteBatch, new Vector2(Position.X + 550, Position.Y + 100));
         }
     }
 }
