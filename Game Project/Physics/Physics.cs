@@ -19,7 +19,7 @@ namespace Game_Project
         public bool falling;
 
         public bool isRunning;
-        public bool IsJumping => appliedForce.Y > 0;
+        public bool isJumping;
 
         private const float DRAG = 5.0f;
         public const float GRAVITY = 6.0f;
@@ -36,6 +36,7 @@ namespace Game_Project
             falling = false;
 
             isRunning = false;
+            isJumping = false;
 
             totalDistance = 0;
 
