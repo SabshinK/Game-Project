@@ -21,7 +21,7 @@ namespace Game_Project
         private const float DRAG = 5.0f;
         public const float GRAVITY = 6.0f;
         private const float TERMINAL_VELOCITY_X = 32.0f;
-        public const float TERMINAL_VELOCITY_Y = 32.0f;
+        private const float TERMINAL_VELOCITY_Y = 26.0f;
 
         public const float TERMINAL_DISTANCE_Y = 256.0f;
 
