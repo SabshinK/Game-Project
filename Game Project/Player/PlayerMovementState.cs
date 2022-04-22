@@ -9,20 +9,17 @@ namespace Game_Project
     class PlayerMovementState : IPlayerState
     {
         private Player player;
-        public bool runAndThenJump;
 
         public PlayerMovementState(Player manager)
         {
             player = manager;
-
-            runAndThenJump = false;
 
             // Reset physics stuff
             player.physics.displacement = new Vector2(0.0f, 0.0f);
             player.physics.velocity = new Vector2(0.0f, 0.0f);
             player.physics.acceleration = new Vector2(0.0f, 0.0f);
 
-            if (player.isJumping)
+            if (player.physics.isJumping)
                 player.physics.startJumping = true;
 
         }
@@ -57,79 +54,47 @@ namespace Game_Project
         {
             if (player.FacingRight)
             {
-                if (player.isRunning && !player.isJumping)
-                {
-                    player.physics.startJumping = false;
-                    player.location.X += player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.X <= 0)
-                        BackToIdle();
+                player.location.X += player.physics.HorizontalChange(gameTime);
 
-                }
-                if (player.isJumping && !player.isRunning)
-                {
-                    player.location.Y -= player.physics.VerticalChange(gameTime);
+                if (player.physics.displacement.X <= 0)
+                    player.physics.isRunning = false;
 
-                    if (player.physics.displacement.Y <= 0)
-                        player.physics.falling = true;
+                player.location.Y -= player.physics.VerticalChange(gameTime);
 
                     if (player.physics.displacement.Y <= 0)
                     {
-                        BackToIdle();
+                        player.physics.isJumping = false;
+                        player.physics.falling = true;
                     }
 
-                    if (player.physics.velocity.Y <= 0 && player.isRunning) //set the starting velocity if a jump occurs while already running
-                        player.physics.startJumping = true;
-                }
-                if (player.isRunning && player.isJumping)
-                {
-                    player.location.X += player.physics.HorizontalChange(gameTime);
-                    player.location.Y -= player.physics.VerticalChange(gameTime);
-
-                    if (player.physics.displacement.X <= 0 && player.physics.displacement.Y <= 0)
-                        BackToIdle();
-                }
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                    BackToIdle();
             }
             else
             {
-                if (player.isRunning && !player.isJumping)
+
+                player.location.X -= player.physics.HorizontalChange(gameTime);
+
+                if (player.physics.displacement.X <= 0)
+                    player.physics.isRunning = false;
+
+                player.location.Y -= player.physics.VerticalChange(gameTime);
+
+                if (player.physics.displacement.Y <= 0)
                 {
-                    player.physics.startJumping = false;
-                    player.location.X -= player.physics.HorizontalChange(gameTime);
-
-                    if (player.physics.displacement.X <= 0)
-                        BackToIdle();
-
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
                 }
-                if (player.isJumping && !player.isRunning)
-                {
-                    player.location.Y -= player.physics.VerticalChange(gameTime);
 
-                    if (player.physics.displacement.Y <= 0)
-                        player.physics.falling = true;
-
-                    if (player.physics.displacement.Y <= 0)
-                    {
-                        BackToIdle();
-                    }
-
-                    if (player.physics.velocity.Y <= 0 && player.isRunning) //set the starting velocity if a jump occurs while already running
-                        player.physics.startJumping = true;
-                }
-                if (player.isRunning && player.isJumping)
-                {
-                    player.location.X -= player.physics.HorizontalChange(gameTime);
-                    player.location.Y -= player.physics.VerticalChange(gameTime);
-
-                    if (player.physics.displacement.X <= 0 && player.physics.displacement.Y <= 0)
-                        BackToIdle();
-                }
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                    BackToIdle();
 
             }
 
-            Debug.WriteLine(player.physics.displacement.Y);
+            Debug.WriteLine(player.physics.falling);
 
-            //player.physics.Update(gameTime);
+            player.physics.Update(gameTime);
         }   
     }
 }
