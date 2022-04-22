@@ -72,13 +72,13 @@ namespace Game_Project
 
             if (FacingRight)
             {
-                if (physics.isRunning && !physics.isJumping)
+                if (physics.isRunning && !physics.IsJumping)
                     if (!currentAnimationRun.Equals("movingRight"))
                     {
                         sprite = SpriteFactory.Instance.CreateSprite("movingRight");
                         currentAnimationRun = "movingRight";
                     }
-                if (physics.isJumping)
+                if (physics.IsJumping)
                 {
                     if (!currentAnimationJump.Equals("jumpingRight"))
                     {
@@ -89,13 +89,13 @@ namespace Game_Project
             }
             else
             {
-                if (physics.isRunning && !physics.isJumping)
+                if (physics.isRunning && !physics.IsJumping)
                     if (!currentAnimationRun.Equals("movingLeft"))
                     {
                         sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
                         currentAnimationRun = "movingLeft";
                     }
-                if (physics.isJumping)
+                if (physics.IsJumping)
                 {
                     if (!currentAnimationJump.Equals("jumpingLeft"))
                     {
@@ -211,7 +211,9 @@ namespace Game_Project
             //}
 
             physics.Update(gameTime);
-            location.Y -= (int)physics.VerticalChange(gameTime);
+
+            if(!physics.IsJumping)
+                location.Y -= (int)physics.VerticalChange(gameTime);
 
             sprite.Update();
 
