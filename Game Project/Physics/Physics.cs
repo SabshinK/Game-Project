@@ -50,6 +50,8 @@ namespace Game_Project
             // Update initial variables for use with changing displacement
             if (isRunning)
                 acceleration.X = appliedForce.X - DRAG;
+            else
+                acceleration.X = 0.0f;
 
             displacement.X = (velocity.X * time) + (acceleration.X * (float)Math.Pow(time, 2) * 0.5f);
 
@@ -71,11 +73,11 @@ namespace Game_Project
         {
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds * 10f;
 
-            if (startJumping)
-            {
-                velocity.Y = TERMINAL_VELOCITY_Y;
-                startJumping = false;
-            }
+            //if (startJumping)
+            //{
+            //    velocity.Y = TERMINAL_VELOCITY_Y;
+            //    startJumping = false;
+            //}
 
             acceleration.Y = appliedForce.Y - GRAVITY;
 
