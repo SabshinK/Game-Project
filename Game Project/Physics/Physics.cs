@@ -18,12 +18,13 @@ namespace Game_Project
         public bool startJumping;
         public bool falling;
 
+        public bool isRunning;
+        public bool isJumping;
+
         private const float DRAG = 5.0f;
         public const float GRAVITY = 6.0f;
         private const float TERMINAL_VELOCITY_X = 32.0f;
-        private const float TERMINAL_VELOCITY_Y = 26.0f;
-
-        public const float TERMINAL_DISTANCE_Y = 256.0f;
+        public const float TERMINAL_VELOCITY_Y = 26.0f;
 
         public Physics()
         {
@@ -33,6 +34,9 @@ namespace Game_Project
 
             startJumping = false;
             falling = false;
+
+            isRunning = false;
+            isJumping = false;
 
             totalDistance = 0;
 
@@ -44,7 +48,8 @@ namespace Game_Project
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds * 10f;
 
             // Update initial variables for use with changing displacement
-            acceleration.X = appliedForce.X - DRAG;
+            if (isRunning)
+                acceleration.X = appliedForce.X - DRAG;
 
             displacement.X = (velocity.X * time) + (acceleration.X * (float)Math.Pow(time, 2) * 0.5f);
 
@@ -72,10 +77,9 @@ namespace Game_Project
                 startJumping = false;
             }
 
-            // Update initial variables for use with changing displacement
             acceleration.Y = appliedForce.Y - GRAVITY;
 
-            displacement.Y = (velocity.Y * time) + (acceleration.X * (float)Math.Pow(time, 2) * 0.5f);
+            displacement.Y = (velocity.Y * time) + (acceleration.Y * (float)Math.Pow(time, 2) * 0.5f);
 
             // Update variables for next call, like the new initial velocity and the acceleration if need be
             if (velocity.Y > 0 || appliedForce.Y == 0f)
