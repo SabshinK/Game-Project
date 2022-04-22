@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game_Project
 {
-    class Sidekick : ISidekick
+    public class Sidekick : ISidekick
     {
         public Tuple<bool, bool, bool> stateTuple; //Item1 is stay, Item2 is facingRight, and Item3 is attacking
         private enum direction {up, down, left, right};
@@ -43,16 +43,18 @@ namespace Game_Project
 
             sidekick = new SidekickStateMachine();
             if (facingRight)
-                sidekickSprite = SpriteFactory.Instance.CreateSprite("rightSidekickIdle");
+            {
+                //sidekickSprite = SpriteFactory.Instance.CreateSprite("rightSidekickIdle");
+            }
             else
-                sidekickSprite = SpriteFactory.Instance.CreateSprite("leftSidekickIdle");
+            {
+                //sidekickSprite = SpriteFactory.Instance.CreateSprite("leftSidekickIdle");
+            }
         }
         
 
         public void Attack()
         {
-            sidekick.Attack();
-
             IEnemy enemy;
 
             // calculate an attack rectangle around the sidekick that will be used if the attack button is pressed
@@ -70,11 +72,23 @@ namespace Game_Project
                         Rectangle enemyRectangle = new Rectangle((int)gameObject.Position.X, (int)gameObject.Position.Y, (int)enemy.Size.X, (int)enemy.Size.Y);
                         if (attackRectangle.Intersects(enemyRectangle))
                         {
-                            enemy.TakeDamage();
-                            if (stateTuple.Item3)
-                                sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
-                            else
-                                sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
+                            //random attacks if the enemy is in the AI's range
+                            int randomInteger = (int)new Random().Next(10);
+                            if ((0 <= randomInteger) && (randomInteger < 5))
+                            {
+                                sidekick.Attack();
+
+                                enemy.TakeDamage();
+
+                                if (stateTuple.Item3)
+                                {
+                                    // sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
+                                }
+                                else
+                                {
+                                    // sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
+                                }
+                            }
                         }
                     }
                 }
@@ -126,16 +140,21 @@ namespace Game_Project
 
             // we need some way to get back to the idle/moving state after attacking
             if (stateTuple.Item3)
-                sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
+            {
+                //sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
+            }
             else
-                sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
-            
+            {
+                //sidekickSprite = SpriteFactory.Instance.CreateSprite("rightAttackSidekick");
+            }
+
             // if the sidekick has been told to stay...then stay
             if (stateTuple.Item1 == false)
             {
                 sidekick.Stay();
 
-            } else
+            }
+            else
             {
                 if (!stateTuple.Item2) // if the sidekick is not attacking
                 {
@@ -164,11 +183,8 @@ namespace Game_Project
                 }
             }
 
-            //random attacks
-            //if (1 == (int) new Random().Next(10))
-            //{
-            //    sidekick.Attack();
-            //}
+            // check for attacking opprotunities
+            Attack();
 
             sidekickSprite.Update();
         }

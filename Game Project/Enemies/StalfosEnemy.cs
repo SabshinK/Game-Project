@@ -28,7 +28,6 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
-        float accel = 1;
         
         public StalfosEnemy(UniversalParameterObject parameters)
         {
@@ -59,7 +58,6 @@ namespace Game_Project
 
         public void Collide()
         {
-            // TODO
         }
 
         public void Collide(Rectangle collision, int direction)
@@ -90,9 +88,9 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
 
-            ////always falling
-            //int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            //locationVector.Y += verticalDis;
+            //always falling
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y += verticalDis;
 
             stateTuple = stalfos.getState();
 
@@ -101,11 +99,6 @@ namespace Game_Project
                 case actions.dead:
                     GameObjectManager.Instance.RemoveObject(this);
                     stalfosSprite = null;
-                    break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime);
-                    stalfosSprite.Update();
                     break;
                 case actions.moving:
                     if (stateTuple.Item2)

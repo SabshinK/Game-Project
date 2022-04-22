@@ -40,7 +40,7 @@ namespace Game_Project
         public static void LoadContent(ContentManager content)
         {
             // Load all sprites
-            enemiesSpriteSheet = content.Load<Texture2D>("TempDungeonEnemies");
+            enemiesSpriteSheet = content.Load<Texture2D>("Enemies");
             blocksSpriteSheet = content.Load<Texture2D>("TileSet");
             projectilesSpriteSheet = content.Load<Texture2D>("TempProjectiles");
             playerSpriteSheet = content.Load<Texture2D>("ClarySage");
@@ -54,7 +54,7 @@ namespace Game_Project
 
         private static void LoadDictionary()
         {
-            spritesByNames.Add("TempDungeonEnemies", enemiesSpriteSheet);
+            spritesByNames.Add("Enemies", enemiesSpriteSheet);
             spritesByNames.Add("TileSet", blocksSpriteSheet);
             spritesByNames.Add("TempProjectiles", projectilesSpriteSheet);
             spritesByNames.Add("ClarySage", playerSpriteSheet);
