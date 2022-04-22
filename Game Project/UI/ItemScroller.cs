@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class ItemScroller : IDrawable, IUI
+    public class ItemScroller : IUI
     {
         private List<String> items;
         private int numItems = 6;
@@ -53,7 +53,7 @@ namespace Game_Project
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, new Vector2(Position.X + 100, Position.Y));
+            sprite.Draw(spriteBatch, new Vector2(Position.X + 600, Position.Y + 200));
         }
     }
 }

@@ -7,9 +7,9 @@ namespace Game_Project
     class OverCommand
     {
         public GameStateMachine stateMachine;
-        public OverCommand()
+        public OverCommand(GameStateMachine stateMachine)
         {
-
+            this.stateMachine = stateMachine;
         }
 
         public void Execute()

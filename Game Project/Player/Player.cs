@@ -17,7 +17,7 @@ namespace Game_Project
 
         public int Health { get; private set; }
 
-        private Vector2 location;
+        public Vector2 location;
         // The location needed for moving the sprite is based on the sprite size but the Position to be accessed by other classes
         // and for use in collision is smaller than the sprite size
         public Vector2 Position 
@@ -31,9 +31,6 @@ namespace Game_Project
 
         public bool FacingRight { get; private set; }
         public bool isColliding;
-
-        public bool isRunning;
-        public bool isJumping;
 
         public string currentAnimationRun;
         public string currentAnimationJump;
@@ -53,9 +50,6 @@ namespace Game_Project
 
             FacingRight = true;
             isColliding = false;
-
-            isRunning = false;
-            isJumping = false;
 
             physics = new Physics();
 
@@ -78,13 +72,13 @@ namespace Game_Project
 
             if (FacingRight)
             {
-                if (isRunning && !isJumping)
+                if (physics.isRunning && !physics.isJumping)
                     if (!currentAnimationRun.Equals("movingRight"))
                     {
                         sprite = SpriteFactory.Instance.CreateSprite("movingRight");
                         currentAnimationRun = "movingRight";
                     }
-                if (isJumping)
+                if (physics.isJumping)
                 {
                     if (!currentAnimationJump.Equals("jumpingRight"))
                     {
@@ -95,13 +89,13 @@ namespace Game_Project
             }
             else
             {
-                if (isRunning && !isJumping)
+                if (physics.isRunning && !physics.isJumping)
                     if (!currentAnimationRun.Equals("movingLeft"))
                     {
                         sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
                         currentAnimationRun = "movingLeft";
                     }
-                if (isJumping)
+                if (physics.isJumping)
                 {
                     if (!currentAnimationJump.Equals("jumpingLeft"))
                     {
@@ -217,6 +211,7 @@ namespace Game_Project
             //}
 
             physics.Update(gameTime);
+
             location.Y -= (int)physics.VerticalChange(gameTime);
 
             sprite.Update();

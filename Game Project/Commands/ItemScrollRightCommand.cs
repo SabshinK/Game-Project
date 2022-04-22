@@ -7,9 +7,9 @@ namespace Game_Project
     class ItemScrollRightCommand : ICommand
     {
         public ItemScroller scroller;
-        public ItemScrollRightCommand()
+        public ItemScrollRightCommand(ItemScroller items)
         {
-            scroller = new ItemScroller();
+            scroller = items;
         }
 
         public void Execute()

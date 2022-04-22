@@ -16,11 +16,11 @@ namespace Game_Project
 
             // Reset physics stuff
             player.physics.displacement = new Vector2(0.0f, 0.0f);
-            player.physics.velocity = new Vector2(0.0f, 0.0f);
+            player.physics.velocity.X = 0f;
             player.physics.acceleration = new Vector2(0.0f, 0.0f);
 
-            if (player.isJumping)
-                player.physics.startJumping = true;
+            //if (player.physics.isJumping)
+            //    player.physics.startJumping = true;
 
         }
 
@@ -54,57 +54,57 @@ namespace Game_Project
         {
             if (player.FacingRight)
             {
-                if (player.isRunning)
-                {
-                    player.location.X += player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.X <= 0 && !player.isJumping)
-                        BackToIdle();
-                }
-                if (player.isJumping)
-                {
-                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+                player.location.X += player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.Y <= 0 && !player.isRunning)
-                    {
-                        player.physics.falling = true;
-                        BackToIdle();
-                    }
+                if (player.physics.displacement.X <= 0f)
+                    player.physics.isRunning = false;
+
+
+                player.location.Y -= player.physics.VerticalChange(gameTime);
+
+                if (player.physics.displacement.Y <= 0f)
+                {
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
+                    player.physics.startJumping = false;
                 }
+
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                {
+
+                    BackToIdle();
+                }
+
             }
             else
             {
-                if (player.isRunning)
-                {
-                    player.location.X -= player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.X <= 0 && !player.isJumping)
-                        BackToIdle();
-                }
-                if (player.isJumping)
-                {
-                    player.location.Y -= (int)player.physics.VerticalChange(gameTime);
+                player.location.X -= player.physics.HorizontalChange(gameTime);
 
-                    if (player.physics.displacement.Y <= 0 && !player.isRunning)
-                    {
-                        player.physics.falling = true;
-                        BackToIdle();
-                    }
+                if (player.physics.displacement.X <= 0f)
+                    player.physics.isRunning = false;
+
+                player.location.Y -= player.physics.VerticalChange(gameTime);
+
+                if (player.physics.displacement.Y <= 0f)
+                {
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
+                    player.physics.startJumping = false;
                 }
+
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                {
+                    BackToIdle();
+                }
+
+
             }
 
-            if (player.isRunning && player.isJumping)
-            {
-                if (player.physics.appliedForce.X == 0 && player.physics.appliedForce.Y == 0)
-                {
-                    if (player.physics.displacement.X <= 0 && player.physics.displacement.Y <= 0)
-                        BackToIdle();
-                }
-            }
+            Debug.WriteLine(player.physics.acceleration.X);
 
-            Debug.WriteLine(player.isJumping);
-
-            //player.physics.Update(gameTime);
+            player.physics.Update(gameTime);
         }   
     }
 }

@@ -7,9 +7,9 @@ namespace Game_Project
     class WinCommand : ICommand
     {
         public GameStateMachine stateMachine;
-        public WinCommand()
+        public WinCommand(GameStateMachine stateMachine)
         {
-
+            this.stateMachine = stateMachine;
         }
 
         public void Execute()
