@@ -19,12 +19,12 @@ namespace Game_Project
         public bool falling;
 
         public bool isRunning;
-        public bool isJumping;
+        public bool IsJumping => appliedForce.Y > 0;
 
         private const float DRAG = 5.0f;
         public const float GRAVITY = 6.0f;
         private const float TERMINAL_VELOCITY_X = 32.0f;
-        public const float TERMINAL_VELOCITY_Y = 26.0f;
+        public const float TERMINAL_VELOCITY_Y = 32.0f;
 
         public Physics()
         {
@@ -36,7 +36,6 @@ namespace Game_Project
             falling = false;
 
             isRunning = false;
-            isJumping = false;
 
             totalDistance = 0;
 
@@ -89,7 +88,7 @@ namespace Game_Project
                 velocity.Y += acceleration.Y * time;
             }
             if (falling)
-                velocity.Y += acceleration.Y * time;
+                velocity.Y += acceleration.Y* time;
 
             if (appliedForce.Y > 0.02f)
                 appliedForce.Y /= 2;

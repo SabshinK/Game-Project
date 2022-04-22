@@ -61,11 +61,11 @@ namespace Game_Project
                     player.physics.isRunning = false;
                     
 
-                player.location.Y -= player.physics.VerticalChange(gameTime);
+                if (!player.physics.falling)
+                    player.location.Y -= player.physics.VerticalChange(gameTime);
 
                     if (player.physics.displacement.Y <= 0f)
                     {
-                        player.physics.isJumping = false;
                         player.physics.falling = true;
                         player.physics.startJumping = false;
                     }
@@ -89,7 +89,6 @@ namespace Game_Project
 
                 if (player.physics.displacement.Y <= 0f)
                 {
-                    player.physics.isJumping = false;
                     player.physics.falling = true;
                     player.physics.startJumping = false;
                 }
