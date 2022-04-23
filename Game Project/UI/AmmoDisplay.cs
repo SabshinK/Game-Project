@@ -19,7 +19,7 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "Tones: " + ItemHandler.Instance.ammoCount, new Vector2(Position.X + 800, Position.Y), Color.Black);
+            spriteBatch.DrawString(font, "Tones: " + ItemHandler.Instance.ammoCount, new Vector2(Position.X + 650, Position.Y), Color.Black);
         }
     }
 }
