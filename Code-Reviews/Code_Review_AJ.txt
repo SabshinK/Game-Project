@@ -79,3 +79,28 @@ Minutes Taken: 10
 Code Readability Comments:
 	This might be one of the most readable pieces of code I've ever seen. In terms of explaining the magic numbers that are being added, this class does it right. Even the conversion to an integer is explained within the comments, and it feels like I can
 	follow it line for line with what it is doing. One thing that might be nice is an explanation at the top that explains what the utility class does. We have that info on our end, but readers of the code do not know Very short review, but it's also quite a short class.
+
+
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    4/23/2022
+Sprint Number:    5
+Name of File:     ItemHandler.cs
+Author of File:    Sebastian King and Aadya Jain
+
+Code Quality Comments: 
+	Decently simple class that used to be part of a different one. The former issues with creating a god-class are now gone. This allows for a player to scroll right or left, and decide which item they want to be holding at the time. I do have a few critiques about this
+	split however. Firstly, that the old class it was in, ItemScroller, is probably improperly named because this is the class doing the actual scrolling. On top of this, I do see a single magic number, 4, used for telling the player how much to heal by when using a specific
+	item. It is explained in a comment, but a variable name might need to be introduced for it. Other than that, this does as it should - it handles items, and uses a switchcase quite effectively. This allows for efficient swapping of items without a lot of sorting or rearranging
+	lists or queues to have one on top, it simply scrolls through an existing list of items.
+
+Author of Code Review:    AJ Waizmann
+Date of Code Review:	    4/23/2022
+Sprint Number:    5
+Name of File:     GameStateMachine.cs
+Author of File:    Anooj Deshpande
+Minutes Taken: 10
+
+Code Readability Comments:
+	Overall, very readable code. At first glance, I noticed the weird naming scheme on the "uIManager", my recommendation is that this name be changed, as the strange camelCaps trip me up. Not the end of the world though! Other than that, the
+	use of enums to keep the states actually makes this quite readable, with states like .playing and .paused, which are self-explanatory. It's also nice, because I know intuitively by names that the Draw method allows the needed UI to be drawn, and 
+	the Update method allows the UI to be updated based on the game's current state. I've never understood a class with no comments better, and I don't even quite think they're needed in this case.
