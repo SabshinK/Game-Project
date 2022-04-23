@@ -8,6 +8,8 @@ namespace Game_Project
         // Might have this be a GameObject thing but I'm not sure yet if that's really necessary
         public int Health { get; }
 
+        public void Heal();
+
         public void Bump(Rectangle collision, int direction);
     }
 }

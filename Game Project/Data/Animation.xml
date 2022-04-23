@@ -312,25 +312,85 @@
 		<Rectangle>256 640 64 64</Rectangle>
 		<Rectangle>320 640 64 64</Rectangle>
 	</Item>
+	<Item>
+		<AnimationName>dragonIdleRight</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 0 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonIdleLeft</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 128 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonMovingRight</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>2</Scale>
+		<Rectangle>0 0 128 128</Rectangle>
+		<Rectangle>128 0 128 128</Rectangle>
+		<Rectangle>256 0 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonAttackingRight</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>2</Scale>
+		<Rectangle>384 0 128 128</Rectangle>
+		<Rectangle>512 0 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonAttackingLeft</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>2</Scale>
+		<Rectangle>384 128 128 128</Rectangle>
+		<Rectangle>512 128 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonMovingLeft</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>2</Scale>
+		<Rectangle>0 128 128 128</Rectangle>
+		<Rectangle>128 128 128 128</Rectangle>
+		<Rectangle>256 128 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonDamagedRight</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>640 0 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonDamagedLeft</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>640 128 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonDeadRight</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>768 0 128 128</Rectangle>
+		<Rectangle>896 0 128 128</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>dragonDeadLeft</AnimationName>
+		<Texture>Dragon</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>768 128 128 128</Rectangle>
+		<Rectangle>896 128 128 128</Rectangle>
+	</Item>
 	
-	<Item>
-		<AnimationName>dragonWaiting</AnimationName>
-		<Texture>TempBosses</Texture>
-		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 11 24 32</Rectangle>
-		<Rectangle>26 11 24 32</Rectangle>
-		<Rectangle>51 11 24 32</Rectangle>
-		<Rectangle>76 11 24 32</Rectangle>
-	</Item>
-	<Item>
-		<AnimationName>dragonAttack</AnimationName>
-		<Texture>TempBosses</Texture>
-		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 11 24 32</Rectangle>
-		<Rectangle>26 11 24 32</Rectangle>
-	</Item>
 
 	<!--Tiles-->>
 	<Item>
@@ -413,25 +473,35 @@
 
 	<!--Projectile animations-->
 	<Item>
-		<AnimationName>accordianGeneric</AnimationName>
-		<Texture>Items</Texture>
+		<AnimationName>accordianBoomerangGeneric</AnimationName>
+		<Texture>accordianboomerang</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
-		<Rectangle>64 64 64 64</Rectangle>
-	</Item>
-	<Item>
-		<AnimationName>leftArrow</AnimationName>
-		<Texture>TempProjectiles</Texture>
-		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>1 18 16 16</Rectangle>
+		<Rectangle>194 0 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>rightArrow</AnimationName>
-		<Texture>TempProjectiles</Texture>
+		<Texture>Arrow</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>18 18 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 0 32 32</Rectangle>
+		<Rectangle>32 0 32 32</Rectangle>
+		<Rectangle>64 0 32 32</Rectangle>
+		<Rectangle>0 32 32 32</Rectangle>
+		<Rectangle>32 32 32 32</Rectangle>
+		<Rectangle>64 32 32 32</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>leftArrow</AnimationName>
+		<Texture>Arrow</Texture>
+		<Speed>3</Speed>
+		<Scale>1</Scale>
+		<Rectangle>0 64 32 32</Rectangle>
+		<Rectangle>32 64 32 32</Rectangle>
+		<Rectangle>64 64 32 32</Rectangle>
+		<Rectangle>0 96 32 32</Rectangle>
+		<Rectangle>32 96 32 32</Rectangle>
+		<Rectangle>64 96 32 32</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>despawnGeneric</AnimationName>
@@ -441,28 +511,23 @@
 		<Rectangle>35 18 16 16</Rectangle>
 	</Item>
 	<Item>
-		<AnimationName>candleFireGeneric</AnimationName>
-		<Texture>TempProjectiles</Texture>
-		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>52 18 16 16</Rectangle>
-		<Rectangle>69 18 16 16</Rectangle>
-	</Item>
-	<Item>
-		<AnimationName>drumGeneric</AnimationName>
-		<Texture>Items</Texture>
+		<AnimationName>fireballGeneric</AnimationName>
+		<Texture>fireball</Texture>
 		<Speed>3</Speed>
 		<Scale>1</Scale>
-		<Rectangle>194 0 64 64</Rectangle>
+		<Rectangle>0 0 32 32</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>bombExplosion</AnimationName>
-		<Texture>TempProjectiles</Texture>
+		<Texture>bombexplode</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
-		<Rectangle>18 35 16 16</Rectangle>
-		<Rectangle>35 35 16 16</Rectangle>
-		<Rectangle>52 35 16 16</Rectangle>
+		<Scale>1</Scale>
+		<Rectangle>0 0 192 192</Rectangle>
+		<Rectangle>192 0 192 192</Rectangle>
+		<Rectangle>384 0 192 192</Rectangle>
+		<Rectangle>0 192 192 192</Rectangle>
+		<Rectangle>192 192 192 192</Rectangle>
+		<Rectangle>384 192 192 192</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>swordBeamRight</AnimationName>
@@ -694,7 +759,7 @@
 		<AnimationName>triangleGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>3</Scale>
 		<Rectangle>64 0 64 64</Rectangle>
 	</Item>
 	<Item>
@@ -716,7 +781,7 @@
 		<AnimationName>harpGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>3</Scale>
 		<Rectangle>128 0 64 64</Rectangle>
 	</Item>
 	<Item>
@@ -745,21 +810,35 @@
 		<AnimationName>fluteGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>3</Scale>
 		<Rectangle>194 64 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>speakerGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>3</Scale>
 		<Rectangle>128 64 64 64</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>guitarGeneric</AnimationName>
 		<Texture>Items</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>3</Scale>
 		<Rectangle>0 0 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>accordianGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>3</Scale>
+		<Rectangle>64 64 64 64</Rectangle>
+	</Item>
+	<Item>
+		<AnimationName>drumGeneric</AnimationName>
+		<Texture>Items</Texture>
+		<Speed>3</Speed>
+		<Scale>3</Scale>
+		<Rectangle>194 0 64 64</Rectangle>
 	</Item>
 </Asset>

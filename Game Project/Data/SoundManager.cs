@@ -17,6 +17,16 @@ namespace Game_Project
 
         private Dictionary<string, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
 
+        public void PlayEffect(string effect)
+        {
+            sfx[effect].Play();
+        }
+
+        public void PlayMusic()
+        {
+
+        }
+        
         public void LoadContent(ContentManager content)
         {
             music.Add(content.Load<Song>("01 - At Dooms Gate"));
@@ -24,21 +34,12 @@ namespace Game_Project
             sfx.Add("getAmmo", content.Load<SoundEffect>(""));
             sfx.Add("getHeart", content.Load<SoundEffect>(""));
             sfx.Add("getInstrument", content.Load<SoundEffect>(""));
-
-
+            sfx.Add("jump", content.Load<SoundEffect>(""));
+            sfx.Add("takeDamage", content.Load<SoundEffect>(""));
+            sfx.Add("damageEnemy", content.Load<SoundEffect>(""));
 
             MediaPlayer.Play(music[0]);
             MediaPlayer.IsRepeating = true;
-        }
-
-        public void PlayEffect()
-        {
-
-        }
-
-        public void PlayMusic()
-        {
-
         }
     }
 }
