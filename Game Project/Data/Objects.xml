@@ -50,6 +50,12 @@
 	<!-- =================================================== Tiles =================================================== -->
 	<!--Y 3-->
 	<Item>
+		<ObjectType>DragonEnemy</ObjectType>
+		<X>67</X>
+		<Y>43</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
 		<ObjectType>Tile</ObjectType>
 		<X>93</X>
 		<Y>3</Y>
