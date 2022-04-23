@@ -21,7 +21,8 @@ namespace Game_Project
                 if (!player.physics.startJumping)
                 {
                     player.physics.startJumping = true;
-                    player.physics.velocity.Y = 20f;
+                    player.isColliding = false;
+                    player.physics.velocity.Y = 26f;
                 }
                 player.physics.isJumping = true;
                 player.StartMoving(player.FacingRight);
