@@ -70,10 +70,24 @@ Sprint 5
 
 Readability:
 Reviewing Physics.cs by Rachel Watters
-For the most part this code is fairly readable, variables of similar type and use are grouped together, constants adhere to naming conventions, and there are minimal comments but the ones that are there help to clarify what some conditions are checking for. However there are a lot of booleans in this code that might be overcomplicating things, and it makes the code hard to read. Booleans like isJumping and startJumping have very similar name and one of these seems reduntant as they seem to be tracking more or less the same thing, so there may be some simplifying that could be done here. Overall the code is well formatted though
+For the most part this code is fairly readable, variables of similar type and use are grouped together, constants adhere to naming conventions, and 
+there are minimal comments but the ones that are there help to clarify what some conditions are checking for. However there are a lot of booleans in 
+this code that might be overcomplicating things, and it makes the code hard to read. Booleans like isJumping and startJumping have very similar name 
+and one of these seems reduntant as they seem to be tracking more or less the same thing, so there may be some simplifying that could be done here. 
+Overall the code is well formatted though
 Review time: 15 minutes
 
 Maintainability:
 Reviewing Sidekick.cs by Aadya Jain
-I had a little trouble understanding what was going on in this class at first, I think there are a good few issues here though, which makes sense seeing as this code isn't going to be used for demoing. For one I don't think the sidekick should have to iterate through all of the objects in the game object list twice, since it's done once for attacking and once for pathfinding. There is probably an easier way by passing only a necessary subset of enemies in for checking based off of position or by having the checks done somewhere else entirely. It seems that some of the checks are collision detection and those should likely be done in the class that handles collisions. The tuple keeping track of three booleans could likely get confusing and could probably be split up into three different variables for the sake of simplicity, especially since one of the variables in the tuple is a boolean that keeps track of whether the sidekick is facing right but there is a boolean with the same function declared as well. The pathfinding could be greatly simplified as well I think, with instead of the AI calculating next squares based on iterating through the lists, you could calculate a next closest position based on where the player is and have a wieght to how far behind the sidekick should be, which is sort of happening, but I think the algorithm could be better there. There seems to be a simple bump function for collisions, and I have no issue with the use of the state machine. This class is complex but I think it could be simplified some
+I had a little trouble understanding what was going on in this class at first, I think there are a good few issues here though, which makes sense seeing 
+as this code isn't going to be used for demoing. For one I don't think the sidekick should have to iterate through all of the objects in the game object 
+list twice, since it's done once for attacking and once for pathfinding. There is probably an easier way by passing only a necessary subset of enemies 
+in for checking based off of position or by having the checks done somewhere else entirely. It seems that some of the checks are collision detection and 
+those should likely be done in the class that handles collisions. The tuple keeping track of three booleans could likely get confusing and could probably 
+be split up into three different variables for the sake of simplicity, especially since one of the variables in the tuple is a boolean that keeps track of 
+whether the sidekick is facing right but there is a boolean with the same function declared as well. The pathfinding could be greatly simplified as well 
+I think, with instead of the AI calculating next squares based on iterating through the lists, you could calculate a next closest position based on where 
+the player is and have a wieght to how far behind the sidekick should be, which is sort of happening, but I think the algorithm could be better there. 
+There seems to be a simple bump function for collisions, and I have no issue with the use of the state machine. This class is complex but I think it could 
+be simplified some
 Review time: 1 hour
