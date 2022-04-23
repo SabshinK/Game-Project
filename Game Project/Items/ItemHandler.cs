@@ -6,29 +6,17 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class ItemHandler : IItem
+    public class ItemHandler
     {
-        private Player player;
-        public bool FacingRight { get; set; }
-        private Vector2 position;
-        public Vector2 Position => position;
-        public Vector2 GridPosition => new Vector2(position.X / 64, position.Y / 64);
-        public int Health { get; set; }
+        private IPlayer player;
         private ItemScroller itemScroller;
-        private List<String> items;
-        private string currItem;
+
+        private Dictionary<string, Action> itemFunctions;
 
         public ItemHandler()
         {
-            items = itemScroller.items;
-            currItem = itemScroller.currItem;
-            Health = Player.Health;
-        }
-        //Returns the item which was picked to 
-        // heals player for the triangle
-        public HealPlayer()
-        {
-            Player.Health = 4; // set player's health to 4
+            player = GameObjectManager.Instance.GetPlayer();
+
         }
 
         public void DecideItem()
@@ -44,7 +32,7 @@ namespace Game_Project
             switch (items.IndexOf(currItem)) //ItemsList is the list I should be able to access from ItemScroller;
             {
                 case 1:
-                    GameObjectManager.RegisterObject(new SwordBeam(new UniversalParameterObject(player.position, FacingRight)));
+                    GameObjectManager.RegisterObject(new SwordBeam(new UniversalParameterObject(player.Position, player.FacingRight)));
                     break;
                 case 2:
                     GameObjectManager.RegisterObject(new Boomerang(new UniversalParameterObject(player.position, FacingRight)));
@@ -70,10 +58,5 @@ namespace Game_Project
         {
             DecideItem();
         }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-        }
-
     }
 }
