@@ -114,6 +114,19 @@ namespace Game_Project
             Rectangle desiredDimensions = new Rectangle(0, 0, 8448, 2944);
             spriteBatch.Draw(Texture2DStorage.GetTexture("FinalBackground"), desiredDimensions, backgroundDimensions, Color.White);
 
+            //triangle
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(3624, 832, 256, 256), new Rectangle(0, 0, 256, 256), Color.White);
+            //harp
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(4352, 1600, 256, 256), new Rectangle(256, 0, 256, 256), Color.White);
+            //flute
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(7104, 1856, 256, 256), new Rectangle(512, 0, 256, 256), Color.White);
+            //speaker
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(1280, 2560, 256, 256), new Rectangle(0, 256, 256, 256), Color.White);
+            //drum
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(4608, 2560, 256, 256), new Rectangle(256, 256, 256, 256), Color.White);
+            //accordion
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(8000, 1088, 256, 256), new Rectangle(512, 256, 256, 256), Color.White);
+
             GameObjectManager.Instance.Draw(spriteBatch);
             gameStateMachine.Draw(spriteBatch);
 
