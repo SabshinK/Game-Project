@@ -114,10 +114,12 @@ namespace Game_Project
             state.TakeDamage();
         } 
 
-        public void Heal()
+        public void Heal(int amount)
         {
             // Full heal
-            Health = 10;
+            Health += amount;
+            if (Health > 10)
+                Health = 10;
         }
 
         public void Attack()
@@ -188,10 +190,9 @@ namespace Game_Project
             //}
 
             physics.Update(gameTime);
-            if (!physics.isJumping)
-            {
-                location.Y -= (int)physics.VerticalChange(gameTime);
-            }
+
+            location.Y -= (int)physics.VerticalChange(gameTime);
+
             sprite.Update();
 
             state.Update(gameTime);
