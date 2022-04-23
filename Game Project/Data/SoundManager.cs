@@ -13,9 +13,21 @@ namespace Game_Project
         private static SoundManager instance = new SoundManager();
         public static SoundManager Instance => instance;
 
-        SoundEffect[] music;
+        private Dictionary<string, SoundEffect> music = new Dictionary<string, SoundEffect>();
+        private delegate void LayerInstruments();
+        private LayerInstruments PlayLayered;
 
         private Dictionary<string, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
+
+        public SoundManager()
+        {
+
+        }
+
+        private void AddMusic(string weapon)
+        {
+            PlayLayered += () => music[weapon].Play();
+        }
 
         public void PlayEffect(string effect)
         {
@@ -24,7 +36,7 @@ namespace Game_Project
 
         public void PlayMusic()
         {
-
+            PlayLayered();
         }
         
         public void LoadContent(ContentManager content)
@@ -38,7 +50,14 @@ namespace Game_Project
             sfx.Add("takeDamage", content.Load<SoundEffect>(""));
             sfx.Add("damageEnemy", content.Load<SoundEffect>(""));
 
-            
+            music.Add("accordianGeneric", content.Load<SoundEffect>("Accordion"));
+            music.Add("fluteGeneric", content.Load<SoundEffect>("Flute"));
+            music.Add("drumGeneric", content.Load<SoundEffect>("Drums"));
+            music.Add("harpGeneric", content.Load<SoundEffect>("Harp"));
+            music.Add("guitarGeneric", content.Load<SoundEffect>("Guitar"));
+            music.Add("speakerGeneric", content.Load<SoundEffect>("Bass_Synth_Speaker"));
+
+            AddMusic("guitarGeneric");
         }
     }
 }
