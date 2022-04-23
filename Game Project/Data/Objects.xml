@@ -7,102 +7,100 @@
 		<Y>42</Y>
 	</Item>
 	<!-- ================================================== Enemies ================================================== -->
-	<!--
 	<Item>
 		<ObjectType>BatEnemy</ObjectType>
-		<X>67</X>
-		<Y>43</Y>
-		<FacingRight>true</FacingRight>
-	</Item>
-	<Item>
-		<ObjectType>GelEnemy</ObjectType>
-		<X>70</X>
-		<Y>43</Y>
-		<FacingRight>true</FacingRight>
-	</Item>
-	<Item>
-		<ObjectType>GoriyaEnemy</ObjectType>
-		<X>73</X>
-		<Y>43</Y>
-		<FacingRight>true</FacingRight>
-	</Item>
-	<Item>
-		<ObjectType>StalfosEnemy</ObjectType>
-		<X>76</X>
-		<Y>43</Y>
-		<FacingRight>true</FacingRight>
-	</Item>
-	<Item>
-		<ObjectType>ZohEnemy</ObjectType>
-		<X>79</X>
-		<Y>43</Y>
-		<FacingRight>true</FacingRight>
-	</Item>
-	<Item>
-		<ObjectType>BatEnemy</ObjectType>
-		<X>84</X>
+		<X>56</X>
 		<Y>42</Y>
 		<FacingRight>true</FacingRight>
 	</Item>
 	<Item>
-		<ObjectType>DragonEnemy</ObjectType>
-		<X>67</X>
-		<Y>43</Y>
+		<ObjectType>GelEnemy</ObjectType>
+		<X>72</X>
+		<Y>39</Y>
 		<FacingRight>true</FacingRight>
 	</Item>
-	-->
+	<Item>
+		<ObjectType>GoriyaEnemy</ObjectType>
+		<X>57</X>
+		<Y>14</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>StalfosEnemy</ObjectType>
+		<X>87</X>
+		<Y>36</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>ZohEnemy</ObjectType>
+		<X>100</X>
+		<Y>14</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>BatEnemy</ObjectType>
+		<X>98</X>
+		<Y>28</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
+	<Item>
+		<ObjectType>DragonEnemy</ObjectType>
+		<X>27</X>
+		<Y>36</Y>
+		<FacingRight>true</FacingRight>
+	</Item>
 	<!-- =================================================== Items =================================================== -->
 	<!--Y 1-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>29</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>93</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>95</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>97</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>99</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>104</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>111</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>112</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>116</X>
 		<Y>1</Y>
 		<Animation>Ammo</Animation>
@@ -110,25 +108,25 @@
 
 	<!--Y 2-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>28</X>
 		<Y>2</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>30</X>
 		<Y>2</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>52</X>
 		<Y>2</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>53</X>
 		<Y>2</Y>
 		<Animation>Ammo</Animation>
@@ -136,109 +134,109 @@
 
 	<!--Y 3-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>11</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>12</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>14</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>15</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>29</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>38</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>81</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>82</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>83</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>89</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>90</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>103</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>105</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>115</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>117</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>124</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>125</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>126</X>
 		<Y>3</Y>
 		<Animation>Ammo</Animation>
@@ -246,13 +244,13 @@
 
 	<!--Y 4-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>43</X>
 		<Y>4</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>47</X>
 		<Y>4</Y>
 		<Animation>Ammo</Animation>
@@ -260,19 +258,19 @@
 
 	<!--Y 5-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>18</X>
 		<Y>5</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>62</X>
 		<Y>5</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>63</X>
 		<Y>5</Y>
 		<Animation>Ammo</Animation>
@@ -280,19 +278,19 @@
 
 	<!--Y 7-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>7</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>106</X>
 		<Y>7</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>120</X>
 		<Y>7</Y>
 		<Animation>Ammo</Animation>
@@ -300,31 +298,31 @@
 
 	<!--Y 8-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>8</X>
 		<Y>8</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>20</X>
 		<Y>8</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>38</X>
 		<Y>8</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>73</X>
 		<Y>8</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>75</X>
 		<Y>8</Y>
 		<Animation>Ammo</Animation>
@@ -332,43 +330,43 @@
 
 	<!--Y 9-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>67</X>
 		<Y>9</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>9</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>79</X>
 		<Y>9</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>90</X>
 		<Y>9</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>93</X>
 		<Y>9</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>104</X>
 		<Y>9</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>122</X>
 		<Y>9</Y>
 		<Animation>Ammo</Animation>
@@ -376,7 +374,7 @@
 
 	<!--Y 10-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>79</X>
 		<Y>10</Y>
 		<Animation>Ammo</Animation>
@@ -384,19 +382,19 @@
 
 	<!--Y 11-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>79</X>
 		<Y>11</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>92</X>
 		<Y>11</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>94</X>
 		<Y>11</Y>
 		<Animation>Ammo</Animation>
@@ -404,61 +402,61 @@
 
 	<!--Y 13-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>33</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>34</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>55</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>56</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>58</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>59</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>75</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>119</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>120</X>
 		<Y>13</Y>
 		<Animation>Ammo</Animation>
@@ -466,43 +464,43 @@
 
 	<!--Y 14-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>5</X>
 		<Y>14</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>39</X>
 		<Y>14</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>65</X>
 		<Y>14</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>14</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>75</X>
 		<Y>14</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>115</X>
 		<Y>14</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>116</X>
 		<Y>14</Y>
 		<Animation>Ammo</Animation>
@@ -510,19 +508,19 @@
 
 	<!--Y 15-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>21</X>
 		<Y>15</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>62</X>
 		<Y>15</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>75</X>
 		<Y>15</Y>
 		<Animation>Ammo</Animation>
@@ -530,25 +528,25 @@
 
 	<!--Y 16-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>27</X>
 		<Y>16</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>28</X>
 		<Y>16</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>38</X>
 		<Y>16</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>40</X>
 		<Y>16</Y>
 		<Animation>Ammo</Animation>
@@ -556,31 +554,31 @@
 
 	<!--Y 17-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>27</X>
 		<Y>17</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>28</X>
 		<Y>17</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>45</X>
 		<Y>17</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>80</X>
 		<Y>17</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>124</X>
 		<Y>17</Y>
 		<Animation>Ammo</Animation>
@@ -588,49 +586,49 @@
 
 	<!--Y 18-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>6</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>23</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>49</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>77</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>102</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>103</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>121</X>
 		<Y>18</Y>
 		<Animation>Ammo</Animation>
@@ -638,37 +636,37 @@
 
 	<!--Y 19-->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>44</X>
 		<Y>19</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>46</X>
 		<Y>19</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>19</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>107</X>
 		<Y>19</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>109</X>
 		<Y>19</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>126</X>
 		<Y>19</Y>
 		<Animation>Ammo</Animation>
@@ -676,25 +674,25 @@
 
 	<!--Y 20 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>20</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>87</X>
 		<Y>20</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>97</X>
 		<Y>20</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>98</X>
 		<Y>20</Y>
 		<Animation>Ammo</Animation>
@@ -702,43 +700,43 @@
 
 	<!--Y 21 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>52</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>53</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>59</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>60</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>85</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>89</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>124</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
@@ -746,55 +744,55 @@
 
 	<!--Y 22 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>17</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>21</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>22</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>48</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>59</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>60</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>118</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>119</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>122</X>
 		<Y>21</Y>
 		<Animation>Ammo</Animation>
@@ -802,55 +800,55 @@
 
 	<!--Y 22 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>17</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>21</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>22</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>48</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>59</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>60</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>118</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>119</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>122</X>
 		<Y>22</Y>
 		<Animation>Ammo</Animation>
@@ -858,49 +856,49 @@
 
 	<!--Y 23 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>21</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>22</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>51</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>54</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>60</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>65</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>90</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>104</X>
 		<Y>23</Y>
 		<Animation>Ammo</Animation>
@@ -908,25 +906,25 @@
 
 	<!--Y 24 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>15</X>
 		<Y>24</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>21</X>
 		<Y>24</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>22</X>
 		<Y>24</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>108</X>
 		<Y>24</Y>
 		<Animation>Ammo</Animation>
@@ -934,7 +932,7 @@
 
 	<!--Y 25 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>5</X>
 		<Y>25</Y>
 		<Animation>Ammo</Animation>
@@ -942,55 +940,55 @@
 
 	<!--Y 26 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>12</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>70</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>71</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>73</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>74</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>105</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>106</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>123</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>124</X>
 		<Y>26</Y>
 		<Animation>Ammo</Animation>
@@ -998,37 +996,37 @@
 
 	<!--Y 27 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>98</X>
 		<Y>27</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>99</X>
 		<Y>27</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>100</X>
 		<Y>27</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>105</X>
 		<Y>27</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>106</X>
 		<Y>27</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>119</X>
 		<Y>27</Y>
 		<Animation>Ammo</Animation>
@@ -1036,19 +1034,19 @@
 
 	<!--Y 28 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>9</X>
 		<Y>28</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>105</X>
 		<Y>28</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>106</X>
 		<Y>28</Y>
 		<Animation>Ammo</Animation>
@@ -1056,19 +1054,19 @@
 
 	<!--Y 29 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>110</X>
 		<Y>29</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>112</X>
 		<Y>29</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>114</X>
 		<Y>29</Y>
 		<Animation>Ammo</Animation>
@@ -1076,13 +1074,13 @@
 
 	<!--Y 30 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>6</X>
 		<Y>30</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>6</X>
 		<Y>123</Y>
 		<Animation>Ammo</Animation>
@@ -1090,19 +1088,19 @@
 
 	<!--Y 32 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>7</X>
 		<Y>32</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>96</X>
 		<Y>32</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>104</X>
 		<Y>32</Y>
 		<Animation>Ammo</Animation>
@@ -1110,7 +1108,7 @@
 
 	<!--Y 33 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>106</X>
 		<Y>33</Y>
 		<Animation>Ammo</Animation>
@@ -1118,7 +1116,7 @@
 
 	<!--Y 34 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>8</X>
 		<Y>33</Y>
 		<Animation>Ammo</Animation>
@@ -1126,61 +1124,61 @@
 
 	<!--Y 35 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>65</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>66</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>67</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>68</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>79</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>83</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>87</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>94</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>107</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>120</X>
 		<Y>35</Y>
 		<Animation>Ammo</Animation>
@@ -1188,13 +1186,13 @@
 
 	<!--Y 36 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>9</X>
 		<Y>36</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>127</X>
 		<Y>36</Y>
 		<Animation>Ammo</Animation>
@@ -1202,13 +1200,13 @@
 
 	<!--Y 37 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>91</X>
 		<Y>37</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>107</X>
 		<Y>37</Y>
 		<Animation>Ammo</Animation>
@@ -1216,19 +1214,19 @@
 
 	<!--Y 38 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>112</X>
 		<Y>38</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>123</X>
 		<Y>38</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>124</X>
 		<Y>38</Y>
 		<Animation>Ammo</Animation>
@@ -1236,31 +1234,31 @@
 
 	<!--Y 39 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>37</X>
 		<Y>39</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>40</X>
 		<Y>39</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>43</X>
 		<Y>39</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>94</X>
 		<Y>39</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>107</X>
 		<Y>39</Y>
 		<Animation>Ammo</Animation>
@@ -1268,13 +1266,13 @@
 
 	<!--Y 40 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>67</X>
 		<Y>40</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>114</X>
 		<Y>40</Y>
 		<Animation>Ammo</Animation>
@@ -1282,31 +1280,31 @@
 
 	<!--Y 41 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>17</X>
 		<Y>41</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>25</X>
 		<Y>41</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>117</X>
 		<Y>41</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>118</X>
 		<Y>41</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>119</X>
 		<Y>41</Y>
 		<Animation>Ammo</Animation>
@@ -1314,73 +1312,73 @@
 
 	<!--Y 42 -->
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>21</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>23</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>27</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>29</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>63</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>65</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>69</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>71</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>82</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>84</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>86</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>
 	</Item>
 	<Item>
-		<ObjectType>Item</ObjectType>
+		<ObjectType>Ammo</ObjectType>
 		<X>88</X>
 		<Y>42</Y>
 		<Animation>Ammo</Animation>

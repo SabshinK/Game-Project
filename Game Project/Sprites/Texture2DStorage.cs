@@ -24,6 +24,7 @@ namespace Game_Project
         private static Texture2D accordianSpriteSheet;
         private static Texture2D background;
         private static Texture2D backgroundTwo;
+        private static Texture2D backgroundFinal;
 
         // Dictionary used for getting Texture2D's
         private static Dictionary<string, Texture2D> spritesByNames = new Dictionary<string, Texture2D>();
@@ -58,6 +59,7 @@ namespace Game_Project
             accordianSpriteSheet = content.Load<Texture2D>("accordionboomerang");
             background = content.Load<Texture2D>("2b");
             backgroundTwo = content.Load<Texture2D>("3b");
+            backgroundFinal = content.Load<Texture2D>("FinalBackground");
 
             LoadDictionary();
         }
@@ -79,6 +81,7 @@ namespace Game_Project
             spritesByNames.Add("accordionboomerang", accordianSpriteSheet);
             spritesByNames.Add("2b", background);
             spritesByNames.Add("3b", backgroundTwo);
+            spritesByNames.Add("FinalBackground", backgroundFinal);
         }
     }
 }
