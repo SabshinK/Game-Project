@@ -90,23 +90,18 @@ namespace Game_Project
 			RegisterCommand(states.playing, Keys.Right, true, new PlayerMoveRightCommand(player));
 			RegisterCommand(states.playing, Keys.Q, false, new QuitCommand(game));			
 			RegisterCommand(states.playing, Keys.N, false, new AttackCommand(player));
-			RegisterCommand(states.playing, Keys.D1, false, new UseItemCommand(player, 1));
-			RegisterCommand(states.playing, Keys.D2, false, new UseItemCommand(player, 2));
-			RegisterCommand(states.playing, Keys.D3, false, new UseItemCommand(player, 3));
-			RegisterCommand(states.playing, Keys.D4, false, new UseItemCommand(player, 4));
-			RegisterCommand(states.playing, Keys.D5, false, new UseItemCommand(player, 5));
-			RegisterCommand(states.playing, Keys.E, false, new TakeDamageCommand(player));
+			RegisterCommand(states.playing, Keys.E, false, new UseItemCommand(player));
 			RegisterCommand(states.playing, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(states.playing, Keys.P, false, new PauseCommand(stateMachine));
 
 			// Sidekick Commands
 			RegisterCommand(states.paused, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
-            
+
 			RegisterCommand(states.paused, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(states.paused, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(states.paused, Keys.P, false, new PauseCommand(stateMachine));
-			RegisterCommand(states.paused, Keys.A, false, new ItemScrollLeftCommand(stateMachine.uIManager.itemScroller));
-			RegisterCommand(states.paused, Keys.D, false, new ItemScrollRightCommand(stateMachine.uIManager.itemScroller));
+			RegisterCommand(states.paused, Keys.A, false, new ItemScrollLeftCommand());
+			RegisterCommand(states.paused, Keys.D, false, new ItemScrollRightCommand());
 
 			RegisterCommand(states.win, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(states.win, Keys.R, false, new ResetCommand(game));

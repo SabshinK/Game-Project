@@ -17,11 +17,13 @@ namespace Game_Project
         {
             if (!player.physics.falling)
             {
-                player.physics.appliedForce.Y = 6;
+                player.physics.appliedForce.Y = 6f;
                 if (!player.physics.startJumping)
                 {
+                    SoundManager.Instance.PlayEffect("jump");
                     player.physics.startJumping = true;
-                    player.physics.velocity.Y = 20f;
+                    player.isColliding = false;
+                    player.physics.velocity.Y = 26f;
                 }
                 player.physics.isJumping = true;
                 player.StartMoving(player.FacingRight);

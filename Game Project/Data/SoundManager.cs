@@ -13,32 +13,37 @@ namespace Game_Project
         private static SoundManager instance = new SoundManager();
         public static SoundManager Instance => instance;
 
-        private List<Song> music = new List<Song>();
+        private Dictionary<string, SoundEffect> music = new Dictionary<string, SoundEffect>();
+        //private delegate void LayerInstruments();
+        //private LayerInstruments PlayLayered;
 
         private Dictionary<string, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
 
+        public void PlayEffect(string effect)
+        {
+            sfx[effect].Play();
+        }
+        
         public void LoadContent(ContentManager content)
         {
-            music.Add(content.Load<Song>("01 - At Dooms Gate"));
+            sfx.Add("getAmmo", content.Load<SoundEffect>("Get Item"));
+            //sfx.Add("getHeart", content.Load<SoundEffect>(""));
+            //sfx.Add("getInstrument", content.Load<SoundEffect>(""));
+            sfx.Add("jump", content.Load<SoundEffect>("JumpUp"));
+            //sfx.Add("takeDamage", content.Load<SoundEffect>(""));
+            //sfx.Add("damageEnemy", content.Load<SoundEffect>(""));
 
-            sfx.Add("getAmmo", content.Load<SoundEffect>(""));
-            sfx.Add("getHeart", content.Load<SoundEffect>(""));
-            sfx.Add("getInstrument", content.Load<SoundEffect>(""));
+            //music.Add("accordianGeneric", content.Load<SoundEffect>("Accordion"));
+            //music.Add("fluteGeneric", content.Load<SoundEffect>("Flute"));
+            //music.Add("drumGeneric", content.Load<SoundEffect>("Drums"));
+            //music.Add("harpGeneric", content.Load<SoundEffect>("Harp"));
+            //music.Add("guitarGeneric", content.Load<SoundEffect>("Guitar"));
+            //music.Add("speakerGeneric", content.Load<SoundEffect>("Bass_Synth_Speaker"));
 
+            //AddMusic("guitarGeneric");
 
-
-            MediaPlayer.Play(music[0]);
+            MediaPlayer.Play(content.Load<Song>("Game_Soundtrack_All_Instruments"));
             MediaPlayer.IsRepeating = true;
-        }
-
-        public void PlayEffect()
-        {
-
-        }
-
-        public void PlayMusic()
-        {
-
         }
     }
 }

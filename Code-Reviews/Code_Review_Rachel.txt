@@ -1,3 +1,40 @@
+SPRINT 5
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    4/23/2022
+Sprint Number:    5
+Name of File:     UIManager.cs
+Author of File:    Anooj Deshpande
+
+Code Quality Comments:
+- This class has access to a lot of objects. It is the function of this, so it makes sense, but, like Player, it might risk becoming too powerful. It hasn't yet though. 
+- The file is very well organized by function
+- No class seems jealous of the other
+- There is a chain of if, else statements set up in the Draw function. There may be a better way to do this.
+- The list of game states is private, meaning this class has restricted information. This may not be beneficial in the future.
+- Will UIList ever change while you are cycling through it?
+- Having the list be private may be a sign of good code quality because no object is dependent on the UIManager, and they all disperse their tasks without caring about the reciever of those tasks. 
+- This code seems well thought out, and concise. This makes for quality code.
+
+Hypothetical Change(s) to to the Game that Are/Are Not Supported by This Code:
+	Overall, I think this is quality code. The UIManager, understandably so, has access to all of the different UI states. However, unlike GameObjectManager, other classes cannot access the behavior of these states. If other classes needed to know this information, they would not be able to see this. In the future, it may or may not be necessary for objects to know the state of the UI, but the list containing the behaviors is private. This code is concise and well thought out, but may have some problems in the future.
+
+Author of Code Review:    Rachel Watters
+Date of Code Review:	    4/23/2022
+Sprint Number:    5
+Name of File:     Bomb.cs
+Author of File:    Maria Stein
+Minutes It Took To Complete Review:     15 
+
+Comments On Readability: 
+- The variables are spaced out and separated by function, which helps me to understand what functionalities are necessary in this file.
+- Comments help me understand the author's thought process
+- There are some magic numbers in this file. Because I have worked on this project enough, I recongize the value to mean something significant, but if I hadn't looked at this project before, I may not be able to decipher what that value means
+- Some methods do nothing, which is fine, but it might be a good idea to include a brief explanation in a comment on why the method does nothing.
+- Variables are well-named
+- the lifespan equalling "2f" doesn't mean much to me. What will change this value (aka what is this variable measuring)?
+
+Overall, I found this code to be quite readable. However, there seems to be some assumptions made that I am always following the author's thinking (because of some variable names and magic numbers), and because I have worked on this project, I am, but that might not always be the case.
+
 SPRINT 4
 Author of Code Review:    Rachel Watters
 Date of Code Review:	    4/9/2022

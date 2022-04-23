@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Game_Project.Enemies;
+using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -16,7 +17,7 @@ namespace Game_Project
         public bool FacingRight { get; private set; }
 
         EnemyStateMachine dragon;
-        ISprite dragonSprite, waitingSprite, attackSprite;
+        ISprite dragonSprite;
         private int health = 70;
 
         private Vector2 locationVector;
@@ -32,21 +33,20 @@ namespace Game_Project
         {
             dragon = new EnemyStateMachine(health);
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
-            waitingSprite = SpriteFactory.Instance.CreateSprite("dragonWaiting");
-            attackSprite = SpriteFactory.Instance.CreateSprite("dragonAttack");
-            dragonSprite = waitingSprite;
             physics = new Physics();
             lengthOfAction = 0;
-
         }
 
         public void ChangeDirection()
         {
+            lengthOfAction = 0;
             dragon.ChangeDirection();
         }
 
         public void Attack()
         {
+            lengthOfAction = 0;
+            weapon = new Candle(new UniversalParameterObject(locationVector, FacingRight));
             dragon.Attack();
         }
 
@@ -88,6 +88,11 @@ namespace Game_Project
         public void Draw(SpriteBatch spriteBatch)
         {
             stateTuple = dragon.getState();
+
+            if(lengthOfAction <= 1)
+            {
+                dragonSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Dragon", stateTuple);
+            }
             dragonSprite.Draw(spriteBatch, locationVector);
             if (stateTuple.Item1.Equals(actions.attacking))
             {
@@ -106,10 +111,16 @@ namespace Game_Project
         {
 
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime);
-            locationVector.Y += verticalDis;
+            //int verticalDis = (int)physics.VerticalChange(gameTime);
+            //locationVector.Y -= verticalDis;
 
             stateTuple = dragon.getState();
+            FacingRight = stateTuple.Item2;
+
+            if(lengthOfAction <= 1)
+            {
+                dragonSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Dragon", stateTuple);
+            }
 
             switch (stateTuple.Item1)
             {
@@ -118,12 +129,6 @@ namespace Game_Project
                     dragonSprite = null;
                     break;
                 case actions.attacking:
-                    if (lengthOfAction <= 1)
-                    {
-                        dragonSprite = attackSprite;
-                    }
-                    else
-                    {
                         if (lengthOfAction < 50) //Length of weapon animation
                         {
                             if (weapon != null)
@@ -138,7 +143,6 @@ namespace Game_Project
                             ChangeDirection();
                         }
                         dragonSprite.Update();
-                    }
                     break;
                 case actions.moving:
                     if (stateTuple.Item2)
@@ -151,7 +155,7 @@ namespace Game_Project
                     }
                     dragonSprite.Update();
 
-                    if (lengthOfAction > 300) //Provides constant behavior of going back and forth and shooting
+                    if (lengthOfAction > 200) //Provides constant behavior of going back and forth and shooting
                     {
                         Attack();
                         lengthOfAction = 0;

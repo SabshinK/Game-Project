@@ -22,7 +22,10 @@ namespace Game_Project
         /// <returns>A GenericSprite implementation</returns>
         public ISprite CreateSprite(string animationName)
         {
-            return new GenericSprite(frames[animationName]);
+            if (animationName != null && frames.ContainsKey(animationName))
+                return new GenericSprite(frames[animationName]);
+            else
+                return null;
         }
 
         public void RegisterAnimation(string name, Tuple<Texture2D, Rectangle[], int, int> data)

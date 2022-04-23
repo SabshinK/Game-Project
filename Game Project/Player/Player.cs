@@ -15,7 +15,7 @@ namespace Game_Project
 
         public Physics physics;
 
-        public int Health { get; private set; }
+        public int Health { get; set; }
 
         public Vector2 location;
         // The location needed for moving the sprite is based on the sprite size but the Position to be accessed by other classes
@@ -46,10 +46,10 @@ namespace Game_Project
 
             location = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
 
-            Health = 3;
+            Health = 10;
 
             FacingRight = true;
-            isColliding = false;
+            isColliding = true;
 
             physics = new Physics();
 
@@ -110,17 +110,20 @@ namespace Game_Project
 
         public void DamageTaken()
         {
-            Health--;
             state.TakeDamage();
         } 
+
+        public void Heal(int amount)
+        {
+            // Full heal
+            Health += amount;
+            if (Health > 10)
+                Health = 10;
+        }
+
         public void Attack()
         {
             state.Attack();
-        }
-        
-        public void UseItem(int code)
-        {
-            state.UseItem(CreateProjectile(code));
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -135,31 +138,6 @@ namespace Game_Project
             {
                 this.state = state;
             }
-        }
-
-        public IProjectile CreateProjectile(int code)
-        {
-            object[] parameters = new object[3];
-            parameters[0] = new Vector2((int)physics.displacement.X, (int)physics.velocity.X);
-            parameters[1] = FacingRight;
-
-            switch(code)
-            {
-            //    case 1:
-            //        return new Arrow(new UniversalParameterObject(parameters));
-            //    case 2:
-            //        return new Bomb(new UniversalParameterObject(parameters));
-            //    case 3:
-            //        return new Boomerang(new UniversalParameterObject(parameters));
-            //    case 4:
-            //        return new Candle(new UniversalParameterObject(parameters));
-            //    case 5 :
-            //        return new SwordBeam(new UniversalParameterObject(parameters));
-                default:
-                    return null;
-            }
-
-
         }
 
         public void Collide()
@@ -209,8 +187,6 @@ namespace Game_Project
             //        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
             //    }
             //}
-
-            physics.Update(gameTime);
 
             location.Y -= (int)physics.VerticalChange(gameTime);
 

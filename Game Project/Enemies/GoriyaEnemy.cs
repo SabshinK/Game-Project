@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Game_Project.Enemies;
+using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -16,7 +17,7 @@ namespace Game_Project
         public bool FacingRight { get; private set; }
 
         EnemyStateMachine goriya;
-        ISprite currentGoriyaSprite, goriyaSpriteRight, goriyaSpriteLeft;
+        ISprite currentGoriyaSprite;
 
         public Vector2 locationVector;
         public Vector2 Position => locationVector;
@@ -33,23 +34,23 @@ namespace Game_Project
         {
             goriya = new EnemyStateMachine(health);
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
-            goriyaSpriteRight = SpriteFactory.Instance.CreateSprite("goriyaRight");
-            goriyaSpriteLeft = SpriteFactory.Instance.CreateSprite("goriyaLeft");
-            currentGoriyaSprite = goriyaSpriteRight;
             physics = new Physics();
         }
         public void ChangeDirection()
         {
+            lengthOfAction = 0;
             goriya.ChangeDirection();
         }
 
         public void Attack()
         {
+            lengthOfAction = 0;
             goriya.Attack();
         }
 
         public void TakeDamage()
         {
+            lengthOfAction = 0;
             goriya.TakeDamage();
         }
 
@@ -98,7 +99,7 @@ namespace Game_Project
 
             //always falling           
             int verticalDis = (int)physics.VerticalChange(gameTime);
-            locationVector.Y += verticalDis;
+            locationVector.Y -= verticalDis;
 
             if (weapon != null && !weapon.finished)
             {
@@ -106,7 +107,7 @@ namespace Game_Project
             }
             else
             {
-                int random = new Random().Next(200);
+                int random = new Random().Next(500);
                 if(lengthOfAction > random)
                 {
                     Attack();
@@ -120,39 +121,36 @@ namespace Game_Project
             }
 
             stateTuple = goriya.getState();
+            if(lengthOfAction <= 1)
+            {
+                currentGoriyaSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Shroomling", stateTuple);
+            }
 
             //An attempt to refactor this to something better led to a plethora of bugs 
-            if (stateTuple.Item1.Equals(actions.moving)) {
+            if (stateTuple.Item1.Equals(actions.moving))
+            {
 
-                if (stateTuple.Item2) {
-                    currentGoriyaSprite = goriyaSpriteRight;
-                    locationVector.X++;
-                }
-                else {
-                    currentGoriyaSprite = goriyaSpriteLeft;
-                    locationVector.X--;
-                }
-            }
-            else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0) {
                 if (stateTuple.Item2)
                 {
-                    currentGoriyaSprite = goriyaSpriteRight;
-                    weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
+                    locationVector.X++;
                 }
                 else
                 {
-                    currentGoriyaSprite = goriyaSpriteLeft;
-                    weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
+                    locationVector.X--;
                 }
-
+                currentGoriyaSprite.Update();
+            }
+            else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0)
+            {
+                weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
+                currentGoriyaSprite.Update();
             }
             else if (stateTuple.Item1.Equals(actions.dead))
             {
                 GameObjectManager.Instance.RemoveObject(this);
-                goriyaSpriteLeft = null;
-                goriyaSpriteRight = null;
+                currentGoriyaSprite = null;
             }
-            currentGoriyaSprite.Update();
+
             lengthOfAction++;
         }
 

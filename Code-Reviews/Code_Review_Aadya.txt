@@ -1,3 +1,30 @@
+---- SPRINT FIVE ----
+
+READABILTY REVIEW:
+
+Author of the code review: Aadya Jain
+Date of the code review: 04/22/22
+Sprint number: 5
+Name of the .cs file being reviewed: EnemyStateMachine.cs
+Author of the .cs file being reviewed: Sebastian King
+Number of minutes taken to complete the review: 30
+This file is one of the files we refactored after a code review to avoid duplicated code. Even then, it does a good job making all components readable while still distinguishing the components which are different for different enemies. The variables and function names are consistently named. All initial variables are grouped together and spaced away from the functions. Each if block gets its own space to make it more readable. 
+
+MAINTAINABILITY:
+
+Author of the code review: Aadya Jain
+Date of the code review: 04/22/22
+Sprint number: 5
+Name of the .cs file being reviewed: BreakableTile.cs
+Author of the .cs file being reviewed: Maria Stein
+Specific comments on code quality
+One change I would make: 
+The author of the code did a good job simplifying the code and making use of different properties while still keeping coupling in mind. 
+One change I would make is to add the magic numbers from the UtilityClass as UtilityClass.ParameterDiv for the number 64 so it is consistent and understandable for later changes. 
+We would not need to trace each and every feel if we change the value of the parameter later. 
+BreakableTile uses Universal Paramater Object which helps the maintainbaility of this code and delegates when it needs to.
+
+
 ---- SPRINT FOUR ----
 
 READABILTY REVIEW:
