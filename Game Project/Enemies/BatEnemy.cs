@@ -19,7 +19,6 @@ namespace Game_Project
         EnemyStateMachine bat;
         ISprite batSprite;
         private int health = 20;
-        EnemySpriteDictionary spriteDictionary;
 
         private Vector2 locationVector;
         public Vector2 Position => locationVector;
@@ -35,7 +34,6 @@ namespace Game_Project
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             lengthOfAction = 0;
             bat = new EnemyStateMachine(health);
-            spriteDictionary = new EnemySpriteDictionary();
             physics = new Physics();
         }
         public void ChangeDirection()
@@ -53,7 +51,6 @@ namespace Game_Project
         {
             lengthOfAction = 0;
             bat.TakeDamage();
-            ChangeDirection(); //enemy will try to run away after damage
         }
 
         public void Collide()
@@ -76,10 +73,12 @@ namespace Game_Project
                 case 2:
                     locationVector.X -= collision.Width;
                     physics.velocity.X = 0;
+                    ChangeDirection();
                     break;
                 case 3:
                     locationVector.X += collision.Width;
                     physics.velocity.X = 0;
+                    ChangeDirection();
                     break;
                 default:
                     break;
@@ -97,39 +96,38 @@ namespace Game_Project
             stateTuple = bat.getState();
             FacingRight = stateTuple.Item2;
 
-            if (lengthOfAction == 0)
+            if (lengthOfAction <= 1)
             {
-                batSprite = spriteDictionary.GetEnemySprite("Bat", stateTuple);
+                batSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Bat", stateTuple);
             }
 
                 switch (stateTuple.Item1) {
                 case actions.dead:
-                    batSprite.Update();
                     GameObjectManager.Instance.RemoveObject(this);
-                    bat = null;
                     batSprite = null;
+                    bat = null;
                     break;
                 case actions.moving:
-                    if (FacingRight) //Treats right as going up, the bat only moves up and down
+                    if (FacingRight)
                     {                 
-                        locationVector.Y--;
+                        locationVector.X++;
                     }
                     else
                     {
-                        locationVector.Y++;
+                        locationVector.X--;
                     }
 
-                    if(lengthOfAction > new Random().Next(100))
+                    if(lengthOfAction > new Random().Next(5000))
                     {
                         ChangeDirection();
                     }
+                    batSprite.Update();
                     break;
 
                 default:
                     break;
                 }
 
-                batSprite.Update();
                 lengthOfAction++;
         }
     }

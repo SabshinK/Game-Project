@@ -87,7 +87,7 @@ namespace Game_Project
 
 
 
-            if (gameStateMachine.currState == GameStateMachine.states.playing)
+            if (gameStateMachine.currState == states.playing)
             {
                 GameObjectManager.Instance.Update(gameTime);
                 collisionDetection.Update(gameTime);
@@ -111,8 +111,6 @@ namespace Game_Project
             GameObjectManager.Instance.Draw(spriteBatch);
             gameStateMachine.Draw(spriteBatch);
 
-            //healthBar.Draw(spriteBatch);
-
             base.Draw(gameTime);
 
             spriteBatch.End();
@@ -120,7 +118,7 @@ namespace Game_Project
 
         public void Reset()
         {
-            gameStateMachine.currState = GameStateMachine.states.playing;
+            gameStateMachine.currState = states.playing;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
             keyboard.LoadContent(gameStateMachine, GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());

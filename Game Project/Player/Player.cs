@@ -113,14 +113,16 @@ namespace Game_Project
             Health--;
             state.TakeDamage();
         } 
+
+        public void Heal()
+        {
+            // Full heal
+            Health = 10;
+        }
+
         public void Attack()
         {
             state.Attack();
-        }
-        
-        public void UseItem(int code)
-        {
-            state.UseItem(CreateProjectile(code));
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -135,31 +137,6 @@ namespace Game_Project
             {
                 this.state = state;
             }
-        }
-
-        public IProjectile CreateProjectile(int code)
-        {
-            object[] parameters = new object[3];
-            parameters[0] = new Vector2((int)physics.displacement.X, (int)physics.velocity.X);
-            parameters[1] = FacingRight;
-
-            switch(code)
-            {
-            //    case 1:
-            //        return new Arrow(new UniversalParameterObject(parameters));
-            //    case 2:
-            //        return new Bomb(new UniversalParameterObject(parameters));
-            //    case 3:
-            //        return new Boomerang(new UniversalParameterObject(parameters));
-            //    case 4:
-            //        return new Candle(new UniversalParameterObject(parameters));
-            //    case 5 :
-            //        return new SwordBeam(new UniversalParameterObject(parameters));
-                default:
-                    return null;
-            }
-
-
         }
 
         public void Collide()
@@ -211,9 +188,10 @@ namespace Game_Project
             //}
 
             physics.Update(gameTime);
-
-            location.Y -= (int)physics.VerticalChange(gameTime);
-
+            if (!physics.isJumping)
+            {
+                location.Y -= (int)physics.VerticalChange(gameTime);
+            }
             sprite.Update();
 
             state.Update(gameTime);

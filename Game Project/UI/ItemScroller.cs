@@ -8,52 +8,58 @@ namespace Game_Project
 {
     public class ItemScroller : IUI
     {
-        private List<String> items;
-        private int numItems = 6;
+        public List<string> items;
         private int itemId;
-        private string currItem;
+        public string currItem;
         private ISprite sprite;
         public Vector2 Position { get; set; }
         public ItemScroller()
         {
             itemId = 0;
-            items = new List<string>(numItems);
-            items.Add("guitarGeneric");
-            items.Add("accordianGeneric");
-            items.Add("fluteGeneric");
-            items.Add("drumGeneric");
-            items.Add("harpGeneric");
-            items.Add("triangleGeneric");
-            currItem = items[itemId];
-            sprite = SpriteFactory.Instance.CreateSprite(currItem);
+            items = new List<string>();
+            //currItem = items[itemId];
+            //sprite = SpriteFactory.Instance.CreateSprite(currItem);
+        }
+
+        public void AddItem(string itemName)
+        {
+            items.Add(itemName);
         }
 
         public void scrollRight()
         {
-           
-            itemId = (items.IndexOf(currItem) + 1)%numItems;
-            currItem = items[itemId];
-            sprite = SpriteFactory.Instance.CreateSprite(currItem);
+            if (items.Count > 0)
+            {
+                itemId = (items.IndexOf(currItem) + 1) % items.Count;
+                currItem = items[itemId];
+                sprite = SpriteFactory.Instance.CreateSprite(currItem);
+            }
 
         }
 
         public void scrollLeft()
         {
-            if (items.IndexOf(currItem) == (0))
+            if (items.Count > 0)
             {
-                itemId = numItems - 1;
+                if (items.IndexOf(currItem) == (0))
+                {
+                    itemId = items.Count - 1;
+                }
+                else
+                {
+                    itemId = items.IndexOf(currItem) - 1;
+                }
+                currItem = items[itemId];
+                sprite = SpriteFactory.Instance.CreateSprite(currItem);
             }
-            else
-            {
-                itemId = items.IndexOf(currItem) - 1;
-            }
-            currItem = items[itemId];
-            sprite = SpriteFactory.Instance.CreateSprite(currItem);
 
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, new Vector2(Position.X + 600, Position.Y + 200));
+            if (items.Count > 0)
+            {
+                sprite.Draw(spriteBatch, new Vector2(Position.X + 550, Position.Y + 100));
+            }
         }
     }
 }
