@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Game_Project.Enemies;
+using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -32,21 +33,22 @@ namespace Game_Project
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             lengthOfAction = 0;
             gel = new EnemyStateMachine(health);
-            gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
             physics = new Physics();
         }
         public void ChangeDirection()
         {
+            lengthOfAction = 0;
             gel.ChangeDirection();
         }
 
         public void Attack()
         {
-            gel.Attack();
+            //Done through collision
         }
 
         public void TakeDamage()
         {
+            lengthOfAction = 0;
             gel.TakeDamage();
         }
 
@@ -90,19 +92,25 @@ namespace Game_Project
 
             //always falling
             int verticalDis = (int)physics.VerticalChange(gameTime);
-            locationVector.Y += verticalDis;
+            locationVector.Y -= verticalDis;
 
             stateTuple = gel.getState();
+            FacingRight = stateTuple.Item2;
+            if(lengthOfAction <= 1)
+            {
+                gelSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Gel", stateTuple);
+            }
 
             switch (stateTuple.Item1)
             {
                 case actions.dead:
                     GameObjectManager.Instance.RemoveObject(this);
                     gelSprite = null;
+                    gel = null;
                     break;
                 case actions.moving:
 
-                    if (stateTuple.Item2)
+                    if (FacingRight) //changed from StateTuple.Item2 for readability
                     {
                         locationVector.X++;
                     }
@@ -112,10 +120,9 @@ namespace Game_Project
                     }
                     gelSprite.Update();
 
-                    if (lengthOfAction > new Random().Next(100))
+                    if (lengthOfAction > new Random().Next(500))
                     {
                         ChangeDirection();
-                        lengthOfAction = 0;
                     }
                     break;
 
