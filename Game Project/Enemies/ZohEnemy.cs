@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Game_Project.Enemies;
+using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -31,7 +32,6 @@ namespace Game_Project
         {
             zoh = new EnemyStateMachine(health);
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y); //game will state where it wants the enemy when it is created
-            zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
             physics = new Physics();
         }
         public void ChangeDirection()
@@ -87,9 +87,15 @@ namespace Game_Project
         {
             //always falling
             int verticalDis = (int)physics.VerticalChange(gameTime);
-            locationVector.Y += verticalDis;
+            locationVector.Y -= verticalDis;
 
             stateTuple = zoh.getState();
+            FacingRight = stateTuple.Item2;
+
+            if(lengthOfAction <= 1)
+            {
+                zohSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Slug", stateTuple);
+            }
 
             switch (stateTuple.Item1)
             {
@@ -101,15 +107,15 @@ namespace Game_Project
 
                     if (stateTuple.Item2)
                     {
-                        locationVector.X++;
+                        locationVector.X += 0.5f;
                     }
                     else
                     {
-                        locationVector.X--;
+                        locationVector.X -= 0.5f;
                     }
                     zohSprite.Update();
 
-                    if (lengthOfAction > new Random().Next(100))
+                    if (lengthOfAction > new Random().Next(20000))
                     {
                         ChangeDirection();
                         lengthOfAction = 0;

@@ -44,7 +44,7 @@ namespace Game_Project
             blocksSpriteSheet = content.Load<Texture2D>("TileSet");
             projectilesSpriteSheet = content.Load<Texture2D>("TempProjectiles");
             playerSpriteSheet = content.Load<Texture2D>("ClarySage");
-            bossesSpriteSheet = content.Load<Texture2D>("TempBosses");
+            bossesSpriteSheet = content.Load<Texture2D>("Dragon");
             itemsSpriteSheet = content.Load<Texture2D>("TempItemsAndCollectables");
             tempPlayerSpriteSheet = content.Load<Texture2D>("TempPlayer");
             newItemSpriteSheet = content.Load<Texture2D>("Items");
@@ -62,7 +62,7 @@ namespace Game_Project
             spritesByNames.Add("TileSet", blocksSpriteSheet);
             spritesByNames.Add("TempProjectiles", projectilesSpriteSheet);
             spritesByNames.Add("ClarySage", playerSpriteSheet);
-            spritesByNames.Add("TempBosses", bossesSpriteSheet);
+            spritesByNames.Add("Dragon", bossesSpriteSheet);
             spritesByNames.Add("TempItemsAndCollectables", itemsSpriteSheet);
             spritesByNames.Add("TempPlayer", tempPlayerSpriteSheet);
             spritesByNames.Add("Items", newItemSpriteSheet);

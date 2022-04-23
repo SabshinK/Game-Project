@@ -84,13 +84,13 @@ namespace Game_Project
              */
           
             // player colliding with the enemies
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(BatEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyChangeDirectionCommand"));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(BatEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyCollideCommand"));
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(BatEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "EnemyDamageCommand"));
 
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(DragonEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyChangeDirectionCommand"));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(DragonEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyCollideCommand"));
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(DragonEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "EnemyDamageCommand"));
 
-            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(GelEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyChangeDirectionCommand"));
+            directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(GelEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyCollideCommand"));
             directionalCollisions.Add(new Tuple<Type, Type, CollideDirection>(typeof(Player), typeof(GelEnemy), CollideDirection.Bottom), new Tuple<string, string>(null, "EnemyDamageCommand"));
 
             directionlessCollisions.Add(new Tuple<Type, Type>(typeof(Player), typeof(GoriyaEnemy)), new Tuple<string, string>("TakeDamageCommand", "EnemyChangeDirectionCommand"));
