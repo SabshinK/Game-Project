@@ -56,7 +56,9 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
-            
+
+            SoundManager.Instance.LoadContent(Content);
+
             font = Content.Load<SpriteFont>("Text");
 
             LevelLoader.Instance.LoadFile("sprites");

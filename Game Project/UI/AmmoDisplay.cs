@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Game_Project
@@ -19,7 +20,8 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "Tones: " + ItemHandler.Instance.ammoCount, new Vector2(Position.X + 650, Position.Y), Color.Black);
+            Debug.WriteLine(ItemHandler.Instance.ammoCount);
+            spriteBatch.DrawString(font, "Tones: " + ItemHandler.Instance.ammoCount, new Vector2(Position.X + 650, Position.Y), Color.White);
         }
     }
 }
