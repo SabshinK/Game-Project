@@ -9,9 +9,6 @@ namespace Game_Project
     public class ItemHandler
     {
         private IPlayer player;
-        private ItemScroller itemScroller;
-
-        private Dictionary<string, Action> itemFunctions;
 
         public ItemHandler()
         {
