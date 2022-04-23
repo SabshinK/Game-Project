@@ -13,7 +13,7 @@ namespace Game_Project
         private static SoundManager instance = new SoundManager();
         public static SoundManager Instance => instance;
 
-        private List<Song> music = new List<Song>();
+        SoundEffect[] music;
 
         private Dictionary<string, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
 
@@ -29,7 +29,7 @@ namespace Game_Project
         
         public void LoadContent(ContentManager content)
         {
-            music.Add(content.Load<Song>("01 - At Dooms Gate"));
+            //music.Add(content.Load<Song>("01 - At Dooms Gate"));
 
             sfx.Add("getAmmo", content.Load<SoundEffect>(""));
             sfx.Add("getHeart", content.Load<SoundEffect>(""));
@@ -38,8 +38,7 @@ namespace Game_Project
             sfx.Add("takeDamage", content.Load<SoundEffect>(""));
             sfx.Add("damageEnemy", content.Load<SoundEffect>(""));
 
-            MediaPlayer.Play(music[0]);
-            MediaPlayer.IsRepeating = true;
+            
         }
     }
 }

@@ -6,14 +6,16 @@ namespace Game_Project
 {
     class UseItemCommand : ICommand
     {
-        private ItemScroller itemScroller;
-        public UseItemCommand(ItemScroller itemScroller)
+        private IPlayer player;
+
+        public UseItemCommand(IPlayer player)
         {
-            this.itemScroller = itemScroller;
+            this.player = player;
         }
+
         public void Execute()
         {
-            itemScroller.UseItem();
+            ItemHandler.Instance.DecideItem(player);
         }
     }
 }
