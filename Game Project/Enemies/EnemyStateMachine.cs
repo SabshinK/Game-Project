@@ -26,7 +26,12 @@ namespace Game_Project.Enemies
 
         public void ChangeDirection()
         {
+            enemyAction = actions.moving;
             facingRight = !facingRight;
+            if(health <= 0)
+            {
+                enemyAction = actions.dead;
+            }
         }
 
         public Tuple<actions, bool> getState()

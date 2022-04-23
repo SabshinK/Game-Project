@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.Physics;
 using static Game_Project.IEnemyStateMachine;
 using Game_Project.Enemies;
+using Game_Project.Sprites;
 
 namespace Game_Project
 {
@@ -33,21 +34,22 @@ namespace Game_Project
         {
             stalfos = new EnemyStateMachine(health);
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y); //game will state where it wants the enemy when it is created
-            stalfosSprite = SpriteFactory.Instance.CreateSprite("stalfosGeneric");
             physics = new Physics();
         }
         public void ChangeDirection()
         {
+            lengthOfAction = 0;
             stalfos.ChangeDirection();
         }
 
         public void Attack()
-        {
-            stalfos.Attack();
+        {   
+            //only attacks through collision
         }
 
         public void TakeDamage()
         {
+            lengthOfAction = 0;
             stalfos.TakeDamage();
         }
 
@@ -90,9 +92,15 @@ namespace Game_Project
 
             //always falling
             int verticalDis = (int)physics.VerticalChange(gameTime);
-            locationVector.Y += verticalDis;
+            locationVector.Y -= verticalDis;
 
             stateTuple = stalfos.getState();
+            FacingRight = stateTuple.Item2;
+
+            if(lengthOfAction <= 1)
+            {
+                stalfosSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Skeleton", stateTuple);
+            }
 
             switch (stateTuple.Item1)
             {
@@ -101,7 +109,7 @@ namespace Game_Project
                     stalfosSprite = null;
                     break;
                 case actions.moving:
-                    if (stateTuple.Item2)
+                    if (FacingRight)
                     {
                         locationVector.X++;
                     }
@@ -111,7 +119,7 @@ namespace Game_Project
                     }
                     stalfosSprite.Update();
 
-                    if (lengthOfAction > new Random().Next(100))
+                    if (lengthOfAction > new Random().Next(10000))
                     {
                         ChangeDirection();
                         lengthOfAction = 0;
