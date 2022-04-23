@@ -33,8 +33,8 @@
 	</Item>
 	<Item>
 		<ObjectType>ZohEnemy</ObjectType>
-		<X>100</X>
-		<Y>14</Y>
+		<X>116</X>
+		<Y>30</Y>
 		<FacingRight>true</FacingRight>
 	</Item>
 	<Item>
@@ -46,10 +46,54 @@
 	<Item>
 		<ObjectType>DragonEnemy</ObjectType>
 		<X>27</X>
-		<Y>36</Y>
+		<Y>38</Y>
 		<FacingRight>true</FacingRight>
 	</Item>
 	<!-- =================================================== Items =================================================== -->
+	<!-- =================================================== Intruments =============================================== -->
+	<Item>
+		<ObjectType>Item</ObjectType>
+		<X>72</X>
+		<Y>40</Y>
+		<Animation>drumGeneric</Animation>
+	</Item>
+
+	<Item>
+		<ObjectType>Item</ObjectType>
+		<X>68</X>
+		<Y>25</Y>
+		<Animation>harpGeneric</Animation>
+	</Item>
+
+	<Item>
+		<ObjectType>Item</ObjectType>
+		<X>112</X>
+		<Y>29</Y>
+		<Animation>fluteGeneric</Animation>
+	</Item>
+	
+	<Item>
+		<ObjectType>Item</ObjectType>
+		<X>126</X>
+		<Y>17</Y>
+		<Animation>accordianGeneric</Animation>
+	</Item>
+		
+	<Item>
+		<ObjectType>Item</ObjectType>
+		<X>20</X>
+		<Y>40</Y>
+		<Animation>speakerGeneric</Animation>
+	</Item>
+
+	<Item>
+		<ObjectType>Item</ObjectType>
+		<X>57</X>
+		<Y>10</Y>
+		<Animation>triangleGeneric</Animation>
+	</Item>
+	
+	<!-- ================================================= End Intruments =============================================== -->
 	<!--Y 1-->
 	<Item>
 		<ObjectType>Ammo</ObjectType>
