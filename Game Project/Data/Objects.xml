@@ -33,8 +33,8 @@
 	</Item>
 	<Item>
 		<ObjectType>ZohEnemy</ObjectType>
-		<X>100</X>
-		<Y>14</Y>
+		<X>116</X>
+		<Y>30</Y>
 		<FacingRight>true</FacingRight>
 	</Item>
 	<Item>
