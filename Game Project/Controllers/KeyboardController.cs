@@ -99,9 +99,12 @@ namespace Game_Project
 			RegisterCommand(states.playing, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(states.playing, Keys.P, false, new PauseCommand(stateMachine));
 
+			// Musician Commands
+			RegisterCommand(states.playing, Keys.Space, false, new MusicianCommand(player));
+
 			// Sidekick Commands
-			RegisterCommand(states.paused, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
-            
+			//RegisterCommand(states.paused, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
+
 			RegisterCommand(states.paused, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(states.paused, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(states.paused, Keys.P, false, new PauseCommand(stateMachine));
