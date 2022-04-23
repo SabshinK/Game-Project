@@ -20,7 +20,7 @@ namespace Game_Project
         private Queue<IGameObject> toRemove = new Queue<IGameObject>();
 
         // List of lists containing the game objects, there should be two lists, one for moving objects and one for non moving
-        public List<List<IGameObject>> GameObjects { get; private set; }
+        public List<List<IGameObject>> GameObjects;
 
         public GameObjectManager()
         {
