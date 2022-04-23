@@ -190,10 +190,9 @@ namespace Game_Project
             //}
 
             physics.Update(gameTime);
-            if (!physics.isJumping)
-            {
-                location.Y -= (int)physics.VerticalChange(gameTime);
-            }
+
+            location.Y -= (int)physics.VerticalChange(gameTime);
+
             sprite.Update();
 
             state.Update(gameTime);
