@@ -1,4 +1,31 @@
 Author of Code Review:	Maria Stein
+Date of Code Review:	4/23/2022
+Sprint Number:			5
+Name of File:			ItemHandler.cs	
+Author of File:			Aadya Jain
+Comments On Code Readability:
+The code is readable, and the syntactic decisions are consistent 
+I personally dislike having both Instance and instance
+There’s a magic number on line 74
+The only reason I would think to not include speaker here is because it doesn’t require creating a projectile the way most of the other items do, but If the triangle implementation goes here, I think the speaker should too
+Comment says order, why is order relevant?
+Scroller functions are good and concise
+
+Author of Code Review:	Maria Stein
+Date of Code Review:	4/23/2022
+Sprint Number:			5
+Name of File:			GoriyaEnemy.cs
+Author of File:			AJ Waizmann
+Minutes It Took To Complete Review:  15
+Comments on Code Quality:
+Variables should be classified as private, public, etc.
+Purpose of lengthOfAction?
+Would name verticalDis something more explicit
+Lots of magic numbers
+Update is too long and difficult to understand. 
+
+
+Author of Code Review:	Maria Stein
 Date of Code Review: 4/8/2022
 Sprint Number:			4
 Name of File:			GelEnemy.cs
