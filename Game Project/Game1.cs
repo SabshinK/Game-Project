@@ -21,7 +21,7 @@ namespace Game_Project
         public states State => gameStateMachine.currState;
 
         private SpriteFont font;
-        private Song song;
+        //used to be a Song object here
 
         public Game1()
         {

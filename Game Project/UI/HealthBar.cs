@@ -22,6 +22,8 @@ namespace Game_Project
 
         public HealthBar(GameStateMachine stateMachine)
         {
+            this.stateMachine = stateMachine;
+
             hearts = new List<Tuple<string, ISprite>>();
 
             over = new OverCommand(stateMachine);

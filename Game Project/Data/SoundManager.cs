@@ -14,8 +14,8 @@ namespace Game_Project
         public static SoundManager Instance => instance;
 
         private Dictionary<string, SoundEffect> music = new Dictionary<string, SoundEffect>();
-        private delegate void LayerInstruments();
-        private LayerInstruments PlayLayered;
+        //private delegate void LayerInstruments();
+        //private LayerInstruments PlayLayered;
 
         private Dictionary<string, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
 
