@@ -19,12 +19,6 @@
 /processorParam:Quality=Best
 /build:01 - At Dooms Gate.mp3
 
-#begin Accordion.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Accordion.mp3
-
 #begin 2b.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,6 +42,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:3b.png
+
+#begin Accordion.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Accordion.mp3
 
 #begin accordionboomerang.PNG
 /importer:TextureImporter
@@ -133,6 +133,18 @@
 /processorParam:TextureFormat=Color
 /build:Enemies.PNG
 
+#begin FinalBackground.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:FinalBackground.PNG
+
 #begin fireball.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -150,6 +162,18 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Flute.mp3
+
+#begin Game_Soundtrack_All_Instruments.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Game_Soundtrack_All_Instruments.mp3
+
+#begin Get Item.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Get Item.wav
 
 #begin Guitar.mp3
 /importer:Mp3Importer
@@ -186,6 +210,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Items.png
+
+#begin JumpUp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:JumpUp.wav
 
 #begin TempBosses.png
 /importer:TextureImporter
