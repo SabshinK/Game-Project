@@ -96,7 +96,7 @@ namespace Game_Project
 
 			// Sidekick Commands
 			RegisterCommand(states.paused, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
-            
+
 			RegisterCommand(states.paused, Keys.Q, false, new QuitCommand(game));
 			RegisterCommand(states.paused, Keys.R, false, new ResetCommand(game));
 			RegisterCommand(states.paused, Keys.P, false, new PauseCommand(stateMachine));

@@ -15,8 +15,12 @@ namespace Game_Project
         private int itemId;
         public string equipedItem;
 
-        public int ammoCount;
-
+        public int ammoCount = 0;
+        public ItemHandler()
+        {
+            Musicians.OnActivateMusician += AddItem;
+            items = new List<string>();
+        }
         public void AddItem(string itemName)
         {
             items.Add(itemName);

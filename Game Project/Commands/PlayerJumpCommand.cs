@@ -22,7 +22,7 @@ namespace Game_Project
                 {
                     player.physics.startJumping = true;
                     player.isColliding = false;
-                    player.physics.velocity.Y = 25f;
+                    player.physics.velocity.Y = 26f;
                 }
                 player.physics.isJumping = true;
                 player.StartMoving(player.FacingRight);
