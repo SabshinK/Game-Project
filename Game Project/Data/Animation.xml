@@ -705,21 +705,21 @@
 		<AnimationName>fullHeart</AnimationName>
 		<Texture>TempItemsAndCollectables</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>4</Scale>
 		<Rectangle>0 0 8 8</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>halfHeart</AnimationName>
 		<Texture>TempItemsAndCollectables</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>4</Scale>
 		<Rectangle>8 0 8 8</Rectangle>
 	</Item>
 	<Item>
 		<AnimationName>emptyHeart</AnimationName>
 		<Texture>TempItemsAndCollectables</Texture>
 		<Speed>3</Speed>
-		<Scale>2</Scale>
+		<Scale>4</Scale>
 		<Rectangle>16 0 8 8</Rectangle>
 	</Item>
 	<Item>

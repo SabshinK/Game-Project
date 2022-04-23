@@ -75,7 +75,7 @@ namespace Game_Project
                 {
                     // Draw the hearts at their positions, based on the camera position, determined by which heart they are in the array
                     // times their size
-                    hearts[i].Item2.Draw(spriteBatch, new Vector2((hearts[i].Item2.Size.X*(2*i)) + Position.X, Position.Y));
+                    hearts[i].Item2.Draw(spriteBatch, new Vector2((hearts[i].Item2.Size.X*(4*i)) + Position.X, Position.Y));
                 }
             }
         }
