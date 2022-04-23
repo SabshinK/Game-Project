@@ -15,7 +15,7 @@ namespace Game_Project
 
         public Physics physics;
 
-        public int Health { get; private set; }
+        public int Health { get; set; }
 
         public Vector2 location;
         // The location needed for moving the sprite is based on the sprite size but the Position to be accessed by other classes
@@ -110,7 +110,6 @@ namespace Game_Project
 
         public void DamageTaken()
         {
-            Health--;
             state.TakeDamage();
         } 
 
@@ -188,8 +187,6 @@ namespace Game_Project
             //        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
             //    }
             //}
-
-            physics.Update(gameTime);
 
             location.Y -= (int)physics.VerticalChange(gameTime);
 

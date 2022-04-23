@@ -13,6 +13,8 @@ namespace Game_Project
         public DamageState(Player manager)
         {
             player = manager;
+
+            player.Health--;
             timeElapsed = 0;
 
             if (player.FacingRight)
@@ -51,7 +53,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            if (timeElapsed < 2)
+            if (timeElapsed < 1)
             {
                 timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             } else
