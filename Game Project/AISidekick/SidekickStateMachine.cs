@@ -13,8 +13,9 @@ namespace Game_Project
         public bool Attacking;
         private Player player;
 
-        public SidekickStateMachine()
+        public SidekickStateMachine(Player manager)
         {
+            player = manager;
         }
 
         public void Attack()

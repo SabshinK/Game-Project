@@ -17,8 +17,9 @@ namespace Game_Project
         Physics physics;
 
         ISidekickStateMachine sidekick;
+#pragma warning disable CS0649 // Add readonly modifier
         ISprite sidekickSprite;
-        // SpriteBatch spriteBatch;
+#pragma warning restore CS0649 // Add readonly modifier
         List<List<IGameObject>> gameObjects;
 
 
@@ -38,10 +39,11 @@ namespace Game_Project
             Following = follow;
             location = new Vector2(player.location.X - DISTANCE, player.location.Y);
             facingRight = player.FacingRight;
+            physics = new Physics();
 
             stateTuple = new Tuple<bool, bool, bool>(true, false, facingRight); //following, not attacking, and facing the direction the player is facing
 
-            sidekick = new SidekickStateMachine();
+            sidekick = new SidekickStateMachine(manager);
             if (facingRight)
             {
                 //sidekickSprite = SpriteFactory.Instance.CreateSprite("rightSidekickIdle");
