@@ -30,16 +30,12 @@ The team is creating our own art for this game. We are creating something with a
 The following new art was added:
 -updated player animations
 -new item sprites
--"At dooms gate" music pack
+-custom, original music pack
 -new backgrounds
 
 New tile sets have been created, but have not yet been implemented in the game. We are going to add more music packs and sounds by the next sprint.
 
 Assets that have yet to be created have been replaced by assets from The Legend of Zelda.
-
-##THE FUTURE
-While many bugs and design considerations have been fixed and taken into account for this sprint, there are still some issues that need to be ironed out. 
-Smooth and efficient level loading is something we are still working on and will be implented next sprint. We will be working tirelessly to make the perfect game that every member of our team is envisioning.
 
 ##.NET CODE QUALITY ANALYSIS WITH ROSLYN
 Sidekick physics: warning had to do with the physics object within the sidekick class never being set to anything, so we created the physics object within the sidekick. As a last minute addition, it would not operate as intended, and therefore was never used.
