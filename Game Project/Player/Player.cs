@@ -211,6 +211,7 @@ namespace Game_Project
             //}
 
             physics.Update(gameTime);
+
             location.Y -= (int)physics.VerticalChange(gameTime);
 
             sprite.Update();

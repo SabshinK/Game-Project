@@ -13,7 +13,6 @@ namespace Game_Project
         public PlayerItemState(Player player)
         {
             this.player = player;
-            player.physics.isJumping = false;
             player.physics.isRunning = false;
 
             if (player.FacingRight)

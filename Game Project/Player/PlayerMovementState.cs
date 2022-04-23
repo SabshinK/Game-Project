@@ -59,23 +59,23 @@ namespace Game_Project
 
                 if (player.physics.displacement.X <= 0f)
                     player.physics.isRunning = false;
-                    
+
 
                 player.location.Y -= player.physics.VerticalChange(gameTime);
 
-                    if (player.physics.displacement.Y <= 0f)
-                    {
-                        player.physics.isJumping = false;
-                        player.physics.falling = true;
-                        player.physics.startJumping = false;
-                    }
+                if (player.physics.displacement.Y <= 0f)
+                {
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
+                    player.physics.startJumping = false;
+                }
 
                 if (!player.physics.isRunning && !player.physics.isJumping)
                 {
-                    
+
                     BackToIdle();
                 }
-                    
+
             }
             else
             {
@@ -83,7 +83,7 @@ namespace Game_Project
                 player.location.X -= player.physics.HorizontalChange(gameTime);
 
                 if (player.physics.displacement.X <= 0f)
-                    player.physics.isRunning = false;    
+                    player.physics.isRunning = false;
 
                 player.location.Y -= player.physics.VerticalChange(gameTime);
 
@@ -98,7 +98,7 @@ namespace Game_Project
                 {
                     BackToIdle();
                 }
-                    
+
 
             }
 
