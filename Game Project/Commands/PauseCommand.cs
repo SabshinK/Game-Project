@@ -7,17 +7,15 @@ namespace Game_Project
 {
     class PauseCommand : ICommand
     {
-        public Game1 game;
-        public PauseMenu pauseMenu;
-        public SpriteBatch spriteBatch;
-        public PauseCommand(Game1 game)
+        public GameStateMachine stateMachine;
+        public PauseCommand(GameStateMachine stateMachine)
         {
-            this.game = game;  
+            this.stateMachine = stateMachine;
         }
 
         public void Execute()
         {
-            game.paused = !game.paused;
+            stateMachine.Pause();
         }
     }
 }

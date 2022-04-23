@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
+using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,13 +11,14 @@ namespace Game_Project
 {
     public class GelEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
 
-        GelStateMachine gel;
+        EnemyStateMachine gel;
         ISprite gelSprite;
+        private int health = 10;
 
         private Vector2 locationVector;
         public Vector2 Position => locationVector;
@@ -24,28 +27,28 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
-        float gelAccel = 1;
 
         public GelEnemy(UniversalParameterObject parameters)
         {
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             lengthOfAction = 0;
-            gel = new GelStateMachine();
-            gelSprite = SpriteFactory.Instance.CreateSprite("gelGeneric");
+            gel = new EnemyStateMachine(health);
             physics = new Physics();
         }
         public void ChangeDirection()
         {
+            lengthOfAction = 0;
             gel.ChangeDirection();
         }
 
         public void Attack()
         {
-            gel.Attack();
+            //Done through collision
         }
 
         public void TakeDamage()
         {
+            lengthOfAction = 0;
             gel.TakeDamage();
         }
 
@@ -88,39 +91,38 @@ namespace Game_Project
         {
 
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            locationVector.Y += verticalDis;
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y -= verticalDis;
 
             stateTuple = gel.getState();
+            FacingRight = stateTuple.Item2;
+            if(lengthOfAction <= 1)
+            {
+                gelSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Gel", stateTuple);
+            }
 
             switch (stateTuple.Item1)
             {
                 case actions.dead:
                     GameObjectManager.Instance.RemoveObject(this);
                     gelSprite = null;
-                    break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime, 2);
-                    gelSprite.Update();
+                    gel = null;
                     break;
                 case actions.moving:
 
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, gelAccel);
-                    if (stateTuple.Item2.Equals(direction.left))
+                    if (FacingRight) //changed from StateTuple.Item2 for readability
                     {
-                        locationVector.X -= displacement;
+                        locationVector.X++;
                     }
                     else
                     {
-                        locationVector.X += displacement;
+                        locationVector.X--;
                     }
                     gelSprite.Update();
 
-                    if (lengthOfAction > new Random().Next(100))
+                    if (lengthOfAction > new Random().Next(500))
                     {
                         ChangeDirection();
-                        lengthOfAction = 0;
                     }
                     break;
 

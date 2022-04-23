@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using static Game_Project.GameStateMachine;
 
 namespace Game_Project
 {
@@ -16,17 +17,11 @@ namespace Game_Project
         public IController mouse;
         private CollisionDetection collisionDetection;
         private Camera camera;
-
-        public bool paused = false;
-        public bool displayInventory = false;
-        private ItemScroller scroller;
-        private PauseMenu pauseMenu;
-        private GameWin gameWin;
-        private GameOver gameOver;
-        private HealthBar healthBar;
+        private GameStateMachine gameStateMachine;
+        public states State => gameStateMachine.currState;
 
         private SpriteFont font;
-        private Song song;
+        //used to be a Song object here
 
         public Game1()
         {
@@ -48,6 +43,7 @@ namespace Game_Project
             collisionDetection = new CollisionDetection();
 
             camera = new Camera(_graphics.GraphicsDevice.Viewport);
+            
 
             base.Initialize();
         }
@@ -60,24 +56,23 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
-            
+
+            SoundManager.Instance.LoadContent(Content);
+
             font = Content.Load<SpriteFont>("Text");
-            pauseMenu = new PauseMenu(font);
-            gameOver = new GameOver(font);
-            gameWin = new GameWin(font);
 
             LevelLoader.Instance.LoadFile("sprites");
             LevelLoader.Instance.LoadFile("forest");
             LevelLoader.Instance.LoadFile("collision");
-            
-            healthBar = new HealthBar();
 
-            scroller = new ItemScroller();
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            gameStateMachine = new GameStateMachine(camera);
+            gameStateMachine.LoadContent(Content);
+           
+            keyboard.LoadContent(gameStateMachine, GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
 
-            song = Content.Load<Song>("01 - At Dooms Gate");
-            MediaPlayer.Play(song);
-            MediaPlayer.IsRepeating = true;
+            //song = Content.Load<Song>("01 - At Dooms Gate");
+            //MediaPlayer.Play(song);
+            //MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -92,18 +87,16 @@ namespace Game_Project
 
             keyboard.Update(gameTime);
 
-            healthBar.Position = camera.Position;
-            pauseMenu.Position = camera.Position;
-            gameWin.Position = camera.Position;
-            gameOver.Position = camera.Position;
-            scroller.Position = camera.Position;
-            healthBar.Update(gameTime);
-            if (!paused)
+
+
+            if (gameStateMachine.currState == states.playing)
             {
                 GameObjectManager.Instance.Update(gameTime);
                 collisionDetection.Update(gameTime);
                 camera.Update(GameObjectManager.Instance.GetPlayer());
             }
+
+            gameStateMachine.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -115,19 +108,27 @@ namespace Game_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
+
+            Rectangle backgroundDimensions = new Rectangle(0, 0, 7869, 2882);
+            Rectangle desiredDimensions = new Rectangle(0, 0, 8448, 2944);
+            spriteBatch.Draw(Texture2DStorage.GetTexture("FinalBackground"), desiredDimensions, backgroundDimensions, Color.White);
+
+            //triangle
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(3624, 768, 256, 256), new Rectangle(0, 0, 256, 256), Color.White);
+            //harp
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(4352, 1152, 256, 256), new Rectangle(256, 0, 256, 256), Color.White);
+            //flute
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(7104, 1792, 256, 256), new Rectangle(512, 0, 256, 256), Color.White);
+            //speaker
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(1280, 2560, 256, 256), new Rectangle(0, 256, 256, 256), Color.White);
+            //drum
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(4608, 2560, 256, 256), new Rectangle(256, 256, 256, 256), Color.White);
+            //accordion
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(8000, 1088, 256, 256), new Rectangle(512, 256, 256, 256), Color.White);
 
             GameObjectManager.Instance.Draw(spriteBatch);
-            if (displayInventory)
-            {
-                scroller.Draw(spriteBatch);
-            }
-            if (paused)
-            {
-                pauseMenu.Draw(spriteBatch);
-            }
-
-            //healthBar.Draw(spriteBatch);
+            gameStateMachine.Draw(spriteBatch);
 
             base.Draw(gameTime);
 
@@ -136,10 +137,10 @@ namespace Game_Project
 
         public void Reset()
         {
-            paused = false;
+            gameStateMachine.currState = states.playing;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
-            keyboard.LoadContent(this, GameObjectManager.Instance.GetPlayer());
+            keyboard.LoadContent(gameStateMachine, GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());
         }
     }
 }

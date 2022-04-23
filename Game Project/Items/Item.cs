@@ -15,10 +15,14 @@ namespace Game_Project
 
         public ISprite sprite, despawnSprite;
 
+        public string currentAnimation;
+
         public Item(UniversalParameterObject parameters)
         {
             position = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             sprite = SpriteFactory.Instance.CreateSprite(parameters.AnimationName);
+
+            currentAnimation = parameters.AnimationName;
         }
 
         public void Collide()

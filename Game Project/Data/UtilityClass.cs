@@ -22,16 +22,16 @@ namespace Game_Project
         //loop through the file to populate magicNums to get all magic numbers in the code
         public static double[] setMagicNums()
         {
-            magicNums = new double[47];
+            magicNums = new double[42];
 
-            string filePath = @"Game Project/Data/MagicNumbers.txt"; // need to edit file path
+            string filePath = @"..\..\..\..\Game Project\Data\MagicNumbers.txt"; // need to edit file path
 
             string[] values = File.ReadAllLines(filePath);
 
             // Display the file contents by using a foreach loop.
             for (int i = 0; i < values.Length; i++)
             {
-                magicNums[i] = (double) Convert.ToDouble(values[i]); // need to convert to int because of readFile
+                magicNums[i] = Convert.ToDouble(values[i]); // need to convert to int because of readFile
             }
 
             return magicNums;
@@ -41,7 +41,7 @@ namespace Game_Project
         public static int ArrayNewObject
         {
             get { magicNums = setMagicNums(); return (int) magicNums[0]; }
-            set { (magicNums[0] = (int) value; }
+            set { magicNums[0] = (int) value; }
         }
 
         public static int AppliedForceY
@@ -298,7 +298,6 @@ namespace Game_Project
         {
             get { magicNums = setMagicNums(); return (int) magicNums[43]; }
             set { magicNums[43] = (int) value; }
-        }
 
         public static int GoriyaHealth
         {
@@ -314,7 +313,8 @@ namespace Game_Project
         public static int ZohHealth
         {
             get { magicNums = setMagicNums(); return (int) magicNums[46]; }
-            set { magicNums[46] = (int)value; }
+            set { magicNums[46] = (int) value; }
+
         }
 
     }

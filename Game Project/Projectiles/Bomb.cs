@@ -31,21 +31,19 @@ namespace Game_Project
 
         public void Collide()
         {
-
+            // do nothing
         }
 
         public void Update(GameTime gameTime)
         {
-            //get sprite for bomb that has not yet exploded and update timer
-            //sprite = SpriteFactory.Instance.CreateSprite("bombWaiting");
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //if bomb timer exceeds its life span, update sprite, reset timer
+
             if (timer >= lifeSpan)
             {
-                sprite = SpriteFactory.Instance.CreateSprite("bombExplosion");
                 timer = 0f;
+                GameObjectManager.Instance.RegisterObject(new Explosion(new UniversalParameterObject(position, "bombExplosion")));
+                GameObjectManager.Instance.RemoveObject(this);
             }
-
 
         }
 

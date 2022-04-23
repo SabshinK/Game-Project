@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
+using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,12 +11,12 @@ namespace Game_Project
 {
     public class ZohEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
         public bool FacingRight { get; private set; }
 
-        ZohStateMachine zoh;
+        EnemyStateMachine zoh;
         ISprite zohSprite;
 
         private Vector2 locationVector;
@@ -24,13 +26,12 @@ namespace Game_Project
 
         int lengthOfAction = 0;
         Physics physics;
-        float accel = 1;
+        private int health = 20;
         
         public ZohEnemy(UniversalParameterObject parameters)
         {
-            zoh = new ZohStateMachine();
+            zoh = new EnemyStateMachine(health);
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y); //game will state where it wants the enemy when it is created
-            zohSprite = SpriteFactory.Instance.CreateSprite("zohGeneric");
             physics = new Physics();
         }
         public void ChangeDirection()
@@ -50,7 +51,7 @@ namespace Game_Project
 
         public void Collide()
         {
-            //TODO
+            
         }
 
         public void Collide(Rectangle collision, int direction)
@@ -85,10 +86,16 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //always falling
-            int verticalDis = (int)physics.VerticalChange(gameTime, physics.gravity);
-            locationVector.Y += verticalDis;
+            int verticalDis = (int)physics.VerticalChange(gameTime);
+            locationVector.Y -= verticalDis;
 
             stateTuple = zoh.getState();
+            FacingRight = stateTuple.Item2;
+
+            if(lengthOfAction <= 1)
+            {
+                zohSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Slug", stateTuple);
+            }
 
             switch (stateTuple.Item1)
             {
@@ -96,32 +103,24 @@ namespace Game_Project
                     GameObjectManager.Instance.RemoveObject(this);
                     zohSprite = null;
                     break;
-                case actions.falling:
-                    locationVector.Y++;
-                    physics.VerticalChange(gameTime, 2);
-                    zohSprite.Update();
-                    break;
                 case actions.moving:
 
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
-
-                    if (stateTuple.Item2.Equals(direction.left))
+                    if (stateTuple.Item2)
                     {
-                        locationVector.X -= displacement;
+                        locationVector.X += 0.5f;
                     }
                     else
                     {
-                        locationVector.X += displacement;
+                        locationVector.X -= 0.5f;
                     }
                     zohSprite.Update();
 
-                    if (lengthOfAction > new Random().Next(100))
+                    if (lengthOfAction > new Random().Next(20000))
                     {
                         ChangeDirection();
                         lengthOfAction = 0;
                     }
                     break;
-
                 default:
                     break;
             }

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace Game_Project
 {
@@ -14,14 +15,25 @@ namespace Game_Project
 
         public Physics physics;
 
-        public int Health { get; private set; }
+        public int Health { get; set; }
 
         public Vector2 location;
-        public Vector2 Position => location;
-        public Vector2 GridPosition => new Vector2(location.X / 64, location.Y / 64);
-        public Vector2 Size => sprite.Size;
+        // The location needed for moving the sprite is based on the sprite size but the Position to be accessed by other classes
+        // and for use in collision is smaller than the sprite size
+        public Vector2 Position 
+        {
+            get { return new Vector2(location.X + 32, location.Y); }
+            set { location = value; }
+        }
+
+        public Vector2 GridPosition => new Vector2(Position.X / 64, Position.Y / 64);
+        public Vector2 Size => new Vector2(sprite.Size.X / 2, sprite.Size.Y);
 
         public bool FacingRight { get; private set; }
+        public bool isColliding;
+
+        public string currentAnimationRun;
+        public string currentAnimationJump;
 
         // Constructor
         public Player(UniversalParameterObject parameters)
@@ -29,11 +41,15 @@ namespace Game_Project
             state = new IdleState(this);
             sprite = SpriteFactory.Instance.CreateSprite("idleRight");
 
+            currentAnimationRun = "";
+            currentAnimationJump = "";
+
             location = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
 
-            Health = 3;
+            Health = 10;
 
             FacingRight = true;
+            isColliding = true;
 
             physics = new Physics();
 
@@ -52,27 +68,62 @@ namespace Game_Project
             if (FacingRight != faceRight)
             {
                 FacingRight = faceRight;
-                if (FacingRight)
-                    sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-                else
-                    sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
             }
+
+            if (FacingRight)
+            {
+                if (physics.isRunning && !physics.isJumping)
+                    if (!currentAnimationRun.Equals("movingRight"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+                        currentAnimationRun = "movingRight";
+                    }
+                if (physics.isJumping)
+                {
+                    if (!currentAnimationJump.Equals("jumpingRight"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                        currentAnimationJump = "jumpingRight";
+                    }
+                }
+            }
+            else
+            {
+                if (physics.isRunning && !physics.isJumping)
+                    if (!currentAnimationRun.Equals("movingLeft"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+                        currentAnimationRun = "movingLeft";
+                    }
+                if (physics.isJumping)
+                {
+                    if (!currentAnimationJump.Equals("jumpingLeft"))
+                    {
+                        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+                        currentAnimationJump = "jumpingLeft";
+                    }
+                }
+            }
+
             state.Move();
         }
 
         public void DamageTaken()
         {
-            Health--;
             state.TakeDamage();
         } 
+
+        public void Heal(int amount)
+        {
+            // Full heal
+            Health += amount;
+            if (Health > 10)
+                Health = 10;
+        }
+
         public void Attack()
         {
             state.Attack();
-        }
-        
-        public void UseItem(int code)
-        {
-            state.UseItem(CreateProjectile(code));
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -89,31 +140,6 @@ namespace Game_Project
             }
         }
 
-        public IProjectile CreateProjectile(int code)
-        {
-            object[] parameters = new object[3];
-            parameters[0] = new Vector2((int)physics.displacement.X, (int)physics.velocity.X);
-            parameters[1] = FacingRight;
-
-            switch(code)
-            {
-            //    case 1:
-            //        return new Arrow(new UniversalParameterObject(parameters));
-            //    case 2:
-            //        return new Bomb(new UniversalParameterObject(parameters));
-            //    case 3:
-            //        return new Boomerang(new UniversalParameterObject(parameters));
-            //    case 4:
-            //        return new Candle(new UniversalParameterObject(parameters));
-            //    case 5 :
-            //        return new SwordBeam(new UniversalParameterObject(parameters));
-                default:
-                    return null;
-            }
-
-
-        }
-
         public void Collide()
         {
             //collisions affecting the player based on the size of the rectangle
@@ -121,24 +147,25 @@ namespace Game_Project
 
         public void Bump(Rectangle collision, int direction)
         {
+            isColliding = true;
+            physics.falling = false;
 
             switch (direction)
             {
                 case 0:
                     location.Y += collision.Height;
-                    physics.velocity.Y = 0;
                     break;
                 case 1:
                     location.Y -= collision.Height;
                     physics.velocity.Y = 0;
                     break;
                 case 2:
-                    location.X -= collision.Width;
-                    physics.velocity.X = 0;
+                    location.X += collision.Width;
+                    state.BackToIdle();
                     break;
                 case 3:
-                    location.X += collision.Width;
-                    physics.velocity.X = 0;
+                    location.X -= collision.Width;
+                    state.BackToIdle();
                     break;
                 default:
                     break;
@@ -148,18 +175,22 @@ namespace Game_Project
         public void Update(GameTime gameTime)
         {
             //the player is always falling
-            if (!(physics.appliedForce.X > 0) && !(physics.appliedForce.Y > 0))
-            {
-                if (FacingRight)
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleRight");
-                }
-                else
-                {
-                    sprite = SpriteFactory.Instance.CreateSprite("idleLeft");
-                }
-            }
-            //location.Y += (int)physics.VerticalChange(gameTime, physics.gravity);
+            //if (!isColliding)
+            //{
+
+            //    if (FacingRight)
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+            //    }
+            //    else
+            //    {
+            //        sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+            //    }
+            //}
+
+            location.Y -= (int)physics.VerticalChange(gameTime);
+
+            sprite.Update();
 
             state.Update(gameTime);
         }

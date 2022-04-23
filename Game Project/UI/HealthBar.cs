@@ -6,24 +6,27 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class HealthBar : IUpdateable, IDrawable
+    public class HealthBar : IUpdateable, IUI
     {
         public Vector2 Position { get; set; }
 
         // Not sure if I like the coupling here
-        private IPlayer player;
-        private int Health => player.Health;
+        private int Health => GameObjectManager.Instance.GetPlayer().Health;
         private bool iterating;
+        private GameStateMachine stateMachine;
+        private OverCommand over;
 
         // Using a list of tuples here because I only want to change the ISprite implementation if it needs to be updated,
         // If the ISprite is already a full heart it doesn't need to be set to a new one, so this has to be checked
         private List<Tuple<string, ISprite>> hearts;
 
-        public HealthBar()
+        public HealthBar(GameStateMachine stateMachine)
         {
-            player = GameObjectManager.Instance.GetPlayer();
+            this.stateMachine = stateMachine;
+
             hearts = new List<Tuple<string, ISprite>>();
 
+            over = new OverCommand(stateMachine);
             iterating = false;
 
             for (int i = 0; i < Health / 2; i++) // Each heart is two health
@@ -36,7 +39,6 @@ namespace Game_Project
         {
             int currentHealth = Health;
             iterating = true;
-
             // check the state of the health bar sprites with the health, if the sprites need to be updated do so
             for (int i = 0; i < hearts.Count; i++)
             {
@@ -60,6 +62,11 @@ namespace Game_Project
             }
 
             iterating = false;
+
+            if (Health == 0)
+            {
+                over.Execute();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -70,7 +77,7 @@ namespace Game_Project
                 {
                     // Draw the hearts at their positions, based on the camera position, determined by which heart they are in the array
                     // times their size
-                    hearts[i].Item2.Draw(spriteBatch, new Vector2(hearts[i].Item2.Size.X * i + Position.X, Position.Y));
+                    hearts[i].Item2.Draw(spriteBatch, new Vector2((hearts[i].Item2.Size.X*(4*i)) + Position.X, Position.Y));
                 }
             }
         }

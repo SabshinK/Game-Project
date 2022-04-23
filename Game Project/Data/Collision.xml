@@ -42,7 +42,7 @@
 		<CollisionObjectType>GelEnemy</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>TakeDamageCommand</Command>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>EnemyCollideCommand</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>Player</CollisionObjectType>
@@ -94,13 +94,27 @@
 		<Command>PlayerBumpCommand</Command>
 		<Command>null</Command>
 	</Item>
+	<Item>
+		<CollisionObjectType>Player</CollisionObjectType>
+		<CollisionObjectType>BreakableTile</CollisionObjectType>
+		<Direction>-1</Direction>
+		<Command>PlayerBumpCommand</Command>
+		<Command>null</Command>
+	</Item>
 	<!--Player colliding with Items-->
 	<Item>
 		<CollisionObjectType>Player</CollisionObjectType>
 		<CollisionObjectType>Item</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>null</Command>
-		<Command>RemoveItemCommand</Command>
+		<Command>MusicianCommand</Command>
+	</Item>
+	<Item>
+		<CollisionObjectType>Player</CollisionObjectType>
+		<CollisionObjectType>Ammo</CollisionObjectType>
+		<Direction>-1</Direction>
+		<Command>null</Command>
+		<Command>AddAmmoCommand</Command>
 	</Item>
 	<!--Player colliding with Projectiles-->
 	<!--Enemies colliding with Tiles-->
@@ -108,14 +122,14 @@
 		<CollisionObjectType>BatEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<Item>
 		<CollisionObjectType>DragonEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<Item>
@@ -129,7 +143,7 @@
 		<CollisionObjectType>GelEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<Item>
@@ -143,7 +157,7 @@
 		<CollisionObjectType>GoriyaEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<Item>
@@ -157,7 +171,7 @@
 		<CollisionObjectType>StalfosEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<Item>
@@ -171,7 +185,7 @@
 		<CollisionObjectType>ZohEnemy</CollisionObjectType>
 		<CollisionObjectType>Tile</CollisionObjectType>
 		<Direction>-1</Direction>
-		<Command>EnemyChangeDirectionCommand</Command>
+		<Command>EnemyCollideCommand</Command>
 		<Command>null</Command>
 	</Item>
 	<Item>

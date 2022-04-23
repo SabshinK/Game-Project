@@ -6,17 +6,16 @@ namespace Game_Project
 {
     class UseItemCommand : ICommand
     {
-        private Player player;
-        private int code;
+        private IPlayer player;
 
-        public UseItemCommand(Player manager, int code)
+        public UseItemCommand(IPlayer player)
         {
-            player = manager;
-            this.code = code;
+            this.player = player;
         }
+
         public void Execute()
         {
-            player.UseItem(code);
+            ItemHandler.Instance.DecideItem(player);
         }
     }
 }

@@ -2,86 +2,112 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using static Game_Project.GameStateMachine;
 
 namespace Game_Project
 {
 	class KeyboardController : IController // wanted to add a new file instead of modifying a perfectly working file.
     {
-        // Will change name and replace the Keyboard Controller file after finishing PlayerManager.cs file!
-        private Dictionary<Keys, ICommand> controllerMappings;
-		private Dictionary<Keys, ICommand> pausedControllerMappings;
+        // Dictionary that keeps track of key mappings that are tied to the game state (the key). The contained dictionaries
+		// Keep track of the key to be pressed, whether the key is to be pressed or held, and the ICommand to be executed upon key press
+		private Dictionary<states, Dictionary<Keys, Tuple<bool, ICommand>>> stateMappings;
+
+		// Some keys should only fire off commands the moment they are pressed, so these keys will be stored and if they are being held then
+		// a new command won't fire until the player stops pressing the key and presses it again
+		private List<Keys> keysDown;
+
 		public Game1 game;
 
         public KeyboardController(Game1 game)
 		{
 			this.game = game;
-			//controllerMappings = new Dictionary<Keys, ICommand>();
+			keysDown = new List<Keys>();
 		}
 
-		public void RegisterCommand(Keys key, ICommand command)
+		public void RegisterCommand(states currState, Keys key, bool isHeld, ICommand command)
 		{
-		
-				controllerMappings.Add(key, command);
-            
+			stateMappings[currState].Add(key, new Tuple<bool, ICommand>(isHeld, command));
 		}
+
+		private void CheckKeysDown(KeyboardState state)
+        {
+			// Since we can't iterate through a list and remove things from it at the same time, we will keep track of the
+			// keys that need to be removed and modify keysDown after iterating
+			List<Keys> keysUp = new List<Keys>();
+
+			foreach (Keys key in keysDown)
+			{
+				if (state.IsKeyUp(key))
+					keysUp.Add(key);
+			}
+
+			foreach (Keys key in keysUp)
+            {
+				keysDown.Remove(key);
+            }
+        }
 
 		public void Update(GameTime gameTime)
 		{
-			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+			KeyboardState state = Keyboard.GetState();
+			Keys[] pressedKeys = state.GetPressedKeys();
+			Dictionary<Keys, Tuple<bool, ICommand>> mappings = stateMappings[game.State];
 
+			// Clear out keys that aren't being pressed
 			foreach (Keys key in pressedKeys)
 			{
-				if (game.paused)
+				if (mappings.ContainsKey(key))
 				{
-					if (pausedControllerMappings.ContainsKey(key) /*&& key != Keys.A && key != Keys.D*/)
+					if (!keysDown.Contains(key) || mappings[key].Item1) // If the key we want isn't being pressed and held or if it should be held
 					{
-						pausedControllerMappings[key].Execute();
-					}
-				}
-				else
-				{
-					// Need to check if the key is valid first
-					if (controllerMappings.ContainsKey(key) /*&& key != Keys.A && key != Keys.D*/)
-					{
-						controllerMappings[key].Execute();
-					}
-				}
-				
-			}
+						mappings[key].Item2.Execute();
 
-            
+						// Keep track of the key if it doesn't need to be held
+						if (!mappings[key].Item1)
+							keysDown.Add(key);
+					}
+				}
+			}
+			
+			CheckKeysDown(state);
         }
 
-		public void LoadContent(Game1 game, Player player)
+		public void LoadContent(GameStateMachine stateMachine, Player player, Sidekick sidekick)
 		{
-			controllerMappings = new Dictionary<Keys, ICommand>();
-			pausedControllerMappings = new Dictionary<Keys, ICommand>();
-			
-			RegisterCommand(Keys.Q, new QuitCommand(game));
-			RegisterCommand(Keys.A, new PlayerMoveLeftCommand(player));
-			RegisterCommand(Keys.W, new PlayerJumpCommand(player));
-			RegisterCommand(Keys.D, new PlayerMoveRightCommand(player));
-			RegisterCommand(Keys.Left, new PlayerMoveLeftCommand(player));
-			RegisterCommand(Keys.Up, new PlayerJumpCommand(player));
-			RegisterCommand(Keys.Right, new PlayerMoveRightCommand(player));
-			RegisterCommand(Keys.N, new AttackCommand(player));
-			RegisterCommand(Keys.D1, new UseItemCommand(player, 1));
-			RegisterCommand(Keys.D2, new UseItemCommand(player, 2));
-			RegisterCommand(Keys.D3, new UseItemCommand(player, 3));
-			RegisterCommand(Keys.D4, new UseItemCommand(player, 4));
-			RegisterCommand(Keys.D5, new UseItemCommand(player, 5));
-			RegisterCommand(Keys.E, new TakeDamageCommand(player));
-			RegisterCommand(Keys.R, new ResetCommand(game));
-			RegisterCommand(Keys.P, new PauseCommand(game));
-            
-			pausedControllerMappings.Add(Keys.Q, new QuitCommand(game));
-			pausedControllerMappings.Add(Keys.R, new ResetCommand(game));
-			pausedControllerMappings.Add(Keys.P, new PauseCommand(game));
-			pausedControllerMappings.Add(Keys.I, new InventoryCommand(game));
-			pausedControllerMappings.Add(Keys.A, new ItemScrollLeftCommand());
-			pausedControllerMappings.Add(Keys.D, new ItemScrollRightCommand());
-			
+			stateMappings = new Dictionary<states, Dictionary<Keys, Tuple<bool, ICommand>>>();
+			stateMappings.Add(states.playing, new Dictionary<Keys, Tuple<bool, ICommand>>());
+			stateMappings.Add(states.paused, new Dictionary<Keys, Tuple<bool, ICommand>>());
+			stateMappings.Add(states.over, new Dictionary<Keys, Tuple<bool, ICommand>>());
+			stateMappings.Add(states.win, new Dictionary<Keys, Tuple<bool, ICommand>>());
+
+			RegisterCommand(states.playing, Keys.A, true, new PlayerMoveLeftCommand(player));
+			RegisterCommand(states.playing, Keys.W, true, new PlayerJumpCommand(player));
+			RegisterCommand(states.playing, Keys.D, true, new PlayerMoveRightCommand(player));
+			RegisterCommand(states.playing, Keys.Left, true, new PlayerMoveLeftCommand(player));
+			RegisterCommand(states.playing, Keys.Up, true, new PlayerJumpCommand(player));
+			RegisterCommand(states.playing, Keys.Right, true, new PlayerMoveRightCommand(player));
+			RegisterCommand(states.playing, Keys.Q, false, new QuitCommand(game));			
+			RegisterCommand(states.playing, Keys.N, false, new AttackCommand(player));
+			RegisterCommand(states.playing, Keys.E, false, new UseItemCommand(player));
+			RegisterCommand(states.playing, Keys.R, false, new ResetCommand(game));
+			RegisterCommand(states.playing, Keys.P, false, new PauseCommand(stateMachine));
+
+			// Sidekick Commands
+			RegisterCommand(states.paused, Keys.Space, false, new SidekickStayOrFollowCommand(sidekick));
+
+			RegisterCommand(states.paused, Keys.Q, false, new QuitCommand(game));
+			RegisterCommand(states.paused, Keys.R, false, new ResetCommand(game));
+			RegisterCommand(states.paused, Keys.P, false, new PauseCommand(stateMachine));
+			RegisterCommand(states.paused, Keys.A, false, new ItemScrollLeftCommand());
+			RegisterCommand(states.paused, Keys.D, false, new ItemScrollRightCommand());
+
+			RegisterCommand(states.win, Keys.Q, false, new QuitCommand(game));
+			RegisterCommand(states.win, Keys.R, false, new ResetCommand(game));
+
+			RegisterCommand(states.over, Keys.Q, false, new QuitCommand(game));
+			RegisterCommand(states.over, Keys.R, false, new ResetCommand(game));
 		}
 	}
 }

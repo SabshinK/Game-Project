@@ -15,7 +15,8 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.physics.appliedForce.X = 4f;
+            player.physics.appliedForce.X = 10f;
+            player.physics.isRunning = true;
             player.StartMoving(true);
         }
     }

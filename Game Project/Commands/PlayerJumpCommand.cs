@@ -15,8 +15,19 @@ namespace Game_Project
 
         public void Execute()
         {
-            player.physics.appliedForce.Y = 4;
-            player.StartMoving(player.FacingRight);
+            if (!player.physics.falling)
+            {
+                player.physics.appliedForce.Y = 6f;
+                if (!player.physics.startJumping)
+                {
+                    SoundManager.Instance.PlayEffect("jump");
+                    player.physics.startJumping = true;
+                    player.isColliding = false;
+                    player.physics.velocity.Y = 26f;
+                }
+                player.physics.isJumping = true;
+                player.StartMoving(player.FacingRight);
+            }
         }
     }
 }

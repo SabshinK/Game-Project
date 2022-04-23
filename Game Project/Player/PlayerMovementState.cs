@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Game_Project
@@ -15,14 +16,9 @@ namespace Game_Project
 
             // Reset physics stuff
             player.physics.displacement = new Vector2(0.0f, 0.0f);
-            player.physics.velocity = new Vector2(0.0f, 0.0f);
-            player.physics.acceleration = new Vector2(0.0f, 0.0f);            
+            player.physics.velocity.X = 0f;
+            player.physics.acceleration = new Vector2(0.0f, 0.0f);
 
-            // This snippet might be able to be put in a method or something it's used a few times I think
-            if (player.FacingRight)
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
-            else
-                player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
         }
 
         public void BackToIdle() 
@@ -51,52 +47,99 @@ namespace Game_Project
             player.SetState(new PlayerItemState(player));
         }
 
-        public void Update(GameTime gameTime)
+        public void CheckAnimation()
         {
-            //horizontal movement
-            if (player.FacingRight)
+            if (player.FacingRight) 
             {
-                player.location.X += player.physics.HorizontalChange(gameTime);
+                if (player.isColliding && player.currentAnimationJump.Equals("jumpingRight") && player.physics.falling)
+                {
+                    player.sprite = SpriteFactory.Instance.CreateSprite("movingRight");
+                    player.currentAnimationJump = "";
+                }
+
+                if (!player.isColliding && player.currentAnimationRun.Equals("movingRight"))
+                {
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
+                    player.currentAnimationRun = "";
+                }
             }
             else
             {
-                player.location.X -= player.physics.HorizontalChange(gameTime);
+                if (player.isColliding && player.currentAnimationJump.Equals("jumpingLeft") && player.physics.falling)
+                {
+                    player.sprite = SpriteFactory.Instance.CreateSprite("movingLeft");
+                    player.currentAnimationJump = "";
+                }
+
+                if (!player.isColliding && player.currentAnimationRun.Equals("movingLeft"))
+                {
+                    player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
+                    player.currentAnimationRun = "";
+                }
             }
+        }
 
-            //vertical movement
-            //if (player.physics.appliedForce.Y > 0)
-            //{
-            //    player.physics.falling = false;
-            //    if (player.FacingRight)
-            //    {
-            //        player.sprite = SpriteFactory.Instance.CreateSprite("jumpingRight");
-            //    }
-            //    else
-            //    {
-            //        player.sprite = SpriteFactory.Instance.CreateSprite("jumpingLeft");
-            //    }
-
-            //    player.physics.acceleration.Y = player.physics.appliedForce.Y - player.physics.gravity;
-
-            //    player.location.Y -= (int)player.physics.VerticalChange(gameTime, player.physics.acceleration.Y);
-
-            //    //slow down in the jump
-            //    player.physics.gravity += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            //    if (player.physics.velocity.Y >= 0)
-            //    {
-            //        player.physics.falling = true;
-            //    }
-            //}
-
-            //go back to the idle state when movement is complete
-            if (player.physics.velocity.X <= 0 && (player.physics.falling && player.physics.velocity.Y <= 0))
+        public void Update(GameTime gameTime)
+        {
+            if (player.FacingRight)
             {
-                //player.physics.gravity = 2f;
-                BackToIdle();
+
+                player.location.X += player.physics.HorizontalChange(gameTime);
+
+                if (player.physics.displacement.X <= 0f)
+                {
+                    CheckAnimation();
+                    player.physics.isRunning = false;
+                }
+
+
+                player.location.Y -= player.physics.VerticalChange(gameTime);
+
+                if (player.physics.displacement.Y <= 0f)
+                {
+                    CheckAnimation();
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
+                    player.physics.startJumping = false;
+                }
+
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                {
+
+                    BackToIdle();
+                }
+
+            }
+            else
+            {
+
+                player.location.X -= player.physics.HorizontalChange(gameTime);
+
+                if (player.physics.displacement.X <= 0f)
+                {
+                    CheckAnimation();
+                    player.physics.isRunning = false;
+                }
+
+                player.location.Y -= player.physics.VerticalChange(gameTime);
+
+                if (player.physics.displacement.Y <= 0f)
+                {
+                    CheckAnimation();
+                    player.physics.isJumping = false;
+                    player.physics.falling = true;
+                    player.physics.startJumping = false;
+                }
+
+                if (!player.physics.isRunning && !player.physics.isJumping)
+                {
+                    BackToIdle();
+                }
+
+
             }
 
-            player.physics.Update(gameTime);
+            Debug.WriteLine(player.physics.acceleration.Y);
         }   
     }
 }

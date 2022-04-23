@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Game_Project
 {
-    class GameWin : IDrawable
+    class GameWin : IUI
     {
         SpriteFont font;
         public Vector2 Position { get; set; }
@@ -17,9 +17,9 @@ namespace Game_Project
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "YOU WIN!", new Vector2(Position.X, Position.Y), Color.White);
-            spriteBatch.DrawString(font, "R - Restart", new Vector2(Position.X, Position.Y + 50), Color.Black);
-            spriteBatch.DrawString(font, "Q - Quit", new Vector2(Position.X, Position.Y + 100), Color.Black);
+            spriteBatch.DrawString(font, "YOU WIN!", new Vector2(Position.X + 300, Position.Y + 100), Color.Yellow);
+            spriteBatch.DrawString(font, "R - Restart", new Vector2(Position.X + 300, Position.Y + 200), Color.White);
+            spriteBatch.DrawString(font, "Q - Quit", new Vector2(Position.X + 300, Position.Y + 250), Color.White);
         }
     }
 }

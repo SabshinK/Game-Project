@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game_Project.Enemies;
+using Game_Project.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Game_Project.IEnemyStateMachine;
@@ -9,12 +11,14 @@ namespace Game_Project
 {
     public class BatEnemy : IEnemy
     {
-        Tuple<actions, direction> stateTuple;
+        Tuple<actions, bool> stateTuple;
         // This bool is here to satisfy IMoveable, idealy it should be used instead of an enum, but it should probably be declared inside
         // the state machine and then this bool just gets the value from the state machine
+
         public bool FacingRight { get; private set; }
-        BatStateMachine bat;
+        EnemyStateMachine bat;
         ISprite batSprite;
+        private int health = 20;
 
         private Vector2 locationVector;
         public Vector2 Position => locationVector;
@@ -24,28 +28,28 @@ namespace Game_Project
         int lengthOfAction;
 
         Physics physics;
-        float accel = 1;
         
         public BatEnemy(UniversalParameterObject parameters)
         {
             locationVector = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
             lengthOfAction = 0;
-            bat = new BatStateMachine();
-            batSprite = SpriteFactory.Instance.CreateSprite("keeseGeneric");
+            bat = new EnemyStateMachine(health);
             physics = new Physics();
         }
         public void ChangeDirection()
         {
+            lengthOfAction = 0;
             bat.ChangeDirection();
         }
 
         public void Attack()
         {
-            bat.Attack();
+            //Not needed, only damage dealt is from contact.
         }
 
         public void TakeDamage()
         {
+            lengthOfAction = 0;
             bat.TakeDamage();
         }
 
@@ -56,7 +60,29 @@ namespace Game_Project
 
         public void Collide(Rectangle collision, int direction)
         {
-
+            switch (direction)
+            {
+                case 0:
+                    locationVector.Y += collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 1:
+                    locationVector.Y -= collision.Height;
+                    physics.velocity.Y = 0;
+                    break;
+                case 2:
+                    locationVector.X -= collision.Width;
+                    physics.velocity.X = 0;
+                    ChangeDirection();
+                    break;
+                case 3:
+                    locationVector.X += collision.Width;
+                    physics.velocity.X = 0;
+                    ChangeDirection();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -68,40 +94,40 @@ namespace Game_Project
         {
 
             stateTuple = bat.getState();
+            FacingRight = stateTuple.Item2;
+
+            if (lengthOfAction <= 1)
+            {
+                batSprite = EnemySpriteDictionary.Instance.GetEnemySprite("Bat", stateTuple);
+            }
 
                 switch (stateTuple.Item1) {
-                    case actions.dead:
+                case actions.dead:
                     GameObjectManager.Instance.RemoveObject(this);
                     batSprite = null;
-                        break;
-                    case actions.falling:
-                        locationVector.Y++;
-                        physics.VerticalChange(gameTime, 2);
-                        batSprite.Update();
-                        break;
-                    case actions.moving:
+                    bat = null;
+                    break;
+                case actions.moving:
+                    if (FacingRight)
+                    {                 
+                        locationVector.X++;
+                    }
+                    else
+                    {
+                        locationVector.X--;
+                    }
 
-                    int displacement = 2; // (int)physics.HorizontalChange(gameTime, accel);
-                        if (stateTuple.Item2.Equals(direction.left))
-                        {
-                            locationVector.X -= displacement;
-                        }
-                        else
-                        {
-                            locationVector.X += displacement;
-                        }
-                        batSprite.Update();
+                    if(lengthOfAction > new Random().Next(5000))
+                    {
+                        ChangeDirection();
+                    }
+                    batSprite.Update();
+                    break;
 
-                        if(lengthOfAction > new Random().Next(100))
-                        {
-                            ChangeDirection();
-                            lengthOfAction = 0;
-                        }
-                        break;
-
-                     default:
-                        break;
+                default:
+                    break;
                 }
+
                 lengthOfAction++;
         }
     }
