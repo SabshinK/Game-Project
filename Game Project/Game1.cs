@@ -56,7 +56,9 @@ namespace Game_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2DStorage.LoadContent(Content);
-            
+
+            SoundManager.Instance.LoadContent(Content);
+
             font = Content.Load<SpriteFont>("Text");
 
             LevelLoader.Instance.LoadFile("sprites");
@@ -106,7 +108,7 @@ namespace Game_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
             Rectangle backgroundDimensions = new Rectangle(0, 0, 7869, 2882);
             Rectangle desiredDimensions = new Rectangle(0, 0, 8448, 2944);

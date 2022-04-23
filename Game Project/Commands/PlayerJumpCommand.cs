@@ -20,6 +20,7 @@ namespace Game_Project
                 player.physics.appliedForce.Y = 6f;
                 if (!player.physics.startJumping)
                 {
+                    SoundManager.Instance.PlayEffect("jump");
                     player.physics.startJumping = true;
                     player.isColliding = false;
                     player.physics.velocity.Y = 26f;

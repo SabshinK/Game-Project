@@ -46,7 +46,7 @@ namespace Game_Project
 
             location = new Vector2(64 * parameters.Position.X, 64 * parameters.Position.Y);
 
-            Health = 3;
+            Health = 10;
 
             FacingRight = true;
             isColliding = true;
