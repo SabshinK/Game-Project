@@ -4,19 +4,28 @@ Code Lead: Sebastian King (Advised all members for their code design!!)
 Significant debugging: Sebastian King and Rachel Watters (among the team, these members had the most significant contributions to debugging)
   Also: Anooj Deshpande
 Player Commands and States: Rachel Watters and Sebastian King
+Enemy Commands: AJ Waizmann
 Enemy interface and class updates: AJ Waizmann
 Projectile interface and class updates: Anooj Deshpande
 GameObjectManager: Sebastian King, Aadya Jain, and Maria Stein
+GameStateMachine: Anooj Deshpande
 Physics and implementation of physics in the player states: Rachel Watters
 CollisionDetection: Maria Stein
-CollisionResolution: Sebastian King and Rachel Watters
+CollisionResolution: Sebastian King, Rachel Watters, and AJ Waizmann
 LevelLoader: Sebastian King
-Reading Data from XML files: Sebastian King and Anooj Deshpande
+Reading Data from XML files: Sebastian King, Anooj Deshpande and AJ Waizmann
 Utility class for magic numbers: Aadya Jain
 Pause menu, quit, and reset: Anooj Deshpande
 Camera: AJ Waizmann
 IGameObject, IMoveable, and UIManager implementations: Sebastian King
-
+EnemySpriteDictionary: AJ Waizmann
+Musicians: Rachel Watters and Sebastian King
+Ammo: Rachel Watters and Sebastian King
+Bombs: Maria Stein
+Items: Anooj Deshpande and Sebastian King
+Sidekick: Aadya Jain and Rachel Watters
+Tiles: Rachel Watters
+UI: Anooj Deshpande
 
 DOCUMENTATION:
 
@@ -27,6 +36,8 @@ README Updates: Anooj Deshpande
 Sprint 4 Reflection: Aadya Jain
   (The sprint4 reflection was written by Aadya Jain and is a compilation of all the thoughts the team had when working on the sprint and finishing it).
 Code Reviews: Entire team
+Sprint 5 Planning Documentation: Entire team
+Sprint 5 Reflection: AJ Waizmann
 
 
 ARTWORK:
@@ -35,9 +46,12 @@ ARTWORK:
 Player animations: Rachel Watters
 Item sprites: Rachel Watters
 Tiles: Rachel Watters
-
-(Not in game)
 Enemy art: Maria Stein
 Backgrounds: Maria Stein
+Musician/NPC: Maria Stein
+
+MUSIC:
+Live Recordings: AJ Waizmann
+Production: Rachel Watters
 
 
