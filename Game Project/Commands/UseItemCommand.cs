@@ -16,7 +16,7 @@ namespace Game_Project
         }
         public void Execute()
         {
-            player.UseItem(code);
+            
         }
     }
 }
