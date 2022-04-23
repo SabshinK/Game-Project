@@ -61,7 +61,7 @@
 	<Item>
 		<ObjectType>Item</ObjectType>
 		<X>68</X>
-		<Y>25</Y>
+		<Y>19</Y>
 		<Animation>harpGeneric</Animation>
 	</Item>
 

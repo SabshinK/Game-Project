@@ -117,7 +117,7 @@ namespace Game_Project
             //triangle
             spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(3624, 768, 256, 256), new Rectangle(0, 0, 256, 256), Color.White);
             //harp
-            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(4352, 1536, 256, 256), new Rectangle(256, 0, 256, 256), Color.White);
+            spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(4352, 1152, 256, 256), new Rectangle(256, 0, 256, 256), Color.White);
             //flute
             spriteBatch.Draw(Texture2DStorage.GetTexture("MusicianSpritesheet"), new Rectangle(7104, 1792, 256, 256), new Rectangle(512, 0, 256, 256), Color.White);
             //speaker
