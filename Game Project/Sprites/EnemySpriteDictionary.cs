@@ -8,6 +8,9 @@ namespace Game_Project.Sprites
     class EnemySpriteDictionary
     {
 
+        private static EnemySpriteDictionary instance = new EnemySpriteDictionary();
+        public static EnemySpriteDictionary Instance => instance;
+
         Dictionary<Tuple<String, Tuple<actions, bool>>, ISprite> spriteDictionary = new Dictionary<Tuple<String, Tuple<actions, bool>>, ISprite>();
         public EnemySpriteDictionary()
         {
