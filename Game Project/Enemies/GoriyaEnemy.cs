@@ -142,16 +142,8 @@ namespace Game_Project
             }
             else if (stateTuple.Item1.Equals(actions.attacking) && lengthOfAction == 0)
             {
-                if (stateTuple.Item2)
-                {
-                    weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
-                }
-                else
-                {
-                    weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
-                }
+                weapon = new Boomerang(new UniversalParameterObject(locationVector, FacingRight));
                 currentGoriyaSprite.Update();
-
             }
             else if (stateTuple.Item1.Equals(actions.dead))
             {
