@@ -1,0 +1,7 @@
+
+This sprint saw the bulk of additions and changes that the rest of the sprints have been building up to. When it comes to our team's own burndown chart, we actually hit a stride in the last week of the sprint. The first week was playing mostly catch-up with minor
+bug fixes, art swaps, and things that should have been done before the end of Sprint 4. However, this left the bulk of Sprint 5, as well as major bug fixes, to be done in the final week of Sprint 5. This led to a lot of refactoring as everything had to figure out
+how to work with the addiitons. So, our burndown chart looks like a quickly decreasing line at the beginning and nearing the end of the sprint, with a sharp level-off in the middle as work was getting done, yet pull requests remained limited. Our processes made in
+the former sprint, with adding hard deadlines, smoothed this sprint over way more than anyone expected. Most of the deadlines were met 2 days before they were due, freeing people up to work on bugs, and working with the new additions to the sprint. On top of this, it
+seems that everyone has gotten plenty of experience with creating higher-quality code, and makiang sure that compilation issues are not a problem at the time you merge. Overall, this sprint went incredibly smooth despite the relatively large amount of work that had to
+be done.
