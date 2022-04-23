@@ -49,7 +49,7 @@ namespace Game_Project
             Health = 3;
 
             FacingRight = true;
-            isColliding = false;
+            isColliding = true;
 
             physics = new Physics();
 

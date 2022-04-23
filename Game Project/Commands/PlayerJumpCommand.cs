@@ -21,6 +21,7 @@ namespace Game_Project
                 if (!player.physics.startJumping)
                 {
                     player.physics.startJumping = true;
+                    player.isColliding = false;
                     player.physics.velocity.Y = 30f;
                 }
                 player.physics.isJumping = true;
