@@ -6,17 +6,14 @@ namespace Game_Project
 {
     class UseItemCommand : ICommand
     {
-        private Player player;
-        private int code;
-
-        public UseItemCommand(Player manager, int code)
+        private ItemScroller itemScroller;
+        public UseItemCommand(ItemScroller itemScroller)
         {
-            player = manager;
-            this.code = code;
+            this.itemScroller = itemScroller;
         }
         public void Execute()
         {
-            
+            itemScroller.
         }
     }
 }
