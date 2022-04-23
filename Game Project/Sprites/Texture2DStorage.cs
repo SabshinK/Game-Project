@@ -22,6 +22,7 @@ namespace Game_Project
         private static Texture2D arrowSpriteSheet;
         private static Texture2D idleArrowSpriteSheet;
         private static Texture2D accordianSpriteSheet;
+        private static Texture2D musicianSpriteSheet;
         private static Texture2D background;
         private static Texture2D backgroundTwo;
         private static Texture2D backgroundFinal;
@@ -57,6 +58,7 @@ namespace Game_Project
             arrowSpriteSheet = content.Load<Texture2D>("Arrow");
             idleArrowSpriteSheet = content.Load<Texture2D>("IdleArrowCollect");
             accordianSpriteSheet = content.Load<Texture2D>("accordionboomerang");
+            musicianSpriteSheet = content.Load<Texture2D>("MusicianSpritesheet");
             background = content.Load<Texture2D>("2b");
             backgroundTwo = content.Load<Texture2D>("3b");
             backgroundFinal = content.Load<Texture2D>("FinalBackground");
@@ -79,6 +81,7 @@ namespace Game_Project
             spritesByNames.Add("Arrow", arrowSpriteSheet);
             spritesByNames.Add("IdleArrowCollect", idleArrowSpriteSheet);
             spritesByNames.Add("accordionboomerang", accordianSpriteSheet);
+            spritesByNames.Add("MusicianSpritesheet", musicianSpriteSheet);
             spritesByNames.Add("2b", background);
             spritesByNames.Add("3b", backgroundTwo);
             spritesByNames.Add("FinalBackground", backgroundFinal);
