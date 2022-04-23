@@ -6,14 +6,15 @@ namespace Game_Project
 {
     class MusicianCommand : ICommand
     {
-        private Player player;
-        public MusicianCommand(Player manager)
+        private Item item;
+        public MusicianCommand(Item manager)
         {
-            player = manager;
+            item = manager;
         }
         public void Execute()
         {
-            
+            Musicians.OnEvent(item.currentAnimation);
+            GameObjectManager.Instance.RemoveObject(item);
 
         }
     }

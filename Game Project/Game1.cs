@@ -108,6 +108,10 @@ namespace Game_Project
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
+            Rectangle backgroundDimensions = new Rectangle(0, 0, 6924, 1514);
+            Rectangle desiredDimensions = new Rectangle(0, 0, 8448, 2944);
+            spriteBatch.Draw(Texture2DStorage.GetTexture("3b"), desiredDimensions, backgroundDimensions, Color.White);
+
             GameObjectManager.Instance.Draw(spriteBatch);
             gameStateMachine.Draw(spriteBatch);
 
