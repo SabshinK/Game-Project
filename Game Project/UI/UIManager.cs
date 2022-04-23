@@ -28,7 +28,7 @@ namespace Game_Project
             this.stateMachine = stateMachine;
             this.camera = camera;
             itemScroller = new ItemScroller();
-            healthBar = new HealthBar();
+            healthBar = new HealthBar(stateMachine);
 
             UIList = new List<IUI>();
         }

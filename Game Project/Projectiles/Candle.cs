@@ -39,7 +39,7 @@ namespace Game_Project
             lifeSpan = 1f;
             FacingRight = parameters.FacingRight;
             stopFire = false;
-            fireSprite = SpriteFactory.Instance.CreateSprite("candleFireGeneric");
+            fireSprite = SpriteFactory.Instance.CreateSprite("fireballGeneric");
             despawnSprite = SpriteFactory.Instance.CreateSprite("despawnGeneric");
             sprite = fireSprite;
             finished = false;
