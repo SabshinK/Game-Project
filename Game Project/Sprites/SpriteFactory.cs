@@ -22,7 +22,7 @@ namespace Game_Project
         /// <returns>A GenericSprite implementation</returns>
         public ISprite CreateSprite(string animationName)
         {
-            if (frames.ContainsKey(animationName))
+            if (animationName != null && frames.ContainsKey(animationName))
                 return new GenericSprite(frames[animationName]);
             else
                 return null;
