@@ -13,7 +13,7 @@ namespace Game_Project
         }
         public void Execute()
         {
-            itemScroller.
+            itemScroller.UseItem();
         }
     }
 }
