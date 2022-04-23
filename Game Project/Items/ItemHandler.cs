@@ -6,74 +6,76 @@ using System.Text;
 
 namespace Game_Project
 {
-    public class ItemHandler : IItem
+    public class ItemHandler
     {
-        private Player player;
-        public bool FacingRight { get; set; }
-        private Vector2 position;
-        public Vector2 Position => position;
-        public Vector2 GridPosition => new Vector2(position.X / 64, position.Y / 64);
-        public int Health { get; set; }
-        private ItemScroller itemScroller;
-        private List<String> items;
-        private string currItem;
+        private static ItemHandler instance = new ItemHandler();
+        public static ItemHandler Instance => instance;
 
+        public List<string> items;
+        private int itemId;
+        public string equipedItem;
+
+        public int ammoCount = 0;
         public ItemHandler()
         {
-            items = itemScroller.items;
-            currItem = itemScroller.currItem;
-            Health = Player.Health;
+            Musicians.OnActivateMusician += AddItem;
+            items = new List<string>();
         }
-        //Returns the item which was picked to 
-        // heals player for the triangle
-        public HealPlayer()
+        public void AddItem(string itemName)
         {
-            Player.Health = 4; // set player's health to 4
+            items.Add(itemName);
         }
 
-        public void DecideItem()
+        public void ScrollRight()
         {
-            // need access to the items list from ItemScroller!
-            //guitar is swordBeam
-            //accordian is boomerang
-            // harp is bow
-            //drum is bomb
-            //flute is candle
-            //triangle is calling heal player up to 4 hearts
-            //Order: guitar, accordian, flute, drum, harp, triangle
-            switch (items.IndexOf(currItem)) //ItemsList is the list I should be able to access from ItemScroller;
+            if (items.Count > 0)
             {
-                case 1:
-                    GameObjectManager.RegisterObject(new SwordBeam(new UniversalParameterObject(player.position, FacingRight)));
-                    break;
-                case 2:
-                    GameObjectManager.RegisterObject(new Boomerang(new UniversalParameterObject(player.position, FacingRight)));
+                itemId = (itemId + 1) % items.Count;
+                equipedItem = items[itemId];
+            }
+        }
+
+        public void ScrollLeft()
+        {
+            if (items.Count > 0)
+            {
+                if (itemId == 0)
+                    itemId = items.Count - 1;
+                else
+                    itemId--;
+
+                equipedItem = items[itemId];
+            }
+        }
+
+        public void DecideItem(IPlayer player)
+        {
+            // accordian is boomerang
+            // harp is bow
+            // drum is bomb
+            // flute is candle
+            // triangle is calling heal player up to 4 hearts
+            // Order: accordian, flute, drum, harp, triangle
+            switch (items[itemId])
+            {
+                case "accordianGeneric":
+                    GameObjectManager.Instance.RegisterObject(new Boomerang(new UniversalParameterObject(player.Position, player.FacingRight)));
                     break ;
-                case 3:
-                    GameObjectManager.RegisterObject(new Candle(new UniversalParameterObject(player.position, FacingRight)));
+                case "fluteGeneric":
+                    GameObjectManager.Instance.RegisterObject(new Candle(new UniversalParameterObject(player.Position, player.FacingRight)));
                     break;
-                case 4:
-                    GameObjectManager.RegisterObject(new Bomb(new UniversalParameterObject(player.position, FacingRight)));
+                case "drumGeneric":
+                    GameObjectManager.Instance.RegisterObject(new Bomb(new UniversalParameterObject(player.Position, player.FacingRight)));
                     break;
-                case 5:
-                    GameObjectManager.RegisterObject(new Arrow(new UniversalParameterObject(player.position, FacingRight)));
+                case "harpGeneric":
+                    GameObjectManager.Instance.RegisterObject(new Arrow(new UniversalParameterObject(player.Position, player.FacingRight)));
                     break;
-                case 6:
-                    HealPlayer();
+                case "triangleGeneric":
+                    player.Heal(4);
                     break;
                 default:
                     break;
             }
         }
-        
-        public void Update(GameTime gameTime)
-        {
-            DecideItem();
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-        }
-
     }
 }

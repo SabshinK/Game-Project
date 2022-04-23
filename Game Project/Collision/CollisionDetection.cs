@@ -9,7 +9,7 @@ namespace Game_Project
     {
         public enum CollideDirection { Top, Bottom, Left, Right };
 
-        private List<List<IGameObject>> gameObjects;
+        //private List<List<IGameObject>> gameObjects;
 
         public CollisionDetection()
         {
@@ -56,8 +56,8 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            gameObjects = GameObjectManager.Instance.GameObjects;
-
+            List<List<IGameObject>> gameObjects = new List<List<IGameObject>>(GameObjectManager.Instance.GameObjects);
+            GameObjectManager.Instance.iterating = true;
             for (int i = 0; i < gameObjects[0].Count; i++)
             {
                 for (int j = i + 1; j < gameObjects[0].Count; j++)
@@ -71,6 +71,7 @@ namespace Game_Project
                     CheckCollision(gameObjects[0][i], nonMoveableObject);
                 }
             }
+            GameObjectManager.Instance.iterating = false;
         }
     }
 }

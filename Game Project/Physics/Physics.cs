@@ -73,12 +73,6 @@ namespace Game_Project
         {
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds * 10f;
 
-            //if (startJumping)
-            //{
-            //    velocity.Y = TERMINAL_VELOCITY_Y;
-            //    startJumping = false;
-            //}
-
             acceleration.Y = appliedForce.Y - GRAVITY;
 
             displacement.Y = (velocity.Y * time) + (acceleration.Y * (float)Math.Pow(time, 2) * 0.5f);
@@ -101,10 +95,7 @@ namespace Game_Project
 
         public void Update(GameTime gameTime)
         {
-            //if (appliedForce.X > 0.0f)
-            //    appliedForce.X /= 2;
-            //else
-            //    appliedForce.X = 0.0f;
+
         }
     }
 }

@@ -18,6 +18,8 @@ namespace Game_Project
             player.currentAnimationRun = "";
             player.currentAnimationJump = "";
 
+            player.isColliding = true;
+
             if (player.FacingRight)
             {
                 player.sprite = SpriteFactory.Instance.CreateSprite("idleRight");

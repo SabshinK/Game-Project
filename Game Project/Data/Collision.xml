@@ -107,7 +107,14 @@
 		<CollisionObjectType>Item</CollisionObjectType>
 		<Direction>-1</Direction>
 		<Command>null</Command>
-		<Command>RemoveItemCommand</Command>
+		<Command>MusicianCommand</Command>
+	</Item>
+	<Item>
+		<CollisionObjectType>Player</CollisionObjectType>
+		<CollisionObjectType>Ammo</CollisionObjectType>
+		<Direction>-1</Direction>
+		<Command>null</Command>
+		<Command>AddAmmoCommand</Command>
 	</Item>
 	<!--Player colliding with Projectiles-->
 	<!--Enemies colliding with Tiles-->

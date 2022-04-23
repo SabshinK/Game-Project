@@ -87,7 +87,7 @@ namespace Game_Project
 
 
 
-            if (gameStateMachine.currState == GameStateMachine.states.playing)
+            if (gameStateMachine.currState == states.playing)
             {
                 GameObjectManager.Instance.Update(gameTime);
                 collisionDetection.Update(gameTime);
@@ -108,10 +108,12 @@ namespace Game_Project
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.zoomMatrix); //have to use this here to use the camera, would love to chat about it if anyone wants to.
 
+            Rectangle backgroundDimensions = new Rectangle(0, 0, 6924, 1514);
+            Rectangle desiredDimensions = new Rectangle(0, 0, 8448, 2944);
+            spriteBatch.Draw(Texture2DStorage.GetTexture("3b"), desiredDimensions, backgroundDimensions, Color.White);
+
             GameObjectManager.Instance.Draw(spriteBatch);
             gameStateMachine.Draw(spriteBatch);
-
-            //healthBar.Draw(spriteBatch);
 
             base.Draw(gameTime);
 
@@ -120,7 +122,7 @@ namespace Game_Project
 
         public void Reset()
         {
-            gameStateMachine.currState = GameStateMachine.states.playing;
+            gameStateMachine.currState = states.playing;
             GameObjectManager.Instance.Reset();
             LevelLoader.Instance.LoadFile("forest");
             keyboard.LoadContent(gameStateMachine, GameObjectManager.Instance.GetPlayer(), GameObjectManager.Instance.GetSidekick());

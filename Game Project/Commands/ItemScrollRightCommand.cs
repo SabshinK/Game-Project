@@ -6,15 +6,9 @@ namespace Game_Project
 {
     class ItemScrollRightCommand : ICommand
     {
-        public ItemScroller scroller;
-        public ItemScrollRightCommand(ItemScroller items)
-        {
-            scroller = items;
-        }
-
         public void Execute()
         {
-            scroller.scrollRight();
+            ItemHandler.Instance.ScrollRight();
         }
     }
 }

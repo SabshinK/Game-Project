@@ -17,6 +17,7 @@ namespace Game_Project
         private GameWin gameWin;
         private HealthBar healthBar;
         public ItemScroller itemScroller;
+        private AmmoDisplay ammoDisplay;
         private PauseMenu menu;
 
         private SpriteFont font;
@@ -28,7 +29,7 @@ namespace Game_Project
             this.stateMachine = stateMachine;
             this.camera = camera;
             itemScroller = new ItemScroller();
-            healthBar = new HealthBar();
+            healthBar = new HealthBar(stateMachine);
 
             UIList = new List<IUI>();
         }
@@ -40,11 +41,13 @@ namespace Game_Project
             menu = new PauseMenu(font);
             gameOver = new GameOver(font);
             gameWin = new GameWin(font);
+            ammoDisplay = new AmmoDisplay(font);
 
             UIList.Add(gameOver);
             UIList.Add(gameWin);
             UIList.Add(healthBar); 
             UIList.Add(itemScroller);
+            UIList.Add(ammoDisplay);
             UIList.Add(menu);
         }
 
@@ -52,7 +55,6 @@ namespace Game_Project
         {
             healthBar.Update(gameTime);
 
-            // change this to a list of UI objects, maybe make an interface?
             foreach (IUI uiItem in UIList)
             {
                 uiItem.Position = camera.Position;
@@ -78,6 +80,7 @@ namespace Game_Project
             else
             {
                 healthBar.Draw(spriteBatch);
+                ammoDisplay.Draw(spriteBatch);
             }
         }
     }

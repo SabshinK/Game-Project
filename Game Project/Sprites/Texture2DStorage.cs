@@ -17,6 +17,13 @@ namespace Game_Project
         private static Texture2D itemsSpriteSheet;
         private static Texture2D tempPlayerSpriteSheet;
         private static Texture2D newItemSpriteSheet;
+        private static Texture2D fireBallSpriteSheet;
+        private static Texture2D explosionSpriteSheet;
+        private static Texture2D arrowSpriteSheet;
+        private static Texture2D idleArrowSpriteSheet;
+        private static Texture2D accordianSpriteSheet;
+        private static Texture2D background;
+        private static Texture2D backgroundTwo;
 
         // Dictionary used for getting Texture2D's
         private static Dictionary<string, Texture2D> spritesByNames = new Dictionary<string, Texture2D>();
@@ -28,13 +35,9 @@ namespace Game_Project
         public static Texture2D GetTexture(string spriteName)
         {
             if (spritesByNames.ContainsKey(spriteName))
-            {
                 return spritesByNames[spriteName];
-            }
             else
-            {
                 return null;
-            }
         }
 
         public static void LoadContent(ContentManager content)
@@ -48,6 +51,13 @@ namespace Game_Project
             itemsSpriteSheet = content.Load<Texture2D>("TempItemsAndCollectables");
             tempPlayerSpriteSheet = content.Load<Texture2D>("TempPlayer");
             newItemSpriteSheet = content.Load<Texture2D>("Items");
+            fireBallSpriteSheet = content.Load<Texture2D>("fireball");
+            explosionSpriteSheet = content.Load<Texture2D>("bombexplode");
+            arrowSpriteSheet = content.Load<Texture2D>("Arrow");
+            idleArrowSpriteSheet = content.Load<Texture2D>("IdleArrowCollect");
+            accordianSpriteSheet = content.Load<Texture2D>("accordionboomerang");
+            background = content.Load<Texture2D>("2b");
+            backgroundTwo = content.Load<Texture2D>("3b");
 
             LoadDictionary();
         }
@@ -62,6 +72,13 @@ namespace Game_Project
             spritesByNames.Add("TempItemsAndCollectables", itemsSpriteSheet);
             spritesByNames.Add("TempPlayer", tempPlayerSpriteSheet);
             spritesByNames.Add("Items", newItemSpriteSheet);
+            spritesByNames.Add("fireball", fireBallSpriteSheet);
+            spritesByNames.Add("bombexplode", explosionSpriteSheet);
+            spritesByNames.Add("Arrow", arrowSpriteSheet);
+            spritesByNames.Add("IdleArrowCollect", idleArrowSpriteSheet);
+            spritesByNames.Add("accordionboomerang", accordianSpriteSheet);
+            spritesByNames.Add("2b", background);
+            spritesByNames.Add("3b", backgroundTwo);
         }
     }
 }
