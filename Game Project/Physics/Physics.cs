@@ -92,10 +92,5 @@ namespace Game_Project
 
             return displacement.Y;
         }
-
-        public void Update(GameTime gameTime)
-        {
-
-        }
     }
 }

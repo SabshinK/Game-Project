@@ -24,7 +24,7 @@ namespace Game_Project
         {
             magicNums = new double[42];
 
-            string filePath = @"Game Project/Data/MagicNumbers.txt"; // need to edit file path
+            string filePath = @"..\..\..\..\Game Project\Data\MagicNumbers.txt"; // need to edit file path
 
             string[] values = File.ReadAllLines(filePath);
 

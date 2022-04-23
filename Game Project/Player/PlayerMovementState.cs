@@ -140,8 +140,6 @@ namespace Game_Project
             }
 
             Debug.WriteLine(player.physics.acceleration.Y);
-
-            player.physics.Update(gameTime);
         }   
     }
 }
