@@ -13,8 +13,6 @@ namespace Game_Project
         public Vector2 GridPosition => new Vector2(position.X / 64, position.Y / 64);
         public Vector2 Size => sprite.Size;
 
-        public Physics physics;
-
         private ISprite sprite;
         private float timer;
         private float lifeSpan;
