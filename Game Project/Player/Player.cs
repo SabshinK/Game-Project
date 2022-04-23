@@ -49,7 +49,7 @@ namespace Game_Project
             Health = 3;
 
             FacingRight = true;
-            isColliding = false;
+            isColliding = true;
 
             physics = new Physics();
 
@@ -188,9 +188,10 @@ namespace Game_Project
             //}
 
             physics.Update(gameTime);
-
-            location.Y -= (int)physics.VerticalChange(gameTime);
-
+            if (!physics.isJumping)
+            {
+                location.Y -= (int)physics.VerticalChange(gameTime);
+            }
             sprite.Update();
 
             state.Update(gameTime);
