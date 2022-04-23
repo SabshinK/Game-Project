@@ -46,6 +46,7 @@ namespace Game_Project
         public void Attack()
         {
             lengthOfAction = 0;
+            weapon = new Candle(new UniversalParameterObject(locationVector, FacingRight));
             dragon.Attack();
         }
 
