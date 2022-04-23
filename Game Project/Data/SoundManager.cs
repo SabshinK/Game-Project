@@ -19,45 +19,31 @@ namespace Game_Project
 
         private Dictionary<string, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
 
-        public SoundManager()
-        {
-
-        }
-
-        private void AddMusic(string weapon)
-        {
-            PlayLayered += () => music[weapon].Play();
-        }
-
         public void PlayEffect(string effect)
         {
             sfx[effect].Play();
         }
-
-        public void PlayMusic()
-        {
-            PlayLayered();
-        }
         
         public void LoadContent(ContentManager content)
         {
-            //music.Add(content.Load<Song>("01 - At Dooms Gate"));
+            sfx.Add("getAmmo", content.Load<SoundEffect>("Get Item"));
+            //sfx.Add("getHeart", content.Load<SoundEffect>(""));
+            //sfx.Add("getInstrument", content.Load<SoundEffect>(""));
+            sfx.Add("jump", content.Load<SoundEffect>("JumpUp"));
+            //sfx.Add("takeDamage", content.Load<SoundEffect>(""));
+            //sfx.Add("damageEnemy", content.Load<SoundEffect>(""));
 
-            sfx.Add("getAmmo", content.Load<SoundEffect>(""));
-            sfx.Add("getHeart", content.Load<SoundEffect>(""));
-            sfx.Add("getInstrument", content.Load<SoundEffect>(""));
-            sfx.Add("jump", content.Load<SoundEffect>(""));
-            sfx.Add("takeDamage", content.Load<SoundEffect>(""));
-            sfx.Add("damageEnemy", content.Load<SoundEffect>(""));
+            //music.Add("accordianGeneric", content.Load<SoundEffect>("Accordion"));
+            //music.Add("fluteGeneric", content.Load<SoundEffect>("Flute"));
+            //music.Add("drumGeneric", content.Load<SoundEffect>("Drums"));
+            //music.Add("harpGeneric", content.Load<SoundEffect>("Harp"));
+            //music.Add("guitarGeneric", content.Load<SoundEffect>("Guitar"));
+            //music.Add("speakerGeneric", content.Load<SoundEffect>("Bass_Synth_Speaker"));
 
-            music.Add("accordianGeneric", content.Load<SoundEffect>("Accordion"));
-            music.Add("fluteGeneric", content.Load<SoundEffect>("Flute"));
-            music.Add("drumGeneric", content.Load<SoundEffect>("Drums"));
-            music.Add("harpGeneric", content.Load<SoundEffect>("Harp"));
-            music.Add("guitarGeneric", content.Load<SoundEffect>("Guitar"));
-            music.Add("speakerGeneric", content.Load<SoundEffect>("Bass_Synth_Speaker"));
+            //AddMusic("guitarGeneric");
 
-            AddMusic("guitarGeneric");
+            MediaPlayer.Play(content.Load<Song>("Game_Soundtrack_All_Instruments"));
+            MediaPlayer.IsRepeating = true;
         }
     }
 }

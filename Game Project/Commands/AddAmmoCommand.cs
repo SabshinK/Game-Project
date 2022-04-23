@@ -13,6 +13,7 @@ namespace Game_Project
         }
         public void Execute()
         {
+            SoundManager.Instance.PlayEffect("getAmmo");
             ItemHandler.Instance.ammoCount++;
             ammo.Collide();
         }
